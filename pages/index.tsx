@@ -4,9 +4,10 @@ import Navbar from '../component/Navbar'
 import Footer from '../component/footer'
 import link from 'next/link'
 import Image from 'next/image'
+import StarIcon from '@mui/icons-material/Star';
 
+function Home() {
 
-function index() {
   return (
     <div className=''>
     <header className="header bg-light-brown flex" id="home">
@@ -21,7 +22,7 @@ function index() {
             </div>
 
             <div className="header-right">
-              <img src="images/hieu2.jpeg" 
+              <img src="images/hieu2.jpg" 
                     alt=''
               />
             </div>
@@ -48,16 +49,16 @@ function index() {
                         </div>
                         <div className='info'>
                             <div className='ratings test-grey'>
-                                <i className="fas fa-star text-brown"></i>
-                                <i className="fas fa-star text-brown"></i>
-                                <i className="fas fa-star text-light-grey"></i>
-                                <i className="fas fa-star text-light-grey"></i>
-                                <i className="fas fa-star text-light-grey"></i>
+                                <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
+                                <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
+                                <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
+                                <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
+                                <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
                                 <span>(10 Reviews)</span>
                             </div>
                             <div className='price'>
                                 <span className='new text-amber-900'>$ 24.99</span>
-                            </div>
+                        </div>
                             <p className='name'>
                             Spider-Man Marvel Legends Series 6-inch Symbiote Action
                             Figure Toy
@@ -71,19 +72,18 @@ function index() {
                         </div>
                         <div className='info'>
                             <div className='ratings test-grey'>
-                                <i className="fas fa-star text-brown"></i>
-                                <i className="fas fa-star text-brown"></i>
-                                <i className="fas fa-star text-light-grey"></i>
-                                <i className="fas fa-star text-light-grey"></i>
-                                <i className="fas fa-star text-light-grey"></i>
+                            <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
+                                <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
+                                <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
+                                <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
+                                <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
                                 <span>(10 Reviews)</span>
                             </div>
                             <div className='price'>
-                                <span className='new text-amber-900'>$ 24.99</span>
+                                <span className='new text-amber-900'>$ 19.99</span>
                             </div>
                             <p className='name'>
-                            Spider-Man Marvel Legends Series 6-inch Symbiote Action
-                            Figure Toy
+                             McFarlane Toys DC Batman: The Batman (Movie)
                             </p>
                         </div>
                     </div>
@@ -94,19 +94,20 @@ function index() {
                         </div>
                         <div className='info'>
                             <div className='ratings test-grey'>
-                                <i className="fas fa-star text-brown"></i>
-                                <i className="fas fa-star text-brown"></i>
-                                <i className="fas fa-star text-light-grey"></i>
-                                <i className="fas fa-star text-light-grey"></i>
-                                <i className="fas fa-star text-light-grey"></i>
+                                <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
+                                <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
+                                <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
+                                <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
+                                <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
                                 <span>(10 Reviews)</span>
                             </div>
                             <div className='price'>
-                                <span className='new text-amber-900'>$ 24.99</span>
+                                <span className='new text-amber-900'>$ 34.99</span>
                             </div>
                             <p className='name'>
-                            Spider-Man Marvel Legends Series 6-inch Symbiote Action
-                            Figure Toy
+                            WWE Ultimate Edition Wave 10 John Cena Action Figure 6 in
+                    with Interchangeable Entrance JacketLanternExtra Head and
+                    Swappable Hands
                             </p>
                         </div>
                     </div>
@@ -117,19 +118,18 @@ function index() {
                         </div>
                         <div className='info'>
                             <div className='ratings test-grey'>
-                                <i className="fas fa-star text-brown"></i>
-                                <i className="fas fa-star text-brown"></i>
-                                <i className="fas fa-star text-light-grey"></i>
-                                <i className="fas fa-star text-light-grey"></i>
-                                <i className="fas fa-star text-light-grey"></i>
+                              <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
+                                <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
+                                <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
+                                <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
+                                <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
                                 <span>(10 Reviews)</span>
                             </div>
                             <div className='price'>
-                                <span className='new text-amber-900'>$ 24.99</span>
+                                <span className='new text-amber-900'>$ 79.99</span>
                             </div>
                             <p className='name'>
-                            Spider-Man Marvel Legends Series 6-inch Symbiote Action
-                            Figure Toy
+                            Tamashi Nations - Deadpool - Bandai Spirits S.H.Figuarts
                             </p>
                         </div>
                     </div>
@@ -159,11 +159,11 @@ function index() {
                 </div>
                 <div className="info">
                   <div className="ratings text-grey">
-                    <i className="fas fa-star text-brown"></i>
-                    <i className="fas fa-star text-brown"></i>
-                    <i className="fas fa-star text-light-grey"></i>
-                    <i className="fas fa-star text-light-grey"></i>
-                    <i className="fas fa-star text-light-grey"></i>
+            <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
+                                <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
+                                <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
+                                <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
+                                <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
                     <span>(90 Reviews)</span>
                   </div>
                   <div className="price">
@@ -187,11 +187,11 @@ function index() {
                 </div>
                 <div className="info">
                 <div className="ratings text-grey">
-                    <i className="fas fa-star text-brown"></i>
-                    <i className="fas fa-star text-brown"></i>
-                    <i className="fas fa-star text-light-grey"></i>
-                    <i className="fas fa-star text-light-grey"></i>
-                    <i className="fas fa-star text-light-grey"></i>
+                    <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
+                                <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
+                                <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
+                                <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
+                                <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
                     <span>(5 Reviews)</span>
                   </div>
                   <div className="price">
@@ -215,11 +215,11 @@ function index() {
                 </div>
                 <div className="info">
                 <div className="ratings text-grey">
-                    <i className="fas fa-star text-brown"></i>
-                    <i className="fas fa-star text-brown"></i>
-                    <i className="fas fa-star text-light-grey"></i>
-                    <i className="fas fa-star text-light-grey"></i>
-                    <i className="fas fa-star text-light-grey"></i>
+                    <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
+                                <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
+                                <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
+                                <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
+                                <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
                     <span>(18 Reviews)</span>
                   </div>
                   <div className="price">
@@ -243,11 +243,11 @@ function index() {
                 </div>
                 <div className="info">
                 <div className="ratings text-grey">
-                    <i className="fas fa-star text-brown"></i>
-                    <i className="fas fa-star text-brown"></i>
-                    <i className="fas fa-star text-light-grey"></i>
-                    <i className="fas fa-star text-light-grey"></i>
-                    <i className="fas fa-star text-light-grey"></i>
+                 <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
+                                <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
+                                <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
+                                <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
+                                <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
                     <span>(30 Reviews)</span>
                   </div>
                   <div className="price">
@@ -333,11 +333,11 @@ function index() {
               <div className="info bg-white">
                 <div className="ratings text-grey">
                 <div className="ratings text-grey">
-                    <i className="fas fa-star text-brown"></i>
-                    <i className="fas fa-star text-brown"></i>
-                    <i className="fas fa-star text-light-grey"></i>
-                    <i className="fas fa-star text-light-grey"></i>
-                    <i className="fas fa-star text-light-grey"></i>
+                   <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
+                                <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
+                                <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
+                                <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
+                                <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
                 </div>
                 <div className="price">
                   <span className="new text-brown">$ 59.99</span>
@@ -356,11 +356,11 @@ function index() {
               </div>
               <div className="info bg-white">
               <div className="ratings text-grey">
-                    <i className="fas fa-star text-brown"></i>
-                    <i className="fas fa-star text-brown"></i>
-                    <i className="fas fa-star text-light-grey"></i>
-                    <i className="fas fa-star text-light-grey"></i>
-                    <i className="fas fa-star text-light-grey"></i>
+                   <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
+                                <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
+                                <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
+                                <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
+                                <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
                 </div>
                 <div className="price">
                   <span className="new text-brown">$ 174.99</span>
@@ -378,11 +378,11 @@ function index() {
               </div>
               <div className="info bg-white">
               <div className="ratings text-grey">
-                    <i className="fas fa-star text-brown"></i>
-                    <i className="fas fa-star text-brown"></i>
-                    <i className="fas fa-star text-light-grey"></i>
-                    <i className="fas fa-star text-light-grey"></i>
-                    <i className="fas fa-star text-light-grey"></i>
+                  <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
+                                <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
+                                <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
+                                <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
+                                <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
                 </div>
                 <div className="price">
                   <span className="new text-brown">$ 83.99</span>
@@ -401,11 +401,11 @@ function index() {
               </div>
               <div className="info bg-white">
               <div className="ratings text-grey">
-                    <i className="fas fa-star text-brown"></i>
-                    <i className="fas fa-star text-brown"></i>
-                    <i className="fas fa-star text-light-grey"></i>
-                    <i className="fas fa-star text-light-grey"></i>
-                    <i className="fas fa-star text-light-grey"></i>
+               <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
+                                <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
+                                <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
+                                <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
+                                <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
                 </div>
                 <div className="price">
                   <span className="new text-brown">$ 94.99</span>
@@ -586,4 +586,4 @@ function index() {
   )
 }
 
-export default index
+export default Home

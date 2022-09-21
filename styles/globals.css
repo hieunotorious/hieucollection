@@ -160,12 +160,14 @@ h4 {
   left: 0;
   width: 100%;
   z-index: 999;
+  ;
 }
 .navbar .container {
   -webkit-box-pack: justify;
   -ms-flex-pack: justify;
   justify-content: space-between;
   width: 100%;
+
 }
 
 .toggler-and-category {
@@ -743,11 +745,11 @@ h4 {
     transition: var(--transition);
   }
   .nav-item {
-    margin-left: 1.2rem;
+    margin-left: 1.5rem;
   }
   .active-link .nav-link-text {
     font-weight: 600;
-    color: var(--brown-color);
+  
   }
   .active-link .dropdown-icon {
     color: var(--brown-color);
