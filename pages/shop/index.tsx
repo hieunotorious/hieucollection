@@ -1,8 +1,9 @@
 import React from 'react'
 import Link from 'next/link'
 import Head from 'next/head'
-import Navbar from '../component/Navbar'
-import Footer from '../component/footer'
+import Navbar from '../../component/Navbar'
+import Footer from '../../component/footer'
+import StarIcon from '@mui/icons-material/Star';
 
 function shop() {
   return (
@@ -25,11 +26,11 @@ function shop() {
               </div>
               <div className="info bg-white">
                 <div className="ratings text-grey">
-                  <i className="fas fa-star text-brown"></i>
-                  <i className="fas fa-star text-brown"></i>
-                  <i className="fas fa-star text-light-grey"></i>
-                  <i className="fas fa-star text-light-grey"></i>
-                  <i className="fas fa-star text-light-grey"></i>
+                 <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
+                                <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
+                                <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
+                                <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
+                                <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
                 </div>
                 <div className="price">
                   <span className="new text-brown">$ 94.99</span>
@@ -46,11 +47,11 @@ function shop() {
               </div>
               <div className="info bg-white">
                 <div className="ratings text-grey">
-                  <i className="fas fa-star text-brown"></i>
-                  <i className="fas fa-star text-brown"></i>
-                  <i className="fas fa-star text-light-grey"></i>
-                  <i className="fas fa-star text-light-grey"></i>
-                  <i className="fas fa-star text-light-grey"></i>
+                  <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
+                                <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
+                                <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
+                                <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
+                                <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
                 </div>
                 <div className="price">
                   <span className="new text-brown">$ 104.99</span>
@@ -67,11 +68,11 @@ function shop() {
               </div>
               <div className="info bg-white">
                 <div className="ratings text-grey">
-                  <i className="fas fa-star text-brown"></i>
-                  <i className="fas fa-star text-brown"></i>
-                  <i className="fas fa-star text-light-grey"></i>
-                  <i className="fas fa-star text-light-grey"></i>
-                  <i className="fas fa-star text-light-grey"></i>
+                  <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
+                                <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
+                                <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
+                                <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
+                                <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
                 </div>
                 <div className="price">
                   <span className="new text-brown">$ 104.99</span>
@@ -88,11 +89,11 @@ function shop() {
               </div>
               <div className="info bg-white">
                 <div className="ratings text-grey">
-                  <i className="fas fa-star text-brown"></i>
-                  <i className="fas fa-star text-brown"></i>
-                  <i className="fas fa-star text-light-grey"></i>
-                  <i className="fas fa-star text-light-grey"></i>
-                  <i className="fas fa-star text-light-grey"></i>
+                  <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
+                                <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
+                                <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
+                                <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
+                                <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
                 </div>
                 <div className="price">
                   <span className="new text-brown">$ 104.99</span>
@@ -110,11 +111,11 @@ function shop() {
               </div>
               <div className="info bg-white">
                 <div className="ratings text-grey">
-                  <i className="fas fa-star text-brown"></i>
-                  <i className="fas fa-star text-brown"></i>
-                  <i className="fas fa-star text-light-grey"></i>
-                  <i className="fas fa-star text-light-grey"></i>
-                  <i className="fas fa-star text-light-grey"></i>
+               <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
+                                <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
+                                <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
+                                <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
+                                <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
                 </div>  
                 <div className="price">
                   <span className="new text-brown">$ 139.99</span>
@@ -132,11 +133,11 @@ function shop() {
               </div>
               <div className="info bg-white">
                 <div className="ratings text-grey">
-                  <i className="fas fa-star text-brown"></i>
-                  <i className="fas fa-star text-brown"></i>
-                  <i className="fas fa-star text-light-grey"></i>
-                  <i className="fas fa-star text-light-grey"></i>
-                  <i className="fas fa-star text-light-grey"></i>
+                 <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
+                                <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
+                                <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
+                                <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
+                                <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
                 </div>
                 <div className="price">
                   <span className="new text-brown">$ 34.99</span>
@@ -153,11 +154,11 @@ function shop() {
               </div>
               <div className="info bg-white">
                 <div className="ratings text-grey">
-                  <i className="fas fa-star text-brown"></i>
-                  <i className="fas fa-star text-brown"></i>
-                  <i className="fas fa-star text-light-grey"></i>
-                  <i className="fas fa-star text-light-grey"></i>
-                  <i className="fas fa-star text-light-grey"></i>
+                  <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
+                                <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
+                                <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
+                                <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
+                                <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
                 </div>
                 <div className="price">
                   <span className="new text-brown">$ 34.99</span>
@@ -172,11 +173,11 @@ function shop() {
               </div>
               <div className="info bg-white">
                 <div className="ratings text-grey">
-                  <i className="fas fa-star text-brown"></i>
-                  <i className="fas fa-star text-brown"></i>
-                  <i className="fas fa-star text-light-grey"></i>
-                  <i className="fas fa-star text-light-grey"></i>
-                  <i className="fas fa-star text-light-grey"></i>
+                 <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
+                                <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
+                                <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
+                                <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
+                                <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
                 </div>
                 <div className="price">
                   <span className="new text-brown">$ 34.99</span>
@@ -192,11 +193,11 @@ function shop() {
               </div>
               <div className="info bg-white">
                 <div className="ratings text-grey">
-                  <i className="fas fa-star text-brown"></i>
-                  <i className="fas fa-star text-brown"></i>
-                  <i className="fas fa-star text-light-grey"></i>
-                  <i className="fas fa-star text-light-grey"></i>
-                  <i className="fas fa-star text-light-grey"></i>
+                   <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
+                                <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
+                                <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
+                                <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
+                                <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
                 </div>
                 <div className="price">
                   <span className="new text-brown">$ 36.99</span>
@@ -211,11 +212,11 @@ function shop() {
               </div>
               <div className="info bg-white">
                 <div className="ratings text-grey">
-                  <i className="fas fa-star text-brown"></i>
-                  <i className="fas fa-star text-brown"></i>
-                  <i className="fas fa-star text-light-grey"></i>
-                  <i className="fas fa-star text-light-grey"></i>
-                  <i className="fas fa-star text-light-grey"></i>
+                  <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
+                                <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
+                                <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
+                                <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
+                                <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
                 </div>
                 <div className="price">
                   <span className="new text-brown">$ 36.99</span>
@@ -231,16 +232,16 @@ function shop() {
               </div>
               <div className="info bg-white">
                 <div className="ratings text-grey">
-                  <i className="fas fa-star text-brown"></i>
-                  <i className="fas fa-star text-brown"></i>
-                  <i className="fas fa-star text-light-grey"></i>
-                  <i className="fas fa-star text-light-grey"></i>
-                  <i className="fas fa-star text-light-grey"></i>
+                <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
+                                <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
+                                <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
+                                <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
+                                <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
                 </div>
                 <div className="price">
                   <span className="new text-brown">$ 44.99</span>
                 </div>
-                <p className="name">Ultraman Trigger S.H.Figuarts Ultraman Trigger (Multi Type)r</p>
+                <p className="name">Ultraman Trigger S.H.Figuarts Ultraman Trigger (Multi Type)</p>
               </div>
             </div>
 
@@ -250,11 +251,11 @@ function shop() {
               </div>
               <div className="info bg-white">
                 <div className="ratings text-grey">
-                  <i className="fas fa-star text-brown"></i>
-                  <i className="fas fa-star text-brown"></i>
-                  <i className="fas fa-star text-light-grey"></i>
-                  <i className="fas fa-star text-light-grey"></i>
-                  <i className="fas fa-star text-light-grey"></i>
+                  <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
+                                <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
+                                <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
+                                <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
+                                <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
                 </div>
                 <div className="price">
                   <span className="new text-brown">$ 132.99</span>
@@ -358,11 +359,11 @@ function shop() {
                 </div>
                 <div className="info bg-white">
                 <div className="ratings text-grey">
-                  <i className="fas fa-star text-brown"></i>
-                  <i className="fas fa-star text-brown"></i>
-                  <i className="fas fa-star text-light-grey"></i>
-                  <i className="fas fa-star text-light-grey"></i>
-                  <i className="fas fa-star text-light-grey"></i>
+                  <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
+                                <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
+                                <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
+                                <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
+                                <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
                   </div>
                   <div className="price">
                     <span className="old text-grey">$ 29.99</span>
@@ -381,11 +382,11 @@ function shop() {
                 </div>
                 <div className="info bg-white">
                 <div className="ratings text-grey">
-                  <i className="fas fa-star text-brown"></i>
-                  <i className="fas fa-star text-brown"></i>
-                  <i className="fas fa-star text-light-grey"></i>
-                  <i className="fas fa-star text-light-grey"></i>
-                  <i className="fas fa-star text-light-grey"></i>
+                  <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
+                                <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
+                                <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
+                                <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
+                                <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
                   </div>
                   <div className="price">
                     <span className="old text-grey">$ 29.99</span>
@@ -404,11 +405,11 @@ function shop() {
                 </div>
                 <div className="info bg-white">
                 <div className="ratings text-grey">
-                  <i className="fas fa-star text-brown"></i>
-                  <i className="fas fa-star text-brown"></i>
-                  <i className="fas fa-star text-light-grey"></i>
-                  <i className="fas fa-star text-light-grey"></i>
-                  <i className="fas fa-star text-light-grey"></i>
+                 <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
+                                <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
+                                <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
+                                <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
+                                <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
                   </div>
                   <div className="price">
                     <span className="old text-grey">$ 29.99</span>

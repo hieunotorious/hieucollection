@@ -1,20 +1,59 @@
 {
   "compilerOptions": {
-    "target": "es5",
-    "lib": ["dom", "dom.iterable", "esnext"],
-    "allowJs": true,
-    "skipLibCheck": true,
     "strict": true,
-    "forceConsistentCasingInFileNames": true,
-    "noEmit": true,
-    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": false,
+    "declaration": false,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "strictNullChecks": true,
+    "baseUrl": ".",
+    "jsx": "preserve",
+    "lib": [
+      "dom",
+      "es2017",
+      "es2018"
+    ],
     "module": "esnext",
     "moduleResolution": "node",
+    "skipLibCheck": true,
+    "sourceMap": true,
+    "target": "es2015",
+    "allowJs": true,
+    "paths": {
+      "app/*": [
+        "./*"
+      ]
+    },
+    "typeRoots": [
+      "./node_modules/@types"
+    ],
+    "noEmit": true,
+    "incremental": true,
+    "esModuleInterop": true,
     "resolveJsonModule": true,
-    "isolatedModules": true,
-    "jsx": "preserve",
-    "incremental": true
+    "isolatedModules": true
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
-  "exclude": ["node_modules"]
+  "include": [
+    "**/*.ts",
+    "**/*.tsx",
+    "declarations.d.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ],
+  "compileOnSave": false,
+  "esModuleInterop": true,
+  "atom": {
+    "rewriteTsconfig": false
+  },
+  "moduleResolution": [
+    "node"
+  ],
+  "ts-node": {
+    "transpileOnly": true,
+    "compilerOptions": {
+      "module": "commonjs"
+    }
+  }
 }

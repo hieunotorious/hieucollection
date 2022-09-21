@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
-import { LoginType } from '../api/auth/models/user'
+import { userlist } from '../../api/auth/data'
+import { LoginType } from '../../api/auth/models/user'
 
 
 function Login() {
+  const [data,setData]=useState(userlist)
   const [user,setUser]=useState<LoginType>(
       {
         username : "",
@@ -10,14 +12,27 @@ function Login() {
       }
   )
 
+ const submitForm=(event:any) => {
+  event.preventDefault()
+  console.log(user)
+  const dataIndex =data.findIndex((item,index)=>item.username===user.username)
+  if(dataIndex>-1){
+    if(data[dataIndex].password===user.password){
+      console.log('successfully Login')
+    }else{
+      console.log('wrong password')
+    }
+  }
+  else{
+    console.log('User does not exist')
+  }
+}
+
   return (
    <div className='full-screen-container'>
      <div className='center'>
      <h1>Login</h1>
-      <form onSubmit={(event) => {
-          event.preventDefault()
-          console.log(user)
-      }}   >
+      <form onSubmit={submitForm}   >
       <div className="txtfield">
           <input type="text" onChange={(event) => {
             setUser((prevState ) => ({...prevState,username: event.target.value}))
