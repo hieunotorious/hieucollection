@@ -9,6 +9,7 @@
     "strictNullChecks": true,
     "baseUrl": ".",
     "jsx": "preserve",
+    "jsxImportSource": "@emotion/react",
     "lib": [
       "dom",
       "es2017",

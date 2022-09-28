@@ -1,23 +1,23 @@
-import React from 'react'
-import Link from 'next/link'
-import Head from 'next/head'
-import Navbar from '../../component/Navbar'
-import Footer from '../../component/footer'
-import StarIcon from '@mui/icons-material/Star';
+import React from "react";
+import Link from "next/link";
+import Head from "next/head";
+import Navbar from "../../component/Navbar";
+import Footer from "../../component/footer";
+import StarIcon from "@mui/icons-material/Star";
 
 function shop() {
   return (
     <main>
-        <section
-          id="new-products"
-          className="new-products py bg-light-grey-color-shade"
-        >
-          <div className="container">
-            <div className="section-title text-center">
-              <h2>New Arrivals</h2>
-              <p className="lead">In stock</p>
-              <div className="line"></div>
-            </div>
+      <section
+        id="new-products"
+        className="new-products py bg-light-grey-color-shade"
+      >
+        <div className="container">
+          <div className="section-title text-center">
+            <h2>New Arrivals</h2>
+            <p className="lead">In stock</p>
+            <div className="line"></div>
+          </div>
 
           <div className="featured-deals-content grid">
             <div className="featured-deals-item">
@@ -26,11 +26,21 @@ function shop() {
               </div>
               <div className="info bg-white">
                 <div className="ratings text-grey">
-                 <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
-                                <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
-                                <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
-                                <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
-                                <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
+                  <i className="">
+                    <StarIcon style={{ fill: "black", fontSize: "10" }} />
+                  </i>
+                  <i className="">
+                    <StarIcon style={{ fill: "black", fontSize: "10" }} />
+                  </i>
+                  <i className="">
+                    <StarIcon style={{ fill: "black", fontSize: "10" }} />
+                  </i>
+                  <i className="">
+                    <StarIcon style={{ fill: "black", fontSize: "10" }} />
+                  </i>
+                  <i className="">
+                    <StarIcon style={{ fill: "black", fontSize: "10" }} />
+                  </i>
                 </div>
                 <div className="price">
                   <span className="new text-brown">$ 94.99</span>
@@ -47,18 +57,26 @@ function shop() {
               </div>
               <div className="info bg-white">
                 <div className="ratings text-grey">
-                  <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
-                                <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
-                                <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
-                                <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
-                                <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
+                  <i className="">
+                    <StarIcon style={{ fill: "black", fontSize: "10" }} />
+                  </i>
+                  <i className="">
+                    <StarIcon style={{ fill: "black", fontSize: "10" }} />
+                  </i>
+                  <i className="">
+                    <StarIcon style={{ fill: "black", fontSize: "10" }} />
+                  </i>
+                  <i className="">
+                    <StarIcon style={{ fill: "black", fontSize: "10" }} />
+                  </i>
+                  <i className="">
+                    <StarIcon style={{ fill: "black", fontSize: "10" }} />
+                  </i>
                 </div>
                 <div className="price">
                   <span className="new text-brown">$ 104.99</span>
                 </div>
-                <p className="name">
-                  Batman: Hush MAFEX No.175 Nightwing
-                </p>
+                <p className="name">Batman: Hush MAFEX No.175 Nightwing</p>
               </div>
             </div>
 
@@ -68,18 +86,26 @@ function shop() {
               </div>
               <div className="info bg-white">
                 <div className="ratings text-grey">
-                  <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
-                                <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
-                                <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
-                                <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
-                                <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
+                  <i className="">
+                    <StarIcon style={{ fill: "black", fontSize: "10" }} />
+                  </i>
+                  <i className="">
+                    <StarIcon style={{ fill: "black", fontSize: "10" }} />
+                  </i>
+                  <i className="">
+                    <StarIcon style={{ fill: "black", fontSize: "10" }} />
+                  </i>
+                  <i className="">
+                    <StarIcon style={{ fill: "black", fontSize: "10" }} />
+                  </i>
+                  <i className="">
+                    <StarIcon style={{ fill: "black", fontSize: "10" }} />
+                  </i>
                 </div>
                 <div className="price">
                   <span className="new text-brown">$ 104.99</span>
                 </div>
-                <p className="name">
-                  Batman: Hush MAFEX No.170 Huntress
-                </p>
+                <p className="name">Batman: Hush MAFEX No.170 Huntress</p>
               </div>
             </div>
 
@@ -89,43 +115,60 @@ function shop() {
               </div>
               <div className="info bg-white">
                 <div className="ratings text-grey">
-                  <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
-                                <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
-                                <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
-                                <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
-                                <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
+                  <i className="">
+                    <StarIcon style={{ fill: "black", fontSize: "10" }} />
+                  </i>
+                  <i className="">
+                    <StarIcon style={{ fill: "black", fontSize: "10" }} />
+                  </i>
+                  <i className="">
+                    <StarIcon style={{ fill: "black", fontSize: "10" }} />
+                  </i>
+                  <i className="">
+                    <StarIcon style={{ fill: "black", fontSize: "10" }} />
+                  </i>
+                  <i className="">
+                    <StarIcon style={{ fill: "black", fontSize: "10" }} />
+                  </i>
                 </div>
                 <div className="price">
                   <span className="new text-brown">$ 104.99</span>
                 </div>
-                <p className="name">
-                  Batman: Hush MAFEX No.133 Hush
-                </p>
+                <p className="name">Batman: Hush MAFEX No.133 Hush</p>
               </div>
             </div>
 
-            
             <div className="featured-deals-item">
               <div className="image">
                 <img src="images/build.jpeg" />
               </div>
               <div className="info bg-white">
                 <div className="ratings text-grey">
-               <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
-                                <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
-                                <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
-                                <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
-                                <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
-                </div>  
+                  <i className="">
+                    <StarIcon style={{ fill: "black", fontSize: "10" }} />
+                  </i>
+                  <i className="">
+                    <StarIcon style={{ fill: "black", fontSize: "10" }} />
+                  </i>
+                  <i className="">
+                    <StarIcon style={{ fill: "black", fontSize: "10" }} />
+                  </i>
+                  <i className="">
+                    <StarIcon style={{ fill: "black", fontSize: "10" }} />
+                  </i>
+                  <i className="">
+                    <StarIcon style={{ fill: "black", fontSize: "10" }} />
+                  </i>
+                </div>
                 <div className="price">
                   <span className="new text-brown">$ 139.99</span>
                 </div>
                 <p className="name">
-                  Kamen Rider S.H.Figuarts Kamen Rider Build Cross-ZBuild Form Exclusive
+                  Kamen Rider S.H.Figuarts Kamen Rider Build Cross-ZBuild Form
+                  Exclusive
                 </p>
               </div>
             </div>
-
 
             <div className="featured-deals-item">
               <div className="image">
@@ -133,17 +176,28 @@ function shop() {
               </div>
               <div className="info bg-white">
                 <div className="ratings text-grey">
-                 <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
-                                <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
-                                <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
-                                <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
-                                <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
+                  <i className="">
+                    <StarIcon style={{ fill: "black", fontSize: "10" }} />
+                  </i>
+                  <i className="">
+                    <StarIcon style={{ fill: "black", fontSize: "10" }} />
+                  </i>
+                  <i className="">
+                    <StarIcon style={{ fill: "black", fontSize: "10" }} />
+                  </i>
+                  <i className="">
+                    <StarIcon style={{ fill: "black", fontSize: "10" }} />
+                  </i>
+                  <i className="">
+                    <StarIcon style={{ fill: "black", fontSize: "10" }} />
+                  </i>
                 </div>
                 <div className="price">
                   <span className="new text-brown">$ 34.99</span>
                 </div>
                 <p className="name">
-                  Kamen Rider Build S.H.Figuarts Kamen Rider Build (Genius Form) Exclusive
+                  Kamen Rider Build S.H.Figuarts Kamen Rider Build (Genius Form)
+                  Exclusive
                 </p>
               </div>
             </div>
@@ -154,16 +208,28 @@ function shop() {
               </div>
               <div className="info bg-white">
                 <div className="ratings text-grey">
-                  <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
-                                <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
-                                <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
-                                <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
-                                <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
+                  <i className="">
+                    <StarIcon style={{ fill: "black", fontSize: "10" }} />
+                  </i>
+                  <i className="">
+                    <StarIcon style={{ fill: "black", fontSize: "10" }} />
+                  </i>
+                  <i className="">
+                    <StarIcon style={{ fill: "black", fontSize: "10" }} />
+                  </i>
+                  <i className="">
+                    <StarIcon style={{ fill: "black", fontSize: "10" }} />
+                  </i>
+                  <i className="">
+                    <StarIcon style={{ fill: "black", fontSize: "10" }} />
+                  </i>
                 </div>
                 <div className="price">
                   <span className="new text-brown">$ 34.99</span>
                 </div>
-                <p className="name">Marvel Legends 20th Anniversary Series Iron Man</p>
+                <p className="name">
+                  Marvel Legends 20th Anniversary Series Iron Man
+                </p>
               </div>
             </div>
 
@@ -173,19 +239,30 @@ function shop() {
               </div>
               <div className="info bg-white">
                 <div className="ratings text-grey">
-                 <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
-                                <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
-                                <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
-                                <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
-                                <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
+                  <i className="">
+                    <StarIcon style={{ fill: "black", fontSize: "10" }} />
+                  </i>
+                  <i className="">
+                    <StarIcon style={{ fill: "black", fontSize: "10" }} />
+                  </i>
+                  <i className="">
+                    <StarIcon style={{ fill: "black", fontSize: "10" }} />
+                  </i>
+                  <i className="">
+                    <StarIcon style={{ fill: "black", fontSize: "10" }} />
+                  </i>
+                  <i className="">
+                    <StarIcon style={{ fill: "black", fontSize: "10" }} />
+                  </i>
                 </div>
                 <div className="price">
                   <span className="new text-brown">$ 34.99</span>
                 </div>
-                <p className="name">Marvel Comics 80th Anniversary Marvel Legends Iron Man</p>
+                <p className="name">
+                  Marvel Comics 80th Anniversary Marvel Legends Iron Man
+                </p>
               </div>
             </div>
-
 
             <div className="featured-deals-item">
               <div className="image">
@@ -193,11 +270,21 @@ function shop() {
               </div>
               <div className="info bg-white">
                 <div className="ratings text-grey">
-                   <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
-                                <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
-                                <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
-                                <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
-                                <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
+                  <i className="">
+                    <StarIcon style={{ fill: "black", fontSize: "10" }} />
+                  </i>
+                  <i className="">
+                    <StarIcon style={{ fill: "black", fontSize: "10" }} />
+                  </i>
+                  <i className="">
+                    <StarIcon style={{ fill: "black", fontSize: "10" }} />
+                  </i>
+                  <i className="">
+                    <StarIcon style={{ fill: "black", fontSize: "10" }} />
+                  </i>
+                  <i className="">
+                    <StarIcon style={{ fill: "black", fontSize: "10" }} />
+                  </i>
                 </div>
                 <div className="price">
                   <span className="new text-brown">$ 36.99</span>
@@ -206,17 +293,27 @@ function shop() {
               </div>
             </div>
 
-              <div className="featured-deals-item">
+            <div className="featured-deals-item">
               <div className="image">
                 <img src="images/rock.jpeg" />
               </div>
               <div className="info bg-white">
                 <div className="ratings text-grey">
-                  <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
-                                <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
-                                <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
-                                <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
-                                <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
+                  <i className="">
+                    <StarIcon style={{ fill: "black", fontSize: "10" }} />
+                  </i>
+                  <i className="">
+                    <StarIcon style={{ fill: "black", fontSize: "10" }} />
+                  </i>
+                  <i className="">
+                    <StarIcon style={{ fill: "black", fontSize: "10" }} />
+                  </i>
+                  <i className="">
+                    <StarIcon style={{ fill: "black", fontSize: "10" }} />
+                  </i>
+                  <i className="">
+                    <StarIcon style={{ fill: "black", fontSize: "10" }} />
+                  </i>
                 </div>
                 <div className="price">
                   <span className="new text-brown">$ 36.99</span>
@@ -225,58 +322,76 @@ function shop() {
               </div>
             </div>
 
-
-              <div className="featured-deals-item">
+            <div className="featured-deals-item">
               <div className="image">
                 <img src="images/trigger.jpeg" />
               </div>
               <div className="info bg-white">
                 <div className="ratings text-grey">
-                <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
-                                <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
-                                <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
-                                <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
-                                <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
+                  <i className="">
+                    <StarIcon style={{ fill: "black", fontSize: "10" }} />
+                  </i>
+                  <i className="">
+                    <StarIcon style={{ fill: "black", fontSize: "10" }} />
+                  </i>
+                  <i className="">
+                    <StarIcon style={{ fill: "black", fontSize: "10" }} />
+                  </i>
+                  <i className="">
+                    <StarIcon style={{ fill: "black", fontSize: "10" }} />
+                  </i>
+                  <i className="">
+                    <StarIcon style={{ fill: "black", fontSize: "10" }} />
+                  </i>
                 </div>
                 <div className="price">
                   <span className="new text-brown">$ 44.99</span>
                 </div>
-                <p className="name">Ultraman Trigger S.H.Figuarts Ultraman Trigger (Multi Type)</p>
+                <p className="name">
+                  Ultraman Trigger S.H.Figuarts Ultraman Trigger (Multi Type)
+                </p>
               </div>
             </div>
 
-              <div className="featured-deals-item">
+            <div className="featured-deals-item">
               <div className="image">
                 <img src="images/ginga.jpeg" />
               </div>
               <div className="info bg-white">
                 <div className="ratings text-grey">
-                  <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
-                                <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
-                                <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
-                                <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
-                                <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
+                  <i className="">
+                    <StarIcon style={{ fill: "black", fontSize: "10" }} />
+                  </i>
+                  <i className="">
+                    <StarIcon style={{ fill: "black", fontSize: "10" }} />
+                  </i>
+                  <i className="">
+                    <StarIcon style={{ fill: "black", fontSize: "10" }} />
+                  </i>
+                  <i className="">
+                    <StarIcon style={{ fill: "black", fontSize: "10" }} />
+                  </i>
+                  <i className="">
+                    <StarIcon style={{ fill: "black", fontSize: "10" }} />
+                  </i>
                 </div>
                 <div className="price">
                   <span className="new text-brown">$ 132.99</span>
                 </div>
-                <p className="name">Ultraman S.H.Figuarts Ultraman Ginga Strium Exclusive</p>
+                <p className="name">
+                  Ultraman S.H.Figuarts Ultraman Ginga Strium Exclusive
+                </p>
               </div>
             </div>
-            </div>
-            </div>
-        </section>
-              
-    
+          </div>
+        </div>
+      </section>
 
-        <section className="category py bg-light-brown" id="category">
-        
-          <div className="container">
-            <div className="section-title text-center">
-              <h2> Product Images</h2>
-             
-              
-            </div>
+      <section className="category py bg-light-brown" id="category">
+        <div className="container">
+          <div className="section-title text-center">
+            <h2> Product Images</h2>
+          </div>
           <div className="container">
             <div className="category-content grid">
               <div className="category-item">
@@ -288,7 +403,7 @@ function shop() {
               <div className="category-item">
                 <img src="images/yj.jpeg" />
                 <div className="category-badge bg-white text-dark flex">
-                   Revoltech The Joker
+                  Revoltech The Joker
                 </div>
               </div>
               <div className="category-item">
@@ -305,7 +420,9 @@ function shop() {
               </div>
               <div className="category-item">
                 <img src="images/rj.jpeg" />
-                <div className="category-badge bg-white text-dark flex">Revoltech Red Hood</div>
+                <div className="category-badge bg-white text-dark flex">
+                  Revoltech Red Hood
+                </div>
               </div>
               <div className="category-item">
                 <img src="images/mai.jpeg" />
@@ -315,118 +432,137 @@ function shop() {
               </div>
             </div>
           </div>
-          </div>
-        </section>
+        </div>
+      </section>
 
-        <section
-          className="featured-deals bg-light-grey-color-shade py"
-          id="featured-deals"
-        >
-          <div className="container">
-            <div className="section-title text-center">
-              <h2>Sale Products</h2>
-              <p className="lead">In Stocks</p>
-              <div className="line"></div>
+      <section
+        className="featured-deals bg-light-grey-color-shade py"
+        id="featured-deals"
+      >
+        <div className="container">
+          <div className="section-title text-center">
+            <h2>Sale Products</h2>
+            <p className="lead">In Stocks</p>
+            <div className="line"></div>
+          </div>
+
+          <div className="featured-deals-content grid">
+            <div className="featured-deals-item">
+              <div className="image">
+                <img src="images/nz.jpeg" />
+              </div>
+              <div className="info bg-white">
+                <div className="ratings text-grey">
+                  <i className="fas fa-star text-brown"></i>
+                  <i className="fas fa-star text-brown"></i>
+                  <i className="fas fa-star text-light-grey"></i>
+                  <i className="fas fa-star text-light-grey"></i>
+                  <i className="fas fa-star text-light-grey"></i>
+                </div>
+                <div className="price">
+                  <span className="old text-grey">$ 29.99</span>
+                  <span className="new text-brown">$ 19.99</span>
+                </div>
+                <p className="name">DC Essentials Nightwing (DCeased) Figure</p>
+              </div>
             </div>
 
-            <div className="featured-deals-content grid">
-              <div className="featured-deals-item">
-                <div className="image">
-                  <img src="images/nz.jpeg" />
-                </div>
-                <div className="info bg-white">
-                <div className="ratings text-grey">
-                  <i className="fas fa-star text-brown"></i>
-                  <i className="fas fa-star text-brown"></i>
-                  <i className="fas fa-star text-light-grey"></i>
-                  <i className="fas fa-star text-light-grey"></i>
-                  <i className="fas fa-star text-light-grey"></i>
-                  </div>
-                  <div className="price">
-                    <span className="old text-grey">$ 29.99</span>
-                    <span className="new text-brown">$ 19.00</span>
-                  </div>
-                  <p className="name">
-                    DC Essentials Nightwing (DCeased) Figure
-                  </p>
-                  
-                </div>
+            <div className="featured-deals-item">
+              <div className="image">
+                <img src="images/bz.jpeg" />
               </div>
+              <div className="info bg-white">
+                <div className="ratings text-grey">
+                  <i className="">
+                    <StarIcon style={{ fill: "black", fontSize: "10" }} />
+                  </i>
+                  <i className="">
+                    <StarIcon style={{ fill: "black", fontSize: "10" }} />
+                  </i>
+                  <i className="">
+                    <StarIcon style={{ fill: "black", fontSize: "10" }} />
+                  </i>
+                  <i className="">
+                    <StarIcon style={{ fill: "black", fontSize: "10" }} />
+                  </i>
+                  <i className="">
+                    <StarIcon style={{ fill: "black", fontSize: "10" }} />
+                  </i>
+                </div>
+                <div className="price">
+                  <span className="old text-grey">$ 29.99</span>
+                  <span className="new text-brown">$ 19.99</span>
+                </div>
+                <p className="name">DC Essentials Batgirl (DCeased) Figure</p>
+              </div>
+            </div>
 
-              <div className="featured-deals-item">
-                <div className="image">
-                  <img src="images/bz.jpeg" />
-                </div>
-                <div className="info bg-white">
-                <div className="ratings text-grey">
-                  <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
-                                <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
-                                <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
-                                <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
-                                <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
-                  </div>
-                  <div className="price">
-                    <span className="old text-grey">$ 29.99</span>
-                    <span className="new text-brown">$ 19.99</span>
-                  </div>
-                  <p className="name">
-                    DC Essentials Batgirl (DCeased) Figure
-                  </p>
-                  
-                </div>
+            <div className="featured-deals-item">
+              <div className="image">
+                <img src="images/rz.jpeg" />
               </div>
+              <div className="info bg-white">
+                <div className="ratings text-grey">
+                  <i className="">
+                    <StarIcon style={{ fill: "black", fontSize: "10" }} />
+                  </i>
+                  <i className="">
+                    <StarIcon style={{ fill: "black", fontSize: "10" }} />
+                  </i>
+                  <i className="">
+                    <StarIcon style={{ fill: "black", fontSize: "10" }} />
+                  </i>
+                  <i className="">
+                    <StarIcon style={{ fill: "black", fontSize: "10" }} />
+                  </i>
+                  <i className="">
+                    <StarIcon style={{ fill: "black", fontSize: "10" }} />
+                  </i>
+                </div>
+                <div className="price">
+                  <span className="old text-grey">$ 29.99</span>
+                  <span className="new text-brown">$ 19.99</span>
+                </div>
+                <p className="name">
+                  DC Essentials Unkillables Red Hood (DCeased) Figure
+                </p>
+              </div>
+            </div>
 
-              <div className="featured-deals-item">
-                <div className="image">
-                  <img src="images/rz.jpeg" />
-                </div>
-                <div className="info bg-white">
-                <div className="ratings text-grey">
-                  <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
-                                <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
-                                <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
-                                <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
-                                <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
-                  </div>
-                  <div className="price">
-                    <span className="old text-grey">$ 29.99</span>
-                    <span className="new text-brown">$ 19.99</span>
-                  </div>
-                  <p className="name">
-                    DC Essentials Unkillables Red Hood (DCeased) Figure
-                  </p>
-                  
-                </div>
+            <div className="featured-deals-item">
+              <div className="image">
+                <img src="images/jz.jpeg" />
               </div>
-
-              <div className="featured-deals-item">
-                <div className="image">
-                  <img src="images/jz.jpeg" />
-                </div>
-                <div className="info bg-white">
+              <div className="info bg-white">
                 <div className="ratings text-grey">
-                 <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
-                                <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
-                                <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
-                                <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
-                                <i className=""><StarIcon style={{fill:"black",fontSize:"10"}} /></i>
-                  </div>
-                  <div className="price">
-                    <span className="old text-grey">$ 29.99</span>
-                    <span className="new text-brown">$ 19.99</span>
-                  </div>
-                  <p className="name">
-                    DC Essentials The Joker (DCeased) Figure
-                  </p>
+                  <i className="">
+                    <StarIcon style={{ fill: "black", fontSize: "10" }} />
+                  </i>
+                  <i className="">
+                    <StarIcon style={{ fill: "black", fontSize: "10" }} />
+                  </i>
+                  <i className="">
+                    <StarIcon style={{ fill: "black", fontSize: "10" }} />
+                  </i>
+                  <i className="">
+                    <StarIcon style={{ fill: "black", fontSize: "10" }} />
+                  </i>
+                  <i className="">
+                    <StarIcon style={{ fill: "black", fontSize: "10" }} />
+                  </i>
                 </div>
+                <div className="price">
+                  <span className="old text-grey">$ 29.99</span>
+                  <span className="new text-brown">$ 19.99</span>
+                </div>
+                <p className="name">DC Essentials The Joker (DCeased) Figure</p>
               </div>
-</div>
-           </div> 
-           
-        </section>
-</main>
-        
-      )
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  );
 }
 
-export default shop
+export default shop;
