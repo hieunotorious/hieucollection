@@ -10,13 +10,14 @@ export type ProductType = {
   sale?: number;
   category: CategoryType;
   available: boolean;
+  all: AllType;
 };
 
 export enum BrandType {
   marvel_legend = "MARVEL_LEGEND",
   mcfarlane = "MCFARLANE",
   shf = "SHF",
-  figma = "FIGMA",
+  mafex = "MAFEX",
   dc_collectibles = "DC_COLLECTIBLES",
   mattel = "MATTEL",
   figuart = "FIGUART",
@@ -25,4 +26,10 @@ export enum BrandType {
 export enum CategoryType {
   action_figure = "ACTION_FIGURE",
   statue = "STATUE",
+}
+
+export enum AllType {
+  new = "NEW",
+  sale = "SALE",
+  pre_order = "PRE_ORDER",
 }

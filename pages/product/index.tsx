@@ -1,13 +1,22 @@
 import { Category } from "@mui/icons-material";
 import { DefaultProduct } from "app/api/auth/data";
-import { BrandType, CategoryType } from "app/api/auth/models/product";
+import { AllType, BrandType, CategoryType } from "app/api/auth/models/product";
 import { css } from "@emotion/react";
 
 import ProductItem from "app/component/product";
 import React, { useState } from "react";
+import { useResponsive } from "app/hooks/useResponsive";
 
 const Product = () => {
   const [products, setProduct] = useState(DefaultProduct);
+  const { isMobile } = useResponsive();
+
+  const filterAll = (all: AllType) => {
+    const filterProducts = DefaultProduct.filter((item, index) => {
+      return item.all === all;
+    });
+    setProduct(filterProducts);
+  };
 
   const filterBrand = (brand: BrandType) => {
     const filterProducts = DefaultProduct.filter((item, index) => {
@@ -24,9 +33,16 @@ const Product = () => {
 
   return (
     <div
-      style={{ display: "flex", padding: 16 }}
+      style={{
+        display: "flex",
+        padding: 16,
+        minHeight: 800,
+        flexDirection: `${isMobile ? "column" : "row"}`,
+      }}
       css={css`
-        background-color: var(--light-grey-color-shade);
+        background-color: ${isMobile
+          ? "white"
+          : "var(--light-grey-color-shade)"};
       `}
     >
       <div
@@ -38,64 +54,52 @@ const Product = () => {
         >
           All
         </div>
+        <div
+          style={{ cursor: "pointer", fontSize: 12 }}
+          onClick={() => filterAll(AllType.new)}
+        >
+          NEW ARRIVAL
+        </div>
+        <div
+          style={{ cursor: "pointer", fontSize: 12 }}
+          onClick={() => filterAll(AllType.sale)}
+        >
+          SALE-PRODUCT
+        </div>
+        <div
+          style={{ cursor: "pointer", fontSize: 12 }}
+          onClick={() => filterAll(AllType.pre_order)}
+        >
+          PRE-ORDER
+        </div>
         <div style={{ display: "flex", flexDirection: "column" }}>
           <div style={{ fontWeight: 900 }}>Brand</div>
-
-          <div
-            style={{ cursor: "pointer" }}
-            onClick={() => filterBrand(BrandType.marvel_legend)}
+          <select
+            onChange={(event) => {
+              filterBrand(event.target.value as BrandType);
+            }}
           >
-            ML
-          </div>
-          <div
-            style={{ cursor: "pointer" }}
-            onClick={() => filterBrand(BrandType.mcfarlane)}
-          >
-            MCF
-          </div>
-          <div
-            style={{ cursor: "pointer" }}
-            onClick={() => filterBrand(BrandType.shf)}
-          >
-            SHF
-          </div>
-          <div
-            style={{ cursor: "pointer" }}
-            onClick={() => filterBrand(BrandType.dc_collectibles)}
-          >
-            DC COLLECTIBLES
-          </div>
-          <div
-            style={{ cursor: "pointer" }}
-            onClick={() => filterBrand(BrandType.mattel)}
-          >
-            MATTEL
-          </div>
-          <div
-            style={{ cursor: "pointer" }}
-            onClick={() => filterBrand(BrandType.figuart)}
-          >
-            FIGUART
-          </div>
-          <div
-            style={{ cursor: "pointer" }}
-            onClick={() => filterBrand(BrandType.figma)}
-          >
-            FIGMA
-          </div>
+            {Object.values(BrandType).map((item, index) => {
+              return (
+                <option value={item} key={item}>
+                  {item}
+                </option>
+              );
+            })}
+          </select>
         </div>
 
         <div style={{ display: "flex", flexDirection: "column" }}>
           <div style={{ fontWeight: 900 }}>Category</div>
 
           <div
-            style={{ cursor: "pointer" }}
+            style={{ cursor: "pointer", fontSize: 12 }}
             onClick={() => filterCategory(CategoryType.action_figure)}
           >
             ACTION FIGURE
           </div>
           <div
-            style={{ cursor: "pointer" }}
+            style={{ cursor: "pointer", fontSize: 12 }}
             onClick={() => filterCategory(CategoryType.statue)}
           >
             STATUE

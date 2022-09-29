@@ -1,6 +1,7 @@
 import { ProductType } from "app/api/auth/models/product";
 import { css } from "@emotion/react";
 import React from "react";
+import { floor, isEmpty } from "lodash";
 
 const ProductItem = ({ product }: { product: ProductType }) => {
   return (
@@ -12,9 +13,9 @@ const ProductItem = ({ product }: { product: ProductType }) => {
         background: "white",
         width: 216,
         padding: 8,
-        border: "1px solid black",
         borderRadius: 16,
-        marginBottom: 8,
+        marginBottom: 35,
+        marginLeft: 25,
       }}
       css={css`
         &:hover {
@@ -32,8 +33,33 @@ const ProductItem = ({ product }: { product: ProductType }) => {
         <img src={product.img} alt="" />
       </div>
       <div style={{ display: "flex", flexDirection: "column" }}>
-        <div>{product.price}$</div>
-        <div>{product.name}</div>
+        <div style={{ display: "flex" }}>
+          <div
+            style={{ marginRight: 16, position: "relative", fontWeight: 600 }}
+            css={css`
+              ${(product.sale || product.sale === 0) &&
+              ` &:after {
+                content: "";
+                position: absolute;
+                left: 0;
+                bottom: 0;
+                height: 2px;
+                width: 100%;
+                background-color: var(--dark-grey-color);
+                top: 50%;
+                transform: translateY(-50%);
+               
+              }`}
+            `}
+          >
+            {product.price}$
+          </div>
+          {(product.sale || product.sale === 0) && (
+            <div>{floor(product.price - product.sale, 2)}$</div>
+          )}
+        </div>
+
+        <div style={{ fontWeight: 600 }}>{product.name}</div>
       </div>
     </div>
   );
