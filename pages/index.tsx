@@ -17,7 +17,7 @@ function Home() {
               <p className="text">
                 Action figures, Statue, Collectibles, and More!
               </p>
-              <a href="shop" className="btn-header text-white bg-brown">
+              <a href="product" className="btn-header text-white bg-brown">
                 shop now
               </a>
             </div>

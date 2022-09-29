@@ -89,7 +89,7 @@ function Navbar() {
               </li>
 
               <li className="nav-item">
-                <Link href="/shop" className="nav-link">
+                <Link href="/product" className="nav-link">
                   <span style={{ color: "black" }} className="nav-link-text">
                     Shop
                   </span>
@@ -122,7 +122,9 @@ function Navbar() {
             <ul className="navbar-nav text-uppercase">
               <li className="nav-item">
                 <Link href="/" className="nav-link active-link">
-                  <span className="nav-link-text">Home</span>
+                  <span style={{ fontWeight: 900 }} className="nav-link-text">
+                    Home
+                  </span>
                 </Link>
               </li>
 
@@ -133,7 +135,7 @@ function Navbar() {
               </li>
 
               <li className="nav-item">
-                <Link href="/shop" className="nav-link">
+                <Link href="/product" className="nav-link">
                   <span className="nav-link-text">Shop</span>
                 </Link>
               </li>
