@@ -17,7 +17,17 @@ type UserType = {
   removeAllCart: () => void;
 };
 
-export const AuthContext = createContext<UserType>();
+export const AuthContext = createContext<UserType>({
+  user: undefined,
+  setUser: () => {},
+  users: [],
+  updateUserCartQuantity: (id: string) => {},
+  removeAllCart: () => {},
+  removeUserCart: (id: string) => {},
+  addUserCart: (id: string) => {},
+  setUsers: () => {},
+  createUser: (info: SignupType) => {},
+});
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [user, setUser] = useState<User | undefined>(undefined);
