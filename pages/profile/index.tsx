@@ -1,47 +1,31 @@
-import { AuthContext } from "app/context/authContext";
-import { useRouter } from "next/router";
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import { userlist } from "../../api/auth/data";
-import { LoginType } from "../../api/auth/models/user";
+import { User } from "../../api/auth/models/user";
 
-function Login() {
-  const [data, setData] = useState(userlist);
-  const [user, setUser] = useState<LoginType>({
-    username: "",
-    password: "",
-  });
-  const router = useRouter();
+function Profile() {
+  // const [data, setData] = useState(userlist);
+  // const [user, setUser] = useState<User>({
+  //     username: "",
+  // password: "",
+  // dispalyName: "",
+  //id: "",
+  // address: "",
+  // phonenumber: "",
+  // dob: "",
 
-  const { setUser: setGlobalUser } = useContext(AuthContext);
-
-  const submitForm = (event: any) => {
-    event.preventDefault();
-    const dataIndex = data.findIndex(
-      (item, index) => item.username === user.username
-    );
-    if (dataIndex > -1) {
-      if (data[dataIndex].password === user.password) {
-        console.log("successfully Login");
-        setGlobalUser(data[dataIndex]);
-        router.push("/");
-      } else {
-        console.log("wrong password");
-      }
-    } else {
-      console.log("User does not exist");
-    }
-  };
+  // });
 
   return (
     <div
       style={{
+        width: "350px",
         margin: "0 auto",
-        minHeight: 800,
+        minHeight: " 350px",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
         flexDirection: "column",
-        background: "var(--light-grey-color-shade)",
+        background: "white",
       }}
     >
       <div>
@@ -58,8 +42,8 @@ function Login() {
           }}
         >
           <h1 style={{ textAlign: "center" }}>Login</h1>
-          <label style={{}}>Username</label>
-          <form onSubmit={submitForm}>
+          <label style={{}}>Name</label>
+          <form>
             <div>
               <input
                 style={{
@@ -69,12 +53,6 @@ function Login() {
                   width: 275,
                 }}
                 type="text"
-                onChange={(event) => {
-                  setUser((prevState) => ({
-                    ...prevState,
-                    username: event.target.value,
-                  }));
-                }}
                 required
               ></input>
             </div>
@@ -88,12 +66,6 @@ function Login() {
                   width: 275,
                 }}
                 type="password"
-                onChange={(event) => {
-                  setUser((prevState) => ({
-                    ...prevState,
-                    password: event.target.value,
-                  }));
-                }}
                 required
               ></input>
             </div>
@@ -149,4 +121,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default Profile;

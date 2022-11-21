@@ -1,31 +1,171 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Head from "next/head";
 import Navbar from "../component/Navbar";
-import Footer from "../component/footer";
+import Footer from "../component/Footer";
 import link from "next/link";
 import Image from "next/image";
 import StarIcon from "@mui/icons-material/Star";
+import { useResponsive } from "app/hooks/useResponsive";
+import { DefaultProduct } from "app/api/auth/data";
+import { padding } from "@mui/system";
+import { shuffle } from "lodash";
+import {
+  AllType,
+  BrandType,
+  CategoryType,
+  ProductType,
+} from "app/api/auth/models/product";
+import Link from "next/link";
 
 function Home() {
-  return (
-    <div className="">
-      <header className="header bg-light-brown flex" id="home">
-        <div className="container">
-          <div className="header-content grid text-center">
-            <div className="header-left">
-              <h1>HIEUCOLLECTION</h1>
-              <p className="text">
-                Action figures, Statue, Collectibles, and More!
-              </p>
-              <a href="product" className="btn-header text-white bg-brown">
-                shop now
-              </a>
+  const [products, setProduct] = useState(DefaultProduct);
+  const [newProducts, setNewProducts] = useState(DefaultProduct);
+  const [saleProducts, setSaleProducts] = useState(DefaultProduct);
+  const [preProducts, setPreProducts] = useState(DefaultProduct);
+  const { isMobile } = useResponsive();
+
+  useEffect(() => {
+    setNewProducts(
+      shuffle(
+        DefaultProduct.filter((item, index) => {
+          return item.all === AllType.new;
+        })
+      ).slice(0, 4)
+    );
+    setSaleProducts(
+      shuffle(
+        DefaultProduct.filter((item, index) => {
+          return item.all === AllType.sale;
+        })
+      ).slice(0, 4)
+    );
+    setPreProducts(
+      shuffle(
+        DefaultProduct.filter((item, index) => {
+          return item.all === AllType.pre_order;
+        })
+      ).slice(0, 4)
+    );
+  }, [products]);
+
+  const renderProducts = (item: ProductType, index: number) => {
+    const ratingStars = new Array(item.rating).fill(0);
+
+    return (
+      <div className="new-product-item">
+        <div className="image" style={{ height: 280 }}>
+          <img src={item.img} alt="" />
+        </div>
+        <div className="info">
+          <div
+            className="ratings test-grey"
+            style={{ display: "flex", alignItems: "center" }}
+          >
+            <div style={{ display: "flex", width: 60 }}>
+              {ratingStars.map((value) => {
+                return <StarIcon style={{ fill: "black", fontSize: "10" }} />;
+              })}
             </div>
 
-            <div className="header-right">
-              <img src="images/hieu2.jpg" alt="" />
+            <span>({item.review} Reviews)</span>
+          </div>
+          <div className="price">
+            <span className="new text-amber-900">${item.price}</span>
+          </div>
+          <p className="name">{item.name}</p>
+        </div>
+      </div>
+    );
+  };
+
+  return (
+    <div className="">
+      <header
+        style={{
+          display: "grid",
+          paddingTop: "1rem",
+          lineHeight: "1.6",
+          rowGap: "13rem",
+          position: "relative",
+          overflow: "hidden",
+          minHeight: "730px",
+        }}
+        className="header bg-light-brown flex"
+        id="home"
+      >
+        <div
+          style={{
+            maxWidth: "calc 1145+20 ",
+            margin: "0 auto",
+            padding: "0 1rem",
+            textAlign: "center",
+            lineHeight: 1.6,
+            paddingTop: "10rem",
+            paddingBottom: "1.2rem",
+            display: "grid",
+          }}
+        >
+          <div
+            style={{
+              paddingTop: 0,
+              maxWidth: "100%",
+              display: "grid",
+              gridTemplateColumns: "40% 60%",
+              alignItems: "center",
+            }}
+          >
+            <div style={{ width: "100%" }}>
+              <h1
+                style={{
+                  opacity: 0.9,
+                  fontSize: "4.5rem",
+                  lineHeight: 1.6,
+                }}
+              >
+                HIEUCOLLECTION
+              </h1>
+              <p
+                style={{
+                  lineHeight: 2,
+                  opacity: 0.8,
+                  fontWeight: 400,
+                  textTransform: "uppercase",
+                  fontSize: "1.6rem",
+                }}
+              >
+                Action figures, Statue, Collectibles, and More!
+              </p>
+              <div
+                style={{
+                  textTransform: "uppercase",
+                  fontWeight: 700,
+                  padding: "1.4rem 4.2rem",
+                  borderRadius: " 1rem",
+                  textAlign: "center",
+                  lineHeight: 1,
+                  display: "inline-block",
+                  cursor: "pointer",
+                  backgroundColor: "white",
+                }}
+              >
+                <Link href="/product">shop now</Link>
+              </div>
             </div>
-            <img src="images/hieu3.jpeg" className="header-shape" />
+
+            <div style={{ width: "100%", position: "relative" }}>
+              <img
+                style={{
+                  position: "absolute",
+                  top: "-25%",
+                  right: "50%",
+                  width: "80%",
+                  transform: "translateX(50%)",
+                }}
+                src="images/hieu2.jpg"
+                alt=""
+              />
+              <img src="images/hieu3.jpeg" style={{}} />
+            </div>
           </div>
         </div>
       </header>
@@ -42,136 +182,7 @@ function Home() {
               <div className="line"></div>
             </div>
             <div className="new-products-content grid">
-              <div className="new-product-item">
-                <div className="image">
-                  <img src="images/NS.jpeg" alt="" />
-                </div>
-                <div className="info">
-                  <div className="ratings test-grey">
-                    <i className="">
-                      <StarIcon style={{ fill: "black", fontSize: "10" }} />
-                    </i>
-                    <i className="">
-                      <StarIcon style={{ fill: "black", fontSize: "10" }} />
-                    </i>
-                    <i className="">
-                      <StarIcon style={{ fill: "black", fontSize: "10" }} />
-                    </i>
-                    <i className="">
-                      <StarIcon style={{ fill: "black", fontSize: "10" }} />
-                    </i>
-                    <i className="">
-                      <StarIcon style={{ fill: "black", fontSize: "10" }} />
-                    </i>
-                    <span>(10 Reviews)</span>
-                  </div>
-                  <div className="price">
-                    <span className="new text-amber-900">$ 24.99</span>
-                  </div>
-                  <p className="name">
-                    Spider-Man Marvel Legends Series 6-inch Symbiote Action
-                    Figure Toy
-                  </p>
-                </div>
-              </div>
-
-              <div className="new-product-item">
-                <div className="image">
-                  <img src="images/NB.jpeg" alt="" />
-                </div>
-                <div className="info">
-                  <div className="ratings test-grey">
-                    <i className="">
-                      <StarIcon style={{ fill: "black", fontSize: "10" }} />
-                    </i>
-                    <i className="">
-                      <StarIcon style={{ fill: "black", fontSize: "10" }} />
-                    </i>
-                    <i className="">
-                      <StarIcon style={{ fill: "black", fontSize: "10" }} />
-                    </i>
-                    <i className="">
-                      <StarIcon style={{ fill: "black", fontSize: "10" }} />
-                    </i>
-                    <i className="">
-                      <StarIcon style={{ fill: "black", fontSize: "10" }} />
-                    </i>
-                    <span>(10 Reviews)</span>
-                  </div>
-                  <div className="price">
-                    <span className="new text-amber-900">$ 19.99</span>
-                  </div>
-                  <p className="name">
-                    McFarlane Toys DC Batman: The Batman (Movie)
-                  </p>
-                </div>
-              </div>
-
-              <div className="new-product-item">
-                <div className="image">
-                  <img src="images/NJ.jpeg" alt="" />
-                </div>
-                <div className="info">
-                  <div className="ratings test-grey">
-                    <i className="">
-                      <StarIcon style={{ fill: "black", fontSize: "10" }} />
-                    </i>
-                    <i className="">
-                      <StarIcon style={{ fill: "black", fontSize: "10" }} />
-                    </i>
-                    <i className="">
-                      <StarIcon style={{ fill: "black", fontSize: "10" }} />
-                    </i>
-                    <i className="">
-                      <StarIcon style={{ fill: "black", fontSize: "10" }} />
-                    </i>
-                    <i className="">
-                      <StarIcon style={{ fill: "black", fontSize: "10" }} />
-                    </i>
-                    <span>(10 Reviews)</span>
-                  </div>
-                  <div className="price">
-                    <span className="new text-amber-900">$ 34.99</span>
-                  </div>
-                  <p className="name">
-                    WWE Ultimate Edition Wave 10 John Cena Action Figure 6 in
-                    with Interchangeable Entrance JacketLanternExtra Head and
-                    Swappable Hands
-                  </p>
-                </div>
-              </div>
-
-              <div className="new-product-item">
-                <div className="image">
-                  <img src="images/ND.jpeg" alt="" />
-                </div>
-                <div className="info">
-                  <div className="ratings test-grey">
-                    <i className="">
-                      <StarIcon style={{ fill: "black", fontSize: "10" }} />
-                    </i>
-                    <i className="">
-                      <StarIcon style={{ fill: "black", fontSize: "10" }} />
-                    </i>
-                    <i className="">
-                      <StarIcon style={{ fill: "black", fontSize: "10" }} />
-                    </i>
-                    <i className="">
-                      <StarIcon style={{ fill: "black", fontSize: "10" }} />
-                    </i>
-                    <i className="">
-                      <StarIcon style={{ fill: "black", fontSize: "10" }} />
-                    </i>
-                    <span>(10 Reviews)</span>
-                  </div>
-                  <div className="price">
-                    <span className="new text-amber-900">$ 79.99</span>
-                  </div>
-                  <p className="name">
-                    Tamashi Nations - Deadpool - Bandai Spirits S.H.Figuarts
-                  </p>
-                </div>
-              </div>
+              {newProducts.map(renderProducts)}
             </div>
           </div>
         </section>
@@ -182,353 +193,37 @@ function Home() {
         >
           <div className="container">
             <div className="section-title text-center">
-              <h2>top sale products</h2>
+              <h2>Top Sale products</h2>
               <p className="lead">In stock.</p>
               <div className="line"></div>
             </div>
-
             <div className="sale-products-content grid">
-              <div className="sale-product-item">
-                <div className="image">
-                  <img src="images/goku.jpeg" alt="" />
-                  <span className="badge bg-brown text-white text-center text-uppercase">
-                    sale
-                  </span>
-                </div>
-                <div className="info">
-                  <div className="ratings text-grey">
-                    <i className="">
-                      <StarIcon style={{ fill: "black", fontSize: "10" }} />
-                    </i>
-                    <i className="">
-                      <StarIcon style={{ fill: "black", fontSize: "10" }} />
-                    </i>
-                    <i className="">
-                      <StarIcon style={{ fill: "black", fontSize: "10" }} />
-                    </i>
-                    <i className="">
-                      <StarIcon style={{ fill: "black", fontSize: "10" }} />
-                    </i>
-                    <i className="">
-                      <StarIcon style={{ fill: "black", fontSize: "10" }} />
-                    </i>
-                    <span>(90 Reviews)</span>
-                  </div>
-                  <div className="price">
-                    <span className="old text-grey">$ 50.00</span>
-                    <span className="new text-brown">$ 35.00</span>
-                  </div>
-                  <p className="name">
-                    Tamashii Nations S.H. Figuarts Ultra Instinct Son Goku
-                    Dragon Ball Super
-                  </p>
-                </div>
-              </div>
-
-              <div className="sale-product-item">
-                <div className="image">
-                  <img src="images/loki.jpeg" alt="" />
-                  <span className="badge bg-brown text-white text-center text-uppercase">
-                    sale
-                  </span>
-                </div>
-                <div className="info">
-                  <div className="ratings text-grey">
-                    <i className="">
-                      <StarIcon style={{ fill: "black", fontSize: "10" }} />
-                    </i>
-                    <i className="">
-                      <StarIcon style={{ fill: "black", fontSize: "10" }} />
-                    </i>
-                    <i className="">
-                      <StarIcon style={{ fill: "black", fontSize: "10" }} />
-                    </i>
-                    <i className="">
-                      <StarIcon style={{ fill: "black", fontSize: "10" }} />
-                    </i>
-                    <i className="">
-                      <StarIcon style={{ fill: "black", fontSize: "10" }} />
-                    </i>
-                    <span>(5 Reviews)</span>
-                  </div>
-                  <div className="price">
-                    <span className="old text-grey">$ 24.99</span>
-                    <span className="new text-brown">$ 22.00</span>
-                  </div>
-                  <p className="name">
-                    Marvel Legends Series Loki Agent of Asgard 6-inch Retro
-                  </p>
-                </div>
-              </div>
-
-              <div className="sale-product-item">
-                <div className="image">
-                  <img src="images/randy.jpeg" alt="" />
-                  <span className="badge bg-brown text-white text-center text-uppercase">
-                    sale
-                  </span>
-                </div>
-                <div className="info">
-                  <div className="ratings text-grey">
-                    <i className="">
-                      <StarIcon style={{ fill: "black", fontSize: "10" }} />
-                    </i>
-                    <i className="">
-                      <StarIcon style={{ fill: "black", fontSize: "10" }} />
-                    </i>
-                    <i className="">
-                      <StarIcon style={{ fill: "black", fontSize: "10" }} />
-                    </i>
-                    <i className="">
-                      <StarIcon style={{ fill: "black", fontSize: "10" }} />
-                    </i>
-                    <i className="">
-                      <StarIcon style={{ fill: "black", fontSize: "10" }} />
-                    </i>
-                    <span>(18 Reviews)</span>
-                  </div>
-                  <div className="price">
-                    <span className="old text-grey">$ 21.00</span>
-                    <span className="new text-brown">$ 15.00</span>
-                  </div>
-                  <p className="name">
-                    WWE Randy Orton Elite Collection Action Figure, Series # 90
-                  </p>
-                </div>
-              </div>
-
-              <div className="sale-product-item">
-                <div className="image">
-                  <img src="images/batman.jpeg" alt="" />
-                  <span className="badge bg-brown text-white text-center text-uppercase">
-                    sale
-                  </span>
-                </div>
-                <div className="info">
-                  <div className="ratings text-grey">
-                    <i className="">
-                      <StarIcon style={{ fill: "black", fontSize: "10" }} />
-                    </i>
-                    <i className="">
-                      <StarIcon style={{ fill: "black", fontSize: "10" }} />
-                    </i>
-                    <i className="">
-                      <StarIcon style={{ fill: "black", fontSize: "10" }} />
-                    </i>
-                    <i className="">
-                      <StarIcon style={{ fill: "black", fontSize: "10" }} />
-                    </i>
-                    <i className="">
-                      <StarIcon style={{ fill: "black", fontSize: "10" }} />
-                    </i>
-                    <span>(30 Reviews)</span>
-                  </div>
-                  <div className="price">
-                    <span className="old text-grey">$ 35.00</span>
-                    <span className="new text-brown">$ 30.00</span>
-                  </div>
-                  <p className="name">
-                    McFarlane Multiverse The Batman from Batman Movie Deluxe
-                    Figure
-                  </p>
-                </div>
-              </div>
+              {saleProducts.map(renderProducts)}
             </div>
           </div>
         </section>
-
-        <section className="category py bg-light-brown" id="category">
-          <div className="container">
-            <div className="section-title text-center">
-              <h2> Product Images</h2>
-            </div>
-            <div className="container">
-              <div className="category-content grid">
-                <div className="category-item">
-                  <img src="images/stargirl.jpeg" />
-                  <div className="category-badge bg-white text-dark flex">
-                    StarGirl
-                  </div>
-                </div>
-                <div className="category-item">
-                  <img src="images/2.jpeg" />
-                  <div className="category-badge bg-white text-dark flex">
-                    Spiderman 2099
-                  </div>
-                </div>
-                <div className="category-item">
-                  <img src="images/3.jpeg" />
-                  <div className="category-badge bg-white text-dark flex">
-                    Songoku Super saiyan 4
-                  </div>
-                </div>
-                <div className="category-item">
-                  <img src="images/4.jpeg" />
-                  <div className="category-badge bg-white text-dark flex">
-                    Songoku Raised on Earth
-                  </div>
-                </div>
-                <div className="category-item">
-                  <img src="images/5.jpeg" />
-                  <div className="category-badge bg-white text-dark flex">
-                    {" "}
-                    Gojo Satoru
-                  </div>
-                </div>
-                <div className="category-item">
-                  <img src="images/psy.jpeg" />
-                  <div className="category-badge bg-white text-dark flex">
-                    Psylocke
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
         <section
-          className="featured-deals bg-light-grey-color-shade py"
-          id="featured-deals"
+          id="pre-products"
+          className="pre-products py bg-light-grey-color-shade"
         >
           <div className="container">
             <div className="section-title text-center">
-              <h2>featured Pre-orders</h2>
-              <p className="lead">Featured Pre-Orders List</p>
+              <h2>Top Pre-Order products</h2>
+              <p className="lead">In stock.</p>
               <div className="line"></div>
             </div>
-
-            <div className="featured-deals-content grid">
-              <div className="featured-deals-item">
-                <div className="image">
-                  <img src="images/Pgoku.jpeg" />
-                </div>
-                <div className="info bg-white">
-                  <div className="ratings text-grey">
-                    <div className="ratings text-grey">
-                      <i className="">
-                        <StarIcon style={{ fill: "black", fontSize: "10" }} />
-                      </i>
-                      <i className="">
-                        <StarIcon style={{ fill: "black", fontSize: "10" }} />
-                      </i>
-                      <i className="">
-                        <StarIcon style={{ fill: "black", fontSize: "10" }} />
-                      </i>
-                      <i className="">
-                        <StarIcon style={{ fill: "black", fontSize: "10" }} />
-                      </i>
-                      <i className="">
-                        <StarIcon style={{ fill: "black", fontSize: "10" }} />
-                      </i>
-                    </div>
-                    <div className="price">
-                      <span className="new text-brown">$ 59.99</span>
-                    </div>
-                    <p className="name">
-                      Dragon Ball Super S.H.Figuarts Super Saiyan God Super
-                      Saiyan Gogeta
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <div className="featured-deals-item">
-                <div className="image">
-                  <img src="images/Pbat.jpeg" />
-                </div>
-                <div className="info bg-white">
-                  <div className="ratings text-grey">
-                    <i className="">
-                      <StarIcon style={{ fill: "black", fontSize: "10" }} />
-                    </i>
-                    <i className="">
-                      <StarIcon style={{ fill: "black", fontSize: "10" }} />
-                    </i>
-                    <i className="">
-                      <StarIcon style={{ fill: "black", fontSize: "10" }} />
-                    </i>
-                    <i className="">
-                      <StarIcon style={{ fill: "black", fontSize: "10" }} />
-                    </i>
-                    <i className="">
-                      <StarIcon style={{ fill: "black", fontSize: "10" }} />
-                    </i>
-                  </div>
-                  <div className="price">
-                    <span className="new text-brown">$ 174.99</span>
-                  </div>
-                  <p className="name">
-                    The Batman 1/10 Art Scale Limited Edition Statue
-                  </p>
-                </div>
-              </div>
-
-              <div className="featured-deals-item">
-                <div className="image">
-                  <img src="images/Pbroly.jpeg" />
-                </div>
-                <div className="info bg-white">
-                  <div className="ratings text-grey">
-                    <i className="">
-                      <StarIcon style={{ fill: "black", fontSize: "10" }} />
-                    </i>
-                    <i className="">
-                      <StarIcon style={{ fill: "black", fontSize: "10" }} />
-                    </i>
-                    <i className="">
-                      <StarIcon style={{ fill: "black", fontSize: "10" }} />
-                    </i>
-                    <i className="">
-                      <StarIcon style={{ fill: "black", fontSize: "10" }} />
-                    </i>
-                    <i className="">
-                      <StarIcon style={{ fill: "black", fontSize: "10" }} />
-                    </i>
-                  </div>
-                  <div className="price">
-                    <span className="new text-brown">$ 83.99</span>
-                  </div>
-                  <p className="name">
-                    Dragon Ball Super S.H.Figuarts Super Saiyan Broly (Full
-                    Power)
-                  </p>
-                </div>
-              </div>
-
-              <div className="featured-deals-item">
-                <div className="image">
-                  <img src="images/spider.jpeg" />
-                </div>
-                <div className="info bg-white">
-                  <div className="ratings text-grey">
-                    <i className="">
-                      <StarIcon style={{ fill: "black", fontSize: "10" }} />
-                    </i>
-                    <i className="">
-                      <StarIcon style={{ fill: "black", fontSize: "10" }} />
-                    </i>
-                    <i className="">
-                      <StarIcon style={{ fill: "black", fontSize: "10" }} />
-                    </i>
-                    <i className="">
-                      <StarIcon style={{ fill: "black", fontSize: "10" }} />
-                    </i>
-                    <i className="">
-                      <StarIcon style={{ fill: "black", fontSize: "10" }} />
-                    </i>
-                  </div>
-                  <div className="price">
-                    <span className="new text-brown">$ 94.99</span>
-                  </div>
-                  <p className="name">
-                    Avengers: Endgame S.H.Figuarts Iron Spider (Final Battle
-                    Edition)
-                  </p>
-                </div>
-              </div>
+            <div
+              style={{
+                gridTemplateColumns: "repeat(4,1fr)",
+                gap: "3rem",
+                padding: "5rem 0",
+              }}
+              className="pre-products-content grid"
+            >
+              {preProducts.map(renderProducts)}
             </div>
           </div>
         </section>
-
         <section
           className="latest-news bg-light-grey-color-shade py"
           id="latest-news"
