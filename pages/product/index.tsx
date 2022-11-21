@@ -3,7 +3,7 @@ import { DefaultProduct } from "app/api/auth/data";
 import { AllType, BrandType, CategoryType } from "app/api/auth/models/product";
 import { css } from "@emotion/react";
 import ManageSearchIcon from "@mui/icons-material/ManageSearch";
-import ProductItem from "app/component/product";
+import ProductItem from "app/component/ProductItem";
 import React, { useState } from "react";
 import { useResponsive } from "app/hooks/useResponsive";
 import { Formik } from "formik";

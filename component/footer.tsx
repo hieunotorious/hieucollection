@@ -91,6 +91,7 @@ function Footer() {
                 width="100%"
                 height="100%"
                 src="/images/pay_3.png"
+                alt=""
               />
             </div>
 
@@ -108,6 +109,7 @@ function Footer() {
                 width="100%"
                 height="100%"
                 src="/images/pay_4.png"
+                alt=""
               />
             </div>
 
@@ -125,6 +127,7 @@ function Footer() {
                 width="100%"
                 height="100%"
                 src="/images/pay_5.png"
+                alt=""
               />
             </div>
           </div>
