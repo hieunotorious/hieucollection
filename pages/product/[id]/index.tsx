@@ -30,6 +30,7 @@ function ProductId() {
   return (
     product && (
       <div
+        key={product.id}
         style={{
           padding: "4rem",
           minHeight: "950px",
@@ -76,8 +77,13 @@ function ProductId() {
               style={{ display: "flex", alignItems: "center" }}
             >
               <div style={{ display: "flex", width: 60 }}>
-                {ratingStars.map((value) => {
-                  return <StarIcon style={{ fill: "black", fontSize: "10" }} />;
+                {ratingStars.map((value, index) => {
+                  return (
+                    <StarIcon
+                      key={index}
+                      style={{ fill: "black", fontSize: "10" }}
+                    />
+                  );
                 })}
               </div>
               <h3
