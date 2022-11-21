@@ -1,9 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Head from "next/head";
-import Navbar from "../component/Navbar";
-import Footer from "../component/Footer";
-import link from "next/link";
-import Image from "next/image";
+
 import StarIcon from "@mui/icons-material/Star";
 import { useResponsive } from "app/hooks/useResponsive";
 import { DefaultProduct } from "app/api/auth/data";

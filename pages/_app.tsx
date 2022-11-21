@@ -1,8 +1,9 @@
 import "../styles/globals.css";
 import type { AppProps } from "next/app";
 import Navbar from "../component/Navbar";
-import Footer from "../component/Footer";
+
 import { AuthProvider } from "../context/authContext";
+import Footer from "../component/Footer";
 
 function App({ Component, pageProps }: AppProps) {
   return (

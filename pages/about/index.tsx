@@ -1,9 +1,3 @@
-import React from "react";
-import link from "next/link";
-import Header from "../../component/Navbar";
-import Footer from "../../component/Footer";
-import Navbar from "../../component/Navbar";
-
 function About() {
   return (
     <section
