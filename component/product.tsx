@@ -2,43 +2,46 @@ import { ProductType } from "app/api/auth/models/product";
 import { css } from "@emotion/react";
 import React from "react";
 import { floor, isEmpty } from "lodash";
+import Link from "next/link";
+import Image from "next/image";
 
 const ProductItem = ({ product }: { product: ProductType }) => {
   return (
-    <div
-      style={{
-        display: "flex",
-        justifyContent: "flex-start",
-        flexDirection: "column",
-        background: "white",
-        width: 216,
-        padding: 8,
-        borderRadius: 16,
-        marginBottom: 35,
-        marginLeft: 25,
-      }}
-      css={css`
-        &:hover {
-          -webkit-box-shadow: var(--box-shadow);
-          box-shadow: var(--box-shadow);
-        }
-      `}
-    >
+    <Link href={`product/${product.id}`}>
       <div
+        style={{
+          display: "flex",
+          justifyContent: "flex-start",
+          flexDirection: "column",
+          background: "white",
+          width: 216,
+          padding: 8,
+          borderRadius: 16,
+          marginBottom: 35,
+          marginLeft: 25,
+        }}
         css={css`
-          width: 200px;
-          height: 200px;
+          &:hover {
+            -webkit-box-shadow: var(--box-shadow);
+            box-shadow: var(--box-shadow);
+          }
         `}
       >
-        <img src={product.img} alt="" />
-      </div>
-      <div style={{ display: "flex", flexDirection: "column" }}>
-        <div style={{ display: "flex" }}>
-          <div
-            style={{ marginRight: 16, position: "relative", fontWeight: 600 }}
-            css={css`
-              ${(product.sale || product.sale === 0) &&
-              ` &:after {
+        <div
+          css={css`
+            width: 200px;
+            height: 200px;
+          `}
+        >
+          <Image width={200} height={200} src={`/${product.img}`} alt="" />
+        </div>
+        <div style={{ display: "flex", flexDirection: "column" }}>
+          <div style={{ display: "flex" }}>
+            <div
+              style={{ marginRight: 16, position: "relative", fontWeight: 600 }}
+              css={css`
+                ${(product.sale || product.sale === 0) &&
+                ` &:after {
                 content: "";
                 position: absolute;
                 left: 0;
@@ -50,18 +53,19 @@ const ProductItem = ({ product }: { product: ProductType }) => {
                 transform: translateY(-50%);
                
               }`}
-            `}
-          >
-            {product.price}$
+              `}
+            >
+              {product.price}$
+            </div>
+            {(product.sale || product.sale === 0) && (
+              <div>{floor(product.price - product.sale, 2)}$</div>
+            )}
           </div>
-          {(product.sale || product.sale === 0) && (
-            <div>{floor(product.price - product.sale, 2)}$</div>
-          )}
-        </div>
 
-        <div style={{ fontWeight: 600 }}>{product.name}</div>
+          <div style={{ fontWeight: 600 }}>{product.name}</div>
+        </div>
       </div>
-    </div>
+    </Link>
   );
 };
 
