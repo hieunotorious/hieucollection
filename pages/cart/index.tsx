@@ -162,7 +162,7 @@ function Cart() {
   return (
     <div
       style={{
-        minHeight: 800,
+        minHeight: 900,
 
         padding: "0 4rem",
 

@@ -36,7 +36,7 @@ function Login() {
     <div
       style={{
         margin: "0 auto",
-        minHeight: 800,
+        minHeight: 900,
         display: "flex",
         justifyContent: "center",
         alignItems: "center",

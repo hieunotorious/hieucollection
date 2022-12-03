@@ -1,31 +1,45 @@
-import React, { useState } from "react";
+import { blue } from "@mui/material/colors";
+import React, { useContext, useState } from "react";
 import { userlist } from "../../api/auth/data";
 import { User } from "../../api/auth/models/user";
-
-function Profile() {
-  // const [data, setData] = useState(userlist);
-  // const [user, setUser] = useState<User>({
-  //     username: "",
-  // password: "",
-  // dispalyName: "",
-  //id: "",
-  // address: "",
-  // phonenumber: "",
-  // dob: "",
-
-  // });
+import { css } from "@emotion/react";
+import { Password } from "@mui/icons-material";
+import { AuthContext } from "app/context/authContext";
+import { info } from "console";
+import { useRouter } from "next/router";
+/*function Signup() {
+  const [data, setData] = useState(userlist);
+  const [user, setUser] = useState<User>({
+    username: "",
+    password: "",
+    dob: "",
+    phonenumber: "",
+    email: "",
+    address: "",
+    displayName: "",
+    id: "",
+  });
+  const router = useRouter();
+  const { createUser } = useContext(AuthContext);
+  const submitForm = (event: any) => {
+    event.preventDefault();
+    if (user.password === user.confirm) {
+      console.log("Complete");
+      createUser(user);
+      router.push("/");
+    }
+  };
 
   return (
     <div
       style={{
-        width: "350px",
+        background: "var(--light-grey-color-shade)",
         margin: "0 auto",
-        minHeight: " 350px",
+        minHeight: " 900px",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
         flexDirection: "column",
-        background: "white",
       }}
     >
       <div>
@@ -41,9 +55,9 @@ function Profile() {
             background: "white",
           }}
         >
-          <h1 style={{ textAlign: "center" }}>Login</h1>
-          <label style={{}}>Name</label>
-          <form>
+          <h1 style={{ textAlign: "center" }}>Profile</h1>
+          <label style={{}}>Username</label>
+          <form onSubmit={submitForm}>
             <div>
               <input
                 style={{
@@ -53,9 +67,96 @@ function Profile() {
                   width: 275,
                 }}
                 type="text"
+                onChange={(event) => {
+                  setUser((prevState) => ({
+                    ...prevState,
+                    username: event.target.value,
+                  }));
+                }}
                 required
               ></input>
             </div>
+
+            <label style={{}}>Email</label>
+            <div>
+              <input
+                style={{
+                  borderRadius: " 0.25rem",
+                  border: "1px solid black",
+                  padding: "0.25rem 0.5rem",
+                  width: 275,
+                }}
+                type="text"
+                onChange={(event) => {
+                  setUser((prevState) => ({
+                    ...prevState,
+                    email: event.target.value,
+                  }));
+                }}
+                required
+              ></input>
+            </div>
+
+            <label style={{}}>Display Name</label>
+            <div>
+              <input
+                style={{
+                  borderRadius: " 0.25rem",
+                  border: "1px solid black",
+                  padding: "0.25rem 0.5rem",
+                  width: 275,
+                }}
+                type="text"
+                onChange={(event) => {
+                  setUser((prevState) => ({
+                    ...prevState,
+                    displayName: event.target.value,
+                  }));
+                }}
+                required
+              ></input>
+            </div>
+
+            <label style={{}}>Phone Number</label>
+            <div>
+              <input
+                style={{
+                  borderRadius: " 0.25rem",
+                  border: "1px solid black",
+                  padding: "0.25rem 0.5rem",
+                  width: 275,
+                }}
+                type="text"
+                onChange={(event) => {
+                  setUser((prevState) => ({
+                    ...prevState,
+                    phonenumber: event.target.value,
+                  }));
+                }}
+                required
+              ></input>
+            </div>
+
+            <label style={{}}>Address</label>
+            <div>
+              <input
+                style={{
+                  borderRadius: " 0.25rem",
+                  border: "1px solid black",
+                  padding: "0.25rem 0.5rem",
+                  width: 275,
+                }}
+                type="text"
+                onChange={(event) => {
+                  setUser((prevState) => ({
+                    ...prevState,
+                    address: event.target.value,
+                  }));
+                }}
+                required
+              ></input>
+            </div>
+
             <label>Password</label>
             <div>
               <input
@@ -66,6 +167,32 @@ function Profile() {
                   width: 275,
                 }}
                 type="password"
+                onChange={(event) => {
+                  setUser((prevState) => ({
+                    ...prevState,
+                    password: event.target.value,
+                  }));
+                }}
+                required
+              ></input>
+            </div>
+
+            <label>Confirm Password</label>
+            <div>
+              <input
+                style={{
+                  padding: "0.25rem 0.5rem",
+                  borderRadius: "0.25rem",
+                  border: "1px solid black",
+                  width: 275,
+                }}
+                type="confirm"
+                onChange={(event) => {
+                  setUser((prevState) => ({
+                    ...prevState,
+                    confirm: event.target.value,
+                  }));
+                }}
                 required
               ></input>
             </div>
@@ -77,7 +204,9 @@ function Profile() {
                 color: "var(--text)",
               }}
             >
-              Forgot Password ?
+              By clicking Create account, I agree that I have read and accepted
+              the <a style={{ color: "blue" }}>Terms of Use </a> and
+              <a style={{ color: "blue", padding: 2 }}>Privacy Policy.</a>
             </div>
             <input
               style={{
@@ -90,35 +219,14 @@ function Profile() {
                 width: 275,
               }}
               type="submit"
-              value="login"
+              value="update"
             ></input>
           </form>
-        </div>
-        <div
-          style={{
-            marginTop: " 1rem",
-            display: "flex",
-            alignItems: " center",
-            borderRadius: "0.5rem",
-            border: "1px solid black",
-            padding: " 1.25rem",
-            background: "white",
-            marginBottom: "4rem",
-          }}
-        >
-          <div style={{}}>
-            Not a member?{" "}
-            <a
-              style={{ color: "blue", textDecoration: "underline" }}
-              href="signup"
-            >
-              Sign up
-            </a>
-          </div>
         </div>
       </div>
     </div>
   );
 }
 
-export default Profile;
+export default Signup;
+*/

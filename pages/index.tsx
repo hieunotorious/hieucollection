@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 
 import StarIcon from "@mui/icons-material/Star";
 import { useResponsive } from "app/hooks/useResponsive";
 import { DefaultProduct } from "app/api/auth/data";
 import { padding } from "@mui/system";
 import { shuffle } from "lodash";
+
 import {
   AllType,
   BrandType,
@@ -80,7 +81,7 @@ function Home() {
   };
 
   return (
-    <div className="">
+    <div>
       <header
         style={{
           display: "grid",
@@ -147,9 +148,12 @@ function Home() {
                   display: "inline-block",
                   cursor: "pointer",
                   backgroundColor: "white",
+                  color: "black",
                 }}
               >
-                <Link href="/product">shop now</Link>
+                <Link style={{ color: "black" }} href="/product">
+                  shop now
+                </Link>
               </div>
             </div>
 

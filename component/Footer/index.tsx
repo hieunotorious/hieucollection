@@ -20,7 +20,8 @@ function Footer() {
             router.pathname === "/cart" ||
             router.pathname === "/signin" ||
             router.pathname === "/signup" ||
-            router.pathname === "/product"
+            router.pathname === "/product" ||
+            router.pathname === "/admin"
               ? "none"
               : "block",
         }}

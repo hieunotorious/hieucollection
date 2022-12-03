@@ -6,9 +6,8 @@ html,
 .bg-light-brown {
   background-color: var(--light-brown-color);
 }
-.bg-brown {
-  background-color: var(--brown-color);
-}
+
+
 .bg-light-grey {
   background-color: var(--light-grey-color);
 }
@@ -31,9 +30,8 @@ html,
 .text-brown {
   color: var(--brown-color);
 }
-.text-white {
-  color: var(--white-color);
-}
+
+
 .text-dark {
   color: var(--dark-color);
 }
