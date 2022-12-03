@@ -32,7 +32,7 @@ function Signup() {
       style={{
         background: "var(--light-grey-color-shade)",
         margin: "0 auto",
-        minHeight: " 800px",
+        minHeight: " 900px",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",

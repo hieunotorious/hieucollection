@@ -7,6 +7,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
 import useTranslation from "next-translate/useTranslation";
 import setLanguage from "next-translate/setLanguage";
+import { useRouter } from "next/router";
 function Navbar() {
   const [isCategory, setIscategory] = useState("");
   const { t } = useTranslation();
@@ -29,9 +30,14 @@ function Navbar() {
   const navHideBtn = () => {
     setItcategory("");
   };
-
+  const router = useRouter();
   return (
-    <nav className="navbar bg-brown flex">
+    <nav
+      style={{
+        display: router.pathname === "/admin" ? "none" : "block",
+      }}
+      className="navbar bg-brown flex"
+    >
       <div className="container flex">
         <div className="toggler-and-category bg-brown text-white flex">
           <button
@@ -40,7 +46,7 @@ function Navbar() {
             className="btn navbar-show-btn text-white"
           >
             <i className="flex">
-              <MenuIcon style={{ fill: "white", fontSize: "30" }} />{" "}
+              <MenuIcon style={{ fill: "white", fontSize: "30" }} />
             </i>
           </button>
           <div
@@ -87,8 +93,18 @@ function Navbar() {
             </li>
           </ul>
         </div>
-        <div className="navbar-collapse flex">
-          <ul className="navbar-nav text-uppercase">
+        <div
+          style={{
+            display: router.pathname === "/admin" ? "none" : "block",
+          }}
+          className="navbar-collapse flex"
+        >
+          <ul
+            style={{
+              display: router.pathname === "/admin" ? "none" : "block",
+            }}
+            className="navbar-nav text-uppercase"
+          >
             <li className="nav-item">
               <Link href="/" className="nav-link active-link">
                 <span style={{ fontWeight: 900 }} className="nav-link-text">
@@ -112,7 +128,9 @@ function Navbar() {
           <div style={{ display: "flex", marginLeft: "8rem" }}>
             <Link href="/cart" className="btn text-white">
               <i className="flex">
-                <ShoppingCartIcon style={{ fill: "black", fontSize: "20" }} />{" "}
+                <ShoppingCartIcon
+                  style={{ fill: "black", fontSize: "20", cursor: "pointer" }}
+                />{" "}
               </i>
             </Link>
             <Link
@@ -121,7 +139,9 @@ function Navbar() {
               className="btn text-white"
             >
               <i className="flex">
-                <Man3Icon style={{ fill: "black", fontSize: "20" }} />{" "}
+                <Man3Icon
+                  style={{ fill: "black", fontSize: "20", cursor: "pointer" }}
+                />{" "}
               </i>
             </Link>
           </div>

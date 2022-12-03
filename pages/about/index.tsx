@@ -1,10 +1,13 @@
 function About() {
   return (
     <section
-      className="featured-deals bg-light-grey-color-shade py"
-      id="featured-deals"
+      style={{
+        padding: "5rem 0",
+        background: "var(--light-grey-color-shade)",
+        gap: "3rem",
+      }}
     >
-      <div style={{ minHeight: 900 }} className="container">
+      <div style={{ minHeight: 900, margin: "0 auto", padding: "0 1rem" }}>
         <div className="section-title text-center">
           <h2>About</h2>
           <p className="lead">About Us</p>

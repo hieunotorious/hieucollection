@@ -10,7 +10,8 @@ import { useRouter } from "next/router";
 import { ProductType } from "app/api/auth/models/product";
 import { css } from "@emotion/react";
 import { AuthContext } from "../../../context/authContext";
-
+import Link from "next/link";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 function ProductId() {
   const router = useRouter();
   const { addUserCart } = useContext(AuthContext);
@@ -50,11 +51,17 @@ function ProductId() {
           }}
         >
           <Image
-            style={{ objectFit: "cover", borderRadius: "0.25rem" }}
+            style={{ objectFit: "cover", borderRadius: 16, display: "flex" }}
             width={512}
             height={500}
             src={`/${product.img}`}
             alt=""
+            css={css`
+              &:hover {
+                -webkit-box-shadow: var(--box-shadow);
+                box-shadow: var(--box-shadow);
+              }
+            `}
           />
           <form
             style={{
@@ -101,7 +108,10 @@ function ProductId() {
                 fontSize: "1.25rem",
               }}
             >
-              <a style={{ fontWeight: "bold" }}>Price: </a>${product.sale}
+              <a style={{ fontWeight: "bold" }}>Price: </a>${product.price}
+              <div>
+                <a style={{ fontWeight: "bold" }}>Price: </a>${product.sale}
+              </div>
             </h3>
             <div
               style={{
@@ -110,7 +120,7 @@ function ProductId() {
                 fontSize: "1rem",
               }}
             >
-              <p style={{ textAlign: "justify" }}>
+              <p style={{ textAlign: "justify", fontSize: "12px" }}>
                 <a style={{ fontWeight: "bold" }}>Description: </a>
                 {product.description}
               </p>
@@ -124,6 +134,7 @@ function ProductId() {
                   textTransform: "capitalize",
                   letterSpacing: " normal",
                   borderBottom: "1px solid black",
+                  marginBottom: "2rem",
                 }}
                 className="brand"
               >
@@ -138,17 +149,34 @@ function ProductId() {
               }}
               style={{
                 textTransform: "uppercase",
-                fontWeight: "700",
+                fontWeight: "500",
                 padding: "1.4rem 4.2rem",
                 borderRadius: "1rem",
                 backgroundColor: "black",
                 color: "white",
                 textAlign: "center",
+                cursor: "pointer",
+                width: 200,
+                alignItems: "center",
               }}
             >
               Add to Cart
             </div>
           </form>
+          <div>
+            <Link style={{}} href="/product">
+              <button>
+                <ArrowBackIcon
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    color: "black",
+                    fontSize: 50,
+                  }}
+                />
+              </button>
+            </Link>
+          </div>
         </div>
       </div>
     )

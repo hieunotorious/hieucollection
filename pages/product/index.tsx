@@ -48,7 +48,7 @@ const Product = () => {
       style={{
         display: "flex",
         padding: 16,
-        minHeight: 800,
+        minHeight: 900,
         flexDirection: `${isMobile ? "column" : "row"}`,
       }}
       css={css`
@@ -149,6 +149,7 @@ const Product = () => {
           margin: "auto",
           flexWrap: "wrap",
           marginTop: 8,
+          cursor: "pointer",
         }}
       >
         {products.map((item, index) => {
