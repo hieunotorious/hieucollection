@@ -32,12 +32,7 @@ function Navbar() {
   };
   const router = useRouter();
   return (
-    <nav
-      style={{
-        display: router.pathname === "/admin" ? "none" : "block",
-      }}
-      className="navbar bg-brown flex"
-    >
+    <nav className="navbar bg-brown flex">
       <div className="container flex">
         <div className="toggler-and-category bg-brown text-white flex">
           <button
@@ -93,18 +88,8 @@ function Navbar() {
             </li>
           </ul>
         </div>
-        <div
-          style={{
-            display: router.pathname === "/admin" ? "none" : "block",
-          }}
-          className="navbar-collapse flex"
-        >
-          <ul
-            style={{
-              display: router.pathname === "/admin" ? "none" : "block",
-            }}
-            className="navbar-nav text-uppercase"
-          >
+        <div className="navbar-collapse flex">
+          <ul className="navbar-nav text-uppercase">
             <li className="nav-item">
               <Link href="/" className="nav-link active-link">
                 <span style={{ fontWeight: 900 }} className="nav-link-text">
