@@ -7,8 +7,15 @@ import { Password } from "@mui/icons-material";
 import { AuthContext } from "app/context/authContext";
 import { info } from "console";
 import { useRouter } from "next/router";
+import setLanguage from "next-translate/setLanguage";
+import useTranslation from "next-translate/useTranslation";
+import { Input, InputGroup, InputRightElement, Button } from "@chakra-ui/react";
 function Signup() {
+  const [show1, setShow1] = React.useState(false);
+  const [show2, setShow2] = React.useState(false);
+
   const [data, setData] = useState(userlist);
+  const { t } = useTranslation();
   const [user, setUser] = useState<SignupType>({
     username: "",
     password: "",
@@ -26,6 +33,9 @@ function Signup() {
       router.push("/");
     }
   };
+  const handleClick1 = () => setShow1(!show1);
+
+  const handleClick2 = () => setShow2(!show2);
 
   return (
     <div
@@ -53,7 +63,7 @@ function Signup() {
           }}
         >
           <h1 style={{ textAlign: "center" }}>Sign up</h1>
-          <label style={{}}>Username</label>
+          <label style={{}}>{t("username")}</label>
           <form onSubmit={submitForm}>
             <div>
               <input
@@ -94,44 +104,60 @@ function Signup() {
               ></input>
             </div>
 
-            <label>Password</label>
+            <label>{t("Password")}</label>
             <div>
-              <input
-                style={{
-                  padding: "0.25rem 0.5rem",
-                  borderRadius: "0.25rem",
-                  border: "1px solid black",
-                  width: 275,
-                }}
-                type="password"
-                onChange={(event) => {
-                  setUser((prevState) => ({
-                    ...prevState,
-                    password: event.target.value,
-                  }));
-                }}
-                required
-              ></input>
+              <InputGroup size="md">
+                <Input
+                  style={{
+                    padding: "0.25rem 0.5rem",
+                    borderRadius: "0.25rem",
+                    border: "1px solid black",
+                    width: 275,
+                    height: 30,
+                  }}
+                  type={show1 ? "text" : "password"}
+                  onChange={(event) => {
+                    setUser((prevState) => ({
+                      ...prevState,
+                      password: event.target.value,
+                    }));
+                  }}
+                  required
+                />
+                <InputRightElement width="5.5rem">
+                  <Button h="1.75rem" size="sm" onClick={handleClick1}>
+                    {show1 ? "Hide" : "Show"}
+                  </Button>
+                </InputRightElement>
+              </InputGroup>
             </div>
 
-            <label>Confirm Password</label>
+            <label>{t("confirm_password")}</label>
             <div>
-              <input
-                style={{
-                  padding: "0.25rem 0.5rem",
-                  borderRadius: "0.25rem",
-                  border: "1px solid black",
-                  width: 275,
-                }}
-                type="confirm"
-                onChange={(event) => {
-                  setUser((prevState) => ({
-                    ...prevState,
-                    confirm: event.target.value,
-                  }));
-                }}
-                required
-              ></input>
+              <InputGroup size="md">
+                <Input
+                  style={{
+                    padding: "0.25rem 0.5rem",
+                    borderRadius: "0.25rem",
+                    border: "1px solid black",
+                    width: 275,
+                    height: 30,
+                  }}
+                  type={show2 ? "text" : "password"}
+                  onChange={(event) => {
+                    setUser((prevState) => ({
+                      ...prevState,
+                      confirm: event.target.value,
+                    }));
+                  }}
+                  required
+                />
+                <InputRightElement width="5.5rem">
+                  <Button h="1.75rem" size="sm" onClick={handleClick2}>
+                    {show2 ? "Hide" : "Show"}
+                  </Button>
+                </InputRightElement>
+              </InputGroup>
             </div>
 
             <div
@@ -156,7 +182,7 @@ function Signup() {
                 width: 275,
               }}
               type="submit"
-              value="signup"
+              value={t("signup")}
             ></input>
           </form>
         </div>
@@ -173,12 +199,12 @@ function Signup() {
           }}
         >
           <div>
-            Already have an account?{" "}
+            {t("already_have_an_account?")}
             <a
               style={{ color: "blue", textDecoration: "underline" }}
               href="signin"
             >
-              Login
+              {t("signup")}
             </a>
           </div>
         </div>

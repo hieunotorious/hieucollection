@@ -13,13 +13,19 @@ function About() {
           <p className="lead">About Us</p>
           <div className="line"></div>
         </div>
-
-        <div className="text-center">
-          <p className="about-text">
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Minima,
-            enim iure. Architecto magnam iure recusandae dolorem quibusdam at
-            placeat, odio ratione magni labore laborum sunt alias similique
-            perferendis officia omnis!
+        <div>
+          <div className="conternt"></div>
+          <p style={{ fontSize: "1rem", lineHeight: 2 }}>
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Fugiat
+            accusantium sapiente tempora sed dolore esse deserunt eaque
+            excepturi, delectus error accusamus vel eligendi, omnis beatae.
+            Quisquam, dicta. Eos quod quisquam esse recusandae vitae neque
+            dolore, obcaecati incidunt sequi blanditiis est exercitationem
+            molestiae delectus saepe odio eligendi modi porro eaque in libero
+            minus unde sapiente consectetur architecto. Ullam rerum, nemo iste
+            ex, eaque perspiciatis nisi, eum totam velit saepe sed quos
+            similique amet. Ex, voluptate accusamus nesciunt totam vitae esse
+            iste.
           </p>
         </div>
       </div>

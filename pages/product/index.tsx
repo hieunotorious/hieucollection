@@ -7,11 +7,13 @@ import ProductItem from "app/component/ProductItem";
 import React, { useState } from "react";
 import { useResponsive } from "app/hooks/useResponsive";
 import { Formik } from "formik";
+import setLanguage from "next-translate/setLanguage";
+import useTranslation from "next-translate/useTranslation";
 
 const Product = () => {
   const [products, setProduct] = useState(DefaultProduct);
   const { isMobile } = useResponsive();
-
+  const { t } = useTranslation();
   const filterName = (name: string) => {
     if (!!name.trim()) {
       const filterProducts = DefaultProduct.filter((item, index) => {
@@ -74,7 +76,7 @@ const Product = () => {
         >
           <input
             onChange={(event) => filterName(event.target.value)}
-            placeholder="Search..."
+            placeholder={t("search")}
             style={{
               border: "1px solid black",
               padding: "1rem",
@@ -85,28 +87,28 @@ const Product = () => {
             style={{ cursor: "pointer", fontWeight: 900 }}
             onClick={() => setProduct(DefaultProduct)}
           >
-            All
+            {t("all")}
           </div>
           <div
             style={{ cursor: "pointer", fontSize: 12 }}
             onClick={() => filterAll(AllType.new)}
           >
-            NEW ARRIVAL
+            {t("new_arrival")}
           </div>
           <div
             style={{ cursor: "pointer", fontSize: 12 }}
             onClick={() => filterAll(AllType.sale)}
           >
-            SALE-PRODUCT
+            {t("sale_product")}
           </div>
           <div
             style={{ cursor: "pointer", fontSize: 12 }}
             onClick={() => filterAll(AllType.pre_order)}
           >
-            PRE-ORDER
+            {t("pre_order")}
           </div>
           <div style={{ display: "flex", flexDirection: "column" }}>
-            <div style={{ fontWeight: 900 }}>Brand</div>
+            <div style={{ fontWeight: 900 }}>{t("brand")}</div>
             <select
               onChange={(event) => {
                 filterBrand(event.target.value as BrandType);
@@ -123,19 +125,19 @@ const Product = () => {
           </div>
 
           <div style={{ display: "flex", flexDirection: "column" }}>
-            <div style={{ fontWeight: 900 }}>Category</div>
+            <div style={{ fontWeight: 900 }}>{t("category")}</div>
 
             <div
               style={{ cursor: "pointer", fontSize: 12 }}
               onClick={() => filterCategory(CategoryType.action_figure)}
             >
-              ACTION FIGURE
+              {t("action_figure")}
             </div>
             <div
               style={{ cursor: "pointer", fontSize: 12 }}
               onClick={() => filterCategory(CategoryType.statue)}
             >
-              STATUE
+              {t("statue")}
             </div>
           </div>
         </div>

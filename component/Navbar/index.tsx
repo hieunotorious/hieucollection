@@ -1,139 +1,181 @@
-import React, { useEffect, useState } from "react";
+import { css } from "@emotion/react";
 import Link from "next/link";
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import Man3Icon from "@mui/icons-material/Man3";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import MenuIcon from "@mui/icons-material/Menu";
-import CloseIcon from "@mui/icons-material/Close";
-import useTranslation from "next-translate/useTranslation";
 import setLanguage from "next-translate/setLanguage";
-import { useRouter } from "next/router";
-function Navbar() {
-  const [isCategory, setIscategory] = useState("");
+import useTranslation from "next-translate/useTranslation";
+import React, { useState, useContext } from "react";
+import LanguageIcon from "@mui/icons-material/Language";
+import AccountBoxIcon from "@mui/icons-material/AccountBox";
+import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
+import ShoppingCartCheckoutIcon from "@mui/icons-material/ShoppingCartCheckout";
+import { AuthContext } from "../../context/authContext";
+import {
+  Button,
+  Flex,
+  Grid,
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+  Text,
+} from "@chakra-ui/react";
+function Nav() {
+  const {
+    user,
+    updateUserCartQuantity,
+    removeUserCart,
+    removeAllCart,
+    setUser,
+  } = useContext(AuthContext);
+
+  const [isOpenLanguage, setIsOpenLanguage] = useState(false);
   const { t } = useTranslation();
-
-  const onToggleCategory = () => {
-    if (isCategory === "") {
-      setIscategory("show-category-items");
-    } else {
-      setIscategory("");
-    }
+  const handleChangeLanguage = async (lang: string) => {
+    await setLanguage(lang);
+    setIsOpenLanguage(false);
   };
-
-  const [itCategory, setItcategory] = useState("");
-  const navShowBtn = () => {
-    if (itCategory === "") {
-      setItcategory("side-navbar-show");
-    }
-  };
-
-  const navHideBtn = () => {
-    setItcategory("");
-  };
-  const router = useRouter();
   return (
-    <nav className="navbar bg-brown flex">
-      <div className="container flex">
-        <div className="toggler-and-category bg-brown text-white flex">
-          <button
-            type="button"
-            onClick={navShowBtn}
-            className="btn navbar-show-btn text-white"
-          >
-            <i className="flex">
-              <MenuIcon style={{ fill: "white", fontSize: "30" }} />
-            </i>
-          </button>
-          <div
-            className="category-list"
-            style={{ display: "flex", alignItems: "center" }}
-          ></div>
-
-          <ul
-            id="side-navbar"
-            className={`bg-white text-uppercase ${itCategory} ${itCategory}`}
-          >
-            <button
-              type="button"
-              onClick={navHideBtn}
-              className="btn navbar-hide-btn text-dark"
-            >
-              <i className="flex">
-                <CloseIcon style={{ fill: "black", fontSize: "30" }} />{" "}
-              </i>
-            </button>
-
-            <li className="nav-item">
-              <Link href="/" className="nav-link active-link">
-                <span style={{ color: "black" }} className="nav-link-text">
-                  Home
-                </span>
-              </Link>
-            </li>
-
-            <li className="nav-item">
-              <Link href="/about" className="nav-link">
-                <span style={{ color: "black" }} className="nav-link-text">
-                  About
-                </span>
-              </Link>
-            </li>
-
-            <li className="nav-item">
-              <Link href="/product" className="nav-link">
-                <span style={{ color: "black" }} className="nav-link-text">
-                  Shop
-                </span>
-              </Link>
-            </li>
-          </ul>
-        </div>
-        <div className="navbar-collapse flex">
-          <ul className="navbar-nav text-uppercase">
-            <li className="nav-item">
-              <Link href="/" className="nav-link active-link">
-                <span style={{ fontWeight: 900 }} className="nav-link-text">
-                  Home
-                </span>
-              </Link>
-            </li>
-
-            <li className="nav-item">
-              <Link href="/about" className="nav-link">
-                <span className="nav-link-text">About</span>
-              </Link>
-            </li>
-
-            <li className="nav-item">
-              <Link href="/product" className="nav-link">
-                <span className="nav-link-text">Shop</span>
-              </Link>
-            </li>
-          </ul>
-          <div style={{ display: "flex", marginLeft: "8rem" }}>
-            <Link href="/cart" className="btn text-white">
-              <i className="flex">
-                <ShoppingCartIcon
-                  style={{ fill: "black", fontSize: "20", cursor: "pointer" }}
-                />{" "}
-              </i>
+    <div
+      style={{
+        display: "flex",
+        position: "sticky",
+        top: "0px",
+        left: "0px",
+        width: "var(--chakra-sizes-full)",
+        height: "72px",
+        zIndex: 99,
+        background: "white",
+      }}
+    >
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          width: "90vw",
+          margin: "0px auto",
+        }}
+        css={css`
+          -webkit-box-align: center;
+          -webkit-box-pack: justify;
+        `}
+      >
+        <div
+          style={{ display: "flex", alignItems: "center" }}
+          css={css`
+            -webkit-box-align: center;
+          `}
+        >
+          <div style={{ display: "flex", marginLeft: "3rem" }}>
+            <Link href="/">
+              <span
+                style={{
+                  color: "black",
+                  cursor: "pointer",
+                  marginRight: "2rem",
+                  fontWeight: "bold",
+                }}
+              >
+                {t("home")}
+              </span>
             </Link>
-            <Link
-              href="/signin"
-              style={{ margin: "5rem" }}
-              className="btn text-white"
-            >
-              <i className="flex">
-                <Man3Icon
-                  style={{ fill: "black", fontSize: "20", cursor: "pointer" }}
-                />{" "}
-              </i>
+            <Link href="/about">
+              <span
+                style={{
+                  color: "black",
+                  cursor: "pointer",
+                  marginRight: "2rem",
+                }}
+              >
+                {t("about")}
+              </span>
             </Link>
+            <Link href="/product">
+              <span
+                style={{
+                  color: "black",
+                  cursor: "pointer",
+                  marginRight: "2rem",
+                }}
+              >
+                {t("product")}
+              </span>
+            </Link>
+
+            <Flex justifyContent="flex-end" alignItems="center">
+              <Popover>
+                <PopoverTrigger>
+                  <Button>
+                    <AccountBoxIcon />
+                  </Button>
+                </PopoverTrigger>
+                <PopoverContent>
+                  {user ? (
+                    <>
+                      <Link href="/profile">
+                        <Button variant="unstyled"> {t("profile")}</Button>
+                      </Link>
+
+                      <Link href="/cart">
+                        <Button variant="unstyled">
+                          <ShoppingCartCheckoutIcon
+                            style={{ color: "black" }}
+                          />
+                        </Button>
+                      </Link>
+                      <Link href="/">
+                        <Button
+                          onClick={() => setUser(undefined)}
+                          variant="unstyled"
+                        >
+                          {t("logout")}
+                        </Button>
+                      </Link>
+                    </>
+                  ) : (
+                    <Link href="/signin">
+                      <Button variant="unstyled"> {t("login")}</Button>
+                    </Link>
+                  )}
+                </PopoverContent>
+              </Popover>
+
+              <Popover
+                isOpen={isOpenLanguage}
+                onClose={() => setIsOpenLanguage(false)}
+              >
+                <PopoverTrigger>
+                  <Button
+                    display="flex"
+                    w="30px"
+                    h="30px"
+                    variant="unstyled"
+                    minWidth={0}
+                    p="4px"
+                    onClick={() => setIsOpenLanguage(true)}
+                  >
+                    <LanguageIcon style={{ color: "black" }} />
+                  </Button>
+                </PopoverTrigger>
+                <PopoverContent w="120px">
+                  <Button
+                    variant="unstyled"
+                    onClick={() => handleChangeLanguage("en")}
+                  >
+                    English
+                  </Button>
+                  <Button
+                    variant="unstyled"
+                    onClick={() => handleChangeLanguage("vi")}
+                  >
+                    Tiếng Việt
+                  </Button>
+                </PopoverContent>
+              </Popover>
+            </Flex>
           </div>
         </div>
       </div>
-    </nav>
+    </div>
   );
 }
 
-export default Navbar;
+export default Nav;

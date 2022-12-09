@@ -19,7 +19,7 @@ export enum BrandType {
   shf = "SHF",
   mafex = "MAFEX",
   dc_collectibles = "DC_COLLECTIBLES",
-  mattel = "MATTEL",
+  wwe = "WWE",
   figuart = "FIGUART",
 }
 

@@ -4,9 +4,10 @@ import TwitterIcon from "@mui/icons-material/Twitter";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import Image from "next/image";
 import { useRouter } from "next/router";
+import useTranslation from "next-translate/useTranslation";
 function Footer() {
   const router = useRouter();
-
+  const { t } = useTranslation();
   return (
     <nav
       style={{
@@ -31,8 +32,9 @@ function Footer() {
           <div className="footer-item">
             <h3>chubedan.netlify.app</h3>
             <p className="text">
-              Thank you for shopping with us your order is on the way. Have a
-              wonderful day!
+              {t(
+                "thank_you_for_shopping_with_us_your_order_is_on_the_way_have_a_wonderful_day!"
+              )}
             </p>
             <ul className="social-links flex">
               <li>
@@ -40,7 +42,7 @@ function Footer() {
                   href="https://www.facebook.com/profile.php?id=100004517205574"
                   className="flex"
                 >
-                  <FacebookIcon style={{ fill: "#4F4F4F" }} />
+                  <FacebookIcon style={{ fill: "3B5998" }} />
                 </a>
               </li>
               <li>
@@ -48,24 +50,24 @@ function Footer() {
                   href="https://www.instagram.com/hieucollection___/"
                   className="flex"
                 >
-                  <InstagramIcon style={{ fill: "#4F4F4F" }} />
+                  <InstagramIcon style={{ fill: "#BC2A8D" }} />
                 </a>
               </li>
               <li>
                 <a href="https://twitter.com/MNgcHiu2" className="flex">
-                  <TwitterIcon style={{ fill: "#4F4F4F" }} />
+                  <TwitterIcon style={{ fill: "#1DA1F2" }} />
                 </a>
               </li>
               <li>
                 <a href="https://github.com/hieunotorious" className="flex">
-                  <GitHubIcon style={{ fill: "#4F4F4F" }} />
+                  <GitHubIcon style={{ fill: "#000000" }} />
                 </a>
               </li>
             </ul>
           </div>
 
           <div className="footer-item">
-            <h3>Contact Us</h3>
+            <h3>{t("contact_us")}</h3>
             <p className="text">Email: hieumn2001@gmail.com</p>
           </div>
         </div>
@@ -73,9 +75,10 @@ function Footer() {
 
       <div className="footer-end bg-dark">
         <div className="container grid">
-          <p className="text text-white text-center">
-            &copy; Copyright 2022. All Right Reserved. Designed and Developed by
-            Ma Ngoc Hieu
+          <p style={{ color: "white" }} className="text text-white text-center">
+            {t(
+              "copyright_2022_all_right_reserved_designed_and_developed_by_Ma_Ngoc_Hieu"
+            )}
           </p>
           <div className="flex payment">
             <div

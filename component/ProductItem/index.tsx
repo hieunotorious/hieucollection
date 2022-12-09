@@ -31,9 +31,21 @@ const ProductItem = ({ product }: { product: ProductType }) => {
           css={css`
             width: 200px;
             height: 200px;
+            overflow: hidden;
+            border-radius: 1rem;
+            &:hover img {
+              scale: 1.2;
+            }
           `}
         >
-          <Image width={200} height={200} src={`/${product.img}`} alt="" />
+          <Image
+            style={{ transition: "all 300ms ease-in-out" }}
+            objectFit="cover"
+            width={200}
+            height={200}
+            src={`/${product.img}`}
+            alt=""
+          />
         </div>
         <div style={{ display: "flex", flexDirection: "column" }}>
           <div style={{ display: "flex" }}>

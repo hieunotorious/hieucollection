@@ -1,29 +1,26 @@
 import AdminFeatured from "app/component/AdminFeatured";
-import AdminNav from "app/component/AdminNav";
-import AdminSide from "app/component/AdminSide";
+
+import { css } from "@emotion/react";
+import { Flex } from "@chakra-ui/react";
 
 const Admin = () => {
   return (
-    <div style={{ display: "flex" }}>
-      <AdminSide />
-      <div>
-        <AdminNav />
-        <div style={{ padding: "5px 20px" }}>
-          <AdminFeatured />
-        </div>
-        <div
-          style={{
-            boxShadow: "2px 4px 10px 1px rgba(201, 201, 201, 0.47)",
-            padding: "20px",
-            margin: "20px",
-          }}
-        >
-          <div style={{ fontWeight: 500, color: "gray", marginBottom: "15px" }}>
-            Latest Transactions
-          </div>
+    <Flex w="full" direction="column">
+      <div style={{ padding: "5px 20px" }}>
+        <AdminFeatured />
+      </div>
+      <div
+        style={{
+          boxShadow: "2px 4px 10px 1px rgba(201, 201, 201, 0.47)",
+          padding: "20px",
+          margin: "20px",
+        }}
+      >
+        <div style={{ fontWeight: 500, color: "gray", marginBottom: "15px" }}>
+          Latest Transactions
         </div>
       </div>
-    </div>
+    </Flex>
   );
 };
 
