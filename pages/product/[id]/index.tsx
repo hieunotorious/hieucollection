@@ -11,9 +11,28 @@ import { ProductType } from "app/api/auth/models/product";
 import { css } from "@emotion/react";
 import { AuthContext } from "../../../context/authContext";
 import Link from "next/link";
+import FacebookIcon from "@mui/icons-material/Facebook";
+import GoogleIcon from "@mui/icons-material/Google";
+import TwitterIcon from "@mui/icons-material/Twitter";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import setLanguage from "next-translate/setLanguage";
+import useTranslation from "next-translate/useTranslation";
+import {
+  NumberInput,
+  NumberInputField,
+  NumberInputStepper,
+  NumberIncrementStepper,
+  NumberDecrementStepper,
+  Button,
+  Flex,
+  FlexProps,
+  Text,
+  Stack,
+} from "@chakra-ui/react";
 function ProductId() {
   const router = useRouter();
+  const { t } = useTranslation();
   const { addUserCart } = useContext(AuthContext);
   const [product, setProduct] = useState<ProductType>();
   const ratingStars = useMemo(
@@ -37,7 +56,7 @@ function ProductId() {
           minHeight: "950px",
           width: "100%",
           boxSizing: "border-box",
-          background: " var(--light-grey-color-shade)",
+          background: "WhiteSmoke",
         }}
       >
         <div
@@ -51,7 +70,11 @@ function ProductId() {
           }}
         >
           <Image
-            style={{ objectFit: "cover", borderRadius: 16, display: "flex" }}
+            style={{
+              objectFit: "cover",
+              borderRadius: 16,
+              display: "flex",
+            }}
             width={512}
             height={500}
             src={`/${product.img}`}
@@ -60,7 +83,8 @@ function ProductId() {
               &:hover {
                 -webkit-box-shadow: var(--box-shadow);
                 box-shadow: var(--box-shadow);
-              }
+               
+              
             `}
           />
           <form
@@ -109,14 +133,16 @@ function ProductId() {
               }}
             >
               <a style={{ fontWeight: "bold" }}>Price: </a>${product.price}
-              <div>
-                <a style={{ fontWeight: "bold" }}>Price: </a>${product.sale}
-              </div>
+              {product.sale && (
+                <div>
+                  <a style={{ fontWeight: "bold" }}>Sale: </a>$
+                  {product.price - product.sale}
+                </div>
+              )}
             </h3>
             <div
               style={{
                 lineHeight: 2,
-
                 fontSize: "1rem",
               }}
             >
@@ -142,25 +168,81 @@ function ProductId() {
                 {product.brand}
               </h3>
             </div>
+            <div style={{ width: 50 }}>
+              <NumberInput defaultValue={1} min={1} max={100}>
+                <NumberInputField />
+                <NumberInputStepper>
+                  <NumberIncrementStepper />
+                  <NumberDecrementStepper />
+                </NumberInputStepper>
+              </NumberInput>
+            </div>
+
             <div
-              onClick={() => {
-                router.push("/cart");
-                addUserCart(product.id);
-              }}
               style={{
-                textTransform: "uppercase",
-                fontWeight: "500",
-                padding: "1.4rem 4.2rem",
-                borderRadius: "1rem",
-                backgroundColor: "black",
-                color: "white",
-                textAlign: "center",
-                cursor: "pointer",
-                width: 200,
+                display: "flex",
+                alignItems: "center",
+                marginLeft: "1rem",
+              }}
+            >
+              <Link style={{ color: "black" }} href="/checkout">
+                <Stack spacing={4} direction="row" align="center">
+                  <Button
+                    style={{ width: "15rem", height: "3rem" }}
+                    onClick={() => {
+                      router.push("/cart");
+                      addUserCart(product.id);
+                    }}
+                    colorScheme="blue"
+                    size="md"
+                  >
+                    {t("buy_now")}
+                  </Button>
+                </Stack>
+              </Link>
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                }}
+              >
+                <Link style={{ color: "black" }} href="/cart">
+                  <Stack spacing={4} direction="row" align="center">
+                    <Button
+                      style={{ width: "15rem", height: "3rem" }}
+                      onClick={() => {
+                        router.push("/cart");
+                        addUserCart(product.id);
+                      }}
+                      variant="ghost"
+                      colorScheme="blue"
+                      size="md"
+                    >
+                      {t("add_to_cart")}
+                    </Button>
+                  </Stack>
+                </Link>
+              </div>
+            </div>
+
+            <div
+              style={{
+                display: "flex",
                 alignItems: "center",
               }}
             >
-              Add to Cart
+              <FacebookIcon
+                style={{ fontSize: "4rem", fill: "#3B5998", cursor: "pointer" }}
+              />
+              <GoogleIcon
+                style={{ fontSize: "4rem", fill: "#EA4335", cursor: "pointer" }}
+              />
+              <TwitterIcon
+                style={{ fontSize: "4rem", fill: "#1DA1F2", cursor: "pointer" }}
+              />
+              <FavoriteBorderIcon
+                style={{ fontSize: "4rem", fill: "red", cursor: "pointer" }}
+              />
             </div>
           </form>
           <div>

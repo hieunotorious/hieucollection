@@ -1,5 +1,5 @@
 import { blue } from "@mui/material/colors";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState, useMemo } from "react";
 import { userlist } from "../../api/auth/data";
 import { Gender, UpdateUser, User } from "../../api/auth/models/user";
 import { css } from "@emotion/react";
@@ -10,8 +10,11 @@ import { useRouter } from "next/router";
 import setLanguage from "next-translate/setLanguage";
 import useTranslation from "next-translate/useTranslation";
 import { Select, Input } from "@chakra-ui/react";
-function Signup() {
+import { round } from "lodash";
+
+function Checkout() {
   const [data, setData] = useState(userlist);
+
   const { t } = useTranslation();
   const { user, updateProfile } = useContext(AuthContext);
   const [tempuser, setTempUser] = useState<UpdateUser>({
@@ -22,6 +25,17 @@ function Signup() {
     displayName: "",
     gender: Gender.other,
   });
+  const totalPrice = useMemo(() => {
+    if (user && user.cart.length > 0) {
+      let total = 0;
+      user.cart.forEach((item) => {
+        total +=
+          (item.sale ? item.price - item.sale : item.price) * item.quantity;
+      });
+      return round(total, 2);
+    }
+    return 0;
+  }, [user]);
   const router = useRouter();
   const { createUser } = useContext(AuthContext);
   const submitForm = (event: any) => {
@@ -65,8 +79,8 @@ function Signup() {
             background: "white",
           }}
         >
-          <h1 style={{ textAlign: "center" }}> {t("profile")}</h1>
-          <label style={{}}> {t("username")}</label>
+          <h1 style={{ textAlign: "center" }}> {t("checkout")}</h1>
+          <label style={{}}> {t("Email")}</label>
           <form onSubmit={submitForm}>
             <div>
               <input
@@ -130,56 +144,6 @@ function Signup() {
               ></input>
             </div>
 
-            <label>{t("birthday")}</label>
-            <div
-              style={{
-                borderRadius: " 0.25rem",
-                border: "1px solid black",
-                padding: "0.25rem 0.5rem",
-                width: 275,
-              }}
-            >
-              <Input
-                placeholder="Select Date and Time"
-                size="md"
-                type="datetime-local"
-                value={tempuser.dob}
-                onChange={(event) => {
-                  setTempUser((prevState) => ({
-                    ...prevState,
-                    dob: event.target.value,
-                  }));
-                }}
-              />
-            </div>
-
-            <label> {t("gender")}</label>
-
-            <div
-              style={{
-                borderRadius: " 0.25rem",
-                border: "1px solid black",
-                padding: "0.25rem 0.5rem",
-                width: 275,
-              }}
-            >
-              <Select
-                placeholder="Choose"
-                value={tempuser.gender}
-                onChange={(event) => {
-                  const gender: Gender = event.target.value as any;
-                  setTempUser((prevState) => ({
-                    ...prevState,
-                    gender,
-                  }));
-                }}
-              >
-                <option value={Gender.male}>Male</option>
-                <option value={Gender.female}>Female</option>
-                <option value={Gender.other}>Other</option>
-              </Select>
-            </div>
-
             <label style={{}}> {t("address")}</label>
             <div>
               <input
@@ -200,9 +164,12 @@ function Signup() {
                 required
               ></input>
             </div>
+            <label style={{ marginTop: "2rem" }}>
+              {t("subtotal")}:<span>${totalPrice}</span>
+            </label>
+
             <input
               style={{
-                marginTop: "2rem",
                 borderRadius: " 0.25rem",
                 fontWeight: "300",
                 transition: " all .3s ease-in-out",
@@ -212,7 +179,7 @@ function Signup() {
                 width: 275,
               }}
               type="submit"
-              value={t("update")}
+              value={t("pay")}
             ></input>
           </form>
         </div>
@@ -221,4 +188,4 @@ function Signup() {
   );
 }
 
-export default Signup;
+export default Checkout;

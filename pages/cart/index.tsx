@@ -9,7 +9,11 @@ import Link from "next/link";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import Image from "next/image";
 import { round } from "lodash";
+import setLanguage from "next-translate/setLanguage";
+import useTranslation from "next-translate/useTranslation";
+import { Button, Flex, FlexProps, Text, Stack } from "@chakra-ui/react";
 function Cart() {
+  const { t } = useTranslation();
   const { user, updateUserCartQuantity, removeUserCart, removeAllCart } =
     useContext(AuthContext);
 
@@ -17,12 +21,13 @@ function Cart() {
     if (user && user.cart.length > 0) {
       let total = 0;
       user.cart.forEach((item) => {
-        total += item.price * item.quantity;
+        total +=
+          (item.sale ? item.price - item.sale : item.price) * item.quantity;
       });
       return round(total, 2);
     }
     return 0;
-  }, [user?.cart]);
+  }, [user]);
 
   const renderCartItem = (item: UserCart) => {
     return (
@@ -77,7 +82,7 @@ function Cart() {
             fontFamily: "cursive",
           }}
         >
-          <h3>${item.price}</h3>
+          <h3>${item.sale ? item.price - item.sale : item.price}</h3>
         </div>
         <div
           style={{
@@ -183,10 +188,10 @@ function Cart() {
             fontFamily: "serif",
           }}
         >
-          <p>Item</p>
-          <p>Price</p>
-          <p>Quantity</p>
-          <p>Subtotal</p>
+          <p>{t("item")}</p>
+          <p>{t("price")}</p>
+          <p>{t("quantity")}</p>
+          <p>{t("subtotal")}</p>
           <span></span>
         </div>
 
@@ -197,9 +202,7 @@ function Cart() {
       <div
         style={{
           display: "flex",
-
           width: "100%",
-
           margin: "1rem",
           padding: "1rem",
           justifyContent: "space-between",
@@ -284,16 +287,47 @@ function Cart() {
             }}
           >
             <h3>
-              Subtotal:
-              <span>${totalPrice}</span>
+              {t("subtotal")}:<span>${totalPrice}</span>
             </h3>
             <h3>
-              Shipping Fee:<span>Free</span>
+              {t("shipping_fee")}:<span>{t("free")}</span>
             </h3>
             <hr />
             <h2 style={{ marginBottom: "1rem" }}>
-              Order Total: <span>${totalPrice}</span>
+              {t("order_total")}: <span>${totalPrice}</span>
             </h2>
+          </form>
+        </article>
+      </div>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          fontFamily: "Gill Sans",
+          width: "100%",
+        }}
+      >
+        <article>
+          <form
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              marginTop: "1rem",
+              padding: "1rem",
+              marginBottom: "5rem",
+              gap: "1rem",
+              textAlign: "center",
+            }}
+          >
+            <h3>
+              <Link style={{ color: "black" }} href="/checkout">
+                <Stack spacing={4} direction="row" align="center">
+                  <Button border="2px" colorScheme="red" size="lg">
+                    {t("checkout")}
+                  </Button>
+                </Stack>
+              </Link>
+            </h3>
           </form>
         </article>
       </div>

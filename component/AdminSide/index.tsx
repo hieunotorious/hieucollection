@@ -16,10 +16,10 @@ function AdminNav() {
   return (
     <div
       style={{
-        flex: 1,
         borderRight: "0.5px solid rgb(230, 227, 227)",
         minHeight: "100vh",
         backgroundColor: "white",
+        width: 200,
       }}
     >
       <div
@@ -71,7 +71,7 @@ function AdminNav() {
           >
             LISTS
           </p>
-          <Link href="/users" style={{ textDecoration: "none" }}>
+          <Link href="/admin/users" style={{ textDecoration: "none" }}>
             <li
               style={{
                 display: "flex",
@@ -90,7 +90,7 @@ function AdminNav() {
               <span>Users</span>
             </li>
           </Link>
-          <Link href="/products" style={{ textDecoration: "none" }}>
+          <Link href="/admin/products" style={{ textDecoration: "none" }}>
             <li
               style={{
                 display: "flex",

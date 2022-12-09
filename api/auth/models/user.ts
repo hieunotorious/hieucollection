@@ -22,6 +22,15 @@ export type User = {
   gender: Gender;
   cart: UserCart[];
 };
+
+export type UpdateUser = {
+  username: string;
+  displayName: string;
+  address: string;
+  phonenumber: string;
+  dob: string;
+  gender: Gender;
+};
 export type UserCart = {
   quantity: number;
 } & ProductType;

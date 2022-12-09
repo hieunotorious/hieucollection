@@ -1,9 +1,11 @@
+import { textAlign } from "@mui/system";
 import { AuthContext } from "app/context/authContext";
 import { useRouter } from "next/router";
 import React, { useContext, useState } from "react";
 import { userlist } from "../../api/auth/data";
 import { LoginType } from "../../api/auth/models/user";
-
+import setLanguage from "next-translate/setLanguage";
+import useTranslation from "next-translate/useTranslation";
 function Login() {
   const [data, setData] = useState(userlist);
   const [user, setUser] = useState<LoginType>({
@@ -11,7 +13,7 @@ function Login() {
     password: "",
   });
   const router = useRouter();
-
+  const { t } = useTranslation();
   const { setUser: setGlobalUser } = useContext(AuthContext);
 
   const submitForm = (event: any) => {
@@ -57,8 +59,8 @@ function Login() {
             background: "white",
           }}
         >
-          <h1 style={{ textAlign: "center" }}>Login</h1>
-          <label style={{}}>Username</label>
+          <h1 style={{ textAlign: "center" }}>{t("login")}</h1>
+          <label style={{}}>{t("username")}</label>
           <form onSubmit={submitForm}>
             <div>
               <input
@@ -78,7 +80,7 @@ function Login() {
                 required
               ></input>
             </div>
-            <label>Password</label>
+            <label>{t("password")}</label>
             <div>
               <input
                 style={{
@@ -103,9 +105,10 @@ function Login() {
                 fontSize: "1rem",
                 letterSpacing: "normal",
                 color: "var(--text)",
+                textDecoration: "underline",
               }}
             >
-              Forgot Password ?
+              {t("forgot_password?")}
             </div>
             <input
               style={{
@@ -118,7 +121,7 @@ function Login() {
                 width: 275,
               }}
               type="submit"
-              value="login"
+              value={t("login")}
             ></input>
           </form>
         </div>
@@ -134,13 +137,13 @@ function Login() {
             marginBottom: "4rem",
           }}
         >
-          <div style={{}}>
-            Not a member?{" "}
+          <div style={{ paddingRight: "10rem" }}>
+            {t("not_a_member")}
             <a
               style={{ color: "blue", textDecoration: "underline" }}
               href="signup"
             >
-              Sign up
+              {t("signup")}
             </a>
           </div>
         </div>

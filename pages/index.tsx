@@ -5,7 +5,8 @@ import { useResponsive } from "app/hooks/useResponsive";
 import { DefaultProduct } from "app/api/auth/data";
 import { padding } from "@mui/system";
 import { shuffle } from "lodash";
-
+import { css } from "@emotion/react";
+import { Button, ButtonGroup, Image } from "@chakra-ui/react";
 import {
   AllType,
   BrandType,
@@ -13,14 +14,15 @@ import {
   ProductType,
 } from "app/api/auth/models/product";
 import Link from "next/link";
-
+import Section from "app/component/Section";
+import useTranslation from "next-translate/useTranslation";
 function Home() {
   const [products, setProduct] = useState(DefaultProduct);
   const [newProducts, setNewProducts] = useState(DefaultProduct);
   const [saleProducts, setSaleProducts] = useState(DefaultProduct);
   const [preProducts, setPreProducts] = useState(DefaultProduct);
   const { isMobile } = useResponsive();
-
+  const { t } = useTranslation();
   useEffect(() => {
     setNewProducts(
       shuffle(
@@ -49,32 +51,50 @@ function Home() {
     const ratingStars = new Array(item.rating).fill(0);
 
     return (
-      <div className="new-product-item">
-        <div className="image" style={{ height: 280 }}>
-          <img src={item.img} alt="" />
-        </div>
-        <div className="info">
+      <div>
+        <div className="new-product-item">
           <div
-            className="ratings test-grey"
-            style={{ display: "flex", alignItems: "center" }}
+            css={css`
+              overflow: hidden;
+              img {
+                object-fit: cover;
+              }
+              &:hover img {
+                scale: 1.2;
+              }
+            `}
+            className="image"
+            style={{ height: 280 }}
           >
-            <div style={{ display: "flex", width: 60 }}>
-              {ratingStars.map((value, index) => {
-                return (
-                  <StarIcon
-                    key={index}
-                    style={{ fill: "black", fontSize: "10" }}
-                  />
-                );
-              })}
-            </div>
+            <Image
+              style={{ transition: "all 300ms ease-in-out" }}
+              src={item.img}
+              alt=""
+            />
+          </div>
+          <div className="info">
+            <div
+              className="ratings test-grey"
+              style={{ display: "flex", alignItems: "center" }}
+            >
+              <div style={{ display: "flex", width: 60 }}>
+                {ratingStars.map((value, index) => {
+                  return (
+                    <StarIcon
+                      key={index}
+                      style={{ fill: "black", fontSize: "10" }}
+                    />
+                  );
+                })}
+              </div>
 
-            <span>({item.review} Reviews)</span>
+              <span>({item.review} Reviews)</span>
+            </div>
+            <div className="price">
+              <span className="new text-amber-900">${item.price}</span>
+            </div>
+            <p className="name">{item.name}</p>
           </div>
-          <div className="price">
-            <span className="new text-amber-900">${item.price}</span>
-          </div>
-          <p className="name">{item.name}</p>
         </div>
       </div>
     );
@@ -82,98 +102,7 @@ function Home() {
 
   return (
     <div>
-      <header
-        style={{
-          display: "grid",
-          paddingTop: "1rem",
-          lineHeight: "1.6",
-          rowGap: "13rem",
-          position: "relative",
-          overflow: "hidden",
-          minHeight: "730px",
-        }}
-        className="header bg-light-brown flex"
-        id="home"
-      >
-        <div
-          style={{
-            maxWidth: "calc 1145+20 ",
-            margin: "0 auto",
-            padding: "0 1rem",
-            textAlign: "center",
-            lineHeight: 1.6,
-            paddingTop: "10rem",
-            paddingBottom: "1.2rem",
-            display: "grid",
-          }}
-        >
-          <div
-            style={{
-              paddingTop: 0,
-              maxWidth: "100%",
-              display: "grid",
-              gridTemplateColumns: "40% 60%",
-              alignItems: "center",
-            }}
-          >
-            <div style={{ width: "100%" }}>
-              <h1
-                style={{
-                  opacity: 0.9,
-                  fontSize: "4.5rem",
-                  lineHeight: 1.6,
-                }}
-              >
-                HIEUCOLLECTION
-              </h1>
-              <p
-                style={{
-                  lineHeight: 2,
-                  opacity: 0.8,
-                  fontWeight: 400,
-                  textTransform: "uppercase",
-                  fontSize: "1.6rem",
-                }}
-              >
-                Action figures, Statue, Collectibles, and More!
-              </p>
-              <div
-                style={{
-                  textTransform: "uppercase",
-                  fontWeight: 700,
-                  padding: "1.4rem 4.2rem",
-                  borderRadius: " 1rem",
-                  textAlign: "center",
-                  lineHeight: 1,
-                  display: "inline-block",
-                  cursor: "pointer",
-                  backgroundColor: "white",
-                  color: "black",
-                }}
-              >
-                <Link style={{ color: "black" }} href="/product">
-                  shop now
-                </Link>
-              </div>
-            </div>
-
-            <div style={{ width: "100%", position: "relative" }}>
-              <img
-                style={{
-                  position: "absolute",
-                  top: "-25%",
-                  right: "50%",
-                  width: "80%",
-                  transform: "translateX(50%)",
-                }}
-                src="images/hieu2.jpg"
-                alt=""
-              />
-              <img src="images/hieu3.jpeg" style={{}} />
-            </div>
-          </div>
-        </div>
-      </header>
+      <Section />
 
       <main>
         <section
@@ -182,8 +111,8 @@ function Home() {
         >
           <div className="container">
             <div className="section-title text-center">
-              <h2>Top new products</h2>
-              <p className="lead">In stock.</p>
+              <h2>{t("top_new_products")}</h2>
+              <p className="lead">{t("in_stock")}</p>
               <div className="line"></div>
             </div>
             <div className="new-products-content grid">
@@ -198,8 +127,8 @@ function Home() {
         >
           <div className="container">
             <div className="section-title text-center">
-              <h2>Top Sale products</h2>
-              <p className="lead">In stock.</p>
+              <h2>{t("top_sale_products")}</h2>
+              <p className="lead">{t("in_stock")}</p>
               <div className="line"></div>
             </div>
             <div className="sale-products-content grid">
@@ -213,8 +142,8 @@ function Home() {
         >
           <div className="container">
             <div className="section-title text-center">
-              <h2>Top Pre-Order products</h2>
-              <p className="lead">In stock.</p>
+              <h2>{t("top_pre_order_products")}</h2>
+              <p className="lead">{t("in_stock")}</p>
               <div className="line"></div>
             </div>
             <div
@@ -235,17 +164,17 @@ function Home() {
         >
           <div className="container">
             <div className="section-title text-center">
-              <h2>latest news</h2>
-              <p className="lead">Information about upcoming prodcuts.</p>
+              <h2>{t("latest_news")}</h2>
+              <p className="lead">{t("information_about_upcoming_prodcuts")}</p>
               <div className="line"></div>
             </div>
 
             <div className="latest-news-content grid">
               <article className="latest-news-item bg-white">
                 <div className="top">
-                  <img src="images/MIS.jpeg" />
+                  <Image alt="" src="images/MIS.jpeg" />
                   <div className="author">
-                    <img src="images/MIS2.jpeg" />
+                    <Image alt="" src="images/MIS2.jpeg" />
                   </div>
                 </div>
                 <div className="body">
@@ -256,7 +185,6 @@ function Home() {
                   <p className="text">
                     We have a single figure preview from Hasbro Pulse showing
                     off
-                    <span>...</span>
                   </p>
                 </div>
                 <div className="bottom">
@@ -268,9 +196,9 @@ function Home() {
 
               <article className="latest-news-item bg-white">
                 <div className="top">
-                  <img src="images/MDL.jpeg" />
+                  <Image alt="" src="images/MDL.jpeg" />
                   <div className="author">
-                    <img src="images/MDL2.jpeg" />
+                    <Image alt="" src="images/MDL2.jpeg" />
                   </div>
                 </div>
                 <div className="body">
@@ -281,7 +209,6 @@ function Home() {
                   <p className="text">
                     Clothing covers the upper bodys joints, for an appearance so
                     natural youd mistake it for a sculpture!
-                    <span>...</span>
                   </p>
                 </div>
                 <div className="bottom">
@@ -293,9 +220,9 @@ function Home() {
 
               <article className="latest-news-item bg-white">
                 <div className="top">
-                  <img src="images/m.jpeg" />
+                  <Image src="images/m.jpeg" alt="" />
                   <div className="author">
-                    <img src="images/m2.jpeg" />
+                    <Image src="images/m2.jpeg" alt="" />
                   </div>
                 </div>
                 <div className="body">
@@ -303,7 +230,7 @@ function Home() {
                   <h3 className="title text-uppercase">PAGE PUNCHERS</h3>
                   <p className="text">
                     Comic figure for only $9.99. Check out this SNEAK PEEK from
-                    Todd McFarlane of what’s coming this year!<span>...</span>
+                    Todd McFarlane of what’s coming this year!
                   </p>
                 </div>
                 <div className="bottom">
@@ -322,22 +249,22 @@ function Home() {
         >
           <div className="container">
             <div className="section-title text-center">
-              <h2>Feedback</h2>
-              <p className="lead">Your thought about us.</p>
+              <h2>{t("feedback")}</h2>
+              <p className="lead">{t("your_thought_about_us")}</p>
               <div className="line"></div>
             </div>
 
             <div className="feedback-inner">
               <div className="feedback-container grid">
                 <div className="feedback-item bg-white text-center" data-id="1">
-                  <img src="images/f22.jpeg" className="quote-icon" />
+                  <Image src="images/f22.jpeg" className="quote-icon" alt="" />
                   <p className="text text-grey">
                     Absolutely the best Batman action figure I’ve ever seen or
                     owned. Arrived in perfect condition and you can’t beat the
                     price at $20 for the quality you get.
                   </p>
                   <div className="client">
-                    <img src="images/f1.jpeg" />
+                    <Image src="images/f1.jpeg" alt="" />
                   </div>
                 </div>
 
@@ -346,24 +273,24 @@ function Home() {
                   data-id="2"
                   id="feedback-display"
                 >
-                  <img src="images/f11.jpeg" className="quote-icon" />
+                  <Image alt="" src="images/f11.jpeg" className="quote-icon" />
                   <p className="text text-grey">
                     Japanese. Definitely worth the price compared to the chinese
                     fakes. Tamashii nations is legit
                   </p>
                   <div className="client">
-                    <img src="images/f2.jpeg" />
+                    <Image alt="" src="images/f2.jpeg" />
                   </div>
                 </div>
 
                 <div className="feedback-item bg-white text-center" data-id="3">
-                  <img src="images/f33.jpeg" className="quote-icon" />
+                  <Image alt="" src="images/f33.jpeg" className="quote-icon" />
                   <p className="text text-grey">
                     WARNING: Small parts may be generated. Not for children
                     under 3 years.
                   </p>
                   <div className="client">
-                    <img src="images/f3.jpeg" />
+                    <Image alt="" src="images/f3.jpeg" />
                   </div>
                 </div>
               </div>
@@ -383,8 +310,8 @@ function Home() {
       >
         <div className="container">
           <div className="section-title text-center">
-            <h2>COMMENT</h2>
-            <p className="lead">Would you like to tell us about??</p>
+            <h2>{t("comment")}</h2>
+            <p className="lead">{t("would_you_like_to_tell_us_about??")}</p>
             <div className="line"></div>
           </div>
 

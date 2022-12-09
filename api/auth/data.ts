@@ -421,7 +421,7 @@ export const DefaultProduct: ProductType[] = [
     rating: 5,
     description:
       "This WWE Randy Orton figure has deluxe articulation, detailed character expression, authentic ring attire, and iconic accessories. Get all the WWE Elite Collection figures and let the battles begin!",
-    brand: BrandType.mattel,
+    brand: BrandType.wwe,
     sale: 15.0,
     category: CategoryType.action_figure,
     available: true,
@@ -450,7 +450,7 @@ export const DefaultProduct: ProductType[] = [
     rating: 5,
     description:
       "Kick your WWE collection up a notch with this WWE Ultimate Edition Brock Lesnar action figure! This Ultimate action figure features authentic ring gear and accessories.",
-    brand: BrandType.mattel,
+    brand: BrandType.wwe,
     category: CategoryType.action_figure,
     available: true,
     all: AllType.new,
@@ -464,7 +464,7 @@ export const DefaultProduct: ProductType[] = [
     rating: 5,
     description:
       "Kick your WWE collection up a notch with this WWE Ultimate Edition The Rock action figure! This Ultimate action figure features authentic ring gear and accessories.",
-    brand: BrandType.mattel,
+    brand: BrandType.wwe,
     category: CategoryType.action_figure,
     available: true,
     all: AllType.new,
@@ -478,7 +478,7 @@ export const DefaultProduct: ProductType[] = [
     rating: 5,
     description:
       "Kick your WWE collection up a notch with this WWE Ultimate Edition John Cena action figure! This Ultimate action figure features authentic ring gear and accessories.",
-    brand: BrandType.mattel,
+    brand: BrandType.wwe,
     category: CategoryType.action_figure,
     available: true,
     all: AllType.pre_order,
@@ -662,7 +662,7 @@ export const DefaultProduct: ProductType[] = [
     rating: 5,
     description:
       "Kick your WWE collection up a notch with this WWE Ultimate Edition Roman Reigns action figure! This Ultimate action figure features authentic ring gear and accessories.",
-    brand: BrandType.mattel,
+    brand: BrandType.wwe,
     sale: 15.0,
     category: CategoryType.action_figure,
     available: true,
@@ -678,7 +678,7 @@ export const DefaultProduct: ProductType[] = [
     rating: 5,
     description:
       "Kick your WWE collection up a notch with this WWE Ultimate Edition Hulk Hogan action figure! This Ultimate action figure features authentic ring gear and accessories.",
-    brand: BrandType.mattel,
+    brand: BrandType.wwe,
     sale: 15.0,
     category: CategoryType.action_figure,
     available: true,

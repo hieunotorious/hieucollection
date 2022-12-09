@@ -1,4 +1,4 @@
-import { Gender, SignupType, User } from "../api/auth/models/user";
+import { Gender, SignupType, UpdateUser, User } from "../api/auth/models/user";
 import React, { useState, createContext } from "react";
 import { DefaultProduct } from "app/api/auth/data";
 import { ListItem } from "@mui/material";
@@ -13,6 +13,7 @@ type UserType = {
   addUserCart: (id: string) => void;
   users: User[];
   setUsers: React.Dispatch<React.SetStateAction<User[]>>;
+  updateProfile: (info: UpdateUser) => void;
   createUser: (info: SignupType) => void;
   removeAllCart: () => void;
 };
@@ -27,6 +28,7 @@ export const AuthContext = createContext<UserType>({
   addUserCart: (id: string) => {},
   setUsers: () => {},
   createUser: (info: SignupType) => {},
+  updateProfile: (info: UpdateUser) => {},
 });
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
@@ -90,6 +92,18 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       }
     }
   };
+
+  const updateProfile = (info: UpdateUser) => {
+    if (user) {
+      setUser((prevState) => {
+        if (prevState) {
+          return { ...prevState, ...info };
+        }
+        return prevState;
+      });
+    }
+  };
+
   const createUser = (info: SignupType) => {
     const userIndex = users.findIndex((item) => item.email === info.email);
     if (userIndex > -1) {
@@ -123,6 +137,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         removeUserCart,
         updateUserCartQuantity,
         user,
+        updateProfile,
         setUser,
       }}
     >
