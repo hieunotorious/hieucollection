@@ -21,6 +21,7 @@ export type User = {
   dob: string;
   gender: Gender;
   cart: UserCart[];
+  role: Role;
 };
 
 export type UpdateUser = {
@@ -38,4 +39,9 @@ export enum Gender {
   male = "MALE",
   female = "FEMALE",
   other = "OTHER",
+}
+
+export enum Role {
+  user = "USER",
+  admin = "ADMIN",
 }

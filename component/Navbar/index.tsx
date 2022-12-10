@@ -1,5 +1,6 @@
 import { css } from "@emotion/react";
 import Link from "next/link";
+import Image from "next/image";
 import setLanguage from "next-translate/setLanguage";
 import useTranslation from "next-translate/useTranslation";
 import React, { useState, useContext } from "react";
@@ -17,7 +18,10 @@ import {
   PopoverTrigger,
   Text,
 } from "@chakra-ui/react";
+import { Role } from "app/api/auth/models/user";
+import { useRouter } from "next/router";
 function Nav() {
+  const router = useRouter();
   const {
     user,
     updateUserCartQuantity,
@@ -71,7 +75,7 @@ function Nav() {
                   color: "black",
                   cursor: "pointer",
                   marginRight: "2rem",
-                  fontWeight: "bold",
+                  fontWeight: router.pathname === "/" ? 700 : 400,
                 }}
               >
                 {t("home")}
@@ -83,6 +87,7 @@ function Nav() {
                   color: "black",
                   cursor: "pointer",
                   marginRight: "2rem",
+                  fontWeight: router.pathname === "/about" ? 700 : 400,
                 }}
               >
                 {t("about")}
@@ -94,6 +99,7 @@ function Nav() {
                   color: "black",
                   cursor: "pointer",
                   marginRight: "2rem",
+                  fontWeight: router.pathname === "/product" ? 700 : 400,
                 }}
               >
                 {t("product")}
@@ -110,6 +116,12 @@ function Nav() {
                 <PopoverContent>
                   {user ? (
                     <>
+                      {user.role === Role.admin && (
+                        <Link href="/admin">
+                          <Button variant="unstyled">{t("Admin")}</Button>
+                        </Link>
+                      )}
+
                       <Link href="/profile">
                         <Button variant="unstyled"> {t("profile")}</Button>
                       </Link>

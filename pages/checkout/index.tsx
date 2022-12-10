@@ -57,7 +57,7 @@ function Checkout() {
   return (
     <div
       style={{
-        background: "var(--light-grey-color-shade)",
+        background: "white",
         margin: "0 auto",
         minHeight: " 900px",
         display: "flex",

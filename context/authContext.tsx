@@ -1,4 +1,10 @@
-import { Gender, SignupType, UpdateUser, User } from "../api/auth/models/user";
+import {
+  Gender,
+  Role,
+  SignupType,
+  UpdateUser,
+  User,
+} from "../api/auth/models/user";
 import React, { useState, createContext } from "react";
 import { DefaultProduct } from "app/api/auth/data";
 import { ListItem } from "@mui/material";
@@ -119,6 +125,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         phonenumber: "",
         displayName: "",
         address: "",
+        role: Role.user,
         id: uuidv4(),
       };
       setUsers((prevState) => [...prevState, newUser]);

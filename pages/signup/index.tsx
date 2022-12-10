@@ -10,6 +10,8 @@ import { useRouter } from "next/router";
 import setLanguage from "next-translate/setLanguage";
 import useTranslation from "next-translate/useTranslation";
 import { Input, InputGroup, InputRightElement, Button } from "@chakra-ui/react";
+import { setTokens } from "app/utils/token";
+import { getUser, signup } from "app/services/UserService";
 function Signup() {
   const [show1, setShow1] = React.useState(false);
   const [show2, setShow2] = React.useState(false);
@@ -24,13 +26,18 @@ function Signup() {
     confirm: "",
   });
   const router = useRouter();
-  const { createUser } = useContext(AuthContext);
-  const submitForm = (event: any) => {
+  const { setUser: setGlobalUser } = useContext(AuthContext);
+  const submitForm = async (event: any) => {
     event.preventDefault();
-    if (user.password === user.confirm) {
-      console.log("Complete");
-      createUser(user);
-      router.push("/");
+    const res = await signup(user.username, user.password, user.email);
+    if (res) {
+      const { accessToken, refreshToken, expiredDate } = res;
+      setTokens(accessToken, expiredDate, refreshToken);
+      const loginUser = await getUser();
+      if (loginUser) {
+        setGlobalUser(loginUser);
+        router.push("/");
+      }
     }
   };
   const handleClick1 = () => setShow1(!show1);
@@ -40,7 +47,7 @@ function Signup() {
   return (
     <div
       style={{
-        background: "var(--light-grey-color-shade)",
+        background: "white",
         margin: "0 auto",
         minHeight: " 900px",
         display: "flex",
@@ -62,7 +69,7 @@ function Signup() {
             background: "white",
           }}
         >
-          <h1 style={{ textAlign: "center" }}>Sign up</h1>
+          <h1 style={{ textAlign: "center" }}>{t("signup")}</h1>
           <label style={{}}>{t("username")}</label>
           <form onSubmit={submitForm}>
             <div>
@@ -167,9 +174,11 @@ function Signup() {
                 color: "var(--text)",
               }}
             >
-              By clicking Create account, I agree that I have read and accepted
-              the <a style={{ color: "blue" }}>Terms of Use </a> and
-              <a style={{ color: "blue", padding: 2 }}>Privacy Policy.</a>
+              {t(
+                "by_clicking_reate_account_i_agree_that_i_have_read_and_accepted_the_and"
+              )}
+              <a style={{ color: "blue" }}>{t("terms_of_use")}</a> and
+              <a style={{ color: "blue", padding: 2 }}>{t("privacy_policy")}</a>
             </div>
             <input
               style={{
@@ -204,7 +213,7 @@ function Signup() {
               style={{ color: "blue", textDecoration: "underline" }}
               href="signin"
             >
-              {t("signup")}
+              {t("login")}
             </a>
           </div>
         </div>

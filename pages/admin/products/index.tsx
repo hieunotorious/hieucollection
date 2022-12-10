@@ -13,7 +13,11 @@ const Products = (props: Props) => {
   const [products, setProduct] = useState(
     shuffle(
       DefaultProduct.filter((item, index) => {
-        return item.all === AllType.sale || item.all === AllType.new;
+        return (
+          item.all === AllType.sale ||
+          item.all === AllType.new ||
+          item.all === AllType.pre_order
+        );
       })
     )
   );

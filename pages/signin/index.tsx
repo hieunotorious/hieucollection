@@ -6,6 +6,10 @@ import { userlist } from "../../api/auth/data";
 import { LoginType } from "../../api/auth/models/user";
 import setLanguage from "next-translate/setLanguage";
 import useTranslation from "next-translate/useTranslation";
+import { Input, InputGroup, InputRightElement, Button } from "@chakra-ui/react";
+import axios from "axios";
+import { getUser, login } from "app/services/UserService";
+import { setTokens } from "app/utils/token";
 function Login() {
   const [data, setData] = useState(userlist);
   const [user, setUser] = useState<LoginType>({
@@ -13,27 +17,38 @@ function Login() {
     password: "",
   });
   const router = useRouter();
+  const [show, setShow] = React.useState(false);
   const { t } = useTranslation();
   const { setUser: setGlobalUser } = useContext(AuthContext);
 
-  const submitForm = (event: any) => {
+  const submitForm = async (event: any) => {
     event.preventDefault();
-    const dataIndex = data.findIndex(
-      (item, index) => item.username === user.username
-    );
-    if (dataIndex > -1) {
-      if (data[dataIndex].password === user.password) {
-        console.log("successfully Login");
-        setGlobalUser(data[dataIndex]);
+    const res = await login(user.username, user.password);
+    if (res) {
+      const { accessToken, refreshToken, expiredDate } = res;
+      setTokens(accessToken, expiredDate, refreshToken);
+      const loginUser = await getUser();
+      if (loginUser) {
+        setGlobalUser(loginUser);
         router.push("/");
-      } else {
-        console.log("wrong password");
       }
-    } else {
-      console.log("User does not exist");
     }
+    // const dataIndex = data.findIndex(
+    //   (item, index) => item.username === user.username
+    // );
+    // if (dataIndex > -1) {
+    //   if (data[dataIndex].password === user.password) {
+    //     console.log("successfully Login");
+    //     setGlobalUser(data[dataIndex]);
+    //     router.push("/");
+    //   } else {
+    //     console.log("wrong password");
+    //   }
+    // } else {
+    //   console.log("User does not exist");
+    // }
   };
-
+  const handleClick = () => setShow(!show);
   return (
     <div
       style={{
@@ -43,7 +58,7 @@ function Login() {
         justifyContent: "center",
         alignItems: "center",
         flexDirection: "column",
-        background: "var(--light-grey-color-shade)",
+        background: "white",
       }}
     >
       <div>
@@ -55,7 +70,7 @@ function Login() {
             display: "grid",
             gap: "1rem",
             marginTop: " 4rem",
-            width: "300px",
+
             background: "white",
           }}
         >
@@ -82,22 +97,30 @@ function Login() {
             </div>
             <label>{t("password")}</label>
             <div>
-              <input
-                style={{
-                  padding: "0.25rem 0.5rem",
-                  borderRadius: "0.25rem",
-                  border: "1px solid black",
-                  width: 275,
-                }}
-                type="password"
-                onChange={(event) => {
-                  setUser((prevState) => ({
-                    ...prevState,
-                    password: event.target.value,
-                  }));
-                }}
-                required
-              ></input>
+              <InputGroup size="md">
+                <Input
+                  style={{
+                    padding: "0.25rem 0.5rem",
+                    borderRadius: "0.25rem",
+                    border: "1px solid black",
+                    width: 275,
+                    height: 30,
+                  }}
+                  type={show ? "text" : "password"}
+                  onChange={(event) => {
+                    setUser((prevState) => ({
+                      ...prevState,
+                      password: event.target.value,
+                    }));
+                  }}
+                  required
+                />
+                <InputRightElement width="5.5rem">
+                  <Button h="1.75rem" size="sm" onClick={handleClick}>
+                    {show ? "Hide" : "Show"}
+                  </Button>
+                </InputRightElement>
+              </InputGroup>
             </div>
 
             <div

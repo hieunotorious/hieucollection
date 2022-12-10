@@ -26,7 +26,7 @@ const Slide = ({ title, description, banner, ...props }: SlideType) => {
         <Text color="MintCream" fontSize="6xl">
           {title}
         </Text>
-        <Text maxWidth="60%" color="MintCream" fontSize="md">
+        <Text maxWidth="60%" color="MintCream" fontSize="4xl">
           {description}
         </Text>
         <Flex mt="16px">
