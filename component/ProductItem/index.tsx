@@ -1,11 +1,17 @@
 import { ProductType } from "app/api/auth/models/product";
 import { css } from "@emotion/react";
-import React from "react";
+import React, { useContext, useEffect, useMemo, useState } from "react";
 import { floor, isEmpty } from "lodash";
 import Link from "next/link";
 import Image from "next/image";
-
+import { ButtonGroup, Button } from "@chakra-ui/react";
+import useTranslation from "next-translate/useTranslation";
+import router, { useRouter } from "next/router";
+import { AuthContext } from "app/context/authContext";
+import { height } from "@mui/system";
 const ProductItem = ({ product }: { product: ProductType }) => {
+  const { t } = useTranslation();
+  const { addUserCart } = useContext(AuthContext);
   return (
     <Link href={`product/${product.id}`}>
       <div
@@ -47,7 +53,14 @@ const ProductItem = ({ product }: { product: ProductType }) => {
             alt=""
           />
         </div>
-        <div style={{ display: "flex", flexDirection: "column" }}>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            overflow: "hidden",
+            textOverflow: "ellipsis",
+          }}
+        >
           <div style={{ display: "flex" }}>
             <div
               style={{ marginRight: 16, position: "relative", fontWeight: 600 }}
@@ -73,9 +86,38 @@ const ProductItem = ({ product }: { product: ProductType }) => {
               <div>{floor(product.price - product.sale, 2)}$</div>
             )}
           </div>
-
-          <div style={{ fontWeight: 600 }}>{product.name}</div>
+          <div
+            style={{
+              fontWeight: 600,
+              fontSize: "1rem",
+              width: "100%",
+              height: "32px",
+            }}
+          >
+            {product.name}
+          </div>
         </div>
+        <ButtonGroup marginTop="1rem" marginBottom="1rem">
+          <Link href="/checkout">
+            <Button variant="solid" colorScheme="blue">
+              {t("buy_now")}
+            </Button>
+          </Link>
+          <Link href="/cart">
+            <Button
+              style={{ width: "15rem", height: "3rem" }}
+              onClick={() => {
+                router.push("/cart");
+                addUserCart(product.id);
+              }}
+              variant="ghost"
+              colorScheme="blue"
+              size="md"
+            >
+              {t("add_to_cart")}
+            </Button>
+          </Link>
+        </ButtonGroup>
       </div>
     </Link>
   );

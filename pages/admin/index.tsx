@@ -2,8 +2,20 @@ import AdminFeatured from "app/component/AdminFeatured";
 
 import { css } from "@emotion/react";
 import { Flex } from "@chakra-ui/react";
+import { useRouter } from "next/router";
+import { useContext, useEffect } from "react";
+import { AuthContext } from "app/context/authContext";
+import { Role } from "app/api/auth/models/user";
 
 const Admin = () => {
+  const { user } = useContext(AuthContext);
+  const router = useRouter();
+  useEffect(() => {
+    if (user && user.role === Role.admin) {
+    } else {
+      router.push("/");
+    }
+  }, [user, router]);
   return (
     <Flex w="full" direction="column">
       <div style={{ padding: "5px 20px" }}>

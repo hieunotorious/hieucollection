@@ -19,7 +19,7 @@ const Section = (props: Props) => {
   return (
     <Flex id="section1">
       <Swiper
-        style={{ width: "99vw", height: "93vh" }}
+        style={{ width: "100vw", height: "93vh" }}
         spaceBetween={30}
         effect={"coverflow"}
         pagination={{
@@ -57,13 +57,6 @@ const Section = (props: Props) => {
         </SwiperSlide>
         <SwiperSlide>
           <Slide
-            banner="/images/slider/slider_3.jpeg"
-            title={t("HIEUCOLLECTION")}
-            description={t("mafex_figures")}
-          />
-        </SwiperSlide>
-        <SwiperSlide>
-          <Slide
             banner="/images/slider/slider_4.jpeg"
             title={t("HIEUCOLLECTION")}
             description={t("statue_figuart")}
@@ -74,20 +67,6 @@ const Section = (props: Props) => {
             banner="/images/slider/slider_5.jpeg"
             title={t("HIEUCOLLECTION")}
             description={t("shf_figures")}
-          />
-        </SwiperSlide>
-        <SwiperSlide>
-          <Slide
-            banner="/images/slider/slider_6.jpeg"
-            title={t("HIEUCOLLECTION")}
-            description={t("wwe_action_figures")}
-          />
-        </SwiperSlide>
-        <SwiperSlide>
-          <Slide
-            banner="/images/slider/slider_7.jpeg"
-            title={t("HIEUCOLLECTION")}
-            description={t("dc_essentials_figures")}
           />
         </SwiperSlide>
       </Swiper>

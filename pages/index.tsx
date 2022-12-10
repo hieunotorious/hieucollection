@@ -94,6 +94,18 @@ function Home() {
               <span className="new text-amber-900">${item.price}</span>
             </div>
             <p className="name">{item.name}</p>
+            <ButtonGroup spacing="2">
+              <Link href="/checkout">
+                <Button variant="solid" colorScheme="blue">
+                  {t("buy_now")}
+                </Button>
+              </Link>
+              <Link href="/cart">
+                <Button variant="ghost" colorScheme="blue">
+                  {t("add_to_cart")}
+                </Button>
+              </Link>
+            </ButtonGroup>
           </div>
         </div>
       </div>

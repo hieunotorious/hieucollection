@@ -19,13 +19,15 @@ function App({ Component, pageProps }: AppProps) {
   return (
     <ChakraProvider>
       <AuthProvider>
-        {!isAdminPage ? <Navbar /> : <AdminNav />}
+        <Flex direction="column" w="full" h="full">
+          {!isAdminPage ? <Navbar /> : <AdminNav />}
 
-        <Flex w="full" h="full">
-          {isAdminPage && <AdminSide />}
-          <Component {...pageProps} />
+          <Flex w="full" h="full">
+            {isAdminPage && <AdminSide />}
+            <Component {...pageProps} />
+          </Flex>
+          <Footer />
         </Flex>
-        <Footer />
       </AuthProvider>
     </ChakraProvider>
   );

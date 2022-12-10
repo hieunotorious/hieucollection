@@ -22,7 +22,9 @@ function Footer() {
             router.pathname === "/signin" ||
             router.pathname === "/signup" ||
             router.pathname === "/product" ||
-            router.pathname === "/admin"
+            router.pathname === "/admin" ||
+            router.pathname === "/checkout" ||
+            router.pathname === "/profile"
               ? "none"
               : "block",
         }}

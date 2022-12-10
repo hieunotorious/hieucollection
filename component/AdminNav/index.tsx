@@ -5,8 +5,27 @@ import FullscreenExitOutlinedIcon from "@mui/icons-material/FullscreenExitOutlin
 import NotificationsNoneOutlinedIcon from "@mui/icons-material/NotificationsNoneOutlined";
 import ChatBubbleOutlineOutlinedIcon from "@mui/icons-material/ChatBubbleOutlineOutlined";
 import ListOutlinedIcon from "@mui/icons-material/ListOutlined";
+import setLanguage from "next-translate/setLanguage";
+import useTranslation from "next-translate/useTranslation";
+import LanguageIcon from "@mui/icons-material/Language";
 import { css } from "@emotion/react";
+import {
+  Button,
+  Flex,
+  Grid,
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+  Text,
+} from "@chakra-ui/react";
+import { useState } from "react";
 const AdminNav = () => {
+  const [isOpenLanguage, setIsOpenLanguage] = useState(false);
+  const { t } = useTranslation();
+  const handleChangeLanguage = async (lang: string) => {
+    await setLanguage(lang);
+    setIsOpenLanguage(false);
+  };
   return (
     <div
       style={{
@@ -50,19 +69,38 @@ const AdminNav = () => {
           />
           <SearchOutlinedIcon />
         </div>
-        <div style={{ display: "flex", alignItems: "center" }}>
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              marginRight: "20px",
-              position: "relative",
-            }}
-          >
-            <LanguageOutlinedIcon style={{ fontSize: "20px" }} />
-            English
-          </div>
-        </div>
+        <Popover
+          isOpen={isOpenLanguage}
+          onClose={() => setIsOpenLanguage(false)}
+        >
+          <PopoverTrigger>
+            <Button
+              display="flex"
+              w="30px"
+              h="30px"
+              variant="unstyled"
+              minWidth={0}
+              p="4px"
+              onClick={() => setIsOpenLanguage(true)}
+            >
+              <LanguageIcon style={{ color: "black" }} />
+            </Button>
+          </PopoverTrigger>
+          <PopoverContent w="120px">
+            <Button
+              variant="unstyled"
+              onClick={() => handleChangeLanguage("en")}
+            >
+              English
+            </Button>
+            <Button
+              variant="unstyled"
+              onClick={() => handleChangeLanguage("vi")}
+            >
+              Tiếng Việt
+            </Button>
+          </PopoverContent>
+        </Popover>
         <div
           style={{
             display: "flex",

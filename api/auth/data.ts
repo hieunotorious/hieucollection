@@ -4,7 +4,7 @@ import {
   CategoryType,
   ProductType,
 } from "./models/product";
-import { Gender, User } from "./models/user";
+import { Gender, Role, User } from "./models/user";
 import { v4 as uuidv4 } from "uuid";
 
 export const userlist: User[] = [
@@ -19,6 +19,7 @@ export const userlist: User[] = [
     dob: "123",
     gender: Gender.male,
     cart: [],
+    role: Role.admin,
   },
   {
     username: "hieu",
@@ -30,6 +31,7 @@ export const userlist: User[] = [
     phonenumber: "123",
     dob: "123",
     gender: Gender.male,
+    role: Role.user,
     cart: [
       {
         id: uuidv4(),

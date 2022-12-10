@@ -7,7 +7,7 @@ type Props = {};
 const Users = (props: Props) => {
   const { users } = useContext(AuthContext);
   return (
-    <Flex>
+    <Flex style={{ display: "flex", flexDirection: "column" }}>
       {users.map((user, index) => {
         return <div key={user.id}>{user.username}</div>;
       })}

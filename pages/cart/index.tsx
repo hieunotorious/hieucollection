@@ -167,6 +167,9 @@ function Cart() {
   return (
     <div
       style={{
+        display: "flex",
+        flexDirection: "column",
+        width: "100%",
         minHeight: 900,
 
         padding: "0 4rem",
