@@ -11,6 +11,8 @@ import { Autoplay, Navigation, Pagination, EffectCoverflow } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 import Slide from "./Slide";
+import Container from "../Container";
+import Image from "next/image";
 
 type Props = {};
 
@@ -19,7 +21,7 @@ const Section = (props: Props) => {
   return (
     <Flex id="section1">
       <Swiper
-        style={{ width: "100vw", height: "93vh" }}
+        style={{ width: "100%", height: "600px" }}
         spaceBetween={30}
         effect={"coverflow"}
         pagination={{
@@ -70,6 +72,14 @@ const Section = (props: Props) => {
           />
         </SwiperSlide>
       </Swiper>
+      <Flex w="30%" direction="column" padding="1px" gap="1px" h="full">
+        <Flex paddingBottom="0 " position="relative" h="full">
+          <Image layout="fill" src="/images/cat.jpeg" alt=""></Image>
+        </Flex>
+        <Flex position="relative" h="full">
+          <Image layout="fill" src="/images/s2.jpeg" alt=""></Image>
+        </Flex>
+      </Flex>
     </Flex>
   );
 };

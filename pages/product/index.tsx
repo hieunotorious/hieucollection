@@ -1,5 +1,4 @@
 import { Category } from "@mui/icons-material";
-import { DefaultProduct } from "app/api/auth/data";
 import { AllType, BrandType, CategoryType } from "app/api/auth/models/product";
 import { css } from "@emotion/react";
 import ManageSearchIcon from "@mui/icons-material/ManageSearch";
@@ -9,37 +8,51 @@ import { useResponsive } from "app/hooks/useResponsive";
 import { Formik } from "formik";
 import setLanguage from "next-translate/setLanguage";
 import useTranslation from "next-translate/useTranslation";
+import { getProduct } from "app/services/ProductService";
+import { InferGetServerSidePropsType } from "next";
+import { shuffle } from "lodash";
+export const getServerSideProps = async () => {
+  const product = await getProduct();
+  return {
+    props: {
+      product,
+    },
+  };
+};
 
-const Product = () => {
-  const [products, setProduct] = useState(DefaultProduct);
+const Product = ({
+  product,
+}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+  const [products, setProduct] = useState(product);
   const { isMobile } = useResponsive();
   const { t } = useTranslation();
   const filterName = (name: string) => {
     if (!!name.trim()) {
-      const filterProducts = DefaultProduct.filter((item, index) => {
+      const filterProducts = product.filter((item, index) => {
         return item.name.toUpperCase().indexOf(name.toUpperCase()) > -1;
       });
 
       setProduct(filterProducts);
     } else {
-      setProduct(DefaultProduct);
+      setProduct(product);
     }
   };
+
   const filterAll = (all: AllType) => {
-    const filterProducts = DefaultProduct.filter((item, index) => {
+    const filterProducts = product.filter((item, index) => {
       return item.all === all;
     });
     setProduct(filterProducts);
   };
 
   const filterBrand = (brand: BrandType) => {
-    const filterProducts = DefaultProduct.filter((item, index) => {
+    const filterProducts = product.filter((item, index) => {
       return item.brand === brand;
     });
     setProduct(filterProducts);
   };
   const filterCategory = (category: CategoryType) => {
-    const filterProducts = DefaultProduct.filter((item, index) => {
+    const filterProducts = product.filter((item, index) => {
       return item.category === category;
     });
     setProduct(filterProducts);
@@ -85,7 +98,7 @@ const Product = () => {
 
           <div
             style={{ cursor: "pointer", fontWeight: 900 }}
-            onClick={() => setProduct(DefaultProduct)}
+            onClick={() => setProduct(product)}
           >
             {t("all")}
           </div>
@@ -154,7 +167,7 @@ const Product = () => {
           cursor: "pointer",
         }}
       >
-        {products.map((item, index) => {
+        {products.map((item: any, index: number) => {
           return <ProductItem product={item} key={item.id} />;
         })}
       </div>

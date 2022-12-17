@@ -30,27 +30,45 @@ import {
   Text,
   Stack,
 } from "@chakra-ui/react";
+import { getProductId } from "app/services/ProductService";
+import { addToCart } from "app/services/CartService";
 function ProductId() {
   const router = useRouter();
   const { t } = useTranslation();
-  const { addUserCart } = useContext(AuthContext);
+  const { setUser } = useContext(AuthContext);
   const [product, setProduct] = useState<ProductType>();
   const ratingStars = useMemo(
     () => new Array(product?.rating).fill(0),
     [product]
   );
+
+  const [quantity, setQuantity] = useState(1);
   useEffect(() => {
     if (router.query.id) {
-      setProduct(
-        DefaultProduct.find((item, index) => item.id === router.query.id)
-      );
+      const call = async () => {
+        const id = router.query.id?.toString() || "";
+        const res = await getProductId(id);
+        setProduct(res);
+      };
+      call();
     }
   }, [router]);
+
+  const handleAddCart = async (id: string) => {
+    const data = await addToCart(id, quantity);
+    if (data) {
+      setUser((prevState) => {
+        if (prevState) return { ...prevState, cart: data };
+        return undefined;
+      });
+      router.push("/cart");
+    }
+  };
 
   return (
     product && (
       <div
-        key={product.id}
+        key={product._id}
         style={{
           padding: "4rem",
           minHeight: "950px",
@@ -77,7 +95,7 @@ function ProductId() {
             }}
             width={512}
             height={500}
-            src={`/${product.img}`}
+            src={product.img}
             alt=""
             css={css`
               &:hover {
@@ -169,7 +187,12 @@ function ProductId() {
               </h3>
             </div>
             <div style={{ width: 50 }}>
-              <NumberInput defaultValue={1} min={1} max={100}>
+              <NumberInput
+                value={quantity}
+                onChange={(value) => setQuantity(parseInt(value))}
+                min={1}
+                max={100}
+              >
                 <NumberInputField />
                 <NumberInputStepper>
                   <NumberIncrementStepper />
@@ -191,7 +214,7 @@ function ProductId() {
                     style={{ width: "15rem", height: "3rem" }}
                     onClick={() => {
                       router.push("/cart");
-                      addUserCart(product.id);
+                      handleAddCart(product._id);
                     }}
                     colorScheme="blue"
                     size="md"
@@ -212,7 +235,7 @@ function ProductId() {
                       style={{ width: "15rem", height: "3rem" }}
                       onClick={() => {
                         router.push("/cart");
-                        addUserCart(product.id);
+                        handleAddCart(product._id);
                       }}
                       variant="ghost"
                       colorScheme="blue"

@@ -12,10 +12,14 @@ import { round } from "lodash";
 import setLanguage from "next-translate/setLanguage";
 import useTranslation from "next-translate/useTranslation";
 import { Button, Flex, FlexProps, Text, Stack } from "@chakra-ui/react";
+import {
+  clearCart,
+  removeFromCart,
+  updateCartQuantity,
+} from "app/services/CartService";
 function Cart() {
   const { t } = useTranslation();
-  const { user, updateUserCartQuantity, removeUserCart, removeAllCart } =
-    useContext(AuthContext);
+  const { user, setUser } = useContext(AuthContext);
 
   const totalPrice = useMemo(() => {
     if (user && user.cart.length > 0) {
@@ -29,6 +33,36 @@ function Cart() {
     return 0;
   }, [user]);
 
+  const updateUserCartQuantity = async (id: string, minus?: boolean) => {
+    const data = await updateCartQuantity(id, minus);
+    if (data) {
+      setUser((prevState) => {
+        if (prevState) return { ...prevState, cart: data };
+        return undefined;
+      });
+    }
+  };
+
+  const removeUserCart = async (id: string) => {
+    const data = await removeFromCart(id);
+    if (data) {
+      setUser((prevState) => {
+        if (prevState) return { ...prevState, cart: data };
+        return undefined;
+      });
+    }
+  };
+
+  const removeAllCart = async () => {
+    const data = await clearCart();
+    if (data?.success) {
+      setUser((prevState) => {
+        if (prevState) return { ...prevState, cart: [] };
+        return undefined;
+      });
+    }
+  };
+
   const renderCartItem = (item: UserCart) => {
     return (
       <div
@@ -41,7 +75,7 @@ function Cart() {
           borderBottom: "1px solid black",
           paddingBottom: "1rem",
         }}
-        key={item.id}
+        key={item.product_id}
       >
         <div style={{ marginTop: "1rem" }}>
           <div
@@ -56,7 +90,7 @@ function Cart() {
               width="100%"
               height="100%"
               objectFit="cover"
-              src={`/${item.img}`}
+              src={item.img}
               alt=""
             />
             <h3
@@ -94,7 +128,9 @@ function Cart() {
         >
           <button
             type="button"
-            onClick={() => item.quantity > 1 && updateUserCartQuantity(item.id)}
+            onClick={() =>
+              item.quantity > 1 && updateUserCartQuantity(item.product_id, true)
+            }
           >
             <RemoveIcon
               style={{
@@ -114,7 +150,7 @@ function Cart() {
           >
             {item.quantity}
           </h2>
-          <button onClick={() => updateUserCartQuantity(item.id, true)}>
+          <button onClick={() => updateUserCartQuantity(item.product_id)}>
             <AddIcon
               style={{
                 display: "flex",
@@ -148,7 +184,7 @@ function Cart() {
           }}
         ></div>
         <div>
-          <button type="button" onClick={() => removeUserCart(item.id)}>
+          <button type="button" onClick={() => removeUserCart(item.product_id)}>
             <DeleteIcon
               style={{
                 display: "flex",

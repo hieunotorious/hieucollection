@@ -28,3 +28,15 @@ export const signup = async (
   });
   return res.data || undefined;
 };
+export const logout = async () => {
+  const res = await axios.post(
+    `${process.env.NEXT_PUBLIC_HOST}/user/logout`,
+    { refreshToken: localStorage.getItem("refresh_token") },
+    {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+      },
+    }
+  );
+  return res.data;
+};

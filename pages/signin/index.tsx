@@ -142,6 +142,8 @@ function Login() {
                 border: "none",
                 textTransform: "uppercase",
                 width: 275,
+                background: "#3399FF",
+                color: "white",
               }}
               type="submit"
               value={t("login")}

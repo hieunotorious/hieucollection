@@ -9,11 +9,23 @@ import useTranslation from "next-translate/useTranslation";
 import router, { useRouter } from "next/router";
 import { AuthContext } from "app/context/authContext";
 import { height } from "@mui/system";
+import { addToCart } from "app/services/CartService";
 const ProductItem = ({ product }: { product: ProductType }) => {
   const { t } = useTranslation();
-  const { addUserCart } = useContext(AuthContext);
+  const { setUser } = useContext(AuthContext);
+
+  const handleAddCart = async (id: string) => {
+    const data = await addToCart(id, 1);
+    if (data) {
+      setUser((prevState) => {
+        if (prevState) return { ...prevState, cart: data };
+        return undefined;
+      });
+      router.push("/cart");
+    }
+  };
   return (
-    <Link href={`product/${product.id}`}>
+    <Link href={`product/${product._id}`}>
       <div
         style={{
           display: "flex",
@@ -49,7 +61,7 @@ const ProductItem = ({ product }: { product: ProductType }) => {
             objectFit="cover"
             width={200}
             height={200}
-            src={`/${product.img}`}
+            src={product.img}
             alt=""
           />
         </div>
@@ -106,10 +118,7 @@ const ProductItem = ({ product }: { product: ProductType }) => {
           <Link href="/cart">
             <Button
               style={{ width: "15rem", height: "3rem" }}
-              onClick={() => {
-                router.push("/cart");
-                addUserCart(product.id);
-              }}
+              onClick={() => handleAddCart(product._id)}
               variant="ghost"
               colorScheme="blue"
               size="md"
