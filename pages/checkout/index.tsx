@@ -184,6 +184,7 @@ function Checkout() {
           </form>
         </div>
       </div>
+      <div></div>
     </div>
   );
 }

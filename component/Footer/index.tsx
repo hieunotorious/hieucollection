@@ -5,6 +5,8 @@ import GitHubIcon from "@mui/icons-material/GitHub";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import useTranslation from "next-translate/useTranslation";
+import Container from "../Container";
+import { css } from "@emotion/react";
 function Footer() {
   const router = useRouter();
   const { t } = useTranslation();
@@ -13,9 +15,10 @@ function Footer() {
       style={{
         width: "100%",
         height: "100%",
+        marginTop: "200px",
       }}
     >
-      <div
+      <Container
         style={{
           display:
             router.pathname === "/cart" ||
@@ -26,69 +29,51 @@ function Footer() {
             router.pathname === "/checkout" ||
             router.pathname === "/profile"
               ? "none"
-              : "block",
+              : "flex",
         }}
-        className="container"
+      ></Container>
+
+      <div
+        style={{
+          background: "black",
+          minHeight: "6.7rem",
+          padding: "2rem 0",
+          justifyContent: "space-between",
+        }}
       >
-        <div className="footer-content py grid text-center">
-          <div className="footer-item">
-            <h3>chubedan.netlify.app</h3>
-            <p className="text">
-              {t(
-                "thank_you_for_shopping_with_us_your_order_is_on_the_way_have_a_wonderful_day!"
-              )}
-            </p>
-            <ul className="social-links flex">
-              <li>
-                <a
-                  href="https://www.facebook.com/profile.php?id=100004517205574"
-                  className="flex"
-                >
-                  <FacebookIcon style={{ fill: "3B5998" }} />
-                </a>
-              </li>
-              <li>
-                <a
-                  href="https://www.instagram.com/hieucollection___/"
-                  className="flex"
-                >
-                  <InstagramIcon style={{ fill: "#BC2A8D" }} />
-                </a>
-              </li>
-              <li>
-                <a href="https://twitter.com/MNgcHiu2" className="flex">
-                  <TwitterIcon style={{ fill: "#1DA1F2" }} />
-                </a>
-              </li>
-              <li>
-                <a href="https://github.com/hieunotorious" className="flex">
-                  <GitHubIcon style={{ fill: "#000000" }} />
-                </a>
-              </li>
-            </ul>
-          </div>
-
-          <div className="footer-item">
-            <h3>{t("contact_us")}</h3>
-            <p className="text">Email: hieumn2001@gmail.com</p>
-          </div>
-        </div>
-      </div>
-
-      <div className="footer-end bg-dark">
-        <div className="container grid">
-          <p style={{ color: "white" }} className="text text-white text-center">
+        <div
+          style={{
+            display: "grid",
+            justifyContent: "space-between",
+            gridTemplateColumns: "auto 330px",
+            alignItems: "center",
+          }}
+        >
+          <p
+            style={{
+              color: "white",
+              fontSize: "1.5rem",
+              opacity: 1,
+              marginLeft: "300px",
+            }}
+          >
             {t(
               "copyright_2022_all_right_reserved_designed_and_developed_by_Ma_Ngoc_Hieu"
             )}
           </p>
-          <div className="flex payment">
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              height: "32px",
+              marginRight: "200px",
+            }}
+          >
             <div
               className=""
               style={{
                 width: 52,
                 height: 32,
-                display: "flex",
               }}
             >
               <Image
@@ -101,11 +86,10 @@ function Footer() {
             </div>
 
             <div
-              className=""
               style={{
                 width: 52,
                 height: 32,
-                display: "flex",
+
                 marginLeft: "1rem",
               }}
             >
@@ -119,11 +103,10 @@ function Footer() {
             </div>
 
             <div
-              className=""
               style={{
                 width: 52,
                 height: 32,
-                display: "flex",
+
                 marginLeft: "1rem",
               }}
             >

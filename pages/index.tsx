@@ -1,12 +1,18 @@
 import React, { useContext, useEffect, useState } from "react";
-
+import Brand from "app/component/Brand";
 import StarIcon from "@mui/icons-material/Star";
 import { useResponsive } from "app/hooks/useResponsive";
 import { DefaultProduct } from "app/api/auth/data";
 import { padding } from "@mui/system";
 import { shuffle } from "lodash";
 import { css } from "@emotion/react";
-import { Button, ButtonGroup, Image } from "@chakra-ui/react";
+import SVG from "react-inlinesvg";
+import { Button, ButtonGroup, Flex, Input, Text } from "@chakra-ui/react";
+import Banner from "app/component/Banner";
+import "swiper/css";
+import { Autoplay } from "swiper";
+import { Swiper, SwiperSlide } from "swiper/react";
+
 import {
   AllType,
   BrandType,
@@ -15,335 +21,243 @@ import {
 } from "app/api/auth/models/product";
 import Link from "next/link";
 import Section from "app/component/Section";
+import NewLetter from "app/component/NewLetter";
 import useTranslation from "next-translate/useTranslation";
-function Home() {
-  const [products, setProduct] = useState(DefaultProduct);
-  const [newProducts, setNewProducts] = useState(DefaultProduct);
-  const [saleProducts, setSaleProducts] = useState(DefaultProduct);
-  const [preProducts, setPreProducts] = useState(DefaultProduct);
-  const { isMobile } = useResponsive();
+import Container from "app/component/Container";
+import { getProduct } from "app/services/ProductService";
+import { InferGetServerSidePropsType } from "next";
+import Image from "next/image";
+
+export const getServerSideProps = async () => {
+  const product = await getProduct();
+  return {
+    props: {
+      product,
+    },
+  };
+};
+
+const Home = ({
+  product,
+}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+  const [products, setProduct] = useState(product);
+  const [newProducts, setNewProducts] = useState(product);
+  const [saleProducts, setSaleProducts] = useState(product);
+  const [nameproducts, setNameProducts] = useState(product);
+  const [preProducts, setPreProducts] = useState(product);
   const { t } = useTranslation();
+
   useEffect(() => {
     setNewProducts(
       shuffle(
-        DefaultProduct.filter((item, index) => {
+        product.filter((item, index) => {
           return item.all === AllType.new;
+        })
+      ).slice(0, 4)
+    );
+    setNameProducts(
+      shuffle(
+        product.filter((item, index) => {
+          return item.name.search(/dragon ball/i) > -1;
+        })
+      ).slice(0, 8)
+    );
+    setPreProducts(
+      shuffle(
+        product.filter((item, index) => {
+          return item.all === AllType.pre_order;
         })
       ).slice(0, 4)
     );
     setSaleProducts(
       shuffle(
-        DefaultProduct.filter((item, index) => {
+        product.filter((item, index) => {
           return item.all === AllType.sale;
         })
       ).slice(0, 4)
     );
-    setPreProducts(
-      shuffle(
-        DefaultProduct.filter((item, index) => {
-          return item.all === AllType.pre_order;
-        })
-      ).slice(0, 4)
-    );
-  }, [products]);
+  }, [product]);
 
-  const renderProducts = (item: ProductType, index: number) => {
-    const ratingStars = new Array(item.rating).fill(0);
-
+  const renderProducts = (product: ProductType, index: number) => {
     return (
-      <div>
-        <div className="new-product-item">
-          <div
-            css={css`
-              overflow: hidden;
-              img {
-                object-fit: cover;
-              }
-              &:hover img {
-                scale: 1.2;
-              }
-            `}
-            className="image"
-            style={{ height: 280 }}
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "flex-start",
+          flexDirection: "column",
+          background: "white",
+          width: 216,
+          padding: 8,
+          borderRadius: 16,
+          marginBottom: 35,
+          marginLeft: 25,
+        }}
+        css={css`
+          border: 2px dashed #f1f1f1;
+          &:hover {
+            -webkit-box-shadow: var(--box-shadow);
+            box-shadow: var(--box-shadow);
+            border: 2px dashed #ff33cc;
+          }
+        `}
+      >
+        <div
+          css={css`
+            width: 200px;
+            height: 200px;
+            overflow: hidden;
+            border-radius: 1rem;
+            &:hover img {
+              scale: 1.2;
+            }
+          `}
+        >
+          <Image
+            style={{ transition: "all 300ms ease-in-out" }}
+            objectFit="cover"
+            width={200}
+            height={200}
+            src={product.img}
+            alt=""
+          />
+        </div>
+        <div className="info">
+          <div className="price">
+            <span className="new text-amber-900">${product.price}</span>
+          </div>
+          <p
+            style={{
+              fontWeight: 600,
+              fontSize: "1rem",
+              width: "100%",
+              height: "32px",
+            }}
           >
-            <Image
-              style={{ transition: "all 300ms ease-in-out" }}
-              src={item.img}
-              alt=""
-            />
-          </div>
-          <div className="info">
-            <div
-              className="ratings test-grey"
-              style={{ display: "flex", alignItems: "center" }}
-            >
-              <div style={{ display: "flex", width: 60 }}>
-                {ratingStars.map((value, index) => {
-                  return (
-                    <StarIcon
-                      key={index}
-                      style={{ fill: "black", fontSize: "10" }}
-                    />
-                  );
-                })}
-              </div>
-
-              <span>({item.review} Reviews)</span>
-            </div>
-            <div className="price">
-              <span className="new text-amber-900">${item.price}</span>
-            </div>
-            <p className="name">{item.name}</p>
-            <ButtonGroup spacing="2">
-              <Link href="/checkout">
-                <Button variant="solid" colorScheme="blue">
-                  {t("buy_now")}
-                </Button>
-              </Link>
-              <Link href="/cart">
-                <Button variant="ghost" colorScheme="blue">
-                  {t("add_to_cart")}
-                </Button>
-              </Link>
-            </ButtonGroup>
-          </div>
+            {product.name}
+          </p>
+          <ButtonGroup alignItems="center" spacing="2">
+            <Link href="/checkout">
+              <Button margin="2rem" variant="solid" colorScheme="blue">
+                {t("buy_now")}
+              </Button>
+            </Link>
+            <Link href="/cart">
+              <Button variant="ghost" colorScheme="blue">
+                {t("add_to_cart")}
+              </Button>
+            </Link>
+          </ButtonGroup>
         </div>
       </div>
     );
   };
 
   return (
-    <div>
+    <Container direction="column">
       <Section />
-
-      <main>
-        <section
-          id="new-products"
-          className="new-products py bg-light-grey-color-shade"
-        >
-          <div className="container">
-            <div className="section-title text-center">
-              <h2>{t("top_new_products")}</h2>
-              <p className="lead">{t("in_stock")}</p>
-              <div className="line"></div>
-            </div>
-            <div className="new-products-content grid">
-              {newProducts.map(renderProducts)}
-            </div>
-          </div>
-        </section>
-
-        <section
-          id="sale-products"
-          className="sale-products py bg-light-grey-color-shade"
-        >
-          <div className="container">
-            <div className="section-title text-center">
-              <h2>{t("top_sale_products")}</h2>
-              <p className="lead">{t("in_stock")}</p>
-              <div className="line"></div>
-            </div>
-            <div className="sale-products-content grid">
-              {saleProducts.map(renderProducts)}
-            </div>
-          </div>
-        </section>
-        <section
-          id="pre-products"
-          className="pre-products py bg-light-grey-color-shade"
-        >
-          <div className="container">
-            <div className="section-title text-center">
-              <h2>{t("top_pre_order_products")}</h2>
-              <p className="lead">{t("in_stock")}</p>
-              <div className="line"></div>
-            </div>
-            <div
-              style={{
-                gridTemplateColumns: "repeat(4,1fr)",
-                gap: "3rem",
-                padding: "5rem 0",
-              }}
-              className="pre-products-content grid"
+      <Flex marginTop="19rem" justifyContent="center" alignItems="center">
+        <Flex>
+          <Flex>
+            <Text
+              fontWeight="600"
+              fontSize="26px"
+              color="#222222"
+              fontFamily="'Baloo', serif"
             >
-              {preProducts.map(renderProducts)}
-            </div>
-          </div>
-        </section>
-        <section
-          className="latest-news bg-light-grey-color-shade py"
-          id="latest-news"
+              DRAGONBALL FIGURES
+            </Text>
+          </Flex>
+        </Flex>
+      </Flex>
+      <Flex width="full" marginTop="5rem">
+        <Flex
+          w="full"
+          border="2px"
+          borderRadius="2xl"
+          gap="3rem"
+          borderColor="white"
         >
-          <div className="container">
-            <div className="section-title text-center">
-              <h2>{t("latest_news")}</h2>
-              <p className="lead">{t("information_about_upcoming_prodcuts")}</p>
-              <div className="line"></div>
-            </div>
+          <Swiper
+            style={{ width: "100%" }}
+            spaceBetween={30}
+            slidesPerView="auto"
+            // effect={"coverflow"}
+            // pagination={{
+            //   clickable: true,
+            // }}
+            // coverflowEffect={{
+            //   rotate: 50,
+            //   stretch: 0,
+            //   depth: 100,
+            //   modifier: 1,
+            //   slideShadows: true,
+            // }}
+            autoplay={{
+              delay: 2000,
+              disableOnInteraction: false,
+            }}
+            modules={[Autoplay]}
+            loop
+            centeredSlides
+            grabCursor
+            className="mySwiper"
+          >
+            {nameproducts.map((item, index) => (
+              <SwiperSlide style={{ width: 216 }} key={item._id}>
+                {renderProducts(item, index)}
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        </Flex>
+      </Flex>
+      <Banner />
 
-            <div className="latest-news-content grid">
-              <article className="latest-news-item bg-white">
-                <div className="top">
-                  <Image alt="" src="images/MIS.jpeg" />
-                  <div className="author">
-                    <Image alt="" src="images/MIS2.jpeg" />
-                  </div>
-                </div>
-                <div className="body">
-                  <span className="date">Posted January 20, 2022</span>
-                  <h3 className="title text-uppercase">
-                    New Marvel Legends Iron Spider
-                  </h3>
-                  <p className="text">
-                    We have a single figure preview from Hasbro Pulse showing
-                    off
-                  </p>
-                </div>
-                <div className="bottom">
-                  <a href="#" className="text-uppercase">
-                    read more
-                  </a>
-                </div>
-              </article>
-
-              <article className="latest-news-item bg-white">
-                <div className="top">
-                  <Image alt="" src="images/MDL.jpeg" />
-                  <div className="author">
-                    <Image alt="" src="images/MDL2.jpeg" />
-                  </div>
-                </div>
-                <div className="body">
-                  <span className="date">Posted August 2, 2022</span>
-                  <h3 className="title text-uppercase">
-                    Monkey. D. Luffy joins the ultimate action figure series!
-                  </h3>
-                  <p className="text">
-                    Clothing covers the upper bodys joints, for an appearance so
-                    natural youd mistake it for a sculpture!
-                  </p>
-                </div>
-                <div className="bottom">
-                  <a href="#" className="text-uppercase">
-                    read more
-                  </a>
-                </div>
-              </article>
-
-              <article className="latest-news-item bg-white">
-                <div className="top">
-                  <Image src="images/m.jpeg" alt="" />
-                  <div className="author">
-                    <Image src="images/m2.jpeg" alt="" />
-                  </div>
-                </div>
-                <div className="body">
-                  <span className="date">Brand NEW line coming in 2022</span>
-                  <h3 className="title text-uppercase">PAGE PUNCHERS</h3>
-                  <p className="text">
-                    Comic figure for only $9.99. Check out this SNEAK PEEK from
-                    Todd McFarlane of what’s coming this year!
-                  </p>
-                </div>
-                <div className="bottom">
-                  <a href="#" className="text-uppercase">
-                    read more
-                  </a>
-                </div>
-              </article>
-            </div>
-          </div>
-        </section>
-
-        <section
-          className="feedback py bg-light-grey-color-shade"
-          id="feedback"
-        >
-          <div className="container">
-            <div className="section-title text-center">
-              <h2>{t("feedback")}</h2>
-              <p className="lead">{t("your_thought_about_us")}</p>
-              <div className="line"></div>
-            </div>
-
-            <div className="feedback-inner">
-              <div className="feedback-container grid">
-                <div className="feedback-item bg-white text-center" data-id="1">
-                  <Image src="images/f22.jpeg" className="quote-icon" alt="" />
-                  <p className="text text-grey">
-                    Absolutely the best Batman action figure I’ve ever seen or
-                    owned. Arrived in perfect condition and you can’t beat the
-                    price at $20 for the quality you get.
-                  </p>
-                  <div className="client">
-                    <Image src="images/f1.jpeg" alt="" />
-                  </div>
-                </div>
-
-                <div
-                  className="feedback-item bg-white text-center"
-                  data-id="2"
-                  id="feedback-display"
-                >
-                  <Image alt="" src="images/f11.jpeg" className="quote-icon" />
-                  <p className="text text-grey">
-                    Japanese. Definitely worth the price compared to the chinese
-                    fakes. Tamashii nations is legit
-                  </p>
-                  <div className="client">
-                    <Image alt="" src="images/f2.jpeg" />
-                  </div>
-                </div>
-
-                <div className="feedback-item bg-white text-center" data-id="3">
-                  <Image alt="" src="images/f33.jpeg" className="quote-icon" />
-                  <p className="text text-grey">
-                    WARNING: Small parts may be generated. Not for children
-                    under 3 years.
-                  </p>
-                  <div className="client">
-                    <Image alt="" src="images/f3.jpeg" />
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="feedback-btns flex">
-              <button className="feedback-btn feedback-active-btn"></button>
-              <button className="feedback-btn"></button>
-              <button className="feedback-btn"></button>
-            </div>
-          </div>
-        </section>
-      </main>
-
-      <section
-        className="newsletter py bg-light-grey-color-shade"
-        id="newsletter"
-      >
-        <div className="container">
-          <div className="section-title text-center">
-            <h2>{t("comment")}</h2>
-            <p className="lead">{t("would_you_like_to_tell_us_about??")}</p>
-            <div className="line"></div>
-          </div>
-
-          <div className="newsletter-content">
-            <form>
-              <div className="input-group flex">
-                <input type="email" className="form-control bg-light-grey" />
-                <button
-                  type="submit"
-                  className="btn bg-dark text-white text-uppercase"
-                >
-                  subscribe
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
-      </section>
-    </div>
+      <Flex direction="row" justifyContent="center" alignItems="center">
+        <Flex direction="column">
+          <Flex justifyContent="center" alignItems="center" marginTop="19rem">
+            <Link href="/checkout">
+              <Button
+                w="150px"
+                h="50px"
+                margin="2rem"
+                variant="solid"
+                colorScheme="blue"
+              >
+                {t("top_new_products")}
+              </Button>
+            </Link>
+            <Link href="/checkout">
+              <Button
+                w="150px"
+                h="50px"
+                margin="2rem"
+                variant="solid"
+                colorScheme="blue"
+              >
+                {t("top_sale_products")}
+              </Button>
+            </Link>
+            <Link href="/cart">
+              <Button w="150px" h="50px" margin="2rem" colorScheme="blue">
+                {t("top_pre_order_products")}
+              </Button>
+            </Link>
+          </Flex>
+          <Flex
+            marginTop="5rem"
+            border="2px"
+            borderRadius="2xl"
+            gap="3rem"
+            borderColor="white"
+          >
+            {newProducts.map(renderProducts)}
+          </Flex>
+        </Flex>
+      </Flex>
+      <Brand />
+      <NewLetter />
+    </Container>
   );
-}
+};
 
 export default Home;

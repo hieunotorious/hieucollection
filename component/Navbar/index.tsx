@@ -6,13 +6,18 @@ import useTranslation from "next-translate/useTranslation";
 import React, { useState, useContext } from "react";
 import LanguageIcon from "@mui/icons-material/Language";
 import AccountBoxIcon from "@mui/icons-material/AccountBox";
-import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
+import ShoppingCartRoundedIcon from "@mui/icons-material/ShoppingCartRounded";
 import ShoppingCartCheckoutIcon from "@mui/icons-material/ShoppingCartCheckout";
 import { AuthContext } from "../../context/authContext";
+import MenuIcon from "@mui/icons-material/Menu";
+import { getUser, logout } from "app/services/UserService";
 import {
   Button,
   Flex,
-  Grid,
+  Menu,
+  MenuButton,
+  MenuItem,
+  MenuList,
   Popover,
   PopoverContent,
   PopoverTrigger,
@@ -20,173 +25,180 @@ import {
 } from "@chakra-ui/react";
 import { Role } from "app/api/auth/models/user";
 import { useRouter } from "next/router";
+import Container from "../Container";
+import { fontFamily, height } from "@mui/system";
 function Nav() {
   const router = useRouter();
-  const {
-    user,
-    updateUserCartQuantity,
-    removeUserCart,
-    removeAllCart,
-    setUser,
-  } = useContext(AuthContext);
 
+  const { user, setUser } = useContext(AuthContext);
   const [isOpenLanguage, setIsOpenLanguage] = useState(false);
   const { t } = useTranslation();
   const handleChangeLanguage = async (lang: string) => {
     await setLanguage(lang);
     setIsOpenLanguage(false);
   };
+
+  const handleLogout = async () => {
+    const data = await logout();
+    if (data.success) {
+      setUser(undefined);
+      localStorage.clear();
+    }
+  };
+
   return (
-    <div
-      style={{
-        display: "flex",
-        position: "sticky",
-        top: "0px",
-        left: "0px",
-        width: "var(--chakra-sizes-full)",
-        height: "72px",
-        zIndex: 99,
-        background: "white",
-      }}
-    >
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          width: "90vw",
-          margin: "0px auto",
-        }}
-        css={css`
-          -webkit-box-align: center;
-          -webkit-box-pack: justify;
-        `}
+    <Flex direction="column" h="12rem" background="b5def2">
+      <Container
+        w="full"
+        h="48px"
+        justifyContent="space-between"
+        alignItems="center"
+        background="b5def2"
       >
-        <div
-          style={{ display: "flex", alignItems: "center" }}
-          css={css`
-            -webkit-box-align: center;
-          `}
-        >
-          <div style={{ display: "flex", marginLeft: "3rem" }}>
-            <Link href="/">
-              <span
-                style={{
-                  color: "black",
-                  cursor: "pointer",
-                  marginRight: "2rem",
-                  fontWeight: router.pathname === "/" ? 700 : 400,
-                }}
+        <Flex w="full" h="3rem" background="b5def2">
+          <Text style={{ fontFamily: "'Baloo', serif" }} fontSize="15px">
+            Welcome to our online store!
+          </Text>
+        </Flex>
+        <Flex>
+          <Popover
+            isOpen={isOpenLanguage}
+            onClose={() => setIsOpenLanguage(false)}
+          >
+            <PopoverTrigger>
+              <Button
+                display="flex"
+                w="30px"
+                h="30px"
+                variant="unstyled"
+                minWidth={0}
+                p="4px"
+                onClick={() => setIsOpenLanguage(true)}
               >
-                {t("home")}
-              </span>
-            </Link>
-            <Link href="/about">
-              <span
-                style={{
-                  color: "black",
-                  cursor: "pointer",
-                  marginRight: "2rem",
-                  fontWeight: router.pathname === "/about" ? 700 : 400,
-                }}
+                <LanguageIcon style={{ color: "black" }} />
+              </Button>
+            </PopoverTrigger>
+            <PopoverContent w="120px">
+              <Button
+                variant="unstyled"
+                onClick={() => handleChangeLanguage("en")}
               >
-                {t("about")}
-              </span>
-            </Link>
-            <Link href="/product">
-              <span
-                style={{
-                  color: "black",
-                  cursor: "pointer",
-                  marginRight: "2rem",
-                  fontWeight: router.pathname === "/product" ? 700 : 400,
-                }}
+                English
+              </Button>
+              <Button
+                variant="unstyled"
+                onClick={() => handleChangeLanguage("vi")}
               >
-                {t("product")}
-              </span>
-            </Link>
+                Tiếng Việt
+              </Button>
+            </PopoverContent>
+          </Popover>
+        </Flex>
+      </Container>
+      <Flex w="full" h="60px" background="#b5def2" alignItems="center">
+        <Container>
+          <Flex
+            style={{
+              width: "100%",
+              alignItems: "center",
+            }}
+          >
+            <Flex w="full">
+              <Flex alignItems="center" justifyContent="center">
+                <Flex
+                  style={{
+                    fontSize: "2rem",
+                    marginRight: "2rem",
+                    fontFamily: "'Baloo', serif",
+                    cursor: "pointer",
+                    color: "#fff",
+                    letterSpacing: "0.05em",
+                    fontWeight: 700,
+                  }}
+                >
+                  <Link href="/">
+                    <div>{t("home")}</div>
+                  </Link>
+                </Flex>
+                <Flex
+                  style={{
+                    fontSize: "2rem",
+                    marginRight: "2rem",
+                    fontFamily: "'Baloo', serif",
+                    cursor: "pointer",
+                    color: "#fff",
+                    letterSpacing: "0.05em",
+                    fontWeight: 700,
+                  }}
+                >
+                  <Link style={{ marginLeft: "2rem" }} href="/about">
+                    <div>{t("about")}</div>
+                  </Link>
+                </Flex>
+                <Flex
+                  style={{
+                    fontSize: "2rem",
+                    fontFamily: "'Baloo', serif",
+                    cursor: "pointer",
+                    color: "#fff",
+                    letterSpacing: "0.05em",
+                    fontWeight: 700,
+                  }}
+                >
+                  <Link href="/product">
+                    <div>{t("product")}</div>
+                  </Link>
+                </Flex>
+              </Flex>
+              <Flex w="full" justifyContent="flex-end" alignItems="center">
+                <Popover>
+                  <PopoverTrigger>
+                    <Button>
+                      <AccountBoxIcon />
+                    </Button>
+                  </PopoverTrigger>
+                  <PopoverContent>
+                    {user ? (
+                      <>
+                        {user.role === Role.admin && (
+                          <Link href="/admin">
+                            <Button variant="unstyled">{t("Admin")}</Button>
+                          </Link>
+                        )}
 
-            <Flex justifyContent="flex-end" alignItems="center">
-              <Popover>
-                <PopoverTrigger>
-                  <Button>
-                    <AccountBoxIcon />
-                  </Button>
-                </PopoverTrigger>
-                <PopoverContent>
-                  {user ? (
-                    <>
-                      {user.role === Role.admin && (
-                        <Link href="/admin">
-                          <Button variant="unstyled">{t("Admin")}</Button>
+                        <Link href="/profile">
+                          <Button variant="unstyled"> {t("profile")}</Button>
                         </Link>
-                      )}
 
-                      <Link href="/profile">
-                        <Button variant="unstyled"> {t("profile")}</Button>
+                        <Link href="/cart">
+                          <Button variant="unstyled">
+                            <ShoppingCartCheckoutIcon
+                              style={{ color: "black" }}
+                            />
+                          </Button>
+                        </Link>
+                        <Link href="/">
+                          <Button
+                            onClick={() => handleLogout()}
+                            variant="unstyled"
+                          >
+                            {t("logout")}
+                          </Button>
+                        </Link>
+                      </>
+                    ) : (
+                      <Link href="/signin">
+                        <Button variant="unstyled"> {t("login")}</Button>
                       </Link>
-
-                      <Link href="/cart">
-                        <Button variant="unstyled">
-                          <ShoppingCartCheckoutIcon
-                            style={{ color: "black" }}
-                          />
-                        </Button>
-                      </Link>
-                      <Link href="/">
-                        <Button
-                          onClick={() => setUser(undefined)}
-                          variant="unstyled"
-                        >
-                          {t("logout")}
-                        </Button>
-                      </Link>
-                    </>
-                  ) : (
-                    <Link href="/signin">
-                      <Button variant="unstyled"> {t("login")}</Button>
-                    </Link>
-                  )}
-                </PopoverContent>
-              </Popover>
-
-              <Popover
-                isOpen={isOpenLanguage}
-                onClose={() => setIsOpenLanguage(false)}
-              >
-                <PopoverTrigger>
-                  <Button
-                    display="flex"
-                    w="30px"
-                    h="30px"
-                    variant="unstyled"
-                    minWidth={0}
-                    p="4px"
-                    onClick={() => setIsOpenLanguage(true)}
-                  >
-                    <LanguageIcon style={{ color: "black" }} />
-                  </Button>
-                </PopoverTrigger>
-                <PopoverContent w="120px">
-                  <Button
-                    variant="unstyled"
-                    onClick={() => handleChangeLanguage("en")}
-                  >
-                    English
-                  </Button>
-                  <Button
-                    variant="unstyled"
-                    onClick={() => handleChangeLanguage("vi")}
-                  >
-                    Tiếng Việt
-                  </Button>
-                </PopoverContent>
-              </Popover>
+                    )}
+                  </PopoverContent>
+                </Popover>
+              </Flex>
             </Flex>
-          </div>
-        </div>
-      </div>
-    </div>
+          </Flex>
+        </Container>
+      </Flex>
+    </Flex>
   );
 }
 

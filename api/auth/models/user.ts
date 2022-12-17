@@ -33,8 +33,13 @@ export type UpdateUser = {
   gender: Gender;
 };
 export type UserCart = {
+  product_id: string;
+  img: string;
+  name: string;
+  price: number;
   quantity: number;
-} & ProductType;
+  sale?: number;
+};
 export enum Gender {
   male = "MALE",
   female = "FEMALE",
