@@ -17,13 +17,7 @@ import { AuthContext } from "../../context/authContext";
 import setLanguage from "next-translate/setLanguage";
 import useTranslation from "next-translate/useTranslation";
 function AdminNav() {
-  const {
-    user,
-    updateUserCartQuantity,
-    removeUserCart,
-    removeAllCart,
-    setUser,
-  } = useContext(AuthContext);
+  const { setUser } = useContext(AuthContext);
   const { t } = useTranslation();
   return (
     <div

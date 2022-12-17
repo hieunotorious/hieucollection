@@ -4,7 +4,6 @@ import link from "next/link";
 import Image from "next/image";
 import StarIcon from "@mui/icons-material/Star";
 import { useResponsive } from "app/hooks/useResponsive";
-import { DefaultProduct } from "app/api/auth/data";
 import { padding } from "@mui/system";
 import { useRouter } from "next/router";
 import { ProductType } from "app/api/auth/models/product";

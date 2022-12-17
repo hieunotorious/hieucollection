@@ -2,7 +2,6 @@ import React, { useContext, useEffect, useState } from "react";
 import Brand from "app/component/Brand";
 import StarIcon from "@mui/icons-material/Star";
 import { useResponsive } from "app/hooks/useResponsive";
-import { DefaultProduct } from "app/api/auth/data";
 import { padding } from "@mui/system";
 import { shuffle } from "lodash";
 import { css } from "@emotion/react";

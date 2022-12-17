@@ -2,7 +2,6 @@ import { textAlign } from "@mui/system";
 import { AuthContext } from "app/context/authContext";
 import { useRouter } from "next/router";
 import React, { useContext, useState } from "react";
-import { userlist } from "../../api/auth/data";
 import { LoginType } from "../../api/auth/models/user";
 import setLanguage from "next-translate/setLanguage";
 import useTranslation from "next-translate/useTranslation";
@@ -11,7 +10,6 @@ import axios from "axios";
 import { getUser, login } from "app/services/UserService";
 import { setTokens } from "app/utils/token";
 function Login() {
-  const [data, setData] = useState(userlist);
   const [user, setUser] = useState<LoginType>({
     username: "",
     password: "",

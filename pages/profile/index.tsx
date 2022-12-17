@@ -1,6 +1,5 @@
 import { blue } from "@mui/material/colors";
 import React, { useContext, useEffect, useState } from "react";
-import { userlist } from "../../api/auth/data";
 import { Gender, UpdateUser, User } from "../../api/auth/models/user";
 import { css } from "@emotion/react";
 import { Password } from "@mui/icons-material";
@@ -11,7 +10,6 @@ import setLanguage from "next-translate/setLanguage";
 import useTranslation from "next-translate/useTranslation";
 import { Select, Input } from "@chakra-ui/react";
 function Signup() {
-  const [data, setData] = useState(userlist);
   const { t } = useTranslation();
   const { user, updateProfile } = useContext(AuthContext);
   const [tempuser, setTempUser] = useState<UpdateUser>({
@@ -23,7 +21,6 @@ function Signup() {
     gender: Gender.other,
   });
   const router = useRouter();
-  const { createUser } = useContext(AuthContext);
   const submitForm = (event: any) => {
     event.preventDefault();
     updateProfile(tempuser);

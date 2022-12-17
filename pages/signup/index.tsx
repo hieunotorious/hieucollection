@@ -1,6 +1,6 @@
 import { blue } from "@mui/material/colors";
 import React, { useContext, useState } from "react";
-import { userlist } from "../../api/auth/data";
+
 import { SignupType } from "../../api/auth/models/user";
 import { css } from "@emotion/react";
 import { Password } from "@mui/icons-material";
@@ -16,7 +16,6 @@ function Signup() {
   const [show1, setShow1] = React.useState(false);
   const [show2, setShow2] = React.useState(false);
 
-  const [data, setData] = useState(userlist);
   const { t } = useTranslation();
   const [user, setUser] = useState<SignupType>({
     username: "",
