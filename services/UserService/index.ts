@@ -2,12 +2,19 @@ import { UpdateUser } from "app/api/auth/models/user";
 import axios from "axios";
 
 export const getUser = async () => {
-  const user = await axios.get(`${process.env.NEXT_PUBLIC_HOST}/user/getself`, {
-    headers: {
-      Authorization: `Bearer ${localStorage.getItem("access_token")}`,
-    },
-  });
-  return user.data || undefined;
+  try {
+    const user = await axios.get(
+      `${process.env.NEXT_PUBLIC_HOST}/user/getself`,
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+        },
+      }
+    );
+    return user.data;
+  } catch (err) {
+    return undefined;
+  }
 };
 
 export const login = async (username: string, password: string) => {
