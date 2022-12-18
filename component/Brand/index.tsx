@@ -4,9 +4,11 @@ import SendRoundedIcon from "@mui/icons-material/SendRounded";
 import { css } from "@emotion/react";
 type Props = {} & FlexProps;
 import Image from "next/image";
+import { useResponsive } from "app/hooks/useResponsive";
 const Brand = ({ ...props }: Props) => {
+  const { isMobile, isTabletOrLaptop, isDesktop } = useResponsive();
   return (
-    <Flex marginTop="19rem" justifyContent="center" alignItems="center">
+    <Flex marginTop="10rem" justifyContent="center" alignItems="center">
       <Flex>
         <Flex>
           <Text fontSize="26px" color="#222222" fontFamily="'Baloo', serif">
@@ -15,7 +17,7 @@ const Brand = ({ ...props }: Props) => {
         </Flex>
       </Flex>
       <Flex
-        display="grid"
+        display={isMobile ? "column" : "grid"}
         gridTemplateColumns="1fr 1fr 1fr 1fr"
         gap="2rem"
         marginLeft="2rem"

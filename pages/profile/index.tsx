@@ -8,10 +8,13 @@ import { info } from "console";
 import { useRouter } from "next/router";
 import setLanguage from "next-translate/setLanguage";
 import useTranslation from "next-translate/useTranslation";
-import { Select, Input } from "@chakra-ui/react";
+import { Select, Input, useToast } from "@chakra-ui/react";
+import { useResponsive } from "app/hooks/useResponsive";
+import { updateSelfUser } from "app/services/UserService";
 function Signup() {
   const { t } = useTranslation();
-  const { user, updateProfile } = useContext(AuthContext);
+  const { isMobile } = useResponsive();
+  const { user, setUser } = useContext(AuthContext);
   const [tempuser, setTempUser] = useState<UpdateUser>({
     username: "",
     dob: "",
@@ -20,10 +23,21 @@ function Signup() {
     displayName: "",
     gender: Gender.other,
   });
+  const toast = useToast();
   const router = useRouter();
-  const submitForm = (event: any) => {
+  const submitForm = async (event: any) => {
     event.preventDefault();
-    updateProfile(tempuser);
+    const data = await updateSelfUser(tempuser);
+    if (data) {
+      setUser(data);
+      toast({
+        title: "Update Successful",
+        status: "success",
+        position: "top-right",
+        duration: 3000,
+        isClosable: true,
+      });
+    }
   };
 
   useEffect(() => {
@@ -42,7 +56,7 @@ function Signup() {
       style={{
         background: "white",
         margin: "0 auto",
-        minHeight: " 900px",
+        minHeight: isMobile ? "500px" : "900px",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",

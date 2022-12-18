@@ -33,6 +33,7 @@ import { getProductId } from "app/services/ProductService";
 import { addToCart } from "app/services/CartService";
 function ProductId() {
   const router = useRouter();
+  const { isMobile } = useResponsive();
   const { t } = useTranslation();
   const { setUser } = useContext(AuthContext);
   const [product, setProduct] = useState<ProductType>();
@@ -80,7 +81,7 @@ function ProductId() {
           style={{
             background: " var(--light-grey-color-shade)",
             marginTop: "3rem",
-            display: "grid",
+            display: isMobile ? "column" : "grid",
             gridTemplateColumns: " 1fr 1fr",
             gap: "4rem",
             alignItems: " center",

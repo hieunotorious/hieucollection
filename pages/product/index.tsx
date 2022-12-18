@@ -10,7 +10,7 @@ import setLanguage from "next-translate/setLanguage";
 import useTranslation from "next-translate/useTranslation";
 import { getProduct } from "app/services/ProductService";
 import { InferGetServerSidePropsType } from "next";
-import { shuffle } from "lodash";
+
 export const getServerSideProps = async () => {
   const product = await getProduct();
   return {
@@ -64,6 +64,7 @@ const Product = ({
         display: "flex",
         padding: 16,
         minHeight: 900,
+        alignItems: isMobile ? "center" : "initial",
         flexDirection: `${isMobile ? "column" : "row"}`,
       }}
       css={css`
@@ -159,7 +160,8 @@ const Product = ({
       <div
         style={{
           display: "flex",
-          justifyContent: "space-between",
+
+          justifyContent: isMobile ? "center" : "space-between",
           width: "100%",
           margin: "auto",
           flexWrap: "wrap",

@@ -10,6 +10,7 @@ import router, { useRouter } from "next/router";
 import { AuthContext } from "app/context/authContext";
 import { height } from "@mui/system";
 import { addToCart } from "app/services/CartService";
+
 const ProductItem = ({ product }: { product: ProductType }) => {
   const { t } = useTranslation();
   const { setUser } = useContext(AuthContext);
@@ -39,9 +40,12 @@ const ProductItem = ({ product }: { product: ProductType }) => {
           marginLeft: 25,
         }}
         css={css`
+          border: 2px dashed transparent;
           &:hover {
+            border: 2px dashed #f1f1f1;
             -webkit-box-shadow: var(--box-shadow);
             box-shadow: var(--box-shadow);
+            border: 2px dashed #ff33cc;
           }
         `}
       >

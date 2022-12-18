@@ -7,13 +7,15 @@ import { useRouter } from "next/router";
 import useTranslation from "next-translate/useTranslation";
 import Container from "../Container";
 import { css } from "@emotion/react";
+import { useResponsive } from "app/hooks/useResponsive";
 function Footer() {
+  const { isMobile, isTabletOrLaptop, isDesktop } = useResponsive();
   const router = useRouter();
   const { t } = useTranslation();
   return (
     <nav
       style={{
-        width: "100%",
+        width: isMobile ? "100%" : "100%",
         height: "100%",
         marginTop: "200px",
       }}
@@ -43,7 +45,7 @@ function Footer() {
       >
         <div
           style={{
-            display: "grid",
+            display: isMobile ? "column" : "grid",
             justifyContent: "space-between",
             gridTemplateColumns: "auto 330px",
             alignItems: "center",
@@ -54,7 +56,7 @@ function Footer() {
               color: "white",
               fontSize: "1.5rem",
               opacity: 1,
-              marginLeft: "300px",
+              marginLeft: isMobile ? "100px" : "300px",
             }}
           >
             {t(
@@ -64,6 +66,7 @@ function Footer() {
           <div
             style={{
               display: "flex",
+              flexDirection: isMobile ? "column" : "row",
               justifyContent: "center",
               height: "32px",
               marginRight: "200px",

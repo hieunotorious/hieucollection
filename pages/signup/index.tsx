@@ -12,6 +12,7 @@ import useTranslation from "next-translate/useTranslation";
 import { Input, InputGroup, InputRightElement, Button } from "@chakra-ui/react";
 import { setTokens } from "app/utils/token";
 import { getUser, signup } from "app/services/UserService";
+import { useResponsive } from "app/hooks/useResponsive";
 function Signup() {
   const [show1, setShow1] = React.useState(false);
   const [show2, setShow2] = React.useState(false);
@@ -40,7 +41,7 @@ function Signup() {
     }
   };
   const handleClick1 = () => setShow1(!show1);
-
+  const { isMobile } = useResponsive();
   const handleClick2 = () => setShow2(!show2);
 
   return (
@@ -48,7 +49,7 @@ function Signup() {
       style={{
         background: "white",
         margin: "0 auto",
-        minHeight: " 900px",
+        minHeight: isMobile ? "500px" : 900,
         display: "flex",
         justifyContent: "center",
         alignItems: "center",

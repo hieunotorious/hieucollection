@@ -3,6 +3,7 @@ import Link from "next/link";
 import useTranslation from "next-translate/useTranslation";
 import React from "react";
 import { Button, Flex, FlexProps, Text, Stack } from "@chakra-ui/react";
+import { useResponsive } from "app/hooks/useResponsive";
 
 type SlideType = {
   title: string;
@@ -12,8 +13,9 @@ type SlideType = {
 
 const Slide = ({ title, description, banner, ...props }: SlideType) => {
   const { t } = useTranslation();
+  const { isMobile, isTabletOrLaptop, isDesktop } = useResponsive();
   return (
-    <Flex w="full" h="full" position="relative" {...props}>
+    <Flex w={"full"} h="full" position="relative" {...props}>
       <Flex
         direction="column"
         position="relative"
@@ -23,13 +25,17 @@ const Slide = ({ title, description, banner, ...props }: SlideType) => {
         justifyContent="center"
         zIndex={2}
       >
-        <Text color="MintCream" fontSize="6xl">
+        <Text color="MintCream" fontSize={isMobile ? "10lg" : "6xl"}>
           {title}
         </Text>
-        <Text maxWidth="60%" color="MintCream" fontSize="4xl">
+        <Text
+          maxWidth="60%"
+          color="MintCream"
+          fontSize={isMobile ? "md" : "4xl"}
+        >
           {description}
         </Text>
-        <Flex mt="16px">
+        <Flex mt={isMobile ? "1px" : "16px"}>
           <Button colorScheme="MintCream" size="lg">
             <Link href="/product">
               <Text>{t("shop_now")}</Text>

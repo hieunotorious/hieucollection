@@ -17,6 +17,7 @@ import {
   removeFromCart,
   updateCartQuantity,
 } from "app/services/CartService";
+import { useResponsive } from "app/hooks/useResponsive";
 function Cart() {
   const { t } = useTranslation();
   const { user, setUser } = useContext(AuthContext);
@@ -62,16 +63,16 @@ function Cart() {
       });
     }
   };
-
+  const { isMobile } = useResponsive();
   const renderCartItem = (item: UserCart) => {
     return (
       <div
         style={{
-          display: "grid",
+          display: isMobile ? "row" : "grid",
           marginBottom: "2rem",
           justifyContent: "center",
           alignItems: "center",
-          gridTemplateColumns: "360px 1fr 1fr 1fr auto",
+          gridTemplateColumns: isMobile ? "1fr 1fr" : "360px 1fr 1fr 1fr auto",
           borderBottom: "1px solid black",
           paddingBottom: "1rem",
         }}
@@ -87,16 +88,17 @@ function Cart() {
             }}
           >
             <Image
-              width="100%"
-              height="100%"
+              width={isMobile ? "75px" : "100%"}
+              height={isMobile ? "112px" : "100%"}
               objectFit="cover"
               src={item.img}
               alt=""
             />
             <h3
               style={{
+                display: isMobile ? "none" : "flex",
                 margin: "2rem",
-                fontSize: 20,
+                fontSize: isMobile ? "2px" : 20,
                 fontWeight: 700,
                 textAlign: "center",
                 fontFamily: "cursive",
@@ -108,7 +110,7 @@ function Cart() {
         </div>
         <div
           style={{
-            display: "flex",
+            display: isMobile ? "none" : "flex",
             justifyContent: "center",
             alignItems: "center",
             fontWeight: "400",
@@ -134,7 +136,7 @@ function Cart() {
           >
             <RemoveIcon
               style={{
-                display: "flex",
+                display: isMobile ? "column" : "row",
                 justifyContent: "center",
                 alignItems: "center",
                 color: "#102a42",
@@ -164,7 +166,7 @@ function Cart() {
 
         <div
           style={{
-            display: "flex",
+            display: isMobile ? "none" : "flex",
             justifyContent: "center",
             alignItems: "center",
             fontWeight: 700,
@@ -216,7 +218,7 @@ function Cart() {
       <div>
         <div
           style={{
-            display: "grid",
+            display: isMobile ? "none" : "grid",
             marginBottom: "2rem",
             justifyContent: "center",
             textAlign: "center",

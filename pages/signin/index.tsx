@@ -9,6 +9,7 @@ import { Input, InputGroup, InputRightElement, Button } from "@chakra-ui/react";
 import axios from "axios";
 import { getUser, login } from "app/services/UserService";
 import { setTokens } from "app/utils/token";
+import { useResponsive } from "app/hooks/useResponsive";
 function Login() {
   const [user, setUser] = useState<LoginType>({
     username: "",
@@ -47,11 +48,12 @@ function Login() {
     // }
   };
   const handleClick = () => setShow(!show);
+  const { isMobile } = useResponsive();
   return (
     <div
       style={{
         margin: "0 auto",
-        minHeight: 900,
+        minHeight: isMobile ? "500px" : 900,
         display: "flex",
         justifyContent: "center",
         alignItems: "center",

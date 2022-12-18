@@ -13,15 +13,17 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import Slide from "./Slide";
 import Container from "../Container";
 import Image from "next/image";
+import { useResponsive } from "app/hooks/useResponsive";
 
 type Props = {};
 
 const Section = (props: Props) => {
   const { t } = useTranslation();
+  const { isMobile, isTabletOrLaptop, isDesktop } = useResponsive();
   return (
-    <Flex id="section1">
+    <Flex id="section1" direction={isMobile ? "column" : "row"}>
       <Swiper
-        style={{ width: "100%", height: "600px" }}
+        style={{ width: "100%", height: isMobile ? "200px" : "600px" }}
         spaceBetween={30}
         effect={"coverflow"}
         pagination={{
@@ -72,7 +74,13 @@ const Section = (props: Props) => {
           />
         </SwiperSlide>
       </Swiper>
-      <Flex w="30%" direction="column" padding="1px" gap="1px" h="full">
+      <Flex
+        w={isMobile ? "full" : "30%"}
+        direction="column"
+        padding="1px"
+        gap="1px"
+        h={isMobile ? "500px" : "full"}
+      >
         <Flex paddingBottom="0 " position="relative" h="full">
           <Image layout="fill" src="/images/cat.jpeg" alt=""></Image>
         </Flex>

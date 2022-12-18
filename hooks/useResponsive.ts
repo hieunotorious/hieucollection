@@ -1,9 +1,24 @@
-import { useMediaQuery } from "react-responsive";
-
+import { useBreakpointValue } from "@chakra-ui/react";
 export const useResponsive = () => {
-  const isBigscreen = useMediaQuery({ minWidth: 1025 });
-  const isTablet = useMediaQuery({ maxWidth: 1024, minWidth: 769 });
-  const isMobile = useMediaQuery({ maxWidth: 576 });
+  const isMobile = useBreakpointValue({
+    sm: false,
+    base: true,
+  });
 
-  return { isBigscreen, isMobile, isTablet };
+  const isTabletOrLaptop = useBreakpointValue({
+    md: false,
+    base: true,
+  });
+
+  const isDesktop = useBreakpointValue({
+    lg: false,
+    base: true,
+  });
+
+  const isBigscreen = useBreakpointValue({
+    "2xl": false,
+    base: true,
+  });
+
+  return { isBigscreen, isMobile, isTabletOrLaptop, isDesktop };
 };
