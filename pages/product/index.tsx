@@ -9,9 +9,9 @@ import { Formik } from "formik";
 import setLanguage from "next-translate/setLanguage";
 import useTranslation from "next-translate/useTranslation";
 import { getProduct } from "app/services/ProductService";
-import { InferGetServerSidePropsType } from "next";
+import { InferGetServerSidePropsType, InferGetStaticPropsType } from "next";
 
-export const getServerSideProps = async () => {
+export const getStaticProps = async () => {
   const product = await getProduct();
   return {
     props: {
@@ -22,7 +22,7 @@ export const getServerSideProps = async () => {
 
 const Product = ({
   product,
-}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+}: InferGetStaticPropsType<typeof getStaticProps>) => {
   const [products, setProduct] = useState(product);
   const { isMobile } = useResponsive();
   const { t } = useTranslation();

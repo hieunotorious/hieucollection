@@ -31,10 +31,10 @@ import NewLetter from "app/component/NewLetter";
 import useTranslation from "next-translate/useTranslation";
 import Container from "app/component/Container";
 import { getProduct } from "app/services/ProductService";
-import { InferGetServerSidePropsType } from "next";
+import { InferGetServerSidePropsType, InferGetStaticPropsType } from "next";
 import Image from "next/image";
 
-export const getServerSideProps = async () => {
+export const getStaticProps = async () => {
   const product = await getProduct();
   return {
     props: {
@@ -43,9 +43,7 @@ export const getServerSideProps = async () => {
   };
 };
 
-const Home = ({
-  product,
-}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+const Home = ({ product }: InferGetStaticPropsType<typeof getStaticProps>) => {
   const [products, setProduct] = useState(product);
   const [newProducts, setNewProducts] = useState(product);
   const [saleProducts, setSaleProducts] = useState(product);
