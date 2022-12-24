@@ -75,6 +75,7 @@ function Cart() {
           gridTemplateColumns: isMobile ? "1fr 1fr" : "360px 1fr 1fr 1fr auto",
           borderBottom: "1px solid black",
           paddingBottom: "1rem",
+          background: "white",
         }}
         key={item.product_id}
       >
@@ -174,7 +175,11 @@ function Cart() {
             fontFamily: "cursive",
           }}
         >
-          ${round(item.price * item.quantity, 2)}
+          $
+          {round(
+            (item.sale ? item.price - item.sale : item.price) * item.quantity,
+            2
+          )}
         </div>
         <div
           style={{
@@ -212,7 +217,7 @@ function Cart() {
 
         padding: "0 4rem",
 
-        background: "var(--light-grey-color-shade)",
+        background: "white",
       }}
     >
       <div>
@@ -227,6 +232,7 @@ function Cart() {
             fontSize: "3rem",
             textTransform: "uppercase",
             fontFamily: "serif",
+            background: "white",
           }}
         >
           <p>{t("item")}</p>

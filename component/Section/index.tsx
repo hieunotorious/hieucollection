@@ -4,7 +4,7 @@ import "swiper/css/effect-coverflow";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 
-import { Flex } from "@chakra-ui/react";
+import { Flex, Text } from "@chakra-ui/react";
 import useTranslation from "next-translate/useTranslation";
 import React from "react";
 import { Autoplay, Navigation, Pagination, EffectCoverflow } from "swiper";
@@ -21,7 +21,11 @@ const Section = (props: Props) => {
   const { t } = useTranslation();
   const { isMobile, isTabletOrLaptop, isDesktop } = useResponsive();
   return (
-    <Flex id="section1" direction={isMobile ? "column" : "row"}>
+    <Flex
+      id="section1"
+      display={isMobile ? "none" : "flex"}
+      direction={isMobile ? "column" : "row"}
+    >
       <Swiper
         style={{ width: "100%", height: isMobile ? "200px" : "600px" }}
         spaceBetween={30}

@@ -75,11 +75,16 @@ const ProductItem = ({ product }: { product: ProductType }) => {
             flexDirection: "column",
             overflow: "hidden",
             textOverflow: "ellipsis",
+            marginTop: "2rem",
           }}
         >
           <div style={{ display: "flex" }}>
             <div
-              style={{ marginRight: 16, position: "relative", fontWeight: 600 }}
+              style={{
+                marginRight: 16,
+                position: "relative",
+                fontWeight: 600,
+              }}
               css={css`
                 ${(product.sale || product.sale === 0) &&
                 ` &:after {
@@ -113,7 +118,12 @@ const ProductItem = ({ product }: { product: ProductType }) => {
             {product.name}
           </div>
         </div>
-        <ButtonGroup marginTop="1rem" marginBottom="1rem">
+        <ButtonGroup
+          marginTop="1rem"
+          marginBottom="1rem"
+          alignItems="center"
+          justifyContent="center"
+        >
           <Link href="/checkout">
             <Button variant="solid" colorScheme="blue">
               {t("buy_now")}
@@ -121,7 +131,6 @@ const ProductItem = ({ product }: { product: ProductType }) => {
           </Link>
           <Link href="/cart">
             <Button
-              style={{ width: "15rem", height: "3rem" }}
               onClick={() => handleAddCart(product._id)}
               variant="ghost"
               colorScheme="blue"

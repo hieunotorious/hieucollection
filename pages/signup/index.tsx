@@ -9,7 +9,13 @@ import { info } from "console";
 import { useRouter } from "next/router";
 import setLanguage from "next-translate/setLanguage";
 import useTranslation from "next-translate/useTranslation";
-import { Input, InputGroup, InputRightElement, Button } from "@chakra-ui/react";
+import {
+  Input,
+  InputGroup,
+  InputRightElement,
+  Button,
+  useToast,
+} from "@chakra-ui/react";
 import { setTokens } from "app/utils/token";
 import { getUser, signup } from "app/services/UserService";
 import { useResponsive } from "app/hooks/useResponsive";
@@ -26,6 +32,7 @@ function Signup() {
     confirm: "",
   });
   const router = useRouter();
+  const toast = useToast();
   const { setUser: setGlobalUser } = useContext(AuthContext);
   const submitForm = async (event: any) => {
     event.preventDefault();
@@ -35,6 +42,13 @@ function Signup() {
       setTokens(accessToken, expiredDate, refreshToken);
       const loginUser = await getUser();
       if (loginUser) {
+        toast({
+          title: "Signup Successful",
+          status: "success",
+          position: "top-right",
+          duration: 3000,
+          isClosable: true,
+        });
         setGlobalUser(loginUser);
         router.push("/");
       }

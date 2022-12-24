@@ -74,12 +74,26 @@ function ProductId() {
           minHeight: "950px",
           width: "100%",
           boxSizing: "border-box",
-          background: "WhiteSmoke",
+          background: "White",
         }}
       >
+        <div>
+          <Link style={{}} href="/product">
+            <button>
+              <ArrowBackIcon
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  color: "black",
+                  fontSize: 30,
+                }}
+              />
+            </button>
+          </Link>
+        </div>
         <div
           style={{
-            background: " var(--light-grey-color-shade)",
+            background: "white",
             marginTop: "3rem",
             display: isMobile ? "column" : "grid",
             gridTemplateColumns: " 1fr 1fr",
@@ -268,20 +282,6 @@ function ProductId() {
               />
             </div>
           </form>
-          <div>
-            <Link style={{}} href="/product">
-              <button>
-                <ArrowBackIcon
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    color: "black",
-                    fontSize: 50,
-                  }}
-                />
-              </button>
-            </Link>
-          </div>
         </div>
       </div>
     )
