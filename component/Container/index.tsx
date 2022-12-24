@@ -6,10 +6,7 @@ const Container = ({ children, ...props }: FlexProps) => {
   const { isMobile, isTabletOrLaptop, isDesktop, isBigscreen } =
     useResponsive();
   return (
-    <Flex
-      style={{ width: isBigscreen ? "95vw" : "90vw", margin: "0 auto" }}
-      {...props}
-    >
+    <Flex w={!isBigscreen ? "95vw" : "90vw"} m={"0 auto"} {...props}>
       {children}
     </Flex>
   );

@@ -13,7 +13,13 @@ const Banner = ({ ...props }: Props) => {
   const { t } = useTranslation();
   const { isMobile, isTabletOrLaptop, isDesktop } = useResponsive();
   return (
-    <Flex alignItems="center" justifyContent="center" w="full" h="full">
+    <Flex
+      display={isMobile ? "none" : "flex"}
+      alignItems="center"
+      justifyContent="center"
+      w="full"
+      h="full"
+    >
       <Flex direction="column" w={isMobile ? "90%" : "60%"}>
         <Flex gap="2rem" direction={isMobile ? "column" : "row"} w="full">
           <Flex
@@ -90,7 +96,7 @@ const Banner = ({ ...props }: Props) => {
                   w="100px"
                   p="0"
                   boxShadow="0px 5px 14px rgba(247, 103, 67, 0.25)"
-                  background="#b5def2"
+                  background="white"
                   borderRadius="12px"
                   display="flex"
                   justifyContent="center"
@@ -173,7 +179,7 @@ const Banner = ({ ...props }: Props) => {
                   w="100px"
                   p="0"
                   boxShadow="0px 5px 14px rgba(247, 103, 67, 0.25)"
-                  background="#b5def2"
+                  background="white"
                   borderRadius="12px"
                   display="flex"
                   justifyContent="center"
@@ -201,7 +207,7 @@ const Banner = ({ ...props }: Props) => {
                 style={{ border: "1rem", borderRadius: "1rem" }}
                 width="1000px"
                 height={isMobile ? "500px" : "100%"}
-                src="/images/tnk.jpeg"
+                src="/images/hieu1.jpeg"
                 alt=""
               />
             </Flex>
@@ -255,7 +261,7 @@ const Banner = ({ ...props }: Props) => {
                   w="100px"
                   p="0"
                   boxShadow="0px 5px 14px rgba(247, 103, 67, 0.25)"
-                  background="#b5def2"
+                  background="white"
                   borderRadius="12px"
                   display="flex"
                   justifyContent="center"

@@ -22,14 +22,20 @@ import {
   PopoverContent,
   PopoverTrigger,
   Text,
+  MenuItemOption,
+  MenuGroup,
+  MenuOptionGroup,
+  MenuDivider,
+  IconButton,
 } from "@chakra-ui/react";
 import { Role } from "app/api/auth/models/user";
 import { useRouter } from "next/router";
 import Container from "../Container";
 import { fontFamily, height } from "@mui/system";
+import { useResponsive } from "app/hooks/useResponsive";
 function Nav() {
   const router = useRouter();
-
+  const { isMobile, isTabletOrLaptop, isDesktop } = useResponsive();
   const { user, setUser } = useContext(AuthContext);
   const [isOpenLanguage, setIsOpenLanguage] = useState(false);
   const { t } = useTranslation();
@@ -49,7 +55,6 @@ function Nav() {
   return (
     <Flex direction="column" h="12rem" background="b5def2">
       <Container
-        w="full"
         h="48px"
         justifyContent="space-between"
         alignItems="center"
@@ -57,7 +62,7 @@ function Nav() {
       >
         <Flex w="full" h="3rem" background="b5def2">
           <Text style={{ fontFamily: "'Baloo', serif" }} fontSize="15px">
-            Welcome to our online store!
+            {t("welcome_to_our_online_store!")}
           </Text>
         </Flex>
         <Flex>
@@ -101,63 +106,104 @@ function Nav() {
             style={{
               width: "100%",
               alignItems: "center",
+              marginRight: isMobile ? "none" : "50rem",
             }}
           >
             <Flex w="full">
-              <Flex alignItems="center" justifyContent="center">
-                <Flex
-                  style={{
-                    fontSize: "2rem",
-                    marginRight: "2rem",
-                    fontFamily: "'Baloo', serif",
-                    cursor: "pointer",
-                    color: "#fff",
-                    letterSpacing: "0.05em",
-                    fontWeight: 700,
-                  }}
-                >
-                  <Link href="/">
-                    <div>{t("home")}</div>
-                  </Link>
+              {isMobile ? (
+                <Flex>
+                  <Menu>
+                    <MenuButton
+                      as={IconButton}
+                      aria-label="Options"
+                      variant="outline"
+                      icon={<MenuIcon />}
+                    />
+                    <MenuList>
+                      <Link href="/">
+                        <MenuItem fontFamily="'Baloo', serif">
+                          {t("home")}
+                        </MenuItem>
+                      </Link>
+                      <Link href="/about">
+                        <MenuItem fontFamily="'Baloo', serif">
+                          {t("about")}
+                        </MenuItem>
+                      </Link>
+                      <Link href="/product">
+                        <MenuItem fontFamily="'Baloo', serif">
+                          {t("product")}
+                        </MenuItem>
+                      </Link>
+                    </MenuList>
+                  </Menu>
                 </Flex>
+              ) : (
                 <Flex
-                  style={{
-                    fontSize: "2rem",
-                    marginRight: "2rem",
-                    fontFamily: "'Baloo', serif",
-                    cursor: "pointer",
-                    color: "#fff",
-                    letterSpacing: "0.05em",
-                    fontWeight: 700,
-                  }}
+                  h={isMobile ? "35px" : "35px"}
+                  justifyContent="center"
+                  width={isMobile ? "full" : "26%"}
                 >
-                  <Link style={{ marginLeft: "2rem" }} href="/about">
-                    <div>{t("about")}</div>
-                  </Link>
+                  <Flex
+                    style={{
+                      fontSize: "2rem",
+                      marginRight: "2rem",
+                      fontFamily: "'Baloo', serif",
+                      cursor: "pointer",
+                      color: "#fff",
+                      letterSpacing: "0.05em",
+                      fontWeight: 700,
+                      textAlign: "center",
+                    }}
+                  >
+                    <Link href="/">
+                      <div>{t("home")}</div>
+                    </Link>
+                  </Flex>
+                  <Flex
+                    style={{
+                      fontSize: "2rem",
+                      marginRight: "2rem",
+                      fontFamily: "'Baloo', serif",
+                      cursor: "pointer",
+                      color: "#fff",
+                      letterSpacing: "0.05em",
+                      fontWeight: 700,
+                    }}
+                  >
+                    <Link style={{ marginLeft: "2rem" }} href="/about">
+                      <div>{t("about")}</div>
+                    </Link>
+                  </Flex>
+                  <Flex
+                    style={{
+                      fontSize: "2rem",
+                      fontFamily: "'Baloo', serif",
+                      cursor: "pointer",
+                      color: "#fff",
+                      letterSpacing: "0.05em",
+                      fontWeight: 700,
+                    }}
+                  >
+                    <Link href="/product">
+                      <div>{t("product")}</div>
+                    </Link>
+                  </Flex>
                 </Flex>
-                <Flex
-                  style={{
-                    fontSize: "2rem",
-                    fontFamily: "'Baloo', serif",
-                    cursor: "pointer",
-                    color: "#fff",
-                    letterSpacing: "0.05em",
-                    fontWeight: 700,
-                  }}
-                >
-                  <Link href="/product">
-                    <div>{t("product")}</div>
-                  </Link>
-                </Flex>
-              </Flex>
-              <Flex w="full" justifyContent="flex-end" alignItems="center">
+              )}
+              <Flex
+                ml={isMobile ? "280px" : "1380px"}
+                w="full"
+                justifyContent="flex-end"
+                alignItems="center"
+              >
                 <Popover>
                   <PopoverTrigger>
                     <Button>
                       <AccountBoxIcon />
                     </Button>
                   </PopoverTrigger>
-                  <PopoverContent>
+                  <PopoverContent w="100px">
                     {user ? (
                       <>
                         {user.role === Role.admin && (

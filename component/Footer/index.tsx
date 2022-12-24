@@ -8,18 +8,14 @@ import useTranslation from "next-translate/useTranslation";
 import Container from "../Container";
 import { css } from "@emotion/react";
 import { useResponsive } from "app/hooks/useResponsive";
+import { Button, Flex, Text } from "@chakra-ui/react";
+import Link from "next/link";
 function Footer() {
   const { isMobile, isTabletOrLaptop, isDesktop } = useResponsive();
   const router = useRouter();
   const { t } = useTranslation();
   return (
-    <nav
-      style={{
-        width: isMobile ? "100%" : "100%",
-        height: "100%",
-        marginTop: "200px",
-      }}
-    >
+    <Flex direction="column" w="full">
       <Container
         style={{
           display:
@@ -33,98 +29,184 @@ function Footer() {
               ? "none"
               : "flex",
         }}
-      ></Container>
+      >
+        <Flex
+          display={isMobile ? "column" : "grid"}
+          gridTemplateColumns="1fr 1fr 1fr 1fr"
+          textAlign="left"
+          mb="6rem"
+          gap="20rem"
+        >
+          <Flex
+            textAlign={isMobile ? "center" : "left"}
+            direction="column"
+            h={isMobile ? "200px" : "full"}
+            w="full"
+            lineHeight="1.8"
+          >
+            <Text fontWeight="700" fontSize="2.1rem">
+              chubedan.netlify.app
+            </Text>
+            <Text
+              mt="1rem"
+              textAlign={isMobile ? "center" : "left"}
+              whiteSpace={isMobile ? "break-spaces" : "nowrap"}
+            >
+              {t("thank_you_for_shopping_with_us_your_order_is_on_the_way")}
+            </Text>
+            <Text>{t("have_a_wonderful_day!")}</Text>
+            <Flex
+              mt="1rem"
+              direction="row"
+              cursor="pointer"
+              gap="1rem"
+              textAlign="center"
+              ml={isMobile ? "130px" : "none"}
+            >
+              <Link href="https://www.facebook.com/profile.php?id=100004517205574">
+                <FacebookIcon
+                  style={{ width: "23px", height: "23px", fill: "3B5998" }}
+                />
+              </Link>
+              <Link href="https://www.instagram.com/hieucollection___/">
+                <InstagramIcon
+                  style={{ width: "23px", height: "23px", fill: "#BC2A8D" }}
+                />
+              </Link>
+              <Link href="https://github.com/hieunotorious">
+                <GitHubIcon
+                  style={{ width: "23px", height: "23px", fill: "#000000" }}
+                />
+              </Link>
 
-      <div
+              <Link href="https://twitter.com/MNgcHiu2">
+                <TwitterIcon
+                  style={{ width: "23px", height: "23px", fill: "#1DA1F2" }}
+                />
+              </Link>
+            </Flex>
+          </Flex>
+          <Flex
+            direction="column"
+            h={isMobile ? "110px" : "full"}
+            w="full"
+            lineHeight="1.5"
+          >
+            <Text
+              fontWeight="700"
+              fontSize="2.1rem"
+              textAlign={isMobile ? "center" : "left"}
+            >
+              {t("contact_us")}
+            </Text>
+            <Text mt="1rem" ml={isMobile ? "10rem" : "none"}>
+              hieumn2001@gmail.com
+            </Text>
+            <Text ml={isMobile ? "10rem" : "none"}>
+              {" "}
+              Phone: (+84) 912590467
+            </Text>
+          </Flex>
+          <Flex
+            direction="column"
+            h={isMobile ? "150px" : "full"}
+            w="full"
+            lineHeight="1.5"
+          >
+            <Text
+              fontWeight="700"
+              fontSize="2.1rem"
+              whiteSpace="nowrap"
+              textAlign={isMobile ? "center" : "left"}
+            >
+              {t("store_at")}
+            </Text>
+            <Text mt="1rem" ml={isMobile ? "16rem" : "none"}>
+              Amazon
+            </Text>
+            <Text ml={isMobile ? "16rem" : "none"}>Walmart</Text>
+            <Text ml={isMobile ? "16rem" : "none"}>Target</Text>
+          </Flex>
+
+          <Flex
+            direction="column"
+            h={isMobile ? "110px" : "full"}
+            w="full"
+            lineHeight="1.5"
+          >
+            <Text
+              fontWeight="700"
+              fontSize="2.1rem"
+              whiteSpace="nowrap"
+              textAlign={isMobile ? "center" : "left"}
+            >
+              {t("payment")}
+            </Text>
+            <Flex
+              direction={isMobile ? "row" : "row"}
+              h={isMobile ? "110px" : "60px"}
+              w="full"
+            >
+              <Flex ml={isMobile ? "11rem" : "none"}>
+                <Image
+                  width={52}
+                  height={32}
+                  src="/images/master_card.svg"
+                  alt=""
+                />
+              </Flex>
+              <Flex>
+                <Image
+                  style={{ marginLeft: "0.1rem" }}
+                  width={52}
+                  height={32}
+                  src="/images/visa.svg"
+                  alt=""
+                />
+              </Flex>
+              <Flex>
+                <Image
+                  style={{ marginLeft: "0.1rem" }}
+                  width={52}
+                  height={32}
+                  src="/images/cirrus.svg"
+                  alt=""
+                />
+              </Flex>
+            </Flex>
+          </Flex>
+        </Flex>
+      </Container>
+      <Flex
         style={{
           background: "black",
-          minHeight: "6.7rem",
           padding: "2rem 0",
-          justifyContent: "space-between",
+          minHeight: "6.7rem",
+          marginTop: isMobile ? "none" : "2rem",
         }}
       >
-        <div
+        <Flex
           style={{
-            display: isMobile ? "column" : "grid",
-            justifyContent: "space-between",
-            gridTemplateColumns: "auto 330px",
-            alignItems: "center",
+            marginLeft: isMobile ? "none" : "300px",
+            flexDirection: isMobile ? "column" : "row",
           }}
         >
-          <p
+          <Text
             style={{
               color: "white",
               fontSize: "1.5rem",
               opacity: 1,
-              marginLeft: isMobile ? "100px" : "300px",
+              marginLeft: isMobile ? "none" : "300px",
+              textAlign: "center",
             }}
           >
             {t(
               "copyright_2022_all_right_reserved_designed_and_developed_by_Ma_Ngoc_Hieu"
             )}
-          </p>
-          <div
-            style={{
-              display: "flex",
-              flexDirection: isMobile ? "column" : "row",
-              justifyContent: "center",
-              height: "32px",
-              marginRight: "200px",
-            }}
-          >
-            <div
-              className=""
-              style={{
-                width: 52,
-                height: 32,
-              }}
-            >
-              <Image
-                objectFit="contain"
-                width="100%"
-                height="100%"
-                src="/images/pay_3.png"
-                alt=""
-              />
-            </div>
-
-            <div
-              style={{
-                width: 52,
-                height: 32,
-
-                marginLeft: "1rem",
-              }}
-            >
-              <Image
-                objectFit="contain"
-                width="100%"
-                height="100%"
-                src="/images/pay_4.png"
-                alt=""
-              />
-            </div>
-
-            <div
-              style={{
-                width: 52,
-                height: 32,
-
-                marginLeft: "1rem",
-              }}
-            >
-              <Image
-                objectFit="contain"
-                width="100%"
-                height="100%"
-                src="/images/pay_5.png"
-                alt=""
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-    </nav>
+          </Text>
+        </Flex>
+      </Flex>
+    </Flex>
   );
 }
 

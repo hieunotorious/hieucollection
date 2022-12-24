@@ -2,16 +2,18 @@ import { Button, Flex, FlexProps, Image, Input, Text } from "@chakra-ui/react";
 import React from "react";
 import SendRoundedIcon from "@mui/icons-material/SendRounded";
 import { useResponsive } from "app/hooks/useResponsive";
+import useTranslation from "next-translate/useTranslation";
 
 type Props = {} & FlexProps;
 
 const Newletter = ({ ...props }: Props) => {
   const { isMobile, isTabletOrLaptop, isDesktop } = useResponsive();
+  const { t } = useTranslation();
   return (
     <Flex alignItems="center" justifyContent="center" w="full" h="full">
       <Flex
         position="relative"
-        mt="124px"
+        mt={isMobile ? "8rem" : "124px"}
         mb="145px"
         background="#b5def2"
         borderRadius="30px"
@@ -41,17 +43,17 @@ const Newletter = ({ ...props }: Props) => {
             fontFamily="'Baloo', serif"
             textTransform="uppercase"
           >
-            SIGN UP NEWSLETTER
+            {t("sign_up_newletter")}
           </Text>
           <Text
             mt="1rem"
-            fontSize={isMobile ? "12px" : "16px"}
+            fontSize={isMobile ? "10px" : "16px"}
             fontWeight="normal"
             lineHeight="26px"
             color=" #fff"
             marginTop="2rem"
           >
-            Subscribe to get more special Deals, Events and Promotions.
+            {t("subscribe")}
           </Text>
           <Flex
             _placeholder={{
@@ -66,11 +68,7 @@ const Newletter = ({ ...props }: Props) => {
             borderRadius="12px"
             marginTop="2rem"
           >
-            <Input
-              variant="unstyled"
-              pl="50px"
-              placeholder="Your Email Letter"
-            />
+            <Input variant="unstyled" pl="50px" placeholder={t("your_email")} />
 
             <Button
               variant="submit"

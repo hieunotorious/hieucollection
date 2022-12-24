@@ -55,7 +55,7 @@ function Checkout() {
       style={{
         background: "white",
         margin: "0 auto",
-        minHeight: " 900px",
+        minHeight: " 800px",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",

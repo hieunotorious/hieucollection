@@ -2,12 +2,20 @@ import { Flex, FlexProps, Image, Text } from "@chakra-ui/react";
 import React from "react";
 import ExpCard from "app/component/ExpCard";
 import Container from "app/component/Container";
+import { useResponsive } from "app/hooks/useResponsive";
 type Props = {} & FlexProps;
 
 const About = ({ ...props }: Props) => {
+  const { isMobile, isTabletOrLaptop, isDesktop } = useResponsive();
   return (
     <Container>
-      <Flex w="full" alignItems="center" justifyContent="space-between">
+      <Flex
+        mt="5rem"
+        w="full"
+        alignItems="center"
+        justifyContent="space-between"
+        direction={isMobile ? "column" : "row"}
+      >
         <Flex position="relative">
           <Image width="900px" src="/images/hieu2.jpg" alt="" />
           <>
@@ -44,7 +52,13 @@ const About = ({ ...props }: Props) => {
             <Text mt="1rem" fontWeight="semibold" lineHeight="66px">
               Our Stories Have Adventures
             </Text>
-            <Text mt="1rem" fontSize="md" fontWeight="medium" color="#5B5F62">
+            <Text
+              mr={isMobile ? "50%" : "none"}
+              mt="1rem"
+              fontSize="md"
+              fontWeight="medium"
+              color="#5B5F62"
+            >
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis
               deserunt aliquid consequatur velit a deleniti. Impedit illum
               libero officia, non ipsam provident consequuntur tenetur odio quod
@@ -52,7 +66,7 @@ const About = ({ ...props }: Props) => {
             </Text>
           </Flex>
           <Flex mt="2.5rem">
-            <Flex w="full">
+            <Flex w={isMobile ? "50%" : "full"}>
               <ExpCard title="12K+" des="Success Journey" />
               <ExpCard title="16+" des="Awards Winning" />
             </Flex>

@@ -5,33 +5,61 @@ import React, { useContext, useState } from "react";
 import { LoginType } from "../../api/auth/models/user";
 import setLanguage from "next-translate/setLanguage";
 import useTranslation from "next-translate/useTranslation";
-import { Input, InputGroup, InputRightElement, Button } from "@chakra-ui/react";
+import {
+  Input,
+  InputGroup,
+  InputRightElement,
+  Button,
+  useToast,
+} from "@chakra-ui/react";
 import axios from "axios";
 import { getUser, login } from "app/services/UserService";
 import { setTokens } from "app/utils/token";
 import { useResponsive } from "app/hooks/useResponsive";
+import Users from "../admin/users";
+import { Password } from "@mui/icons-material";
 function Login() {
   const [user, setUser] = useState<LoginType>({
     username: "",
     password: "",
   });
+
   const router = useRouter();
   const [show, setShow] = React.useState(false);
   const { t } = useTranslation();
   const { setUser: setGlobalUser } = useContext(AuthContext);
+  const toast = useToast();
 
   const submitForm = async (event: any) => {
     event.preventDefault();
-    const res = await login(user.username, user.password);
-    if (res) {
-      const { accessToken, refreshToken, expiredDate } = res;
-      setTokens(accessToken, expiredDate, refreshToken);
-      const loginUser = await getUser();
-      if (loginUser) {
-        setGlobalUser(loginUser);
-        router.push("/");
+    try {
+      const res = await login(user.username, user.password);
+      if (res) {
+        const { accessToken, refreshToken, expiredDate } = res;
+        setTokens(accessToken, expiredDate, refreshToken);
+        const loginUser = await getUser();
+        if (loginUser) {
+          toast({
+            title: "Login Successful",
+            status: "success",
+            position: "top-right",
+            duration: 3000,
+            isClosable: true,
+          });
+          setGlobalUser(loginUser);
+          router.push("/");
+        }
       }
+    } catch (error) {
+      toast({
+        title: "Incorrect Username or Password",
+        status: "error",
+        position: "top-right",
+        duration: 3000,
+        isClosable: true,
+      });
     }
+
     // const dataIndex = data.findIndex(
     //   (item, index) => item.username === user.username
     // );
