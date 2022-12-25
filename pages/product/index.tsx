@@ -21,6 +21,14 @@ import {
   MenuDivider,
   Button,
   Flex,
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+  PopoverArrow,
+  PopoverCloseButton,
+  PopoverBody,
+  Grid,
+  PopoverHeader,
 } from "@chakra-ui/react";
 import ExpandMoreRoundedIcon from "@mui/icons-material/ExpandMoreRounded";
 export const getStaticProps = async () => {
@@ -84,39 +92,154 @@ const Product = ({
       `}
     >
       <Flex
-        display={isMobile ? "grid" : "none"}
+        display={isMobile ? "flex" : "none"}
         p="1rem"
-        border="1px"
-        borderRadius="xl"
+        justifyContent="center"
       >
-        <Flex gridTemplateColumns="1fr 1fr 1fr 1fr" gap="1rem">
-          <div
-            style={{ cursor: "pointer", fontWeight: 900, fontSize: 12 }}
-            onClick={() => setProduct(product)}
-          >
-            {t("all")}
-          </div>
-          <div
-            style={{
-              cursor: "pointer",
-              fontSize: 12,
-            }}
-            onClick={() => filterAll(AllType.new)}
-          >
-            {t("new_arrival")}
-          </div>
-          <div
-            style={{ cursor: "pointer", fontSize: 12 }}
-            onClick={() => filterAll(AllType.sale)}
-          >
-            {t("sale_product")}
-          </div>
-          <div
-            style={{ cursor: "pointer", fontSize: 12 }}
-            onClick={() => filterAll(AllType.pre_order)}
-          >
-            {t("pre_order")}
-          </div>
+        <Flex direction="column">
+          <Flex mb="1rem">
+            <input
+              onChange={(event) => filterName(event.target.value)}
+              placeholder={t("search")}
+              style={{
+                fontSize: 12,
+                border: "1px solid black",
+                padding: "1rem",
+                width: "190px",
+                height: "30px",
+                borderRadius: "1rem",
+              }}
+            />
+          </Flex>
+          <Flex direction="row" gap="2rem">
+            <Flex w="50px">
+              <Popover>
+                <PopoverTrigger>
+                  <Button variant="ghost" colorScheme="blue">
+                    {t("product")}
+                  </Button>
+                </PopoverTrigger>
+                <PopoverContent>
+                  <PopoverArrow />
+                  <PopoverHeader>
+                    <div
+                      style={{
+                        cursor: "pointer",
+                        fontWeight: 900,
+                        textAlign: "center",
+                      }}
+                      onClick={() => setProduct(product)}
+                    >
+                      {t("all")}
+                    </div>
+                  </PopoverHeader>
+                  <PopoverCloseButton />
+                  <PopoverBody textAlign="center">
+                    <div
+                      style={{
+                        cursor: "pointer",
+                        fontSize: 12,
+                      }}
+                      onClick={() => filterAll(AllType.new)}
+                    >
+                      {t("new_arrival")}
+                    </div>
+                    <div
+                      style={{ cursor: "pointer", fontSize: 12 }}
+                      onClick={() => filterAll(AllType.sale)}
+                    >
+                      {t("sale_product")}
+                    </div>
+                    <div
+                      style={{ cursor: "pointer", fontSize: 12 }}
+                      onClick={() => filterAll(AllType.pre_order)}
+                    >
+                      {t("pre_order")}
+                    </div>
+                  </PopoverBody>
+                </PopoverContent>
+              </Popover>
+            </Flex>
+            <Flex w="50px">
+              <Popover>
+                <PopoverTrigger>
+                  <Button variant="ghost" colorScheme="blue">
+                    {t("brand")}
+                  </Button>
+                </PopoverTrigger>
+                <PopoverContent>
+                  <PopoverHeader>
+                    <div
+                      style={{
+                        cursor: "pointer",
+                        fontWeight: 900,
+                        textAlign: "center",
+                      }}
+                      onClick={() => setProduct(product)}
+                    >
+                      {t("all")}
+                    </div>
+                  </PopoverHeader>
+                  <PopoverArrow />
+                  <PopoverCloseButton />
+                  <PopoverBody>
+                    <select
+                      onChange={(event) => {
+                        filterBrand(event.target.value as BrandType);
+                      }}
+                    >
+                      {Object.values(BrandType).map((item, index) => {
+                        return (
+                          <option value={item} key={item}>
+                            {item}
+                          </option>
+                        );
+                      })}
+                    </select>
+                  </PopoverBody>
+                </PopoverContent>
+              </Popover>
+            </Flex>
+            <Flex w="50px">
+              <Popover>
+                <PopoverTrigger>
+                  <Button variant="ghost" colorScheme="blue">
+                    {t("category")}
+                  </Button>
+                </PopoverTrigger>
+                <PopoverContent>
+                  <PopoverHeader>
+                    <div
+                      style={{
+                        cursor: "pointer",
+                        fontWeight: 900,
+                        textAlign: "center",
+                      }}
+                      onClick={() => setProduct(product)}
+                    >
+                      {t("all")}
+                    </div>
+                  </PopoverHeader>
+                  <PopoverArrow />
+                  <PopoverCloseButton />
+                  <PopoverBody textAlign="center">
+                    <div
+                      style={{ cursor: "pointer", fontSize: 12 }}
+                      onClick={() => filterCategory(CategoryType.action_figure)}
+                    >
+                      {t("action_figure")}
+                    </div>
+                    <div
+                      style={{ cursor: "pointer", fontSize: 12 }}
+                      onClick={() => filterCategory(CategoryType.statue)}
+                    >
+                      {t("statue")}
+                    </div>
+                  </PopoverBody>
+                </PopoverContent>
+              </Popover>
+            </Flex>
+          </Flex>
         </Flex>
       </Flex>
 

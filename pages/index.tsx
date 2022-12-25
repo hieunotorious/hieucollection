@@ -38,6 +38,7 @@ import { AuthContext } from "app/context/authContext";
 import router from "next/router";
 import Banners from "app/component/Banners";
 import ProductItem from "app/component/ProductItem";
+import Header from "app/component/Header";
 export const getStaticProps = async () => {
   const product = await getProduct();
   return {
@@ -125,34 +126,61 @@ const Home = ({ product }: InferGetStaticPropsType<typeof getStaticProps>) => {
   const renderProducts = (product: ProductType, index: number) => {
     return <ProductItem product={product} key={product._id} />;
   };
+  const filterName = (name: string) => {
+    if (!!name.trim()) {
+      const filterProducts = product.filter((item, index) => {
+        return item.name.toUpperCase().indexOf(name.toUpperCase()) > -1;
+      });
 
+      setProduct(filterProducts);
+    } else {
+      setProduct(product);
+    }
+  };
   return (
     <Container direction="column">
       <Section />
       <Flex display={isMobile ? "flex" : "none"} justifyContent="center">
         <Flex direction="column" w={isMobile ? "full" : "70%"}>
           <Flex
-            fontSize="30px"
             direction="column"
             justifyContent="center"
             alignItems="center"
-            marginTop="4rem"
-            textTransform="uppercase"
-            fontWeight="900"
-            fontFamily="Georgia, serif"
+            marginTop="1rem"
           >
-            <Text mb="2rem">hieucollection</Text>
-            <Link href="/product">
-              <Button
-                w="150px"
-                h="50px"
-                margin="2rem"
-                variant="solid"
-                colorScheme="blue"
+            <Image
+              src="/images/HIEUCOLLECTION.png"
+              width={250}
+              height={250}
+              alt=""
+            ></Image>
+
+            <Flex mb="1rem">
+              <Input
+                onChange={(event) => filterName(event.target.value)}
+                placeholder={t("search")}
+                style={{
+                  fontSize: 12,
+                  border: "1px solid black",
+                  padding: "1rem",
+                  width: "290px",
+                  height: "30px",
+                }}
+              />
+            </Flex>
+            <Header />
+            <Flex direction="column" alignItems="center">
+              <Text
+                fontWeight="600"
+                fontSize="26px"
+                color="#222222"
+                fontFamily="'Baloo', serif"
+                textTransform="uppercase"
               >
                 {t("new_arrival")}
-              </Button>
-            </Link>
+              </Text>
+              <Flex w="30%" h="2px" background="red" mb="2rem" />
+            </Flex>
           </Flex>
           {!isMobile ? (
             <Flex
@@ -193,17 +221,6 @@ const Home = ({ product }: InferGetStaticPropsType<typeof getStaticProps>) => {
                   style={{ width: isMobile ? "full" : "60%" }}
                   spaceBetween={30}
                   slidesPerView="auto"
-                  // effect={"coverflow"}
-                  // pagination={{
-                  //   clickable: true,
-                  // }}
-                  // coverflowEffect={{
-                  //   rotate: 50,
-                  //   stretch: 0,
-                  //   depth: 100,
-                  //   modifier: 1,
-                  //   slideShadows: true,
-                  // }}
                   autoplay={{
                     delay: 2000,
                     disableOnInteraction: false,
@@ -280,19 +297,19 @@ const Home = ({ product }: InferGetStaticPropsType<typeof getStaticProps>) => {
       </Flex>
       <Flex display={isMobile ? "flex" : "none"} justifyContent="center">
         <Flex direction="column" w={isMobile ? "full" : "70%"}>
-          <Flex justifyContent="center" alignItems="center">
-            <Link href="/product">
-              <Button
-                w="150px"
-                h="50px"
-                margin="2rem"
-                variant="solid"
-                colorScheme="blue"
-              >
-                {t("pre_order")}
-              </Button>
-            </Link>
+          <Flex direction="column" alignItems="center">
+            <Text
+              fontWeight="600"
+              fontSize="26px"
+              color="#222222"
+              fontFamily="'Baloo', serif"
+              textTransform="uppercase"
+            >
+              {t("pre_order")}
+            </Text>
+            <Flex w="30%" h="2px" background="red" mb="2rem" />
           </Flex>
+
           {!isMobile ? (
             <Flex
               marginTop="5rem"
@@ -353,84 +370,63 @@ const Home = ({ product }: InferGetStaticPropsType<typeof getStaticProps>) => {
           )}
         </Flex>
       </Flex>
-      <Flex justifyContent="center">
-        <Flex direction="column" w={isMobile ? "full" : "70%"}>
-          <Flex justifyContent="center" alignItems="center" marginTop="5rem">
+      <Flex marginTop="10rem" justifyContent="center" alignItems="center">
+        <Flex>
+          <Flex>
             <Text
               fontWeight="600"
               fontSize="26px"
               color="#222222"
               fontFamily="'Baloo', serif"
               textTransform="uppercase"
+              textAlign={isMobile ? "center" : "center"}
             >
               {t("spiderman_figures")}
             </Text>
           </Flex>
-          {!isMobile ? (
-            <Flex
-              marginTop="5rem"
-              border="2px"
-              borderRadius="2xl"
-              gap="1rem"
-              borderColor="white"
-              display="grid"
-              gridTemplateColumns={
-                isMobile
-                  ? "1fr"
-                  : isTabletOrLaptop
-                  ? "1fr 1fr"
-                  : isDesktop
-                  ? "1fr 1fr 1fr"
-                  : "1fr 1fr 1fr 1fr"
-              }
-            >
-              {nameProducts2.map(renderProducts)}
-            </Flex>
-          ) : (
-            <Flex width="full" marginTop="5rem">
-              <Flex
-                w="full"
-                border="2px"
-                borderRadius="2xl"
-                gap="3rem"
-                borderColor="white"
-                css={css`
-                  .swiper-button-prev,
-                  .swiper-button-next {
-                    color: black !important;
-                  }
-                `}
-              >
-                <Swiper
-                  style={{ width: isMobile ? "90  %" : "60%" }}
-                  spaceBetween={30}
-                  slidesPerView="auto"
-                  autoplay={{
-                    delay: 2000,
-                    disableOnInteraction: false,
-                  }}
-                  modules={[Autoplay]}
-                  loop
-                  centeredSlides
-                  grabCursor
-                  className="mySwiper"
-                >
-                  {nameProducts2.map((item, index) => (
-                    <SwiperSlide style={{ width: 216 }} key={item._id}>
-                      {renderProducts(item, index)}
-                    </SwiperSlide>
-                  ))}
-                </Swiper>
-              </Flex>
-            </Flex>
-          )}
+        </Flex>
+      </Flex>
+      <Flex width="full" marginTop="5rem">
+        <Flex
+          w="full"
+          border="2px"
+          borderRadius="2xl"
+          gap="3rem"
+          borderColor="white"
+          css={css`
+            .swiper-button-prev,
+            .swiper-button-next {
+              color: black !important;
+            }
+          `}
+        >
+          <Swiper
+            style={{ width: isMobile ? "full" : "65%" }}
+            spaceBetween={30}
+            slidesPerView="auto"
+            autoplay={{
+              delay: 2000,
+              disableOnInteraction: false,
+            }}
+            modules={[Autoplay]}
+            loop
+            centeredSlides
+            grabCursor
+            className="mySwiper"
+          >
+            {nameProducts2.map((item, index) => (
+              <SwiperSlide style={{ width: 216 }} key={item._id}>
+                {renderProducts(item, index)}
+              </SwiperSlide>
+            ))}
+          </Swiper>
         </Flex>
       </Flex>
       <Banner />
 
-      <Flex justifyContent="center">
-        <Flex direction="column" w={isMobile ? "full" : "70%"}>
-          <Flex justifyContent="center" alignItems="center" marginTop="5rem">
+      <Flex marginTop="10rem" justifyContent="center" alignItems="center">
+        <Flex>
+          <Flex>
             <Text
               fontWeight="600"
               fontSize="26px"
@@ -442,75 +438,42 @@ const Home = ({ product }: InferGetStaticPropsType<typeof getStaticProps>) => {
               {t("transformer_figures")}
             </Text>
           </Flex>
-          {!isMobile ? (
-            <Flex
-              marginTop="5rem"
-              border="2px"
-              borderRadius="2xl"
-              gap="1rem"
-              borderColor="white"
-              display="grid"
-              gridTemplateColumns={
-                isMobile
-                  ? "1fr"
-                  : isTabletOrLaptop
-                  ? "1fr 1fr"
-                  : isDesktop
-                  ? "1fr 1fr 1fr"
-                  : "1fr 1fr 1fr 1fr"
-              }
-            >
-              {nameProducts3.map(renderProducts)}
-            </Flex>
-          ) : (
-            <Flex width="full" marginTop="5rem">
-              <Flex
-                w="full"
-                border="2px"
-                borderRadius="2xl"
-                gap="3rem"
-                borderColor="white"
-                css={css`
-                  .swiper-button-prev,
-                  .swiper-button-next {
-                    color: black !important;
-                  }
-                `}
-              >
-                <Swiper
-                  style={{ width: isMobile ? "90  %" : "60%" }}
-                  spaceBetween={30}
-                  slidesPerView="auto"
-                  // effect={"coverflow"}
-                  // pagination={{
-                  //   clickable: true,
-                  // }}
-                  // coverflowEffect={{
-                  //   rotate: 50,
-                  //   stretch: 0,
-                  //   depth: 100,
-                  //   modifier: 1,
-                  //   slideShadows: true,
-                  // }}
-                  autoplay={{
-                    delay: 2000,
-                    disableOnInteraction: false,
-                  }}
-                  modules={[Autoplay]}
-                  loop
-                  centeredSlides
-                  grabCursor
-                  className="mySwiper"
-                >
-                  {nameProducts3.map((item, index) => (
-                    <SwiperSlide style={{ width: 216 }} key={item._id}>
-                      {renderProducts(item, index)}
-                    </SwiperSlide>
-                  ))}
-                </Swiper>
-              </Flex>
-            </Flex>
-          )}
+        </Flex>
+      </Flex>
+      <Flex width="full" marginTop="5rem">
+        <Flex
+          w="full"
+          border="2px"
+          borderRadius="2xl"
+          gap="3rem"
+          borderColor="white"
+          css={css`
+            .swiper-button-prev,
+            .swiper-button-next {
+              color: black !important;
+            }
+          `}
+        >
+          <Swiper
+            style={{ width: isMobile ? "full" : "65%" }}
+            spaceBetween={30}
+            slidesPerView="auto"
+            autoplay={{
+              delay: 2000,
+              disableOnInteraction: false,
+            }}
+            modules={[Autoplay]}
+            loop
+            centeredSlides
+            grabCursor
+            className="mySwiper"
+          >
+            {nameProducts3.map((item, index) => (
+              <SwiperSlide style={{ width: 216 }} key={item._id}>
+                {renderProducts(item, index)}
+              </SwiperSlide>
+            ))}
+          </Swiper>
         </Flex>
       </Flex>
 
@@ -519,29 +482,32 @@ const Home = ({ product }: InferGetStaticPropsType<typeof getStaticProps>) => {
       <Flex justifyContent="center">
         <Flex direction="column" w={isMobile ? "full" : "70%"}>
           <Flex justifyContent="center" alignItems="center" marginTop="5rem">
-            {isMobile ? (
-              <Link href="/product">
-                <Button
-                  w="150px"
-                  h="50px"
-                  margin="2rem"
-                  variant="solid"
-                  colorScheme="blue"
+            <Flex>
+              {isMobile ? (
+                <Flex direction="column" alignItems="center">
+                  <Text
+                    fontWeight="600"
+                    fontSize="26px"
+                    color="#222222"
+                    fontFamily="'Baloo', serif"
+                    textTransform="uppercase"
+                  >
+                    {t("sale_product")}
+                  </Text>
+                  <Flex w="30%" h="2px" background="red" mb="2rem" />
+                </Flex>
+              ) : (
+                <Text
+                  fontSize="26px"
+                  color="#222222"
+                  fontFamily="'Baloo', serif"
+                  textTransform="uppercase"
+                  fontWeight="600"
                 >
-                  {t("sale_product")}
-                </Button>
-              </Link>
-            ) : (
-              <Text
-                fontSize="26px"
-                color="#222222"
-                fontFamily="'Baloo', serif"
-                textTransform="uppercase"
-                fontWeight="600"
-              >
-                {t("DCEASED")}
-              </Text>
-            )}
+                  {t("DCEASED")}
+                </Text>
+              )}
+            </Flex>
           </Flex>
           {!isMobile ? (
             <Flex
