@@ -10,11 +10,12 @@ import router, { useRouter } from "next/router";
 import { AuthContext } from "app/context/authContext";
 import { height } from "@mui/system";
 import { addToCart } from "app/services/CartService";
+import { useResponsive } from "app/hooks/useResponsive";
 
 const ProductItem = ({ product }: { product: ProductType }) => {
   const { t } = useTranslation();
   const { setUser } = useContext(AuthContext);
-
+  const { isMobile } = useResponsive();
   const handleAddCart = async (id: string) => {
     const data = await addToCart(id, 1);
     if (data) {
@@ -37,7 +38,7 @@ const ProductItem = ({ product }: { product: ProductType }) => {
           padding: 8,
           borderRadius: 16,
           marginBottom: 35,
-          marginLeft: 25,
+          marginLeft: isMobile ? "none" : 25,
         }}
         css={css`
           border: 2px dashed transparent;

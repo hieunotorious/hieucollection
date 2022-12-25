@@ -106,7 +106,6 @@ function Nav() {
             style={{
               width: "100%",
               alignItems: "center",
-              marginRight: isMobile ? "none" : "50rem",
             }}
           >
             <Flex w="full">
@@ -139,11 +138,7 @@ function Nav() {
                   </Menu>
                 </Flex>
               ) : (
-                <Flex
-                  h={isMobile ? "35px" : "35px"}
-                  justifyContent="center"
-                  width={isMobile ? "full" : "26%"}
-                >
+                <Flex justifyContent="flex-start" w="full">
                   <Flex
                     style={{
                       fontSize: "2rem",
@@ -153,7 +148,6 @@ function Nav() {
                       color: "#fff",
                       letterSpacing: "0.05em",
                       fontWeight: 700,
-                      textAlign: "center",
                     }}
                   >
                     <Link href="/">
@@ -171,7 +165,7 @@ function Nav() {
                       fontWeight: 700,
                     }}
                   >
-                    <Link style={{ marginLeft: "2rem" }} href="/about">
+                    <Link href="/about">
                       <div>{t("about")}</div>
                     </Link>
                   </Flex>
@@ -191,12 +185,7 @@ function Nav() {
                   </Flex>
                 </Flex>
               )}
-              <Flex
-                ml={isMobile ? "280px" : "1380px"}
-                w="full"
-                justifyContent="flex-end"
-                alignItems="center"
-              >
+              <Flex w="full" justifyContent="flex-end" alignItems="center">
                 <Popover>
                   <PopoverTrigger>
                     <Button>

@@ -98,7 +98,7 @@ function Login() {
             display: "grid",
             gap: "1rem",
             marginTop: " 4rem",
-
+            width: "300px",
             background: "white",
           }}
         >
@@ -111,7 +111,7 @@ function Login() {
                   borderRadius: " 0.25rem",
                   border: "1px solid black",
                   padding: "0.25rem 0.5rem",
-                  width: isMobile ? 275 : 350,
+                  width: 275,
                 }}
                 type="text"
                 onChange={(event) => {
@@ -131,7 +131,7 @@ function Login() {
                     padding: "0.25rem 0.5rem",
                     borderRadius: "0.25rem",
                     border: "1px solid black",
-                    width: isMobile ? 275 : 350,
+                    width: 275,
                     height: 30,
                   }}
                   type={show ? "text" : "password"}
@@ -169,7 +169,7 @@ function Login() {
                 cursor: "pointer",
                 border: "none",
                 textTransform: "uppercase",
-                width: isMobile ? 275 : 350,
+                width: 275,
                 background: "#3399FF",
                 color: "white",
               }}
@@ -193,8 +193,7 @@ function Login() {
         >
           <div
             style={{
-              marginLeft: isMobile ? "none" : "7rem",
-              paddingRight: "10rem",
+              marginLeft: isMobile ? "none" : "1rem",
             }}
           >
             {t("not_a_member")}
