@@ -82,10 +82,11 @@ function Cart() {
         <div style={{ marginTop: "1rem" }}>
           <div
             style={{
-              display: "grid",
+              display: isMobile ? "flex" : "grid",
               gridTemplateColumns: "100px 200px",
               gridGap: "1rem",
               gap: "1rem",
+              justifyContent: isMobile ? "center" : "none",
             }}
           >
             <Image

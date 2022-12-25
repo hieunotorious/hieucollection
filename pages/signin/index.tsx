@@ -81,7 +81,7 @@ function Login() {
     <div
       style={{
         margin: "0 auto",
-        minHeight: isMobile ? "500px" : 900,
+        minHeight: isMobile ? "700px" : 900,
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
@@ -111,7 +111,7 @@ function Login() {
                   borderRadius: " 0.25rem",
                   border: "1px solid black",
                   padding: "0.25rem 0.5rem",
-                  width: 275,
+                  width: isMobile ? 275 : 350,
                 }}
                 type="text"
                 onChange={(event) => {
@@ -131,7 +131,7 @@ function Login() {
                     padding: "0.25rem 0.5rem",
                     borderRadius: "0.25rem",
                     border: "1px solid black",
-                    width: 275,
+                    width: isMobile ? 275 : 350,
                     height: 30,
                   }}
                   type={show ? "text" : "password"}
@@ -169,7 +169,7 @@ function Login() {
                 cursor: "pointer",
                 border: "none",
                 textTransform: "uppercase",
-                width: 275,
+                width: isMobile ? 275 : 350,
                 background: "#3399FF",
                 color: "white",
               }}
@@ -188,9 +188,15 @@ function Login() {
             padding: " 1.25rem",
             background: "white",
             marginBottom: "4rem",
+            justifyContent: "center",
           }}
         >
-          <div style={{ paddingRight: "10rem" }}>
+          <div
+            style={{
+              marginLeft: isMobile ? "none" : "7rem",
+              paddingRight: "10rem",
+            }}
+          >
             {t("not_a_member")}
             <a
               style={{ color: "blue", textDecoration: "underline" }}
