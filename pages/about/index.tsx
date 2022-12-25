@@ -15,6 +15,7 @@ const About = ({ ...props }: Props) => {
         alignItems="center"
         justifyContent="space-between"
         direction={isMobile ? "column" : "row"}
+        minHeight="700"
       >
         <Flex position="relative">
           <Image width="900px" src="/images/hieu2.jpg" alt="" />

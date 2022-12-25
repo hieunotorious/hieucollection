@@ -83,218 +83,138 @@ const Product = ({
         background-color: ${isMobile ? "white" : "white"};
       `}
     >
-      {isMobile ? (
-        <Flex>
-          <Menu>
-            {({ isOpen }) => (
-              <>
-                <MenuButton
-                  isActive={isOpen}
-                  as={Button}
-                  rightIcon={<ExpandMoreRoundedIcon />}
-                >
-                  {isOpen ? "Close" : "Open"}
-                </MenuButton>
-                <MenuList>
-                  <MenuItem>
-                    <div style={{ position: "relative", display: "flex" }}>
-                      <div
-                        style={{
-                          width: 200,
-                          marginRight: 16,
-                          background: "white",
-                          padding: 8,
-                          position: "sticky",
-                          top: 80,
-                          left: 0,
-                          display: "flex",
-                          flexDirection: "column",
-                          height: "fit-content",
-                          marginLeft: isMobile ? 25 : "none",
-                        }}
-                        css={css`
-                          border: 2px dashed #f1f1f1;
-                          &:hover {
-                            -webkit-box-shadow: var(--box-shadow);
-                            box-shadow: var(--box-shadow);
-                            border: 2px dashed #ff33cc;
-                          }
-                        `}
-                      >
-                        <input
-                          onChange={(event) => filterName(event.target.value)}
-                          placeholder={t("search")}
-                          style={{
-                            border: "1px solid black",
-                            padding: "1rem",
-                          }}
-                        />
-
-                        <div
-                          style={{ cursor: "pointer", fontWeight: 900 }}
-                          onClick={() => setProduct(product)}
-                        >
-                          {t("all")}
-                        </div>
-                        <div
-                          style={{ cursor: "pointer", fontSize: 12 }}
-                          onClick={() => filterAll(AllType.new)}
-                        >
-                          {t("new_arrival")}
-                        </div>
-                        <div
-                          style={{ cursor: "pointer", fontSize: 12 }}
-                          onClick={() => filterAll(AllType.sale)}
-                        >
-                          {t("sale_product")}
-                        </div>
-                        <div
-                          style={{ cursor: "pointer", fontSize: 12 }}
-                          onClick={() => filterAll(AllType.pre_order)}
-                        >
-                          {t("pre_order")}
-                        </div>
-                        <div
-                          style={{ display: "flex", flexDirection: "column" }}
-                        >
-                          <div style={{ fontWeight: 900 }}>{t("brand")}</div>
-                          <select
-                            onChange={(event) => {
-                              filterBrand(event.target.value as BrandType);
-                            }}
-                          >
-                            {Object.values(BrandType).map((item, index) => {
-                              return (
-                                <option value={item} key={item}>
-                                  {item}
-                                </option>
-                              );
-                            })}
-                          </select>
-                        </div>
-
-                        <div
-                          style={{ display: "flex", flexDirection: "column" }}
-                        >
-                          <div style={{ fontWeight: 900 }}>{t("category")}</div>
-
-                          <div
-                            style={{ cursor: "pointer", fontSize: 12 }}
-                            onClick={() =>
-                              filterCategory(CategoryType.action_figure)
-                            }
-                          >
-                            {t("action_figure")}
-                          </div>
-                          <div
-                            style={{ cursor: "pointer", fontSize: 12 }}
-                            onClick={() => filterCategory(CategoryType.statue)}
-                          >
-                            {t("statue")}
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </MenuItem>
-                </MenuList>
-              </>
-            )}
-          </Menu>
-        </Flex>
-      ) : (
-        <div style={{ position: "relative", display: "flex" }}>
+      <Flex
+        display={isMobile ? "grid" : "none"}
+        p="1rem"
+        border="1px"
+        borderRadius="xl"
+      >
+        <Flex gridTemplateColumns="1fr 1fr 1fr 1fr" gap="1rem">
+          <div
+            style={{ cursor: "pointer", fontWeight: 900, fontSize: 12 }}
+            onClick={() => setProduct(product)}
+          >
+            {t("all")}
+          </div>
           <div
             style={{
-              width: 200,
-              marginRight: 16,
-              background: "white",
-              padding: 8,
-              position: "sticky",
-              top: 80,
-              left: 0,
-              display: "flex",
-              flexDirection: "column",
-              height: "fit-content",
-              marginLeft: isMobile ? 25 : "none",
+              cursor: "pointer",
+              fontSize: 12,
             }}
-            css={css`
-              border: 2px dashed #f1f1f1;
-              &:hover {
-                -webkit-box-shadow: var(--box-shadow);
-                box-shadow: var(--box-shadow);
-                border: 2px dashed #ff33cc;
-              }
-            `}
+            onClick={() => filterAll(AllType.new)}
           >
-            <input
-              onChange={(event) => filterName(event.target.value)}
-              placeholder={t("search")}
-              style={{
-                border: "1px solid black",
-                padding: "1rem",
+            {t("new_arrival")}
+          </div>
+          <div
+            style={{ cursor: "pointer", fontSize: 12 }}
+            onClick={() => filterAll(AllType.sale)}
+          >
+            {t("sale_product")}
+          </div>
+          <div
+            style={{ cursor: "pointer", fontSize: 12 }}
+            onClick={() => filterAll(AllType.pre_order)}
+          >
+            {t("pre_order")}
+          </div>
+        </Flex>
+      </Flex>
+
+      <div
+        style={{ position: "relative", display: isMobile ? "none" : "flex" }}
+      >
+        <div
+          style={{
+            width: 200,
+            marginRight: 16,
+            background: "white",
+            padding: 8,
+            position: "sticky",
+            top: 80,
+            left: 0,
+            display: "flex",
+            flexDirection: "column",
+            height: "fit-content",
+            marginLeft: isMobile ? 25 : "none",
+          }}
+          css={css`
+            border: 2px dashed #f1f1f1;
+            &:hover {
+              -webkit-box-shadow: var(--box-shadow);
+              box-shadow: var(--box-shadow);
+              border: 2px dashed #ff33cc;
+            }
+          `}
+        >
+          <input
+            onChange={(event) => filterName(event.target.value)}
+            placeholder={t("search")}
+            style={{
+              border: "1px solid black",
+              padding: "1rem",
+            }}
+          />
+
+          <div
+            style={{ cursor: "pointer", fontWeight: 900 }}
+            onClick={() => setProduct(product)}
+          >
+            {t("all")}
+          </div>
+          <div
+            style={{ cursor: "pointer", fontSize: 12 }}
+            onClick={() => filterAll(AllType.new)}
+          >
+            {t("new_arrival")}
+          </div>
+          <div
+            style={{ cursor: "pointer", fontSize: 12 }}
+            onClick={() => filterAll(AllType.sale)}
+          >
+            {t("sale_product")}
+          </div>
+          <div
+            style={{ cursor: "pointer", fontSize: 12 }}
+            onClick={() => filterAll(AllType.pre_order)}
+          >
+            {t("pre_order")}
+          </div>
+          <div style={{ display: "flex", flexDirection: "column" }}>
+            <div style={{ fontWeight: 900 }}>{t("brand")}</div>
+            <select
+              onChange={(event) => {
+                filterBrand(event.target.value as BrandType);
               }}
-            />
+            >
+              {Object.values(BrandType).map((item, index) => {
+                return (
+                  <option value={item} key={item}>
+                    {item}
+                  </option>
+                );
+              })}
+            </select>
+          </div>
+
+          <div style={{ display: "flex", flexDirection: "column" }}>
+            <div style={{ fontWeight: 900 }}>{t("category")}</div>
 
             <div
-              style={{ cursor: "pointer", fontWeight: 900 }}
-              onClick={() => setProduct(product)}
+              style={{ cursor: "pointer", fontSize: 12 }}
+              onClick={() => filterCategory(CategoryType.action_figure)}
             >
-              {t("all")}
+              {t("action_figure")}
             </div>
             <div
               style={{ cursor: "pointer", fontSize: 12 }}
-              onClick={() => filterAll(AllType.new)}
+              onClick={() => filterCategory(CategoryType.statue)}
             >
-              {t("new_arrival")}
-            </div>
-            <div
-              style={{ cursor: "pointer", fontSize: 12 }}
-              onClick={() => filterAll(AllType.sale)}
-            >
-              {t("sale_product")}
-            </div>
-            <div
-              style={{ cursor: "pointer", fontSize: 12 }}
-              onClick={() => filterAll(AllType.pre_order)}
-            >
-              {t("pre_order")}
-            </div>
-            <div style={{ display: "flex", flexDirection: "column" }}>
-              <div style={{ fontWeight: 900 }}>{t("brand")}</div>
-              <select
-                onChange={(event) => {
-                  filterBrand(event.target.value as BrandType);
-                }}
-              >
-                {Object.values(BrandType).map((item, index) => {
-                  return (
-                    <option value={item} key={item}>
-                      {item}
-                    </option>
-                  );
-                })}
-              </select>
-            </div>
-
-            <div style={{ display: "flex", flexDirection: "column" }}>
-              <div style={{ fontWeight: 900 }}>{t("category")}</div>
-
-              <div
-                style={{ cursor: "pointer", fontSize: 12 }}
-                onClick={() => filterCategory(CategoryType.action_figure)}
-              >
-                {t("action_figure")}
-              </div>
-              <div
-                style={{ cursor: "pointer", fontSize: 12 }}
-                onClick={() => filterCategory(CategoryType.statue)}
-              >
-                {t("statue")}
-              </div>
+              {t("statue")}
             </div>
           </div>
         </div>
-      )}
+      </div>
+
       <div
         style={{
           display: "flex",
