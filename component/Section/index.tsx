@@ -51,7 +51,7 @@ const Section = (props: Props) => {
       >
         <SwiperSlide>
           <Slide
-            banner="/images/slider/slider_1.jpeg"
+            banner="/images/slider/slider_5.jpeg"
             title={t("HIEUCOLLECTION")}
             description={t("action_figures_statue_collectibles_and_more!")}
           />
@@ -72,7 +72,7 @@ const Section = (props: Props) => {
         </SwiperSlide>
         <SwiperSlide>
           <Slide
-            banner="/images/slider/slider_5.jpeg"
+            banner="/images/slider/slider_1.jpeg"
             title={t("HIEUCOLLECTION")}
             description={t("action_figures_statue_collectibles_and_more!")}
           />

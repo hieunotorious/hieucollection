@@ -201,7 +201,6 @@ function Signup() {
               style={{
                 borderRadius: " 0.25rem",
                 fontWeight: "300",
-                transition: " all .3s ease-in-out",
                 cursor: "pointer",
                 border: "none",
                 textTransform: "uppercase",

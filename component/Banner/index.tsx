@@ -208,7 +208,7 @@ const Banner = ({ ...props }: Props) => {
                 style={{ border: "1rem", borderRadius: "1rem" }}
                 width="1000px"
                 height={isMobile ? "500px" : "100%"}
-                src="/images/hieu1.jpeg"
+                src="/images/hieu2.jpg"
                 alt=""
               />
             </Flex>
