@@ -53,43 +53,43 @@ const Section = (props: Props) => {
           <Slide
             banner="/images/slider/slider_1.jpeg"
             title={t("HIEUCOLLECTION")}
-            description={t("mcfarlane_figures")}
+            description={t("action_figures_statue_collectibles_and_more!")}
           />
         </SwiperSlide>
         <SwiperSlide>
           <Slide
             banner="/images/slider/slider_2.jpeg"
             title={t("HIEUCOLLECTION")}
-            description={t("marvel_legend_figures")}
+            description={t("action_figures_statue_collectibles_and_more!")}
           />
         </SwiperSlide>
         <SwiperSlide>
           <Slide
             banner="/images/slider/slider_4.jpeg"
             title={t("HIEUCOLLECTION")}
-            description={t("statue_figuart")}
+            description={t("action_figures_statue_collectibles_and_more!")}
           />
         </SwiperSlide>
         <SwiperSlide>
           <Slide
             banner="/images/slider/slider_5.jpeg"
             title={t("HIEUCOLLECTION")}
-            description={t("shf_figures")}
+            description={t("action_figures_statue_collectibles_and_more!")}
           />
         </SwiperSlide>
       </Swiper>
       <Flex
-        w={isMobile ? "full" : "30%"}
+        w={isMobile ? "full" : "25%"}
         direction="column"
         padding="1px"
         gap="1px"
         h={isMobile ? "500px" : "full"}
       >
-        <Flex paddingBottom="0 " position="relative" h="full">
-          <Image layout="fill" src="/images/cat.jpeg" alt=""></Image>
+        <Flex paddingBottom="0" position="relative" h="full">
+          <Image layout="fill" src="/images/hieuslide.png" alt=""></Image>
         </Flex>
         <Flex position="relative" h="full">
-          <Image layout="fill" src="/images/s2.jpeg" alt=""></Image>
+          <Image layout="fill" src="/images/notorious.png" alt=""></Image>
         </Flex>
       </Flex>
     </Flex>

@@ -56,7 +56,7 @@ function Signup() {
       style={{
         background: "white",
         margin: "0 auto",
-        minHeight: isMobile ? "500px" : "900px",
+        minHeight: isMobile ? "650px" : "900px",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",

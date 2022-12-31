@@ -28,15 +28,11 @@ const Slide = ({ title, description, banner, ...props }: SlideType) => {
         <Text color="MintCream" fontSize={isMobile ? "10lg" : "6xl"}>
           {title}
         </Text>
-        <Text
-          maxWidth="60%"
-          color="MintCream"
-          fontSize={isMobile ? "md" : "4xl"}
-        >
+        <Text maxWidth="60%" color="MintCream" fontSize={isMobile ? "md" : "l"}>
           {description}
         </Text>
         <Flex mt={isMobile ? "1px" : "16px"}>
-          <Button colorScheme="MintCream" size="lg">
+          <Button variant="solid" colorScheme="blue" size="lg">
             <Link href="/product">
               <Text>{t("shop_now")}</Text>
             </Link>

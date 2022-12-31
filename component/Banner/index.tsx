@@ -19,6 +19,7 @@ const Banner = ({ ...props }: Props) => {
       justifyContent="center"
       w="full"
       h="full"
+      mt="4rem"
     >
       <Flex direction="column" w={isMobile ? "90%" : "60%"}>
         <Flex gap="2rem" direction={isMobile ? "column" : "row"} w="full">

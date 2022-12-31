@@ -1,16 +1,10 @@
 import { UpdateUser } from "app/api/auth/models/user";
+import axiosClient from "app/interceptor";
 import axios from "axios";
 
 export const getUser = async () => {
   try {
-    const user = await axios.get(
-      `${process.env.NEXT_PUBLIC_HOST}/user/getself`,
-      {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("access_token")}`,
-        },
-      }
-    );
+    const user = await axiosClient.get(`/user/getself`);
     return user.data;
   } catch (err) {
     return undefined;
@@ -18,7 +12,7 @@ export const getUser = async () => {
 };
 
 export const login = async (username: string, password: string) => {
-  const res = await axios.post(`${process.env.NEXT_PUBLIC_HOST}/user/login`, {
+  const res = await axiosClient.post(`/user/login`, {
     username,
     password,
   });
@@ -29,7 +23,7 @@ export const signup = async (
   password: string,
   email: string
 ) => {
-  const res = await axios.post(`${process.env.NEXT_PUBLIC_HOST}/user/signup`, {
+  const res = await axiosClient.post(`/user/signup`, {
     username,
     password,
     email,
@@ -37,27 +31,13 @@ export const signup = async (
   return res.data || undefined;
 };
 export const logout = async () => {
-  const res = await axios.post(
-    `${process.env.NEXT_PUBLIC_HOST}/user/logout`,
-    { refreshToken: localStorage.getItem("refresh_token") },
-    {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("access_token")}`,
-      },
-    }
-  );
+  const res = await axiosClient.post(`/user/logout`, {
+    refreshToken: localStorage.getItem("refresh_token"),
+  });
   return res.data;
 };
 
 export const updateSelfUser = async (user: UpdateUser) => {
-  const res = await axios.patch(
-    `${process.env.NEXT_PUBLIC_HOST}/user/update_self`,
-    user,
-    {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("access_token")}`,
-      },
-    }
-  );
+  const res = await axiosClient.patch(`/user/update_self`, user);
   return res.data;
 };

@@ -11,6 +11,7 @@ const Brand = ({ ...props }: Props) => {
   const { t } = useTranslation();
   return (
     <Flex
+      display={isMobile ? "none" : "flex"}
       direction={isMobile ? "column" : "row"}
       marginTop={isMobile ? "3rem" : "10rem"}
       justifyContent="center"
@@ -41,14 +42,24 @@ const Brand = ({ ...props }: Props) => {
           }
         `}
       >
-        <Image width="100px" height="100px" src="/images/shf.png" alt="" />
         <Image
-          width="100px"
-          height="100px"
-          src="/images/mcfarlane.jpg"
+          src="https://bbts1.azureedge.net/site-images/nav_tf-white_sm.jpg"
           alt=""
-        />
-        <Image width="100px" height="100px" src="/images/mafex.png" alt="" />
+          width={90}
+          height={40}
+        ></Image>
+        <Image
+          src="https://bbts1.azureedge.net/site-images/nav_dccomics_sm.jpg"
+          width={90}
+          height={40}
+          alt=""
+        ></Image>
+        <Image
+          src="https://bbts1.azureedge.net/site-images/nav_marvel_sm.jpg"
+          width={90}
+          height={40}
+          alt=""
+        ></Image>
       </Flex>
     </Flex>
   );

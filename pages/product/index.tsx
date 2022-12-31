@@ -183,19 +183,51 @@ const Product = ({
                   <PopoverArrow />
                   <PopoverCloseButton />
                   <PopoverBody>
-                    <select
-                      onChange={(event) => {
-                        filterBrand(event.target.value as BrandType);
+                    <div
+                      style={{
+                        cursor: "pointer",
+                        fontSize: 12,
                       }}
+                      onClick={() => filterBrand(BrandType.mafex)}
                     >
-                      {Object.values(BrandType).map((item, index) => {
-                        return (
-                          <option value={item} key={item}>
-                            {item}
-                          </option>
-                        );
-                      })}
-                    </select>
+                      {t("MAFEX")}
+                    </div>
+                    <div
+                      style={{ cursor: "pointer", fontSize: 12 }}
+                      onClick={() => filterBrand(BrandType.dc_collectibles)}
+                    >
+                      {t("DC COLLECTIBLES")}
+                    </div>
+                    <div
+                      style={{ cursor: "pointer", fontSize: 12 }}
+                      onClick={() => filterBrand(BrandType.figuart)}
+                    >
+                      {t("FIGUART")}
+                    </div>
+                    <div
+                      style={{ cursor: "pointer", fontSize: 12 }}
+                      onClick={() => filterBrand(BrandType.shf)}
+                    >
+                      {t("SHF")}
+                    </div>
+                    <div
+                      style={{ cursor: "pointer", fontSize: 12 }}
+                      onClick={() => filterBrand(BrandType.marvel_legend)}
+                    >
+                      {t("MARVEL LEGEND")}
+                    </div>
+                    <div
+                      style={{ cursor: "pointer", fontSize: 12 }}
+                      onClick={() => filterBrand(BrandType.wwe)}
+                    >
+                      {t("WWE")}
+                    </div>
+                    <div
+                      style={{ cursor: "pointer", fontSize: 12 }}
+                      onClick={() => filterBrand(BrandType.mcfarlane)}
+                    >
+                      {t("MCFARLANE")}
+                    </div>
                   </PopoverBody>
                 </PopoverContent>
               </Popover>
@@ -225,15 +257,15 @@ const Product = ({
                   <PopoverBody textAlign="center">
                     <div
                       style={{ cursor: "pointer", fontSize: 12 }}
-                      onClick={() => filterCategory(CategoryType.action_figure)}
-                    >
-                      {t("action_figure")}
-                    </div>
-                    <div
-                      style={{ cursor: "pointer", fontSize: 12 }}
                       onClick={() => filterCategory(CategoryType.statue)}
                     >
                       {t("statue")}
+                    </div>
+                    <div
+                      style={{ cursor: "pointer", fontSize: 12 }}
+                      onClick={() => filterCategory(CategoryType.action_figure)}
+                    >
+                      {t("action_figure")}
                     </div>
                   </PopoverBody>
                 </PopoverContent>
