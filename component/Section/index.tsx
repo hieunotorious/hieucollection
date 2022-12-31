@@ -27,7 +27,7 @@ const Section = (props: Props) => {
       direction={isMobile ? "column" : "row"}
     >
       <Swiper
-        style={{ width: "100%", height: isMobile ? "200px" : "600px" }}
+        style={{ width: "100%", height: isMobile ? "200px" : "800px" }}
         spaceBetween={30}
         effect={"coverflow"}
         pagination={{
@@ -78,20 +78,6 @@ const Section = (props: Props) => {
           />
         </SwiperSlide>
       </Swiper>
-      <Flex
-        w={isMobile ? "full" : "25%"}
-        direction="column"
-        padding="1px"
-        gap="1px"
-        h={isMobile ? "500px" : "full"}
-      >
-        <Flex paddingBottom="0" position="relative" h="full">
-          <Image layout="fill" src="/images/hieuslide.png" alt=""></Image>
-        </Flex>
-        <Flex position="relative" h="full">
-          <Image layout="fill" src="/images/notorious.png" alt=""></Image>
-        </Flex>
-      </Flex>
     </Flex>
   );
 };

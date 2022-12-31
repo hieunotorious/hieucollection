@@ -72,7 +72,7 @@ function Cart() {
           marginBottom: "2rem",
           justifyContent: "center",
           alignItems: "center",
-          gridTemplateColumns: isMobile ? "1fr 1fr" : "360px 1fr 1fr 1fr auto",
+          gridTemplateColumns: isMobile ? "none" : "360px 1fr 1fr 1fr auto",
           borderBottom: "1px solid black",
           paddingBottom: "1rem",
           background: "white",
@@ -103,7 +103,7 @@ function Cart() {
                 fontSize: isMobile ? "2px" : 20,
                 fontWeight: 700,
                 textAlign: "center",
-                fontFamily: "cursive",
+                fontFamily: "'Baloo', serif",
               }}
             >
               {item.name}
@@ -117,7 +117,7 @@ function Cart() {
             alignItems: "center",
             fontWeight: "400",
             fontSize: "2.25rem",
-            fontFamily: "cursive",
+            fontFamily: "'Baloo', serif",
           }}
         >
           <h3>${item.sale ? item.price - item.sale : item.price}</h3>
@@ -127,7 +127,8 @@ function Cart() {
             display: "flex",
             justifyContent: "center",
             gap: "2rem",
-            fontFamily: "cursive",
+            fontFamily: "'Baloo', serif",
+            marginTop: isMobile ? "1rem" : "none",
           }}
         >
           <button
@@ -138,7 +139,6 @@ function Cart() {
           >
             <RemoveIcon
               style={{
-                display: isMobile ? "column" : "row",
                 justifyContent: "center",
                 alignItems: "center",
                 color: "#102a42",
@@ -168,12 +168,12 @@ function Cart() {
 
         <div
           style={{
-            display: isMobile ? "none" : "flex",
+            display: isMobile ? "flex" : "flex",
             justifyContent: "center",
             alignItems: "center",
             fontWeight: 700,
-            fontSize: "2.25rem",
-            fontFamily: "cursive",
+            fontSize: isMobile ? "15px" : "2.25rem",
+            fontFamily: "'Baloo', serif",
           }}
         >
           $
@@ -199,7 +199,7 @@ function Cart() {
                 alignItems: "center",
                 color: "white",
                 fontSize: "2.25rem",
-                fontFamily: "cursive",
+                fontFamily: "'Baloo', serif",
               }}
             />
           </button>
@@ -214,7 +214,7 @@ function Cart() {
         display: "flex",
         flexDirection: "column",
         width: "100%",
-        minHeight: 900,
+        minHeight: isMobile ? 610 : 800,
         padding: "0 4rem",
         background: "white",
         justifyContent: "center",
@@ -233,7 +233,7 @@ function Cart() {
                 borderBottom: "1px solid black",
                 fontSize: "3rem",
                 textTransform: "uppercase",
-                fontFamily: "serif",
+                fontFamily: "'Baloo', serif",
                 background: "white",
               }}
             >
@@ -311,7 +311,7 @@ function Cart() {
             style={{
               display: "flex",
               justifyContent: "center",
-              fontFamily: "Gill Sans",
+              fontFamily: "'Baloo', serif",
               width: "100%",
             }}
           >
@@ -352,7 +352,7 @@ function Cart() {
             style={{
               display: "flex",
               justifyContent: "center",
-              fontFamily: "Gill Sans",
+              fontFamily: "'Baloo', serif",
               width: "100%",
             }}
           >
@@ -383,12 +383,10 @@ function Cart() {
         </Flex>
       ) : (
         <Flex justifyContent="center" alignItems="center">
-          {" "}
           <Flex direction="column" alignItems="center">
-            {" "}
             <Text
               fontWeight="600"
-              fontSize="5xl"
+              fontSize={isMobile ? "4xl" : "5xl"}
               color="#222222"
               fontFamily="'Baloo', serif"
             >
@@ -396,7 +394,7 @@ function Cart() {
             </Text>{" "}
             <Link href="/signin">
               <Text
-                fontSize="20px"
+                fontSize="15px"
                 color="#3399FF"
                 fontFamily="'Baloo', serif"
                 textDecoration="underline"

@@ -82,7 +82,7 @@ function Login() {
     <div
       style={{
         margin: "0 auto",
-        minHeight: isMobile ? "700px" : 900,
+        minHeight: isMobile ? 610 : 795,
         display: "flex",
         justifyContent: "center",
         alignItems: "center",

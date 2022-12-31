@@ -1,4 +1,5 @@
 import { Flex, FlexProps, Text } from "@chakra-ui/react";
+import { useResponsive } from "app/hooks/useResponsive";
 
 type ExpCardType = {
   title: string;
@@ -6,8 +7,10 @@ type ExpCardType = {
 } & FlexProps;
 
 const ExpCard = ({ title, des, ...props }: ExpCardType) => {
+  const { isMobile } = useResponsive();
   return (
     <Flex
+      display={isMobile ? "none" : "flex"}
       borderRadius="2xl"
       w="166px"
       background="rgba(255,255,255,0.7)"
