@@ -52,7 +52,7 @@ const Banner = ({ ...props }: Props) => {
             background="#b5def2"
             borderRadius="30px"
             w="full"
-            h="350px"
+            h="250px"
           >
             <Flex
               position="absolute"
@@ -66,7 +66,7 @@ const Banner = ({ ...props }: Props) => {
                 style={{ border: "1rem", borderRadius: "1rem" }}
                 width="1000px"
                 height="100%"
-                src="/images/hieu2.jpg"
+                src="/images/hieu1.jpeg"
                 alt=""
               />
             </Flex>

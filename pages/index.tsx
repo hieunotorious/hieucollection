@@ -164,7 +164,7 @@ const Home = ({ product }: InferGetStaticPropsType<typeof getStaticProps>) => {
                   border: "1px solid black",
                   padding: "1rem",
                   width: "290px",
-                  height: "30px",
+                  height: "20px",
                 }}
               />
             </Flex>
@@ -179,7 +179,7 @@ const Home = ({ product }: InferGetStaticPropsType<typeof getStaticProps>) => {
               >
                 {t("new_arrival")}
               </Text>
-              <Flex w="30%" h="2px" background="red" mb="2rem" />
+              <Flex w="50%" h="2px" background="red" mb="2rem" />
             </Flex>
           </Flex>
           {!isMobile ? (
@@ -243,9 +243,9 @@ const Home = ({ product }: InferGetStaticPropsType<typeof getStaticProps>) => {
         </Flex>
       </Flex>
 
-      <Flex marginTop="10rem" justifyContent="center" alignItems="center">
+      <Flex marginTop="5rem" justifyContent="center" alignItems="center">
         <Flex>
-          <Flex>
+          <Flex direction="column" alignItems="center">
             <Text
               fontWeight="600"
               fontSize="26px"
@@ -256,6 +256,7 @@ const Home = ({ product }: InferGetStaticPropsType<typeof getStaticProps>) => {
             >
               {t("dragonball_figures")}
             </Text>
+            <Flex w="50%" h="2px" background="red" mb="2rem" />
           </Flex>
         </Flex>
       </Flex>
@@ -307,7 +308,7 @@ const Home = ({ product }: InferGetStaticPropsType<typeof getStaticProps>) => {
             >
               {t("pre_order")}
             </Text>
-            <Flex w="30%" h="2px" background="red" mb="2rem" />
+            <Flex w="20%" h="2px" background="red" mb="2rem" />
           </Flex>
 
           {!isMobile ? (
@@ -370,9 +371,9 @@ const Home = ({ product }: InferGetStaticPropsType<typeof getStaticProps>) => {
           )}
         </Flex>
       </Flex>
-      <Flex marginTop="10rem" justifyContent="center" alignItems="center">
+      <Flex marginTop="5rem" justifyContent="center" alignItems="center">
         <Flex>
-          <Flex>
+          <Flex direction="column" alignItems="center">
             <Text
               fontWeight="600"
               fontSize="26px"
@@ -383,6 +384,7 @@ const Home = ({ product }: InferGetStaticPropsType<typeof getStaticProps>) => {
             >
               {t("spiderman_figures")}
             </Text>
+            <Flex w="50%" h="2px" background="red" mb="2rem" />
           </Flex>
         </Flex>
       </Flex>
@@ -424,9 +426,9 @@ const Home = ({ product }: InferGetStaticPropsType<typeof getStaticProps>) => {
       </Flex>
       <Banner />
 
-      <Flex marginTop="10rem" justifyContent="center" alignItems="center">
+      <Flex marginTop="5rem" justifyContent="center" alignItems="center">
         <Flex>
-          <Flex>
+          <Flex direction="column" alignItems="center">
             <Text
               fontWeight="600"
               fontSize="26px"
@@ -437,6 +439,7 @@ const Home = ({ product }: InferGetStaticPropsType<typeof getStaticProps>) => {
             >
               {t("transformer_figures")}
             </Text>
+            <Flex w="50%" h="2px" background="red" mb="2rem" />
           </Flex>
         </Flex>
       </Flex>
@@ -494,18 +497,21 @@ const Home = ({ product }: InferGetStaticPropsType<typeof getStaticProps>) => {
                   >
                     {t("sale_product")}
                   </Text>
-                  <Flex w="30%" h="2px" background="red" mb="2rem" />
+                  <Flex w="50%" h="2px" background="red" mb="2rem" />
                 </Flex>
               ) : (
-                <Text
-                  fontSize="26px"
-                  color="#222222"
-                  fontFamily="'Baloo', serif"
-                  textTransform="uppercase"
-                  fontWeight="600"
-                >
-                  {t("DCEASED")}
-                </Text>
+                <Flex direction="column" alignItems="center">
+                  <Text
+                    fontSize="26px"
+                    color="#222222"
+                    fontFamily="'Baloo', serif"
+                    textTransform="uppercase"
+                    fontWeight="600"
+                  >
+                    {t("DCEASED")}
+                  </Text>
+                  <Flex w="50%" h="2px" background="red" mb="2rem" />
+                </Flex>
               )}
             </Flex>
           </Flex>
