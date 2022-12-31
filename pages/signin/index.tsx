@@ -29,8 +29,9 @@ function Login() {
   const { t } = useTranslation();
   const { setUser: setGlobalUser } = useContext(AuthContext);
   const toast = useToast();
-
+  const [isLoading, setIsLoading] = useState(false);
   const submitForm = async (event: any) => {
+    setIsLoading(true);
     event.preventDefault();
     try {
       const res = await login(user.username, user.password);
@@ -47,7 +48,7 @@ function Login() {
             isClosable: true,
           });
           setGlobalUser(loginUser);
-          router.push("/");
+          await router.push("/");
         }
       }
     } catch (error) {
@@ -59,7 +60,7 @@ function Login() {
         isClosable: true,
       });
     }
-
+    setIsLoading(false);
     // const dataIndex = data.findIndex(
     //   (item, index) => item.username === user.username
     // );
@@ -161,7 +162,7 @@ function Login() {
             >
               {t("forgot_password?")}
             </div>
-            <input
+            <Button
               style={{
                 borderRadius: " 0.25rem",
                 fontWeight: "300",
@@ -174,8 +175,10 @@ function Login() {
                 color: "white",
               }}
               type="submit"
-              value={t("login")}
-            ></input>
+              isLoading={isLoading}
+            >
+              {t("login")}
+            </Button>
           </form>
         </div>
         <div

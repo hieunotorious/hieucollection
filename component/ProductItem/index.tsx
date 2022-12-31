@@ -4,27 +4,29 @@ import React, { useContext, useEffect, useMemo, useState } from "react";
 import { floor, isEmpty } from "lodash";
 import Link from "next/link";
 import Image from "next/image";
-import { ButtonGroup, Button } from "@chakra-ui/react";
+import { ButtonGroup, Button, Flex, Text } from "@chakra-ui/react";
 import useTranslation from "next-translate/useTranslation";
 import router, { useRouter } from "next/router";
 import { AuthContext } from "app/context/authContext";
 import { height } from "@mui/system";
 import { addToCart } from "app/services/CartService";
 import { useResponsive } from "app/hooks/useResponsive";
-
 const ProductItem = ({ product }: { product: ProductType }) => {
   const { t } = useTranslation();
-  const { setUser } = useContext(AuthContext);
+  const { user, setUser } = useContext(AuthContext);
   const { isMobile } = useResponsive();
+
   const handleAddCart = async (id: string) => {
-    const data = await addToCart(id, 1);
-    if (data) {
-      setUser((prevState) => {
-        if (prevState) return { ...prevState, cart: data };
-        return undefined;
-      });
-      router.push("/cart");
+    if (user) {
+      const data = await addToCart(id, 1);
+      if (data) {
+        setUser((prevState) => {
+          if (prevState) return { ...prevState, cart: data };
+          return undefined;
+        });
+      }
     }
+    router.push("/cart");
   };
   return (
     <Link href={`product/${product._id}`}>
@@ -119,6 +121,7 @@ const ProductItem = ({ product }: { product: ProductType }) => {
             {product.name}
           </div>
         </div>
+
         <ButtonGroup
           marginTop="1rem"
           marginBottom="1rem"

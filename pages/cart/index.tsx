@@ -215,170 +215,199 @@ function Cart() {
         flexDirection: "column",
         width: "100%",
         minHeight: 900,
-
         padding: "0 4rem",
-
         background: "white",
+        justifyContent: "center",
       }}
     >
-      <div>
-        <div
-          style={{
-            display: isMobile ? "none" : "grid",
-            marginBottom: "2rem",
-            justifyContent: "center",
-            textAlign: "center",
-            gridTemplateColumns: "360px 1fr 1fr 1fr auto",
-            borderBottom: "1px solid black",
-            fontSize: "3rem",
-            textTransform: "uppercase",
-            fontFamily: "serif",
-            background: "white",
-          }}
-        >
-          <p>{t("item")}</p>
-          <p>{t("price")}</p>
-          <p>{t("quantity")}</p>
-          <p>{t("subtotal")}</p>
-          <span></span>
-        </div>
+      {user ? (
+        <Flex direction="column">
+          <div>
+            <div
+              style={{
+                display: isMobile ? "none" : "grid",
+                marginBottom: "2rem",
+                justifyContent: "center",
+                textAlign: "center",
+                gridTemplateColumns: "360px 1fr 1fr 1fr auto",
+                borderBottom: "1px solid black",
+                fontSize: "3rem",
+                textTransform: "uppercase",
+                fontFamily: "serif",
+                background: "white",
+              }}
+            >
+              <p>{t("item")}</p>
+              <p>{t("price")}</p>
+              <p>{t("quantity")}</p>
+              <p>{t("subtotal")}</p>
+              <span></span>
+            </div>
 
-        <div>
-          {user && user.cart.length > 0 && user.cart.map(renderCartItem)}
-        </div>
-      </div>
-      <div
-        style={{
-          display: "flex",
-          width: "100%",
-          margin: "1rem",
-          padding: "1rem",
-          justifyContent: "space-between",
-        }}
-      >
-        <div
-          style={{
-            borderRadius: "10px",
-            background: "black",
-            border: "2px solid black",
-            color: "white",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            width: 40,
-          }}
-        >
-          <Link style={{}} href="/product">
-            <button>
-              <ArrowBackIcon
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  color: "white",
-                }}
-              />
-            </button>
-          </Link>
-        </div>
-        <div
-          style={{
-            borderRadius: "10px",
-            background: "black",
-            border: "2px solid black",
-            color: "white",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            width: 40,
-          }}
-        >
-          <div style={{ display: "flex", justifyContent: "center" }}>
-            <button type="button" onClick={() => removeAllCart()}>
-              <DeleteIcon
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  color: "white",
-                }}
-              />
-            </button>
+            <div>
+              {user && user.cart.length > 0 && user.cart.map(renderCartItem)}
+            </div>
           </div>
-        </div>
-      </div>
-
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          fontFamily: "Gill Sans",
-          width: "100%",
-        }}
-      >
-        <article
-          style={{
-            border: "1px solid black",
-            borderRadius: "10px",
-            width: 300,
-            height: 150,
-            marginBottom: 16,
-          }}
-        >
-          <form
+          <div
             style={{
               display: "flex",
-              flexDirection: "column",
-              marginTop: "1rem",
+              width: "100%",
+              margin: "1rem",
               padding: "1rem",
-              marginBottom: "5rem",
-              gap: "1rem",
-              textAlign: "center",
+              justifyContent: "space-between",
             }}
           >
-            <h3>
-              {t("subtotal")}:<span>${totalPrice}</span>
-            </h3>
-            <h3>
-              {t("shipping_fee")}:<span>{t("free")}</span>
-            </h3>
-            <hr />
-            <h2 style={{ marginBottom: "1rem" }}>
-              {t("order_total")}: <span>${totalPrice}</span>
-            </h2>
-          </form>
-        </article>
-      </div>
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          fontFamily: "Gill Sans",
-          width: "100%",
-        }}
-      >
-        <article>
-          <form
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              marginTop: "1rem",
-              padding: "1rem",
-              marginBottom: "5rem",
-              gap: "1rem",
-              textAlign: "center",
-            }}
-          >
-            <h3>
-              <Link style={{ color: "black" }} href="/checkout">
-                <Stack spacing={4} direction="row" align="center">
-                  <Button border="2px" colorScheme="red" size="lg">
-                    {t("checkout")}
-                  </Button>
-                </Stack>
+            <div
+              style={{
+                borderRadius: "10px",
+                background: "black",
+                border: "2px solid black",
+                color: "white",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                width: 40,
+              }}
+            >
+              <Link style={{}} href="/product">
+                <button>
+                  <ArrowBackIcon
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      color: "white",
+                    }}
+                  />
+                </button>
               </Link>
-            </h3>
-          </form>
-        </article>
-      </div>
+            </div>
+            <div
+              style={{
+                borderRadius: "10px",
+                background: "black",
+                border: "2px solid black",
+                color: "white",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                width: 40,
+              }}
+            >
+              <div style={{ display: "flex", justifyContent: "center" }}>
+                <button type="button" onClick={() => removeAllCart()}>
+                  <DeleteIcon
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      color: "white",
+                    }}
+                  />
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              fontFamily: "Gill Sans",
+              width: "100%",
+            }}
+          >
+            <article
+              style={{
+                border: "1px solid black",
+                borderRadius: "10px",
+                width: 300,
+                height: 150,
+                marginBottom: 16,
+              }}
+            >
+              <form
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  marginTop: "1rem",
+                  padding: "1rem",
+                  marginBottom: "5rem",
+                  gap: "1rem",
+                  textAlign: "center",
+                }}
+              >
+                <h3>
+                  {t("subtotal")}:<span>${totalPrice}</span>
+                </h3>
+                <h3>
+                  {t("shipping_fee")}:<span>{t("free")}</span>
+                </h3>
+                <hr />
+                <h2 style={{ marginBottom: "1rem" }}>
+                  {t("order_total")}: <span>${totalPrice}</span>
+                </h2>
+              </form>
+            </article>
+          </div>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              fontFamily: "Gill Sans",
+              width: "100%",
+            }}
+          >
+            <article>
+              <form
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  marginTop: "1rem",
+                  padding: "1rem",
+                  marginBottom: "5rem",
+                  gap: "1rem",
+                  textAlign: "center",
+                }}
+              >
+                <h3>
+                  <Link style={{ color: "black" }} href="/checkout">
+                    <Stack spacing={4} direction="row" align="center">
+                      <Button border="2px" colorScheme="red" size="lg">
+                        {t("checkout")}
+                      </Button>
+                    </Stack>
+                  </Link>
+                </h3>
+              </form>
+            </article>
+          </div>
+        </Flex>
+      ) : (
+        <Flex justifyContent="center" alignItems="center">
+          {" "}
+          <Flex direction="column" alignItems="center">
+            {" "}
+            <Text
+              fontWeight="600"
+              fontSize="5xl"
+              color="#222222"
+              fontFamily="'Baloo', serif"
+            >
+              {t("need_login")}{" "}
+            </Text>{" "}
+            <Link href="/signin">
+              <Text
+                fontSize="20px"
+                color="#3399FF"
+                fontFamily="'Baloo', serif"
+                textDecoration="underline"
+                cursor="pointer"
+              >
+                {t("click")}
+              </Text>
+            </Link>
+          </Flex>
+        </Flex>
+      )}
     </div>
   );
 }

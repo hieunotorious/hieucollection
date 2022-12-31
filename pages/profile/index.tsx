@@ -8,7 +8,7 @@ import { info } from "console";
 import { useRouter } from "next/router";
 import setLanguage from "next-translate/setLanguage";
 import useTranslation from "next-translate/useTranslation";
-import { Select, Input, useToast } from "@chakra-ui/react";
+import { Select, Input, useToast, Button } from "@chakra-ui/react";
 import { useResponsive } from "app/hooks/useResponsive";
 import { updateSelfUser } from "app/services/UserService";
 function Signup() {
@@ -25,7 +25,9 @@ function Signup() {
   });
   const toast = useToast();
   const router = useRouter();
+  const [isLoading, setIsLoading] = useState(false);
   const submitForm = async (event: any) => {
+    setIsLoading(true);
     event.preventDefault();
     const data = await updateSelfUser(tempuser);
     if (data) {
@@ -38,6 +40,7 @@ function Signup() {
         isClosable: true,
       });
     }
+    setIsLoading(false);
   };
 
   useEffect(() => {
@@ -211,7 +214,7 @@ function Signup() {
                 required
               ></input>
             </div>
-            <input
+            <Button
               style={{
                 marginTop: "2rem",
                 borderRadius: " 0.25rem",
@@ -225,8 +228,10 @@ function Signup() {
                 color: "white",
               }}
               type="submit"
-              value={t("update")}
-            ></input>
+              isLoading={isLoading}
+            >
+              {t("update")}
+            </Button>
           </form>
         </div>
       </div>

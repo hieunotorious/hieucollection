@@ -25,9 +25,11 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [user, setUser] = useState<User | undefined>(undefined);
 
   const authUser = useCallback(async () => {
-    const newUser = await getUser();
-    if (newUser) {
+    try {
+      const newUser = await getUser();
       setUser(newUser);
+    } catch (error) {
+      return;
     }
   }, []);
 

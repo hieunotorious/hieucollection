@@ -32,9 +32,11 @@ function Signup() {
     confirm: "",
   });
   const router = useRouter();
+  const [isLoading, setIsLoading] = useState(false);
   const toast = useToast();
   const { setUser: setGlobalUser } = useContext(AuthContext);
   const submitForm = async (event: any) => {
+    setIsLoading(true);
     event.preventDefault();
     const res = await signup(user.username, user.password, user.email);
     if (res) {
@@ -50,9 +52,10 @@ function Signup() {
           isClosable: true,
         });
         setGlobalUser(loginUser);
-        router.push("/");
+        await router.push("/");
       }
     }
+    setIsLoading(false);
   };
   const handleClick1 = () => setShow1(!show1);
   const { isMobile } = useResponsive();
@@ -194,7 +197,7 @@ function Signup() {
               <a style={{ color: "blue" }}>{t("terms_of_use")}</a> and
               <a style={{ color: "blue", padding: 2 }}>{t("privacy_policy")}</a>
             </div>
-            <input
+            <Button
               style={{
                 borderRadius: " 0.25rem",
                 fontWeight: "300",
@@ -207,8 +210,10 @@ function Signup() {
                 color: "white",
               }}
               type="submit"
-              value={t("signup")}
-            ></input>
+              isLoading={isLoading}
+            >
+              {t("signup")}
+            </Button>
           </form>
         </div>
         <div
