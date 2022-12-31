@@ -8,11 +8,15 @@ import { info } from "console";
 import { useRouter } from "next/router";
 import setLanguage from "next-translate/setLanguage";
 import useTranslation from "next-translate/useTranslation";
-import { Select, Input } from "@chakra-ui/react";
+import { Select, Input, Button, Flex, Text } from "@chakra-ui/react";
 import { round } from "lodash";
+import { useResponsive } from "app/hooks/useResponsive";
+import Link from "next/link";
 
 function Checkout() {
+  const { isMobile, isTabletOrLaptop, isDesktop } = useResponsive();
   const { t } = useTranslation();
+  const { setUser } = useContext(AuthContext);
   const { user, updateProfile } = useContext(AuthContext);
   const [tempuser, setTempUser] = useState<UpdateUser>({
     username: "",
@@ -55,132 +59,159 @@ function Checkout() {
       style={{
         background: "white",
         margin: "0 auto",
-        minHeight: " 800px",
+        minHeight: isMobile ? 610 : 795,
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
         flexDirection: "column",
       }}
     >
-      <div>
-        <div
-          style={{
-            padding: "1.25rem",
-            borderRadius: "0.5rem",
-            border: " 1px solid black",
-            display: "grid",
-            gap: "1rem",
-            marginTop: " 4rem",
-            width: "300px",
-            background: "white",
-          }}
-        >
-          <h1 style={{ textAlign: "center" }}> {t("checkout")}</h1>
-          <label style={{}}> {t("Email")}</label>
-          <form onSubmit={submitForm}>
-            <div>
-              <input
+      {user ? (
+        <div>
+          <div
+            style={{
+              padding: "1.25rem",
+              borderRadius: "0.5rem",
+              border: " 1px solid black",
+              display: "grid",
+              gap: "1rem",
+              marginTop: " 4rem",
+              width: "300px",
+              background: "white",
+            }}
+          >
+            <h1 style={{ textAlign: "center" }}> {t("checkout")}</h1>
+            <label style={{}}> {t("Email")}</label>
+            <form onSubmit={submitForm}>
+              <div>
+                <input
+                  style={{
+                    borderRadius: " 0.25rem",
+                    border: "1px solid black",
+                    padding: "0.25rem 0.5rem",
+                    width: 275,
+                  }}
+                  type="text"
+                  value={tempuser.username}
+                  onChange={(event) => {
+                    setTempUser((prevState) => ({
+                      ...prevState,
+                      username: event.target.value,
+                    }));
+                  }}
+                  required
+                ></input>
+              </div>
+
+              <label style={{}}> {t("displayname")}</label>
+              <div>
+                <input
+                  style={{
+                    borderRadius: " 0.25rem",
+                    border: "1px solid black",
+                    padding: "0.25rem 0.5rem",
+                    width: 275,
+                  }}
+                  type="text"
+                  value={tempuser.displayName}
+                  onChange={(event) => {
+                    setTempUser((prevState) => ({
+                      ...prevState,
+                      displayName: event.target.value,
+                    }));
+                  }}
+                  required
+                ></input>
+              </div>
+
+              <label style={{}}> {t("phonenumber")}</label>
+              <div>
+                <input
+                  style={{
+                    borderRadius: " 0.25rem",
+                    border: "1px solid black",
+                    padding: "0.25rem 0.5rem",
+                    width: 275,
+                  }}
+                  type="text"
+                  value={tempuser.phonenumber}
+                  onChange={(event) => {
+                    setTempUser((prevState) => ({
+                      ...prevState,
+                      phonenumber: event.target.value,
+                    }));
+                  }}
+                  required
+                ></input>
+              </div>
+
+              <label style={{}}> {t("address")}</label>
+              <div>
+                <input
+                  style={{
+                    borderRadius: " 0.25rem",
+                    border: "1px solid black",
+                    padding: "0.25rem 0.5rem",
+                    width: 275,
+                  }}
+                  type="text"
+                  value={tempuser.address}
+                  onChange={(event) => {
+                    setTempUser((prevState) => ({
+                      ...prevState,
+                      address: event.target.value,
+                    }));
+                  }}
+                  required
+                ></input>
+              </div>
+              <label style={{ marginTop: "2rem" }}>
+                {t("subtotal")}:<span>${totalPrice}</span>
+              </label>
+
+              <Button
                 style={{
                   borderRadius: " 0.25rem",
-                  border: "1px solid black",
-                  padding: "0.25rem 0.5rem",
+                  fontWeight: "300",
+                  cursor: "pointer",
+                  border: "none",
+                  textTransform: "uppercase",
                   width: 275,
+                  background: "#3399FF",
+                  color: "white",
                 }}
-                type="text"
-                value={tempuser.username}
-                onChange={(event) => {
-                  setTempUser((prevState) => ({
-                    ...prevState,
-                    username: event.target.value,
-                  }));
-                }}
-                required
-              ></input>
-            </div>
-
-            <label style={{}}> {t("displayname")}</label>
-            <div>
-              <input
-                style={{
-                  borderRadius: " 0.25rem",
-                  border: "1px solid black",
-                  padding: "0.25rem 0.5rem",
-                  width: 275,
-                }}
-                type="text"
-                value={tempuser.displayName}
-                onChange={(event) => {
-                  setTempUser((prevState) => ({
-                    ...prevState,
-                    displayName: event.target.value,
-                  }));
-                }}
-                required
-              ></input>
-            </div>
-
-            <label style={{}}> {t("phonenumber")}</label>
-            <div>
-              <input
-                style={{
-                  borderRadius: " 0.25rem",
-                  border: "1px solid black",
-                  padding: "0.25rem 0.5rem",
-                  width: 275,
-                }}
-                type="text"
-                value={tempuser.phonenumber}
-                onChange={(event) => {
-                  setTempUser((prevState) => ({
-                    ...prevState,
-                    phonenumber: event.target.value,
-                  }));
-                }}
-                required
-              ></input>
-            </div>
-
-            <label style={{}}> {t("address")}</label>
-            <div>
-              <input
-                style={{
-                  borderRadius: " 0.25rem",
-                  border: "1px solid black",
-                  padding: "0.25rem 0.5rem",
-                  width: 275,
-                }}
-                type="text"
-                value={tempuser.address}
-                onChange={(event) => {
-                  setTempUser((prevState) => ({
-                    ...prevState,
-                    address: event.target.value,
-                  }));
-                }}
-                required
-              ></input>
-            </div>
-            <label style={{ marginTop: "2rem" }}>
-              {t("subtotal")}:<span>${totalPrice}</span>
-            </label>
-
-            <input
-              style={{
-                borderRadius: " 0.25rem",
-                fontWeight: "300",
-                transition: " all .3s ease-in-out",
-                cursor: "pointer",
-                border: "none",
-                textTransform: "uppercase",
-                width: 275,
-              }}
-              type="submit"
-              value={t("pay")}
-            ></input>
-          </form>
+                type="submit"
+              >
+                {t("pay")}
+              </Button>
+            </form>
+          </div>
         </div>
-      </div>
-      <div></div>
+      ) : (
+        <Flex justifyContent="center" alignItems="center">
+          <Flex direction="column" alignItems="center">
+            <Text
+              fontWeight="600"
+              fontSize={isMobile ? "4xl" : "5xl"}
+              color="#222222"
+              fontFamily="'Baloo', serif"
+            >
+              {t("need_login")}
+            </Text>
+            <Link href="/signin">
+              <Text
+                fontSize="15px"
+                color="#3399FF"
+                fontFamily="'Baloo', serif"
+                textDecoration="underline"
+                cursor="pointer"
+              >
+                {t("click")}
+              </Text>
+            </Link>
+          </Flex>
+        </Flex>
+      )}
     </div>
   );
 }
