@@ -135,7 +135,11 @@ function ProductId() {
               </h2>
               <div
                 className="ratings test-grey"
-                style={{ display: "flex", alignItems: "center", gap: "1rem" }}
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: isMobile ? "1rem" : "3rem",
+                }}
               >
                 <div style={{ display: "flex", width: 60 }}>
                   {ratingStars.map((value, index) => {
@@ -144,7 +148,7 @@ function ProductId() {
                         key={index}
                         style={{
                           fill: "black",
-                          fontSize: isMobile ? "10px" : "15px",
+                          fontSize: isMobile ? "15px" : "20px",
                         }}
                       />
                     );
@@ -154,7 +158,7 @@ function ProductId() {
                   style={{
                     marginLeft: " 1rem",
                     color: "var(--grey-3)",
-                    fontSize: isMobile ? "1rem" : "3rem",
+                    fontSize: isMobile ? "1rem" : "2rem",
                   }}
                 >
                   ({product.review} Reviews)
@@ -162,7 +166,7 @@ function ProductId() {
               </div>
               <h3
                 style={{
-                  fontSize: isMobile ? "1.25rem" : "2rem",
+                  fontSize: isMobile ? "1.25rem" : "1rem",
                 }}
               >
                 <a style={{ fontWeight: "bold" }}>Price: </a>${product.price}
@@ -226,10 +230,11 @@ function ProductId() {
                   display: "flex",
                   alignItems: "center",
                   marginLeft: "1rem",
+                  gap: "1rem",
                 }}
               >
                 <Link style={{ color: "black" }} href="/checkout">
-                  <Stack spacing={4} direction="row" align="center">
+                  <Stack spacing={5} direction="row" align="center">
                     <Button
                       style={{ width: "15rem", height: "3rem" }}
                       onClick={() => {
@@ -237,7 +242,7 @@ function ProductId() {
                         handleAddCart(product._id);
                       }}
                       colorScheme="blue"
-                      size="xl"
+                      size={isMobile ? "md" : "xl"}
                     >
                       {t("buy_now")}
                     </Button>
@@ -259,7 +264,7 @@ function ProductId() {
                         }}
                         variant="ghost"
                         colorScheme="blue"
-                        size="xl"
+                        size={isMobile ? "md" : "xl"}
                       >
                         {t("add_to_cart")}
                       </Button>
