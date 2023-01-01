@@ -1,7 +1,6 @@
-import React, { useContext, useMemo } from "react";
+import { useContext, useMemo } from "react";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { UserCart } from "app/api/auth/models/user";
-import product from "../product";
 import { AuthContext } from "../../context/authContext";
 import RemoveIcon from "@mui/icons-material/Remove";
 import AddIcon from "@mui/icons-material/Add";
@@ -9,7 +8,6 @@ import Link from "next/link";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import Image from "next/image";
 import { round } from "lodash";
-import setLanguage from "next-translate/setLanguage";
 import useTranslation from "next-translate/useTranslation";
 import { Button, Flex, FlexProps, Text, Stack } from "@chakra-ui/react";
 import {
@@ -214,173 +212,200 @@ function Cart() {
         display: "flex",
         flexDirection: "column",
         width: "100%",
-        minHeight: isMobile ? 610 : 800,
+        minHeight: isMobile ? 610 : 400,
         padding: "0 4rem",
         background: "white",
         justifyContent: "center",
+        marginBottom: isMobile ? "none" : "40rem",
       }}
     >
       {user ? (
-        <Flex direction="column">
-          <div>
-            <div
-              style={{
-                display: isMobile ? "none" : "grid",
-                marginBottom: "2rem",
-                justifyContent: "center",
-                textAlign: "center",
-                gridTemplateColumns: "360px 1fr 1fr 1fr auto",
-                borderBottom: "1px solid black",
-                fontSize: "3rem",
-                textTransform: "uppercase",
-                fontFamily: "'Baloo', serif",
-                background: "white",
-              }}
-            >
-              <p>{t("item")}</p>
-              <p>{t("price")}</p>
-              <p>{t("quantity")}</p>
-              <p>{t("subtotal")}</p>
-              <span></span>
-            </div>
-
+        user.cart.length > 0 ? (
+          <Flex direction="column">
             <div>
-              {user && user.cart.length > 0 && user.cart.map(renderCartItem)}
-            </div>
-          </div>
-          <div
-            style={{
-              display: "flex",
-              width: "100%",
-              margin: "1rem",
-              padding: "1rem",
-              justifyContent: "space-between",
-            }}
-          >
-            <div
-              style={{
-                borderRadius: "10px",
-                background: "black",
-                border: "2px solid black",
-                color: "white",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                width: 40,
-              }}
-            >
-              <Link style={{}} href="/product">
-                <button>
-                  <ArrowBackIcon
-                    style={{
-                      display: "flex",
-                      alignItems: "center",
-                      color: "white",
-                    }}
-                  />
-                </button>
-              </Link>
-            </div>
-            <div
-              style={{
-                borderRadius: "10px",
-                background: "black",
-                border: "2px solid black",
-                color: "white",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                width: 40,
-              }}
-            >
-              <div style={{ display: "flex", justifyContent: "center" }}>
-                <button type="button" onClick={() => removeAllCart()}>
-                  <DeleteIcon
-                    style={{
-                      display: "flex",
-                      alignItems: "center",
-                      color: "white",
-                    }}
-                  />
-                </button>
+              <div
+                style={{
+                  display: isMobile ? "none" : "grid",
+                  marginBottom: "2rem",
+                  justifyContent: "center",
+                  textAlign: "center",
+                  gridTemplateColumns: "360px 1fr 1fr 1fr auto",
+                  borderBottom: "1px solid black",
+                  fontSize: "3rem",
+                  textTransform: "uppercase",
+                  fontFamily: "'Baloo', serif",
+                  background: "white",
+                }}
+              >
+                <p>{t("item")}</p>
+                <p>{t("price")}</p>
+                <p>{t("quantity")}</p>
+                <p>{t("subtotal")}</p>
+                <span></span>
+              </div>
+
+              <div>
+                {user && user.cart.length > 0 && user.cart.map(renderCartItem)}
               </div>
             </div>
-          </div>
-
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              fontFamily: "'Baloo', serif",
-              width: "100%",
-            }}
-          >
-            <article
+            <div
               style={{
-                border: "1px solid black",
-                borderRadius: "10px",
-                width: 300,
-                height: 150,
-                marginBottom: 16,
+                display: "flex",
+                width: "100%",
+                margin: "1rem",
+                padding: "1rem",
+                justifyContent: "space-between",
               }}
             >
-              <form
+              <div
                 style={{
+                  borderRadius: "10px",
+                  background: "black",
+                  border: "2px solid black",
+                  color: "white",
                   display: "flex",
-                  flexDirection: "column",
-                  marginTop: "1rem",
-                  padding: "1rem",
-                  marginBottom: "5rem",
-                  gap: "1rem",
-                  textAlign: "center",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  width: 40,
                 }}
               >
-                <h3>
-                  {t("subtotal")}:<span>${totalPrice}</span>
-                </h3>
-                <h3>
-                  {t("shipping_fee")}:<span>{t("free")}</span>
-                </h3>
-                <hr />
-                <h2 style={{ marginBottom: "1rem" }}>
-                  {t("order_total")}: <span>${totalPrice}</span>
-                </h2>
-              </form>
-            </article>
-          </div>
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              fontFamily: "'Baloo', serif",
-              width: "100%",
-            }}
-          >
-            <article>
-              <form
+                <Link style={{}} href="/product">
+                  <button>
+                    <ArrowBackIcon
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        color: "white",
+                      }}
+                    />
+                  </button>
+                </Link>
+              </div>
+              <div
                 style={{
+                  borderRadius: "10px",
+                  background: "black",
+                  border: "2px solid black",
+                  color: "white",
                   display: "flex",
-                  flexDirection: "column",
-                  marginTop: "1rem",
-                  padding: "1rem",
-                  marginBottom: "5rem",
-                  gap: "1rem",
-                  textAlign: "center",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  width: 40,
                 }}
               >
-                <h3>
-                  <Link style={{ color: "black" }} href="/checkout">
-                    <Stack spacing={4} direction="row" align="center">
-                      <Button border="2px" colorScheme="red" size="lg">
-                        {t("checkout")}
-                      </Button>
-                    </Stack>
-                  </Link>
-                </h3>
-              </form>
-            </article>
-          </div>
-        </Flex>
+                <div style={{ display: "flex", justifyContent: "center" }}>
+                  <button type="button" onClick={() => removeAllCart()}>
+                    <DeleteIcon
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        color: "white",
+                      }}
+                    />
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                fontFamily: "'Baloo', serif",
+                width: "100%",
+              }}
+            >
+              <article
+                style={{
+                  border: "1px solid black",
+                  borderRadius: "10px",
+                  width: 300,
+                  height: 150,
+                  marginBottom: 16,
+                }}
+              >
+                <form
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    marginTop: "1rem",
+                    padding: "1rem",
+                    marginBottom: "5rem",
+                    gap: "1rem",
+                    textAlign: "center",
+                  }}
+                >
+                  <h3>
+                    {t("subtotal")}:<span>${totalPrice}</span>
+                  </h3>
+                  <h3>
+                    {t("shipping_fee")}:<span>{t("free")}</span>
+                  </h3>
+                  <hr />
+                  <h2 style={{ marginBottom: "1rem" }}>
+                    {t("order_total")}: <span>${totalPrice}</span>
+                  </h2>
+                </form>
+              </article>
+            </div>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                fontFamily: "'Baloo', serif",
+                width: "100%",
+              }}
+            >
+              <article>
+                <form
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    marginTop: "1rem",
+                    padding: "1rem",
+                    marginBottom: "5rem",
+                    gap: "1rem",
+                    textAlign: "center",
+                  }}
+                >
+                  <h3>
+                    <Link style={{ color: "black" }} href="/checkout">
+                      <Stack spacing={4} direction="row" align="center">
+                        <Button border="2px" colorScheme="red" size="lg">
+                          {t("checkout")}
+                        </Button>
+                      </Stack>
+                    </Link>
+                  </h3>
+                </form>
+              </article>
+            </div>
+          </Flex>
+        ) : (
+          <Flex direction="column" justifyContent="center" alignItems="center">
+            <Flex>
+              <Text
+                fontWeight="600"
+                fontSize={isMobile ? "4xl" : "5xl"}
+                color="#222222"
+                fontFamily="'Baloo', serif"
+              >
+                {t("empty")}
+              </Text>
+            </Flex>
+            <Link href="/product">
+              <Button
+                cursor="pointer"
+                mt="1rem"
+                border="2px"
+                colorScheme="red"
+                size="lg"
+              >
+                {t("fill")}
+              </Button>
+            </Link>
+          </Flex>
+        )
       ) : (
         <Flex justifyContent="center" alignItems="center">
           <Flex direction="column" alignItems="center">
@@ -390,8 +415,8 @@ function Cart() {
               color="#222222"
               fontFamily="'Baloo', serif"
             >
-              {t("need_login")}{" "}
-            </Text>{" "}
+              {t("need_login")}
+            </Text>
             <Link href="/signin">
               <Text
                 fontSize="15px"

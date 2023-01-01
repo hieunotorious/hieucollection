@@ -1,11 +1,9 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import Link from "next/link";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
 import InventoryIcon from "@mui/icons-material/Inventory";
 import LocalShippingIcon from "@mui/icons-material/LocalShipping";
-import SellIcon from "@mui/icons-material/Sell";
-import CreditCardIcon from "@mui/icons-material/CreditCard";
 import InsertChartIcon from "@mui/icons-material/InsertChart";
 import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
 import CommentIcon from "@mui/icons-material/Comment";
@@ -14,7 +12,6 @@ import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import { css } from "@emotion/react";
 import { Button } from "@chakra-ui/react";
 import { AuthContext } from "../../context/authContext";
-import setLanguage from "next-translate/setLanguage";
 import useTranslation from "next-translate/useTranslation";
 function AdminNav() {
   const { setUser } = useContext(AuthContext);

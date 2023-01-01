@@ -1,5 +1,4 @@
-import { Button, Flex, FlexProps, Image, Input, Text } from "@chakra-ui/react";
-import React from "react";
+import { Button, Flex, FlexProps, Input, Text } from "@chakra-ui/react";
 import SendRoundedIcon from "@mui/icons-material/SendRounded";
 import { useResponsive } from "app/hooks/useResponsive";
 import useTranslation from "next-translate/useTranslation";
@@ -7,7 +6,7 @@ import useTranslation from "next-translate/useTranslation";
 type Props = {} & FlexProps;
 
 const Newletter = ({ ...props }: Props) => {
-  const { isMobile, isTabletOrLaptop, isDesktop } = useResponsive();
+  const { isMobile } = useResponsive();
   const { t } = useTranslation();
   return (
     <Flex alignItems="center" justifyContent="center" w="full" h="full">

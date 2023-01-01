@@ -6,12 +6,11 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import useTranslation from "next-translate/useTranslation";
 import Container from "../Container";
-import { css } from "@emotion/react";
 import { useResponsive } from "app/hooks/useResponsive";
-import { Button, Flex, Text } from "@chakra-ui/react";
+import { Flex, Text } from "@chakra-ui/react";
 import Link from "next/link";
 function Footer() {
-  const { isMobile, isTabletOrLaptop, isDesktop } = useResponsive();
+  const { isMobile } = useResponsive();
   const router = useRouter();
   const { t } = useTranslation();
   return (

@@ -1,14 +1,14 @@
 import { ProductType } from "app/api/auth/models/product";
 import { css } from "@emotion/react";
-import React, { useContext, useEffect, useMemo, useState } from "react";
-import { floor, isEmpty } from "lodash";
+import { useContext } from "react";
+import { floor } from "lodash";
 import Link from "next/link";
 import Image from "next/image";
 import { ButtonGroup, Button, Flex, Text } from "@chakra-ui/react";
 import useTranslation from "next-translate/useTranslation";
-import router, { useRouter } from "next/router";
+import router from "next/router";
 import { AuthContext } from "app/context/authContext";
-import { height } from "@mui/system";
+
 import { addToCart } from "app/services/CartService";
 import { useResponsive } from "app/hooks/useResponsive";
 const ProductItem = ({ product }: { product: ProductType }) => {

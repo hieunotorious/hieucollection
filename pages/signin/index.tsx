@@ -1,9 +1,7 @@
-import { textAlign } from "@mui/system";
 import { AuthContext } from "app/context/authContext";
 import { useRouter } from "next/router";
 import React, { useContext, useState } from "react";
 import { LoginType } from "../../api/auth/models/user";
-import setLanguage from "next-translate/setLanguage";
 import useTranslation from "next-translate/useTranslation";
 import {
   Input,
@@ -12,12 +10,10 @@ import {
   Button,
   useToast,
 } from "@chakra-ui/react";
-import axios from "axios";
+
 import { getUser, login } from "app/services/UserService";
 import { setTokens } from "app/utils/token";
 import { useResponsive } from "app/hooks/useResponsive";
-import Users from "../admin/users";
-import { Password } from "@mui/icons-material";
 function Login() {
   const [user, setUser] = useState<LoginType>({
     username: "",
@@ -41,7 +37,7 @@ function Login() {
         const loginUser = await getUser();
         if (loginUser) {
           toast({
-            title: "Login Successful",
+            title: t("login_successful"),
             status: "success",
             position: "top-right",
             duration: 3000,
@@ -53,7 +49,7 @@ function Login() {
       }
     } catch (error) {
       toast({
-        title: "Incorrect Username or Password",
+        title: t("incorrect"),
         status: "error",
         position: "top-right",
         duration: 3000,

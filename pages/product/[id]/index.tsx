@@ -1,10 +1,7 @@
-import React, { useContext, useEffect, useMemo, useState } from "react";
-import Head from "next/head";
-import link from "next/link";
+import { useContext, useEffect, useMemo, useState } from "react";
 import Image from "next/image";
 import StarIcon from "@mui/icons-material/Star";
 import { useResponsive } from "app/hooks/useResponsive";
-import { padding } from "@mui/system";
 import { useRouter } from "next/router";
 import { ProductType } from "app/api/auth/models/product";
 import { css } from "@emotion/react";
@@ -15,7 +12,7 @@ import GoogleIcon from "@mui/icons-material/Google";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import setLanguage from "next-translate/setLanguage";
+import Container from "app/component/Container";
 import useTranslation from "next-translate/useTranslation";
 import {
   NumberInput,
@@ -24,13 +21,12 @@ import {
   NumberIncrementStepper,
   NumberDecrementStepper,
   Button,
-  Flex,
-  FlexProps,
-  Text,
   Stack,
+  Flex,
 } from "@chakra-ui/react";
 import { getProductId } from "app/services/ProductService";
 import { addToCart } from "app/services/CartService";
+import Warning from "app/component/Warning";
 function ProductId() {
   const router = useRouter();
   const { isMobile } = useResponsive();
@@ -67,183 +63,173 @@ function ProductId() {
 
   return (
     product && (
-      <div
-        key={product._id}
-        style={{
-          padding: "4rem",
-          minHeight: "950px",
-          width: "100%",
-          boxSizing: "border-box",
-          background: "White",
-        }}
-      >
-        <div>
-          <Link style={{}} href="/product">
-            <button>
-              <ArrowBackIcon
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  color: "black",
-                  fontSize: 30,
-                }}
-              />
-            </button>
-          </Link>
-        </div>
+      <Container>
         <div
+          key={product._id}
           style={{
-            background: "white",
-            marginTop: "3rem",
-            display: isMobile ? "column" : "grid",
-            gridTemplateColumns: " 1fr 1fr",
-            gap: "4rem",
-            alignItems: " center",
+            padding: "2rem",
+            minHeight: "950px",
+            width: "95%",
+            boxSizing: "border-box",
+            background: "White",
+            flexDirection: "column",
+            justifyContent: "center",
           }}
         >
-          <Image
+          <div>
+            <Link style={{}} href="/product">
+              <button>
+                <ArrowBackIcon
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    color: "black",
+                    fontSize: 30,
+                  }}
+                />
+              </button>
+            </Link>
+          </div>
+          <div
             style={{
-              objectFit: "cover",
-              borderRadius: 16,
-              display: "flex",
-            }}
-            width={512}
-            height={500}
-            src={product.img}
-            alt=""
-            css={css`
-              &:hover {
-                -webkit-box-shadow: var(--box-shadow);
-                box-shadow: var(--box-shadow);
-               
-              
-            `}
-          />
-          <form
-            style={{
-              alignItems: "center",
-              display: "grid",
-              gap: "2rem",
+              background: "white",
+              marginTop: "3rem",
+              display: isMobile ? "column" : "grid",
+              gridTemplateColumns: " 1fr 1fr",
+              gap: "4rem",
+              alignItems: " center",
             }}
           >
-            <h2
+            <Flex
+              position="relative"
+              width={isMobile ? 300 : 800}
+              height={isMobile ? 240 : 700}
+            >
+              <Image
+                style={{
+                  objectFit: "cover",
+                  borderRadius: 16,
+                }}
+                layout="fill"
+                src={product.img}
+                alt=""
+              />
+            </Flex>
+
+            <form
               style={{
-                fontSize: "2.5rem",
-                borderBottom: "1px solid black",
-                textTransform: "capitalize",
+                alignItems: "center",
+                display: "grid",
+                gap: "2rem",
               }}
             >
-              {product.name}
-            </h2>
-            <div
-              className="ratings test-grey"
-              style={{ display: "flex", alignItems: "center" }}
-            >
-              <div style={{ display: "flex", width: 60 }}>
-                {ratingStars.map((value, index) => {
-                  return (
-                    <StarIcon
-                      key={index}
-                      style={{ fill: "black", fontSize: "10" }}
-                    />
-                  );
-                })}
+              <h2
+                style={{
+                  marginTop: "1rem",
+                  fontSize: isMobile ? "2rem" : "5rem",
+                  borderBottom: "1px solid black",
+                  paddingBottom: "1rem",
+                  textTransform: "capitalize",
+                }}
+              >
+                {product.name}
+              </h2>
+              <div
+                className="ratings test-grey"
+                style={{ display: "flex", alignItems: "center", gap: "1rem" }}
+              >
+                <div style={{ display: "flex", width: 60 }}>
+                  {ratingStars.map((value, index) => {
+                    return (
+                      <StarIcon
+                        key={index}
+                        style={{
+                          fill: "black",
+                          fontSize: isMobile ? "10px" : "15px",
+                        }}
+                      />
+                    );
+                  })}
+                </div>
+                <h3
+                  style={{
+                    marginLeft: " 1rem",
+                    color: "var(--grey-3)",
+                    fontSize: isMobile ? "1rem" : "3rem",
+                  }}
+                >
+                  ({product.review} Reviews)
+                </h3>
               </div>
               <h3
                 style={{
-                  marginLeft: " 1rem",
-                  color: "var(--grey-3)",
-                  fontSize: "1rem",
+                  fontSize: isMobile ? "1.25rem" : "2rem",
                 }}
               >
-                ({product.review} Reviews)
+                <a style={{ fontWeight: "bold" }}>Price: </a>${product.price}
+                {product.sale && (
+                  <div>
+                    <a style={{ fontWeight: "bold" }}>Sale: </a>$
+                    {product.price - product.sale}
+                  </div>
+                )}
               </h3>
-            </div>
-            <h3
-              style={{
-                fontSize: "1.25rem",
-              }}
-            >
-              <a style={{ fontWeight: "bold" }}>Price: </a>${product.price}
-              {product.sale && (
-                <div>
-                  <a style={{ fontWeight: "bold" }}>Sale: </a>$
-                  {product.price - product.sale}
-                </div>
-              )}
-            </h3>
-            <div
-              style={{
-                lineHeight: 2,
-                fontSize: "1rem",
-              }}
-            >
-              <p style={{ textAlign: "justify", fontSize: "12px" }}>
-                <a style={{ fontWeight: "bold" }}>Description: </a>
-                {product.description}
-              </p>
-            </div>
-            <div style={{}}>
-              <h3
+              <div
                 style={{
-                  color: "var(--grey-3)",
+                  lineHeight: 2,
                   fontSize: "1rem",
-                  fontWeight: 400,
-                  textTransform: "capitalize",
-                  letterSpacing: " normal",
-                  borderBottom: "1px solid black",
-                  marginBottom: "2rem",
                 }}
-                className="brand"
               >
-                <a style={{ fontWeight: "bold" }}>Brand: </a>
-                {product.brand}
-              </h3>
-            </div>
-            <div style={{ width: 50 }}>
-              <NumberInput
-                value={quantity}
-                onChange={(value) => setQuantity(parseInt(value))}
-                min={1}
-                max={100}
-              >
-                <NumberInputField />
-                <NumberInputStepper>
-                  <NumberIncrementStepper />
-                  <NumberDecrementStepper />
-                </NumberInputStepper>
-              </NumberInput>
-            </div>
+                <p
+                  style={{
+                    textAlign: "justify",
+                    fontSize: isMobile ? "1.25rem" : "2rem",
+                  }}
+                >
+                  <a style={{ fontWeight: "bold" }}>Description: </a>
+                  {product.description}
+                </p>
+              </div>
+              <div>
+                <h3
+                  style={{
+                    color: "var(--grey-3)",
+                    fontSize: isMobile ? "1.25rem" : "2rem",
+                    fontWeight: 400,
+                    textTransform: "capitalize",
+                    letterSpacing: " normal",
+                    borderBottom: "1px solid black",
+                    paddingBottom: "1rem",
+                  }}
+                  className="brand"
+                >
+                  <a style={{ fontWeight: "bold" }}>Brand: </a>
+                  {product.brand}
+                </h3>
+              </div>
+              <div style={{ width: 50, marginLeft: "10px" }}>
+                <NumberInput
+                  value={quantity}
+                  onChange={(value) => setQuantity(parseInt(value))}
+                  min={1}
+                  max={100}
+                >
+                  <NumberInputField />
+                  <NumberInputStepper>
+                    <NumberIncrementStepper />
+                    <NumberDecrementStepper />
+                  </NumberInputStepper>
+                </NumberInput>
+              </div>
 
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                marginLeft: "1rem",
-              }}
-            >
-              <Link style={{ color: "black" }} href="/checkout">
-                <Stack spacing={4} direction="row" align="center">
-                  <Button
-                    style={{ width: "15rem", height: "3rem" }}
-                    onClick={() => {
-                      router.push("/cart");
-                      handleAddCart(product._id);
-                    }}
-                    colorScheme="blue"
-                    size="md"
-                  >
-                    {t("buy_now")}
-                  </Button>
-                </Stack>
-              </Link>
               <div
                 style={{
                   display: "flex",
                   alignItems: "center",
+                  marginLeft: "1rem",
                 }}
               >
-                <Link style={{ color: "black" }} href="/cart">
+                <Link style={{ color: "black" }} href="/checkout">
                   <Stack spacing={4} direction="row" align="center">
                     <Button
                       style={{ width: "15rem", height: "3rem" }}
@@ -251,39 +237,75 @@ function ProductId() {
                         router.push("/cart");
                         handleAddCart(product._id);
                       }}
-                      variant="ghost"
                       colorScheme="blue"
-                      size="md"
+                      size="xl"
                     >
-                      {t("add_to_cart")}
+                      {t("buy_now")}
                     </Button>
                   </Stack>
                 </Link>
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                  }}
+                >
+                  <Link style={{ color: "black" }} href="/cart">
+                    <Stack spacing={4} direction="row" align="center">
+                      <Button
+                        style={{ width: "15rem", height: "3rem" }}
+                        onClick={() => {
+                          router.push("/cart");
+                          handleAddCart(product._id);
+                        }}
+                        variant="ghost"
+                        colorScheme="blue"
+                        size="xl"
+                      >
+                        {t("add_to_cart")}
+                      </Button>
+                    </Stack>
+                  </Link>
+                </div>
               </div>
-            </div>
 
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-              }}
-            >
-              <FacebookIcon
-                style={{ fontSize: "4rem", fill: "#3B5998", cursor: "pointer" }}
-              />
-              <GoogleIcon
-                style={{ fontSize: "4rem", fill: "#EA4335", cursor: "pointer" }}
-              />
-              <TwitterIcon
-                style={{ fontSize: "4rem", fill: "#1DA1F2", cursor: "pointer" }}
-              />
-              <FavoriteBorderIcon
-                style={{ fontSize: "4rem", fill: "red", cursor: "pointer" }}
-              />
-            </div>
-          </form>
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: isMobile ? "center" : "left",
+                  marginLeft: "5px",
+                }}
+              >
+                <FacebookIcon
+                  style={{
+                    fontSize: "4rem",
+                    fill: "#3B5998",
+                    cursor: "pointer",
+                  }}
+                />
+                <GoogleIcon
+                  style={{
+                    fontSize: "4rem",
+                    fill: "#EA4335",
+                    cursor: "pointer",
+                  }}
+                />
+                <TwitterIcon
+                  style={{
+                    fontSize: "4rem",
+                    fill: "#1DA1F2",
+                    cursor: "pointer",
+                  }}
+                />
+                <FavoriteBorderIcon
+                  style={{ fontSize: "4rem", fill: "red", cursor: "pointer" }}
+                />
+              </div>
+            </form>
+          </div>
         </div>
-      </div>
+      </Container>
     )
   );
 }
