@@ -26,7 +26,6 @@ import {
 } from "@chakra-ui/react";
 import { getProductId } from "app/services/ProductService";
 import { addToCart } from "app/services/CartService";
-import Warning from "app/component/Warning";
 function ProductId() {
   const router = useRouter();
   const { isMobile } = useResponsive();
@@ -126,7 +125,7 @@ function ProductId() {
               <h2
                 style={{
                   marginTop: "1rem",
-                  fontSize: isMobile ? "2rem" : "5rem",
+                  fontSize: isMobile ? "2rem" : "3rem",
                   borderBottom: "1px solid black",
                   paddingBottom: "1rem",
                   textTransform: "capitalize",
