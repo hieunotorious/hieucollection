@@ -8,6 +8,7 @@ import { useRouter } from "next/router";
 import { useMemo } from "react";
 import AdminSide from "app/component/AdminSide";
 import AdminNav from "app/component/AdminNav";
+import Head from "next/head";
 
 function App({ Component, pageProps }: AppProps) {
   const router = useRouter();
@@ -19,6 +20,10 @@ function App({ Component, pageProps }: AppProps) {
   return (
     <ChakraProvider>
       <AuthProvider>
+        <Head>
+          <title>HieuCollection</title>
+          <link rel="icon" href="/gorilla.svg" />
+        </Head>
         <Flex direction="column" w="full" h="full">
           {!isAdminPage ? <Navbar /> : <AdminNav />}
 

@@ -166,7 +166,7 @@ function ProductId() {
               </div>
               <h3
                 style={{
-                  fontSize: isMobile ? "1.25rem" : "1rem",
+                  fontSize: isMobile ? "1.25rem" : "2rem",
                 }}
               >
                 <a style={{ fontWeight: "bold" }}>Price: </a>${product.price}
