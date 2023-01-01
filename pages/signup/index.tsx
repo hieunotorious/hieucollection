@@ -1,13 +1,7 @@
-import { blue } from "@mui/material/colors";
 import React, { useContext, useState } from "react";
-
 import { SignupType } from "../../api/auth/models/user";
-import { css } from "@emotion/react";
-import { Password } from "@mui/icons-material";
 import { AuthContext } from "app/context/authContext";
-import { info } from "console";
 import { useRouter } from "next/router";
-import setLanguage from "next-translate/setLanguage";
 import useTranslation from "next-translate/useTranslation";
 import {
   Input,
@@ -45,7 +39,7 @@ function Signup() {
       const loginUser = await getUser();
       if (loginUser) {
         toast({
-          title: "Signup Successful",
+          title: t("signup_successful"),
           status: "success",
           position: "top-right",
           duration: 3000,

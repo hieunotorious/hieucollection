@@ -1,7 +1,4 @@
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
-import LanguageOutlinedIcon from "@mui/icons-material/LanguageOutlined";
-import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
-import FullscreenExitOutlinedIcon from "@mui/icons-material/FullscreenExitOutlined";
 import NotificationsNoneOutlinedIcon from "@mui/icons-material/NotificationsNoneOutlined";
 import ChatBubbleOutlineOutlinedIcon from "@mui/icons-material/ChatBubbleOutlineOutlined";
 import ListOutlinedIcon from "@mui/icons-material/ListOutlined";
@@ -11,12 +8,9 @@ import LanguageIcon from "@mui/icons-material/Language";
 import { css } from "@emotion/react";
 import {
   Button,
-  Flex,
-  Grid,
   Popover,
   PopoverContent,
   PopoverTrigger,
-  Text,
 } from "@chakra-ui/react";
 import { useState } from "react";
 const AdminNav = () => {

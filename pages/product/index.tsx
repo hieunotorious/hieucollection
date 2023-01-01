@@ -1,24 +1,14 @@
-import { Category } from "@mui/icons-material";
 import { AllType, BrandType, CategoryType } from "app/api/auth/models/product";
 import { css } from "@emotion/react";
-import ManageSearchIcon from "@mui/icons-material/ManageSearch";
+
 import ProductItem from "app/component/ProductItem";
-import React, { useState } from "react";
+import { useState } from "react";
 import { useResponsive } from "app/hooks/useResponsive";
-import { Formik } from "formik";
-import setLanguage from "next-translate/setLanguage";
+
 import useTranslation from "next-translate/useTranslation";
 import { getProduct } from "app/services/ProductService";
-import { InferGetServerSidePropsType, InferGetStaticPropsType } from "next";
+import { InferGetStaticPropsType } from "next";
 import {
-  Menu,
-  MenuButton,
-  MenuList,
-  MenuItem,
-  MenuItemOption,
-  MenuGroup,
-  MenuOptionGroup,
-  MenuDivider,
   Button,
   Flex,
   Popover,
@@ -30,7 +20,6 @@ import {
   Grid,
   PopoverHeader,
 } from "@chakra-ui/react";
-import ExpandMoreRoundedIcon from "@mui/icons-material/ExpandMoreRounded";
 export const getStaticProps = async () => {
   const product = await getProduct();
   return {

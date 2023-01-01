@@ -1,8 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import useTranslation from "next-translate/useTranslation";
-import React from "react";
-import { Button, Flex, FlexProps, Text, Stack } from "@chakra-ui/react";
+import { Button, Flex, FlexProps, Text } from "@chakra-ui/react";
 import { useResponsive } from "app/hooks/useResponsive";
 
 type SlideType = {

@@ -1,8 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
-import { useRouter } from "next/router";
-import setLanguage from "next-translate/setLanguage";
-import useTranslation from "next-translate/useTranslation";
-import { Select, Input, Image } from "@chakra-ui/react";
+import { Image } from "@chakra-ui/react";
 import LocalShippingIcon from "@mui/icons-material/LocalShipping";
 import Head from "next/head";
 function Purchase() {

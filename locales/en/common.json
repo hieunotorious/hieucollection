@@ -75,5 +75,12 @@
 "year":"Years Of Experience",
 "experience":"Our Experience",
 "award":"Awards Winning",
-"success":"Success Journey"
+"success":"Success Journey",
+"empty":"Your cart is empty",
+"fill":"Fill in",
+"update_successful":"Update Successful",
+"incorrect":"Incorrect Username or Password",
+"login_successful":"Login Successful",
+"signup_successful":"Signup Successful"
+
 }

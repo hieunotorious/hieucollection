@@ -1,17 +1,12 @@
-import { Button, Flex, FlexProps, Input, Text } from "@chakra-ui/react";
-import React from "react";
-import SendRoundedIcon from "@mui/icons-material/SendRounded";
+import { Button, Flex, FlexProps, Text } from "@chakra-ui/react";
 import useTranslation from "next-translate/useTranslation";
-import Link from "next/link";
-import { css } from "@emotion/react";
 import Image from "next/image";
-import Container from "app/component/Container";
 import { useResponsive } from "app/hooks/useResponsive";
 type Props = {} & FlexProps;
 
 const Banner = ({ ...props }: Props) => {
   const { t } = useTranslation();
-  const { isMobile, isTabletOrLaptop, isDesktop } = useResponsive();
+  const { isMobile } = useResponsive();
   return (
     <Flex
       display={isMobile ? "none" : "flex"}

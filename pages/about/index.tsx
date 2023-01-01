@@ -1,5 +1,5 @@
 import { Flex, FlexProps, Image, Text } from "@chakra-ui/react";
-import React from "react";
+
 import ExpCard from "app/component/ExpCard";
 import Container from "app/component/Container";
 import { useResponsive } from "app/hooks/useResponsive";
@@ -7,7 +7,7 @@ import useTranslation from "next-translate/useTranslation";
 type Props = {} & FlexProps;
 
 const About = ({ ...props }: Props) => {
-  const { isMobile, isTabletOrLaptop, isDesktop } = useResponsive();
+  const { isMobile } = useResponsive();
   const { t } = useTranslation();
   return (
     <Container>

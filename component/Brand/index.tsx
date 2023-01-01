@@ -1,13 +1,11 @@
-import { Button, Flex, FlexProps, Input, Text } from "@chakra-ui/react";
-import React from "react";
-import SendRoundedIcon from "@mui/icons-material/SendRounded";
+import { Flex, FlexProps, Text } from "@chakra-ui/react";
 import { css } from "@emotion/react";
 type Props = {} & FlexProps;
 import Image from "next/image";
 import { useResponsive } from "app/hooks/useResponsive";
 import useTranslation from "next-translate/useTranslation";
 const Brand = ({ ...props }: Props) => {
-  const { isMobile, isTabletOrLaptop, isDesktop } = useResponsive();
+  const { isMobile } = useResponsive();
   const { t } = useTranslation();
   return (
     <Flex

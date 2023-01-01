@@ -4,15 +4,12 @@ import "swiper/css/effect-coverflow";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 
-import { Flex, Text } from "@chakra-ui/react";
+import { Flex } from "@chakra-ui/react";
 import useTranslation from "next-translate/useTranslation";
-import React from "react";
 import { Autoplay, Navigation, Pagination, EffectCoverflow } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 import Slide from "./Slide";
-import Container from "../Container";
-import Image from "next/image";
 import { useResponsive } from "app/hooks/useResponsive";
 
 type Props = {};

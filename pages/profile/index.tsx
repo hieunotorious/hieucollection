@@ -1,12 +1,7 @@
-import { blue } from "@mui/material/colors";
-import React, { useContext, useEffect, useState } from "react";
-import { Gender, UpdateUser, User } from "../../api/auth/models/user";
-import { css } from "@emotion/react";
-import { Password } from "@mui/icons-material";
+import { useContext, useEffect, useState } from "react";
+import { Gender, UpdateUser } from "../../api/auth/models/user";
 import { AuthContext } from "app/context/authContext";
-import { info } from "console";
 import { useRouter } from "next/router";
-import setLanguage from "next-translate/setLanguage";
 import useTranslation from "next-translate/useTranslation";
 import { Select, Input, useToast, Button } from "@chakra-ui/react";
 import { useResponsive } from "app/hooks/useResponsive";
@@ -33,7 +28,7 @@ function Signup() {
     if (data) {
       setUser(data);
       toast({
-        title: "Update Successful",
+        title: t("update_successful"),
         status: "success",
         position: "top-right",
         duration: 3000,

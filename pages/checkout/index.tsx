@@ -1,20 +1,18 @@
-import { blue } from "@mui/material/colors";
-import React, { useContext, useEffect, useState, useMemo } from "react";
-import { Gender, UpdateUser, User } from "../../api/auth/models/user";
-import { css } from "@emotion/react";
-import { Password } from "@mui/icons-material";
+import { useContext, useEffect, useState, useMemo } from "react";
+import { Gender, UpdateUser } from "../../api/auth/models/user";
+
 import { AuthContext } from "app/context/authContext";
-import { info } from "console";
+
 import { useRouter } from "next/router";
-import setLanguage from "next-translate/setLanguage";
+
 import useTranslation from "next-translate/useTranslation";
-import { Select, Input, Button, Flex, Text } from "@chakra-ui/react";
+import { Button, Flex, Text } from "@chakra-ui/react";
 import { round } from "lodash";
 import { useResponsive } from "app/hooks/useResponsive";
 import Link from "next/link";
 
 function Checkout() {
-  const { isMobile, isTabletOrLaptop, isDesktop } = useResponsive();
+  const { isMobile } = useResponsive();
   const { t } = useTranslation();
   const { setUser } = useContext(AuthContext);
   const { user, updateProfile } = useContext(AuthContext);

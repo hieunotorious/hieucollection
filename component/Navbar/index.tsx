@@ -1,16 +1,13 @@
-import { css } from "@emotion/react";
 import Link from "next/link";
-import Image from "next/image";
 import setLanguage from "next-translate/setLanguage";
 import useTranslation from "next-translate/useTranslation";
-import React, { useState, useContext } from "react";
+import { useState, useContext } from "react";
 import LanguageIcon from "@mui/icons-material/Language";
 import AccountBoxIcon from "@mui/icons-material/AccountBox";
-import ShoppingCartRoundedIcon from "@mui/icons-material/ShoppingCartRounded";
 import ShoppingCartCheckoutIcon from "@mui/icons-material/ShoppingCartCheckout";
 import { AuthContext } from "../../context/authContext";
 import MenuIcon from "@mui/icons-material/Menu";
-import { getUser, logout } from "app/services/UserService";
+import { logout } from "app/services/UserService";
 import {
   Button,
   Flex,
@@ -22,20 +19,13 @@ import {
   PopoverContent,
   PopoverTrigger,
   Text,
-  MenuItemOption,
-  MenuGroup,
-  MenuOptionGroup,
-  MenuDivider,
   IconButton,
 } from "@chakra-ui/react";
 import { Role } from "app/api/auth/models/user";
-import { useRouter } from "next/router";
 import Container from "../Container";
-import { fontFamily, height } from "@mui/system";
 import { useResponsive } from "app/hooks/useResponsive";
 function Nav() {
-  const router = useRouter();
-  const { isMobile, isTabletOrLaptop, isDesktop } = useResponsive();
+  const { isMobile } = useResponsive();
   const { user, setUser } = useContext(AuthContext);
   const [isOpenLanguage, setIsOpenLanguage] = useState(false);
   const { t } = useTranslation();
