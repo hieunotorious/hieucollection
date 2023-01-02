@@ -61,7 +61,7 @@ function Footer() {
               cursor="pointer"
               gap="1rem"
               textAlign="center"
-              ml={isMobile ? "130px" : "none"}
+              justifyContent={isMobile ? "center" : "none"}
             >
               <Link href="https://www.facebook.com/profile.php?id=100004517205574">
                 <FacebookIcon
@@ -79,15 +79,14 @@ function Footer() {
                 />
               </Link>
 
-              <Link href="https://twitter.com/MNgcHiu2">
-                <TwitterIcon
-                  style={{ width: "23px", height: "23px", fill: "#1DA1F2" }}
-                />
-              </Link>
+              <TwitterIcon
+                style={{ width: "23px", height: "23px", fill: "#1DA1F2" }}
+              />
             </Flex>
           </Flex>
           <Flex
             direction="column"
+            alignItems="center"
             h={isMobile ? "110px" : "full"}
             w="full"
             lineHeight="1.5"
@@ -99,19 +98,15 @@ function Footer() {
             >
               {t("contact_us")}
             </Text>
-            <Text mt="1rem" ml={isMobile ? "10rem" : "none"}>
-              hieumn2001@gmail.com
-            </Text>
-            <Text ml={isMobile ? "10rem" : "none"}>
-              {" "}
-              Phone: (+84) 912590467
-            </Text>
+            <Text mt="1rem">hieumn2001@gmail.com</Text>
+            <Text> Phone: (+84) 912590467</Text>
           </Flex>
           <Flex
             direction="column"
             h={isMobile ? "150px" : "full"}
             w="full"
             lineHeight="1.5"
+            alignItems="center"
           >
             <Text
               fontWeight="700"
@@ -121,11 +116,9 @@ function Footer() {
             >
               {t("store_at")}
             </Text>
-            <Text mt="1rem" ml={isMobile ? "16rem" : "none"}>
-              Amazon
-            </Text>
-            <Text ml={isMobile ? "16rem" : "none"}>Walmart</Text>
-            <Text ml={isMobile ? "16rem" : "none"}>Target</Text>
+            <Text mt="1rem  ">Target</Text>
+            <Text>Amazon</Text>
+            <Text>Walmart</Text>
           </Flex>
 
           <Flex
@@ -133,6 +126,7 @@ function Footer() {
             h={isMobile ? "110px" : "full"}
             w="full"
             lineHeight="1.5"
+            alignItems="center"
           >
             <Text
               fontWeight="700"
@@ -146,8 +140,9 @@ function Footer() {
               direction={isMobile ? "row" : "row"}
               h={isMobile ? "110px" : "60px"}
               w="full"
+              justifyContent="center"
             >
-              <Flex ml={isMobile ? "11rem" : "none"}>
+              <Flex>
                 <Image
                   width={52}
                   height={32}
