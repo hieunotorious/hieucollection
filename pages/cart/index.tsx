@@ -9,7 +9,7 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import Image from "next/image";
 import { round } from "lodash";
 import useTranslation from "next-translate/useTranslation";
-import { Button, Flex, FlexProps, Text, Stack } from "@chakra-ui/react";
+import { Button, Flex, Text, Stack } from "@chakra-ui/react";
 import {
   clearCart,
   removeFromCart,

@@ -6,7 +6,7 @@ export const useResponsive = () => {
   });
 
   const isMobile = useBreakpointValue({
-    md: false,
+    sm: false,
     base: true,
   });
 
@@ -19,14 +19,17 @@ export const useResponsive = () => {
     xl: false,
     base: true,
   });
-
-  const isBigScreen = useBreakpointValue({
+  const isDesktop = useBreakpointValue({
+    lg: false,
+    base: true,
+  });
+  const isBigscreen = useBreakpointValue({
     "2xl": false,
     base: true,
   });
-
   return {
-    isBigScreen,
+    isBigscreen,
+    isDesktop,
     isMobile,
     isMobileOrTablet,
     isSmallDevice,
