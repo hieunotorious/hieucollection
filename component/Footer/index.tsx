@@ -1,6 +1,5 @@
 import FacebookIcon from "@mui/icons-material/Facebook";
 import InstagramIcon from "@mui/icons-material/Instagram";
-import TwitterIcon from "@mui/icons-material/Twitter";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import Image from "next/image";
 import { useRouter } from "next/router";
@@ -8,9 +7,10 @@ import useTranslation from "next-translate/useTranslation";
 import Container from "../Container";
 import { useResponsive } from "app/hooks/useResponsive";
 import { Flex, Text } from "@chakra-ui/react";
+import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import Link from "next/link";
 function Footer() {
-  const { isMobile } = useResponsive();
+  const { isMobile, isTabletOrLaptop } = useResponsive();
   const router = useRouter();
   const { t } = useTranslation();
   return (
@@ -31,8 +31,10 @@ function Footer() {
         }}
       >
         <Flex
-          display={isMobile ? "column" : "grid"}
-          gridTemplateColumns="1fr 1fr 1fr 1fr"
+          display={isMobile ? "flex" : "grid"}
+          gridTemplateColumns={
+            isTabletOrLaptop ? " 1fr 1fr" : "1fr 1fr 1fr 1fr"
+          }
           textAlign="left"
           mb="6rem"
           gap="20rem"
@@ -65,7 +67,7 @@ function Footer() {
             >
               <Link href="https://www.facebook.com/profile.php?id=100004517205574">
                 <FacebookIcon
-                  style={{ width: "23px", height: "23px", fill: "3B5998" }}
+                  style={{ width: "23px", height: "23px", fill: "#4267b2" }}
                 />
               </Link>
               <Link href="https://www.instagram.com/hieucollection___/">
@@ -79,8 +81,8 @@ function Footer() {
                 />
               </Link>
 
-              <TwitterIcon
-                style={{ width: "23px", height: "23px", fill: "#1DA1F2" }}
+              <LinkedInIcon
+                style={{ width: "23px", height: "23px", fill: "#0077B5" }}
               />
             </Flex>
           </Flex>

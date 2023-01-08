@@ -31,6 +31,7 @@ function App({ Component, pageProps }: AppProps) {
             {isAdminPage && <AdminSide />}
             <Component {...pageProps} />
           </Flex>
+
           <Footer />
         </Flex>
       </AuthProvider>

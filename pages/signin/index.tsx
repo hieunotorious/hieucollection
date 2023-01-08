@@ -9,11 +9,13 @@ import {
   InputRightElement,
   Button,
   useToast,
+  Flex,
 } from "@chakra-ui/react";
 
 import { getUser, login } from "app/services/UserService";
 import { setTokens } from "app/utils/token";
 import { useResponsive } from "app/hooks/useResponsive";
+import Breadcrumb from "app/component/Breadcrumb";
 function Login() {
   const [user, setUser] = useState<LoginType>({
     username: "",
@@ -75,136 +77,145 @@ function Login() {
   const handleClick = () => setShow(!show);
   const { isMobile } = useResponsive();
   return (
-    <div
-      style={{
-        margin: "0 auto",
-        minHeight: isMobile ? 610 : 795,
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        flexDirection: "column",
-        background: "white",
-      }}
-    >
-      <div>
-        <div
-          style={{
-            padding: "1.25rem",
-            borderRadius: "0.5rem",
-            border: " 1px solid black",
-            display: "grid",
-            gap: "1rem",
-            marginTop: " 4rem",
-            width: "300px",
-            background: "white",
-          }}
-        >
-          <h1 style={{ textAlign: "center" }}>{t("login")}</h1>
-          <label style={{}}>{t("username")}</label>
-          <form onSubmit={submitForm}>
-            <div>
-              <input
-                style={{
-                  borderRadius: " 0.25rem",
-                  border: "1px solid black",
-                  padding: "0.25rem 0.5rem",
-                  width: 275,
-                }}
-                type="text"
-                onChange={(event) => {
-                  setUser((prevState) => ({
-                    ...prevState,
-                    username: event.target.value,
-                  }));
-                }}
-                required
-              ></input>
-            </div>
-            <label>{t("password")}</label>
-            <div>
-              <InputGroup size="md">
-                <Input
+    <Flex direction="column" w="full">
+      <Breadcrumb
+        links={[
+          { title: t("home"), href: "/" },
+          { title: t("login"), href: "/signin" },
+        ]}
+        current={t("login")}
+      />
+      <div
+        style={{
+          margin: "0 auto",
+          minHeight: isMobile ? 610 : 795,
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          flexDirection: "column",
+          background: "white",
+        }}
+      >
+        <div>
+          <div
+            style={{
+              padding: "1.25rem",
+              borderRadius: "0.5rem",
+              border: " 1px solid black",
+              display: "grid",
+              gap: "1rem",
+              marginTop: " 4rem",
+              width: "300px",
+              background: "white",
+            }}
+          >
+            <h1 style={{ textAlign: "center" }}>{t("login")}</h1>
+            <label style={{}}>{t("username")}</label>
+            <form onSubmit={submitForm}>
+              <div>
+                <input
                   style={{
-                    padding: "0.25rem 0.5rem",
-                    borderRadius: "0.25rem",
+                    borderRadius: " 0.25rem",
                     border: "1px solid black",
+                    padding: "0.25rem 0.5rem",
                     width: 275,
-                    height: 30,
                   }}
-                  type={show ? "text" : "password"}
+                  type="text"
                   onChange={(event) => {
                     setUser((prevState) => ({
                       ...prevState,
-                      password: event.target.value,
+                      username: event.target.value,
                     }));
                   }}
                   required
-                />
-                <InputRightElement width="5.5rem">
-                  <Button h="1.75rem" size="sm" onClick={handleClick}>
-                    {show ? "Hide" : "Show"}
-                  </Button>
-                </InputRightElement>
-              </InputGroup>
-            </div>
+                ></input>
+              </div>
+              <label>{t("password")}</label>
+              <div>
+                <InputGroup size="md">
+                  <Input
+                    style={{
+                      padding: "0.25rem 0.5rem",
+                      borderRadius: "0.25rem",
+                      border: "1px solid black",
+                      width: 275,
+                      height: 30,
+                    }}
+                    type={show ? "text" : "password"}
+                    onChange={(event) => {
+                      setUser((prevState) => ({
+                        ...prevState,
+                        password: event.target.value,
+                      }));
+                    }}
+                    required
+                  />
+                  <InputRightElement width="5.5rem">
+                    <Button h="1.75rem" size="sm" onClick={handleClick}>
+                      {show ? "Hide" : "Show"}
+                    </Button>
+                  </InputRightElement>
+                </InputGroup>
+              </div>
 
-            <div
-              style={{
-                fontSize: "1rem",
-                letterSpacing: "normal",
-                color: "var(--text)",
-                textDecoration: "underline",
-              }}
-            >
-              {t("forgot_password?")}
-            </div>
-            <Button
-              style={{
-                borderRadius: " 0.25rem",
-                fontWeight: "300",
-                cursor: "pointer",
-                border: "none",
-                textTransform: "uppercase",
-                width: 275,
-                background: "#3399FF",
-                color: "white",
-              }}
-              type="submit"
-              isLoading={isLoading}
-            >
-              {t("login")}
-            </Button>
-          </form>
-        </div>
-        <div
-          style={{
-            marginTop: " 1rem",
-            display: "flex",
-            alignItems: " center",
-            borderRadius: "0.5rem",
-            border: "1px solid black",
-            padding: " 1.25rem",
-            background: "white",
-            marginBottom: "4rem",
-            justifyContent: "center",
-          }}
-        >
+              <div
+                style={{
+                  fontSize: "1rem",
+                  letterSpacing: "normal",
+                  color: "var(--text)",
+                  textDecoration: "underline",
+                }}
+              >
+                {t("forgot_password?")}
+              </div>
+              <Button
+                style={{
+                  borderRadius: " 0.25rem",
+                  fontWeight: "300",
+                  cursor: "pointer",
+                  border: "none",
+                  textTransform: "uppercase",
+                  width: 275,
+                  background: "#3399FF",
+                  color: "white",
+                }}
+                type="submit"
+                isLoading={isLoading}
+              >
+                {t("login")}
+              </Button>
+            </form>
+          </div>
           <div
             style={{
-              marginLeft: isMobile ? "none" : "1rem",
+              marginTop: " 1rem",
+              display: "flex",
+              alignItems: " center",
+              borderRadius: "0.5rem",
+              border: "1px solid black",
+              padding: " 1.25rem",
+              background: "white",
+              marginBottom: "4rem",
+              justifyContent: "center",
             }}
           >
-            {t("not_a_member")}
-            <a
-              style={{ color: "blue", textDecoration: "underline" }}
-              href="signup"
+            <div
+              style={{
+                marginLeft: isMobile ? "none" : "1rem",
+              }}
             >
-              {t("signup")}
-            </a>
+              {t("not_a_member")}
+              <a
+                style={{ color: "blue", textDecoration: "underline" }}
+                href="signup"
+              >
+                {t("signup")}
+              </a>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </Flex>
   );
 }
 

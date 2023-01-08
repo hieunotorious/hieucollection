@@ -33,7 +33,6 @@ const DragonballProduct = ({
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
   const [products, setProduct] = useState(product);
   const [nameproducts, setNameProducts] = useState(product);
-
   const { t } = useTranslation();
   const { isMobile } = useResponsive();
   const { setUser } = useContext(AuthContext);

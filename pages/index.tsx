@@ -17,6 +17,7 @@ import PreProduct from "app/component/PreProduct";
 import SpidermanProduct from "app/component/SpidermanProduct";
 import TransformerProduct from "app/component/TransformerProduct";
 import SaleProduct from "app/component/SaleProduct";
+
 export const getStaticProps = async () => {
   const product = await getProduct();
   return {

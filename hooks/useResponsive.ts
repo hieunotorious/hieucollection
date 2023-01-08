@@ -1,24 +1,35 @@
 import { useBreakpointValue } from "@chakra-ui/react";
 export const useResponsive = () => {
-  const isMobile = useBreakpointValue({
+  const isSmallDevice = useBreakpointValue({
     sm: false,
     base: true,
   });
 
-  const isTabletOrLaptop = useBreakpointValue({
+  const isMobile = useBreakpointValue({
     md: false,
     base: true,
   });
 
-  const isDesktop = useBreakpointValue({
+  const isMobileOrTablet = useBreakpointValue({
     lg: false,
     base: true,
   });
 
-  const isBigscreen = useBreakpointValue({
+  const isTabletOrLaptop = useBreakpointValue({
+    xl: false,
+    base: true,
+  });
+
+  const isBigScreen = useBreakpointValue({
     "2xl": false,
     base: true,
   });
 
-  return { isBigscreen, isMobile, isTabletOrLaptop, isDesktop };
+  return {
+    isBigScreen,
+    isMobile,
+    isMobileOrTablet,
+    isSmallDevice,
+    isTabletOrLaptop,
+  };
 };

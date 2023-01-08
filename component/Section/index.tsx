@@ -37,8 +37,9 @@ const Section = (props: Props) => {
           modifier: 1,
           slideShadows: true,
         }}
+        slidesPerView="auto"
         autoplay={{
-          delay: 5000,
+          delay: 2000,
           disableOnInteraction: false,
         }}
         loop
