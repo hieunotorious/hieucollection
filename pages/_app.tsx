@@ -9,6 +9,7 @@ import { useMemo } from "react";
 import AdminSide from "app/component/AdminSide";
 import AdminNav from "app/component/AdminNav";
 import Head from "next/head";
+import theme from "app/theme";
 
 function App({ Component, pageProps }: AppProps) {
   const router = useRouter();
@@ -18,7 +19,7 @@ function App({ Component, pageProps }: AppProps) {
   );
 
   return (
-    <ChakraProvider>
+    <ChakraProvider theme={theme}>
       <AuthProvider>
         <Head>
           <title>HieuCollection</title>

@@ -20,11 +20,18 @@ import {
   PopoverTrigger,
   Text,
   IconButton,
+  Stack,
+  MenuGroup,
+  MenuDivider,
+  Divider,
 } from "@chakra-ui/react";
 import { Role } from "app/api/auth/models/user";
 import Container from "../Container";
 import { useResponsive } from "app/hooks/useResponsive";
+import { useRouter } from "next/router";
+import Image from "next/image";
 function Nav() {
+  const router = useRouter();
   const { isMobile } = useResponsive();
   const { user, setUser } = useContext(AuthContext);
   const [isOpenLanguage, setIsOpenLanguage] = useState(false);
@@ -45,6 +52,7 @@ function Nav() {
   return (
     <Flex direction="column" h="12rem" background="b5def2">
       <Container
+        display={isMobile ? "flex" : "none"}
         h="48px"
         justifyContent="space-between"
         alignItems="center"
@@ -90,7 +98,13 @@ function Nav() {
           </Popover>
         </Flex>
       </Container>
-      <Flex w="full" h="60px" background="#b5def2" alignItems="center">
+      <Flex
+        w="full"
+        h="60px"
+        background={isMobile ? "#b5def2" : "#FFFFFF"}
+        alignItems="center"
+        mt={isMobile ? "0" : "3rem"}
+      >
         <Container>
           <Flex
             style={{
@@ -128,97 +142,300 @@ function Nav() {
                   </Menu>
                 </Flex>
               ) : (
-                <Flex justifyContent="flex-start" w="full">
+                <Container>
                   <Flex
-                    style={{
-                      fontSize: "2rem",
-                      marginRight: "2rem",
-                      fontFamily: "'Baloo', serif",
-                      cursor: "pointer",
-                      color: "#fff",
-                      letterSpacing: "0.05em",
-                      fontWeight: 700,
-                    }}
+                    justifyContent="space-between"
+                    alignItems="center"
+                    gap="20rem"
                   >
-                    <Link href="/">
-                      <div>{t("home")}</div>
-                    </Link>
-                  </Flex>
-                  <Flex
-                    style={{
-                      fontSize: "2rem",
-                      marginRight: "2rem",
-                      fontFamily: "'Baloo', serif",
-                      cursor: "pointer",
-                      color: "#fff",
-                      letterSpacing: "0.05em",
-                      fontWeight: 700,
-                    }}
-                  >
-                    <Link href="/about">
-                      <div>{t("about")}</div>
-                    </Link>
-                  </Flex>
-                  <Flex
-                    style={{
-                      fontSize: "2rem",
-                      fontFamily: "'Baloo', serif",
-                      cursor: "pointer",
-                      color: "#fff",
-                      letterSpacing: "0.05em",
-                      fontWeight: 700,
-                    }}
-                  >
-                    <Link href="/product">
-                      <div>{t("product")}</div>
-                    </Link>
-                  </Flex>
-                </Flex>
-              )}
-              <Flex w="full" justifyContent="flex-end" alignItems="center">
-                <Popover>
-                  <PopoverTrigger>
-                    <Button>
-                      <AccountBoxIcon />
-                    </Button>
-                  </PopoverTrigger>
-                  <PopoverContent w="100px">
-                    {user ? (
-                      <>
-                        {user.role === Role.admin && (
-                          <Link href="/admin">
-                            <Button variant="unstyled">{t("Admin")}</Button>
-                          </Link>
-                        )}
+                    <Image
+                      src="/images/logo.jpg"
+                      alt=""
+                      width="200px"
+                      height="200px"
+                    />
 
-                        <Link href="/profile">
-                          <Button variant="unstyled"> {t("profile")}</Button>
-                        </Link>
-
-                        <Link href="/cart">
-                          <Button variant="unstyled">
-                            <ShoppingCartCheckoutIcon
-                              style={{ color: "black" }}
-                            />
-                          </Button>
-                        </Link>
-                        <Link href="/">
-                          <Button
-                            onClick={() => handleLogout()}
-                            variant="unstyled"
-                          >
-                            {t("logout")}
-                          </Button>
-                        </Link>
-                      </>
-                    ) : (
-                      <Link href="/signin">
-                        <Button variant="unstyled"> {t("login")}</Button>
+                    <Flex gap="3rem">
+                      <Link href="/">
+                        <Text
+                          variant="h4"
+                          color={
+                            router.pathname === "/" ? "#FFD600" : "#41332C"
+                          }
+                        >
+                          {t("home")}
+                        </Text>
                       </Link>
-                    )}
-                  </PopoverContent>
-                </Popover>
-              </Flex>
+
+                      <Link href="/about">
+                        <Text
+                          variant="h4"
+                          color={
+                            router.pathname === "/about" ? "#FFD600" : "#41332C"
+                          }
+                        >
+                          {t("about")}
+                        </Text>
+                      </Link>
+
+                      <Link href="/product">
+                        <Text
+                          variant="h4"
+                          color={
+                            router.pathname === "/product"
+                              ? "#FFD600"
+                              : "#41332C"
+                          }
+                        >
+                          {t("product")}
+                        </Text>
+                      </Link>
+                      <Link href="/contact">
+                        <Text
+                          variant="h4"
+                          color={
+                            router.pathname === "/contact"
+                              ? "#FFD600"
+                              : "#41332C"
+                          }
+                        >
+                          {t("contact")}
+                        </Text>
+                      </Link>
+                      <Link href="/hieucollection">
+                        <Text
+                          variant="h4"
+                          color={
+                            router.pathname === "/hieucollection"
+                              ? "#FFD600"
+                              : "#41332C"
+                          }
+                        >
+                          Hieucollection
+                        </Text>
+                      </Link>
+                    </Flex>
+                  </Flex>
+                </Container>
+              )}
+
+              {isMobile ? (
+                <Flex w="full" justifyContent="flex-end" alignItems="center">
+                  <Popover>
+                    <PopoverTrigger>
+                      <Button>
+                        <AccountBoxIcon />
+                      </Button>
+                    </PopoverTrigger>
+                    <PopoverContent w="100px">
+                      {user ? (
+                        <>
+                          {user.role === Role.admin && (
+                            <Link href="/admin">
+                              <Button variant="unstyled">{t("Admin")}</Button>
+                            </Link>
+                          )}
+
+                          <Link href="/profile">
+                            <Button variant="unstyled"> {t("profile")}</Button>
+                          </Link>
+
+                          <Link href="/cart">
+                            <Button variant="unstyled">
+                              <ShoppingCartCheckoutIcon
+                                style={{ color: "black" }}
+                              />
+                            </Button>
+                          </Link>
+                          <Link href="/">
+                            <Button
+                              onClick={() => handleLogout()}
+                              variant="unstyled"
+                            >
+                              {t("logout")}
+                            </Button>
+                          </Link>
+                        </>
+                      ) : (
+                        <Link href="/signin">
+                          <Button variant="unstyled"> {t("login")}</Button>
+                        </Link>
+                      )}
+                    </PopoverContent>
+                  </Popover>
+                </Flex>
+              ) : (
+                <Stack
+                  direction="row"
+                  w="full"
+                  justifyContent="flex-end"
+                  alignItems="center"
+                  spacing={4}
+                >
+                  {user ? (
+                    <>
+                      {user.role === Role.admin && (
+                        <Link href="/admin">
+                          <Button variant="unstyled">{t("Admin")}</Button>
+                        </Link>
+                      )}
+                      <Menu>
+                        <MenuButton
+                          as={Button}
+                          h="44px"
+                          border="1px solid #FFD600"
+                          background="linear-gradient(to right, #FFD600 0%, #FFFFFF 100%)"
+                          borderRadius="8px"
+                          variant="unstyled"
+                          paddingX="1rem !important"
+                        >
+                          <Text variant="h1">{t("my_account")}</Text>
+                        </MenuButton>
+                        <MenuList>
+                          <MenuGroup
+                            color="#FF9A00"
+                            fontSize="13px"
+                            title={t("info")}
+                          >
+                            <Link href="/profile">
+                              <Text
+                                variant="h1"
+                                paddingX="1rem"
+                                style={{
+                                  color:
+                                    router.pathname === "/profile"
+                                      ? "#FFD600"
+                                      : "#41332C",
+                                }}
+                              >
+                                {t("profile")}
+                              </Text>
+                            </Link>
+                            <Link href="/cart">
+                              <Text
+                                variant="h1"
+                                paddingX="1rem"
+                                style={{
+                                  color:
+                                    router.pathname === "/cart"
+                                      ? "#FFD600"
+                                      : "#41332C",
+                                }}
+                              >
+                                {t("cart")}
+                              </Text>
+                            </Link>
+                          </MenuGroup>
+                          <MenuDivider />
+                          <MenuGroup
+                            color="#FF9A00"
+                            fontSize="13px"
+                            title={t("help")}
+                          >
+                            <Link href="/FAQ">
+                              <Text
+                                variant="h1"
+                                paddingX="1rem"
+                                style={{
+                                  color:
+                                    router.pathname === "/Faq"
+                                      ? "#FFD600"
+                                      : "#41332C",
+                                }}
+                              >
+                                {t("FAQ")}
+                              </Text>
+                            </Link>
+                            <Link href="/contact">
+                              <Text
+                                variant="h1"
+                                paddingX="1rem"
+                                color={
+                                  router.pathname === "/contact"
+                                    ? "#FFD600"
+                                    : "#41332C"
+                                }
+                              >
+                                {t("contact")}
+                              </Text>
+                            </Link>
+                          </MenuGroup>
+                          <MenuDivider />
+                          <Link href="/">
+                            <Text
+                              onClick={() => handleLogout()}
+                              variant="h1"
+                              paddingX="1rem"
+                            >
+                              {t("logout")}
+                            </Text>
+                          </Link>
+                        </MenuList>
+                      </Menu>
+                    </>
+                  ) : (
+                    <Flex gap="2rem" alignItems="center">
+                      <Link href="/signin">
+                        <Button
+                          w="101px"
+                          h="44px"
+                          border="1px solid #FFD600"
+                          background="linear-gradient(to right, #FFD600 0%, #FFFFFF 100%)"
+                          borderRadius="8px"
+                          variant="unstyled"
+                        >
+                          <Text variant="h1">{t("login")}</Text>
+                        </Button>
+                      </Link>
+                      <Button
+                        h="44px"
+                        border="1px solid #FFD600"
+                        background="linear-gradient(to right, #FFD600 0%, #FFFFFF 100%)"
+                        borderRadius="8px"
+                        variant="unstyled"
+                        paddingX="1rem !important"
+                      >
+                        <Text variant="h1">{t("sign_up_newletter")}</Text>
+                      </Button>
+                    </Flex>
+                  )}
+                  <Flex>
+                    <Popover
+                      isOpen={isOpenLanguage}
+                      onClose={() => setIsOpenLanguage(false)}
+                    >
+                      <PopoverTrigger>
+                        <Button
+                          display="flex"
+                          variant="unstyled"
+                          minWidth={0}
+                          p="4px"
+                          onClick={() => setIsOpenLanguage(true)}
+                        >
+                          <LanguageIcon
+                            style={{ color: "black", fontSize: "30px" }}
+                          />
+                        </Button>
+                      </PopoverTrigger>
+                      <PopoverContent w="120px">
+                        <Button
+                          variant="unstyled"
+                          onClick={() => handleChangeLanguage("en")}
+                        >
+                          <Text variant="h1"> English</Text>
+                        </Button>
+                        <Divider />
+                        <Button
+                          variant="unstyled"
+                          onClick={() => handleChangeLanguage("vi")}
+                        >
+                          <Text variant="h1"> Tiếng Việt</Text>
+                        </Button>
+                      </PopoverContent>
+                    </Popover>
+                  </Flex>
+                </Stack>
+              )}
             </Flex>
           </Flex>
         </Container>

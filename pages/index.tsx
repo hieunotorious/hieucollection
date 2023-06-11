@@ -17,6 +17,8 @@ import PreProduct from "app/component/PreProduct";
 import SpidermanProduct from "app/component/SpidermanProduct";
 import TransformerProduct from "app/component/TransformerProduct";
 import SaleProduct from "app/component/SaleProduct";
+import Title from "app/component/Title";
+import Content from "app/component/Content";
 
 export const getStaticProps = async () => {
   const product = await getProduct();
@@ -37,14 +39,15 @@ const Home = ({ product }: InferGetStaticPropsType<typeof getStaticProps>) => {
   return (
     <Container direction="column">
       <Section />
+      <Title />
+      <Content product={product} />
+      {/* <NewProduct product={product} />
 
-      <NewProduct product={product} />
-
-      <DragonballProduct product={product} />
+    
 
       <PreProduct product={product} />
 
-      <SpidermanProduct product={product} />
+      <SpidermanProduct product={product} /> */}
 
       <Banner />
 

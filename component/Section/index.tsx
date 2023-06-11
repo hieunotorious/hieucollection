@@ -20,7 +20,7 @@ const Section = (props: Props) => {
   return (
     <Flex
       id="section1"
-      display={isMobile ? "none" : "flex"}
+      display={isMobile ? "none" : "none"}
       direction={isMobile ? "column" : "row"}
     >
       <Swiper

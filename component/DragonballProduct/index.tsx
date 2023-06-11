@@ -73,24 +73,20 @@ const DragonballProduct = ({
   };
   return (
     <Container direction="column">
-      <Flex marginTop="5rem" justifyContent="center" alignItems="center">
+      <Flex marginTop="10rem" justifyContent="center" alignItems="center">
         <Flex>
           <Flex direction="column" alignItems="center">
             <Text
-              fontWeight="600"
-              fontSize="26px"
-              color="#222222"
-              fontFamily="'Baloo', serif"
+              variant="h5"
               textTransform="uppercase"
               textAlign={isMobile ? "center" : "center"}
             >
               {t("dragonball_figures")}
             </Text>
-            <Flex w="50%" h="2px" background="red" mb="2rem" />
           </Flex>
         </Flex>
       </Flex>
-      <Flex width="full" marginTop="5rem">
+      <Flex width="full" marginTop="1rem">
         <Flex
           w="full"
           border="2px"

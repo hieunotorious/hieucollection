@@ -16,6 +16,7 @@ import { getUser, login } from "app/services/UserService";
 import { setTokens } from "app/utils/token";
 import { useResponsive } from "app/hooks/useResponsive";
 import Breadcrumb from "app/component/Breadcrumb";
+import { isAxiosError } from "axios";
 function Login() {
   const [user, setUser] = useState<LoginType>({
     username: "",
@@ -49,14 +50,16 @@ function Login() {
           await router.push("/");
         }
       }
-    } catch (error) {
-      toast({
-        title: t("incorrect"),
-        status: "error",
-        position: "top-right",
-        duration: 3000,
-        isClosable: true,
-      });
+    } catch (err) {
+      if (isAxiosError(err)) {
+        toast({
+          title: t(err.response?.data.message || ""),
+          status: "error",
+          position: "top-right",
+          duration: 3000,
+          isClosable: true,
+        });
+      }
     }
     setIsLoading(false);
     // const dataIndex = data.findIndex(
