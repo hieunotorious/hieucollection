@@ -5,7 +5,7 @@
     }
   },
   "home": "Home",
-  "about": "About ",
+  "about": "About us",
   "product": "Products",
   "contact": "Contact",
   "shop_now": "Shop now",
@@ -18,6 +18,7 @@
   "hasbro": "Hasbro Figures",
   "medicom": "Mafex Figures",
   "dc": "DC Collectibles Figures",
+  "transformer": "Transformer",
   "wwe": "WWE Figures",
   "statue_figuart": "Statue Figuart",
   "action_figures_statue_collectibles_and_more!": "Action figures, Statue, Collectibles, and More!",
@@ -32,7 +33,7 @@
   "pre_order": "PRE-ORDER",
   "store_at": "Store at",
   "all": "All",
-  "brand": "Brand",
+  "brand": "Brands",
   "category": "Category",
   "action_figure": "ACTION FIGURE",
   "statue": "STATUE",
@@ -104,5 +105,15 @@
   "cart": "Cart",
   "my_account": "My Account",
   "info": "Info",
-  "help": "Help"
+  "help": "Help",
+  "text1": "As a child , I greatly enjoyed Transformers, DC, Marvel, and Anime... I drifted away from these toys as I progressed through school, but rediscovered my love of collecting toys while I was in college. I spent the next few years collecting, buying . After graduating college in 2023, I had the summer off and decided to try selling toys full time before looking for a real job",
+  "text2": "Our products are made with the highest quality materials.",
+  "text3": "Welcome to the Marvel & DC character. Marvel Legends is one of the longest running Marvel toylines ever by Hasbro,the line is based on properties owned by Marvel Comics. DC Superheroes is a collection of action figures originally produced by McFarlane during McFarlane Toys production, the line is based on properties owned by DC Comics.",
+  "superhero": "Superheroes",
+  "text4": "It's not just a toy, it's a passion",
+  "anime": "Anime characters",
+  "athlete": "Athlete",
+  "text7": "If you have any questions please contact me via the form below",
+  "text6": "WWE action figures are poseable action figures based on wrestlers and personalities of WWE. The UFC Ultimate Series Limited Edition assortment contains seven 6” UFC figures! Each fighter features amazing details including tattoos, weight class ...",
+  "text5": "Transformers is a media franchise produced by American toy company Hasbro and Japanese toy company Takara Tomy. A new standard in Anime action figures representing the state of the art of Bandai's design technology"
 }

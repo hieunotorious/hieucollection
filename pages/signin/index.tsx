@@ -10,25 +10,38 @@ import {
   Button,
   useToast,
   Flex,
+  Text,
+  Stack,
+  Box,
 } from "@chakra-ui/react";
-
 import { getUser, login } from "app/services/UserService";
 import { setTokens } from "app/utils/token";
 import { useResponsive } from "app/hooks/useResponsive";
 import Breadcrumb from "app/component/Breadcrumb";
 import { isAxiosError } from "axios";
+import { Form, Formik } from "formik";
+import * as Yup from "yup";
 function Login() {
   const [user, setUser] = useState<LoginType>({
     username: "",
     password: "",
   });
-
+  const SigninSchema = Yup.object().shape({
+    email: Yup.string()
+      .matches(
+        /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
+        "Định dạng email không đúng"
+      )
+      .required("Bạn cần nhập thông tin vào"),
+    password: Yup.string().required("Bạn cần nhập thông tin vào"),
+  });
   const router = useRouter();
   const [show, setShow] = React.useState(false);
   const { t } = useTranslation();
   const { setUser: setGlobalUser } = useContext(AuthContext);
   const toast = useToast();
   const [isLoading, setIsLoading] = useState(false);
+
   const submitForm = async (event: any) => {
     setIsLoading(true);
     event.preventDefault();
@@ -218,6 +231,101 @@ function Login() {
           </div>
         </div>
       </div>
+      {/* <Formik
+        onSubmit={(e) => submitForm(e)}
+        initialValues={{
+          username: "",
+          password: "",
+        }}
+        validationSchema={SigninSchema}
+      >
+        {({ handleSubmit, handleChange, values, errors, touched }) => (
+          <Form onSubmit={handleSubmit}>
+            <Box width="100%">
+              <Text>{t("username")}</Text>
+              <Input
+                autoComplete="off"
+                placeholder="Nhập email của bạn"
+                value={values.username}
+                sx={{
+                  borderRadius: "6px",
+                  border: "1px solid #FFD600",
+                  width: "100%",
+                  height: "35px",
+                  padding: "0 5px",
+                }}
+                type="text"
+                onChange={handleChange("username")}
+                required
+              />
+              {errors.username && touched.username && (
+                <Text color="error" fontSize="10px">
+                  {errors.username}
+                </Text>
+              )}
+            </Box>
+            <InputGroup width="100%" mt="10px">
+              <Input
+                autoComplete="off"
+                placeholder="Mật khẩu"
+                value={values.password}
+                sx={{
+                  borderRadius: "6px",
+                  border: "1px solid #FFD600",
+                  width: "100%",
+                  height: "35px",
+                  padding: "0 5px",
+                }}
+                type={show ? "text" : "password"}
+                onChange={handleChange("password")}
+                required
+              />
+              <InputRightElement width="5.5rem">
+                <Button h="1.75rem" size="sm" onClick={handleClick}>
+                  {show ? "Hide" : "Show"}
+                </Button>
+              </InputRightElement>
+              {errors.password && touched.password && (
+                <Text color="error" fontSize="10px">
+                  {errors.password}
+                </Text>
+              )}
+            </InputGroup>
+
+            <Text
+              justifyContent="flex-end"
+              display="flex"
+              color="#E28A00"
+              fontSize="10px"
+              mt="10px"
+              style={{ textDecoration: "underline", cursor: "pointer" }}
+            >
+              Quên mật khẩu
+            </Text>
+
+            <Box justifyContent="center" display="flex">
+              <Button
+                variant="contained"
+                sx={{
+                  background:
+                    "linear-gradient(90deg, #FF9900 0%, #FFD600 100%)",
+                  color: "#ffffff",
+                  width: "120px",
+                  display: "flex",
+                  alignItems: "center",
+                  marginTop: "10px",
+                  textTransform: "none",
+                }}
+                type="submit"
+                fontSize="13px"
+                isLoading={isLoading}
+              >
+                Đăng nhập
+              </Button>
+            </Box>
+          </Form>
+        )}
+      </Formik> */}
     </Flex>
   );
 }

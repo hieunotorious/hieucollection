@@ -11,32 +11,25 @@ import useOnScreen from "app/hooks/useOnScreen";
 
 function Title() {
   const ref = useRef(null);
-  const { isMobile } = useResponsive();
+  const { isMobile, isMobileOrTablet } = useResponsive();
   const router = useRouter();
   const { t } = useTranslation();
 
   const isVisible = useOnScreen(ref);
 
   return (
-    <Flex direction="column" w="full">
+    <Flex direction="column" w="full" ref={ref}>
       <Container justifyContent="center" direction="column" alignItems="center">
-        {/* <Stack
-          style={{
-            backgroundImage: "url(/images/banner.jpeg)",
-            width: "100%",
-            height: "100%",
-          }}
-        ></Stack> */}
         <Flex>
           <Text variant={isMobile ? "h2_mobile" : "h2"}>hieu</Text>
           <Text variant={isMobile ? "h3_mobile" : "h3"}>collection</Text>
         </Flex>
 
-        <Text variant="h4">
-          Action figures, Statue, Collectibles, and More!
+        <Text variant={isMobile ? "h4_mobile" : "h4"}>
+          {t("action_figures_statue_collectibles_and_more!")}
         </Text>
-        <Flex ref={ref}>
-          <Flex mt="60px" height="600px" gap="1rem">
+        <Flex display={isMobile ? "none" : isMobileOrTablet ? "none" : "flex"}>
+          <Flex mt="60px" height="600px" gap="1rem" sx={{ overflow: "hidden" }}>
             <Stack
               width="340px"
               sx={{
