@@ -247,7 +247,7 @@ function Nav() {
                       </Link>
                     </Flex>
                   ) : (
-                    <Flex gap={isMobileOrTablet ? "5rem" : "6rem"}>
+                    <Flex gap={isMobileOrTablet ? "5rem" : "3rem"}>
                       <Link href="/">
                         <Text
                           variant="h4"
