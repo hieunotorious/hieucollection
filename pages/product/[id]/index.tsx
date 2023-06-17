@@ -64,7 +64,12 @@ function ProductId() {
   return (
     product && (
       <Container>
-        <Flex w="full" direction="column" title={product?.name || "Product"}>
+        <Flex
+          w="full"
+          direction="column"
+          title={product?.name || "Product"}
+          marginTop="3rem"
+        >
           <Breadcrumb
             links={[
               { title: t("home"), href: "/" },

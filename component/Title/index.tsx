@@ -4,9 +4,7 @@ import useTranslation from "next-translate/useTranslation";
 import Container from "../Container";
 import { useResponsive } from "app/hooks/useResponsive";
 import { Flex, Stack, Text } from "@chakra-ui/react";
-import Link from "next/link";
 import { useRef } from "react";
-import banner from "../../public/images/banner.jpeg";
 import useOnScreen from "app/hooks/useOnScreen";
 
 function Title() {
@@ -29,11 +27,16 @@ function Title() {
           {t("action_figures_statue_collectibles_and_more!")}
         </Text>
         <Flex display={isMobile ? "none" : isMobileOrTablet ? "none" : "flex"}>
-          <Flex mt="60px" height="600px" gap="1rem" sx={{ overflow: "hidden" }}>
+          <Flex
+            marginTop="60px"
+            height="600px"
+            gap="1rem"
+            sx={{ overflow: "hidden" }}
+          >
             <Stack
               width="340px"
               sx={{
-                transform: `translateY(${isVisible ? 100 : 300}px)`,
+                transform: `translateY(${isVisible ? 150 : 600}px)`,
                 opacity: isVisible ? 1 : 0,
                 transition: `all 800ms ease-in`,
                 borderRadius: "1rem",
@@ -59,7 +62,7 @@ function Title() {
             <Stack
               width="340px"
               sx={{
-                transform: `translateY(${isVisible ? -10 : 600}px)`,
+                transform: `translateY(${isVisible ? 10 : 600}px)`,
                 opacity: isVisible ? 1 : 0,
                 transition: `all 800ms ease-in`,
                 borderRadius: "1rem",
@@ -85,7 +88,7 @@ function Title() {
             <Stack
               width="340px"
               sx={{
-                transform: `translateY(${isVisible ? 100 : 600}px)`,
+                transform: `translateY(${isVisible ? 150 : 600}px)`,
                 opacity: isVisible ? 1 : 0,
                 transition: `all 800ms ease-in`,
                 borderRadius: "1rem",
@@ -111,7 +114,7 @@ function Title() {
             <Stack
               width="340px"
               sx={{
-                transform: `translateY(${isVisible ? -10 : 600}px)`,
+                transform: `translateY(${isVisible ? 10 : 600}px)`,
                 opacity: isVisible ? 1 : 0,
                 transition: `all 800ms ease-in`,
                 borderRadius: "1rem",

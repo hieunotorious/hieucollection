@@ -110,7 +110,7 @@ function Footer() {
               {t("contact_us")}
             </Text>
             <Tooltip label="hieumn2001@gmail.com" placement="top">
-              <Link href="mailto:hieumn2001@gmail.com">
+              <Link href="mailto:hieumn2001@gmail.com" legacyBehavior>
                 <Text mt="1rem" variant="h1">
                   hieumn2001@gmail.com
                 </Text>

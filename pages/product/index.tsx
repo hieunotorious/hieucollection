@@ -69,7 +69,7 @@ const Product = ({
   };
 
   return (
-    <Flex direction="column" w="full">
+    <Flex direction="column" w="full" marginTop="3rem">
       <Breadcrumb
         links={[
           { title: t("home"), href: "/" },

@@ -207,61 +207,107 @@ function Nav() {
                     width="200px"
                     height="200px"
                   />
+                  {user ? (
+                    <Flex gap="30rem">
+                      <Link href="/product">
+                        <Text
+                          variant="h4"
+                          color={
+                            router.pathname === "/product"
+                              ? "#FFD600"
+                              : "#41332C"
+                          }
+                        >
+                          {t("product")}
+                        </Text>
+                      </Link>
+                      <Link href="/contact">
+                        <Text
+                          variant="h4"
+                          color={
+                            router.pathname === "/contact"
+                              ? "#FFD600"
+                              : "#41332C"
+                          }
+                        >
+                          {t("contact")}
+                        </Text>
+                      </Link>
+                      <Link href="/hieucollection">
+                        <Text
+                          variant="h4"
+                          color={
+                            router.pathname === "/hieucollection"
+                              ? "#FFD600"
+                              : "#41332C"
+                          }
+                        >
+                          Hieucollection
+                        </Text>
+                      </Link>
+                    </Flex>
+                  ) : (
+                    <Flex gap={isMobileOrTablet ? "5rem" : "6rem"}>
+                      <Link href="/">
+                        <Text
+                          variant="h4"
+                          color={
+                            router.pathname === "/" ? "#FFD600" : "#41332C"
+                          }
+                        >
+                          {t("home")}
+                        </Text>
+                      </Link>
 
-                  <Flex gap={isMobileOrTablet ? "5rem" : "10rem"}>
-                    <Link href="/">
-                      <Text
-                        variant="h4"
-                        color={router.pathname === "/" ? "#FFD600" : "#41332C"}
-                      >
-                        {t("home")}
-                      </Text>
-                    </Link>
+                      <Link href="/about">
+                        <Text
+                          variant="h4"
+                          color={
+                            router.pathname === "/about" ? "#FFD600" : "#41332C"
+                          }
+                        >
+                          {t("about")}
+                        </Text>
+                      </Link>
 
-                    <Link href="/about">
-                      <Text
-                        variant="h4"
-                        color={
-                          router.pathname === "/about" ? "#FFD600" : "#41332C"
-                        }
-                      >
-                        {t("about")}
-                      </Text>
-                    </Link>
-
-                    <Link href="/product">
-                      <Text
-                        variant="h4"
-                        color={
-                          router.pathname === "/product" ? "#FFD600" : "#41332C"
-                        }
-                      >
-                        {t("product")}
-                      </Text>
-                    </Link>
-                    <Link href="/contact">
-                      <Text
-                        variant="h4"
-                        color={
-                          router.pathname === "/contact" ? "#FFD600" : "#41332C"
-                        }
-                      >
-                        {t("contact")}
-                      </Text>
-                    </Link>
-                    <Link href="/hieucollection">
-                      <Text
-                        variant="h4"
-                        color={
-                          router.pathname === "/hieucollection"
-                            ? "#FFD600"
-                            : "#41332C"
-                        }
-                      >
-                        Hieucollection
-                      </Text>
-                    </Link>
-                  </Flex>
+                      <Link href="/product">
+                        <Text
+                          variant="h4"
+                          color={
+                            router.pathname === "/product"
+                              ? "#FFD600"
+                              : "#41332C"
+                          }
+                        >
+                          {t("product")}
+                        </Text>
+                      </Link>
+                      <Link href="/contact">
+                        <Text
+                          variant="h4"
+                          color={
+                            router.pathname === "/contact"
+                              ? "#FFD600"
+                              : "#41332C"
+                          }
+                        >
+                          {t("contact")}
+                        </Text>
+                      </Link>
+                      <Link href="/hieucollection">
+                        <Text
+                          variant="h4"
+                          color={
+                            router.pathname === "/hieucollection"
+                              ? "#FFD600"
+                              : "#41332C"
+                          }
+                        >
+                          Hieucollection
+                        </Text>
+                      </Link>
+                    </Flex>
+                  )}
 
                   <Flex>
                     {isMobile ? (

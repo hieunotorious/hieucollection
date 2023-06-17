@@ -21,6 +21,7 @@ import { InferGetStaticPropsType } from "next";
 import { AuthContext } from "app/context/authContext";
 import { AllType, BrandType, CategoryType } from "app/api/auth/models/product";
 import Link from "next/link";
+import Slide from "app/component/Slide";
 
 export const getStaticProps = async () => {
   const product = await getProduct();
@@ -138,7 +139,12 @@ const Content1 = ({
           }}
         >
           <Stack alignItems="center">
-            <Image src="/images/shflogo.png" width="130px" height="50px" />
+            <Image
+              src="/images/shflogo.png"
+              width="130px"
+              height="50px"
+              alt=""
+            />
             <Text width="200px" variant="h1" textAlign="center">
               {t("shf_figures")}
             </Text>
@@ -157,7 +163,12 @@ const Content1 = ({
           }}
         >
           <Stack alignItems="center">
-            <Image src="/images/mcflogo.jpg" width="50px" height="50px" />
+            <Image
+              src="/images/mcflogo.jpg"
+              width="50px"
+              height="50px"
+              alt=""
+            />
 
             <Text width="200px" variant="h1" textAlign="center">
               {t("mcfarlane_figures")}
@@ -177,7 +188,12 @@ const Content1 = ({
           }}
         >
           <Stack alignItems="center">
-            <Image src="/images/hasbrologo.jpeg" width="80px" height="50px" />
+            <Image
+              src="/images/hasbrologo.jpeg"
+              width="80px"
+              height="50px"
+              alt=""
+            />
 
             <Text width="200px" variant="h1" textAlign="center">
               {t("hasbro")}
@@ -208,6 +224,7 @@ const Content1 = ({
               src="/images/medicomtoylogo.png"
               width="80px"
               height="50px"
+              alt=""
             />
             <Text width="200px" variant="h1" textAlign="center">
               {t("medicom")}
@@ -227,7 +244,7 @@ const Content1 = ({
           }}
         >
           <Stack alignItems="center">
-            <Image src="/images/dclogo.png" width="60px" height="50px" />
+            <Image src="/images/dclogo.png" width="60px" height="50px" alt="" />
 
             <Text width="200px" variant="h1" textAlign="center">
               {t("dc")}
@@ -247,7 +264,12 @@ const Content1 = ({
           }}
         >
           <Stack alignItems="center">
-            <Image src="/images/wweelitelogo.png" width="50px" height="50px" />
+            <Image
+              src="/images/wweelitelogo.png"
+              width="50px"
+              height="50px"
+              alt=""
+            />
 
             <Text width="200px" variant="h1" textAlign="center">
               {t("wwe")}
@@ -272,8 +294,8 @@ const Content1 = ({
           <Link href="mailto:hieumn2001@gmail.com">
             <Image
               src="/images/EmailMes.png"
-              width="40px"
-              height="40px"
+              width="30px"
+              height="30px"
               alt=""
             />
           </Link>
@@ -285,8 +307,8 @@ const Content1 = ({
               <Image
                 src="/images/phoneMes.png"
                 alt=""
-                width="40px"
-                height="40px"
+                width="30px"
+                height="30px"
               />
             </a>
           </Stack>
@@ -296,7 +318,7 @@ const Content1 = ({
           placement="top"
         >
           <Link href="https://www.google.com/maps/place/102+Nguy%E1%BB%85n+Tr%C3%A3i,+Th%C3%A0nh+C%C3%B4ng,+Th%C3%A0nh+ph%E1%BB%91+Bu%C3%B4n+Ma+Thu%E1%BB%99t,+%C4%90%E1%BA%AFk+L%E1%BA%AFk,+Vi%E1%BB%87t+Nam/@12.6865306,108.0361911,17z/data=!3m1!4b1!4m6!3m5!1s0x31721d7a35d6ff99:0x9eae08b73bf3f4df!8m2!3d12.6865306!4d108.038766!16s%2Fg%2F11fsjhqr51?hl=vi-VN&entry=ttu">
-            <Image src="/images/frame.png" width="40px" height="40px" alt="" />
+            <Image src="/images/frame.png" width="30px" height="30px" alt="" />
           </Link>
         </Tooltip>
       </Stack>
@@ -841,6 +863,8 @@ const Content1 = ({
           </Link>
         </Stack>
       </Flex>
+
+      {/* <Slide /> */}
     </Container>
   );
 };
