@@ -1,14 +1,45 @@
-import { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Gender, UpdateUser } from "../../api/auth/models/user";
 import { AuthContext } from "app/context/authContext";
 import { useRouter } from "next/router";
 import useTranslation from "next-translate/useTranslation";
-import { Select, Input, useToast, Button, Flex } from "@chakra-ui/react";
+import {
+  Select,
+  Input,
+  useToast,
+  Button,
+  Flex,
+  Box,
+  Card,
+  Stack,
+  Avatar,
+  Text,
+  InputGroup,
+  InputRightElement,
+  InputLeftElement,
+  Modal,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  ModalOverlay,
+  useDisclosure,
+} from "@chakra-ui/react";
 import { useResponsive } from "app/hooks/useResponsive";
 import { updateSelfUser } from "app/services/UserService";
 import Breadcrumb from "app/component/Breadcrumb";
+import LocalPhoneIcon from "@mui/icons-material/LocalPhone";
+import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
+import BadgeIcon from "@mui/icons-material/Badge";
+import HomeIcon from "@mui/icons-material/Home";
+import Container from "app/component/Container";
+import TransgenderIcon from "@mui/icons-material/Transgender";
+import CakeIcon from "@mui/icons-material/Cake";
+import EmailIcon from "@mui/icons-material/Email";
+import BorderColorIcon from "@mui/icons-material/BorderColor";
 
-function Signup() {
+function Profile() {
   const { t } = useTranslation();
   const { isMobile } = useResponsive();
   const { user, setUser } = useContext(AuthContext);
@@ -20,6 +51,9 @@ function Signup() {
     displayName: "",
     gender: Gender.other,
   });
+  const [show, setShow] = React.useState(false);
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const handleClick = () => setShow(!show);
   const toast = useToast();
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
@@ -52,7 +86,7 @@ function Signup() {
   }, [user]);
 
   return (
-    <Flex direction="column" w="full">
+    <Flex direction="column" w="full" marginTop={isMobile ? "2rem" : "5rem"}>
       <Breadcrumb
         links={[
           { title: t("home"), href: "/" },
@@ -60,189 +94,353 @@ function Signup() {
         ]}
         current={t("profile")}
       />
-      <div
-        style={{
-          background: "white",
-          margin: "0 auto",
-          minHeight: isMobile ? 610 : 795,
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          flexDirection: "column",
-        }}
-      >
-        <div>
-          <div
-            style={{
-              padding: "1.25rem",
-              borderRadius: "0.5rem",
-              border: " 1px solid black",
-              display: "grid",
-              gap: "1rem",
-              marginTop: " 4rem",
-              width: "300px",
-              background: "white",
-            }}
+      <Container alignItems="center" justifyContent="center">
+        <Card
+          height={isMobile ? "600px" : "350px"}
+          width="900px"
+          marginTop="1rem"
+        >
+          <Flex
+            direction={isMobile ? "column" : "row"}
+            marginTop="2rem"
+            alignItems="center"
+            justifyContent="center"
+            gap={isMobile ? "none" : "10rem"}
           >
-            <h1 style={{ textAlign: "center" }}> {t("profile")}</h1>
-            <label style={{}}> {t("username")}</label>
-            <form onSubmit={submitForm}>
-              <div>
-                <input
-                  style={{
-                    borderRadius: " 0.25rem",
-                    border: "1px solid black",
-                    padding: "0.25rem 0.5rem",
-                    width: 275,
-                  }}
-                  type="text"
-                  value={tempuser.username}
-                  onChange={(event) => {
-                    setTempUser((prevState) => ({
-                      ...prevState,
-                      username: event.target.value,
-                    }));
-                  }}
-                  required
-                ></input>
-              </div>
+            <Stack gap={isMobile ? "none" : "1rem"}>
+              <Text variant={isMobile ? "h6_mobile" : "h6"}>
+                {t("profile")}
+              </Text>
+              <Avatar
+                size="2xl"
+                name="user"
+                src="https://bbts1.azureedge.net/images/p/full/2023/06/e93bbc9a-4ee5-4675-a54d-63c737bf9a2d.jpg"
+              />
 
-              <label style={{}}> {t("displayname")}</label>
-              <div>
-                <input
-                  style={{
-                    borderRadius: " 0.25rem",
-                    border: "1px solid black",
-                    padding: "0.25rem 0.5rem",
-                    width: 275,
-                  }}
-                  type="text"
-                  value={tempuser.displayName}
-                  onChange={(event) => {
-                    setTempUser((prevState) => ({
-                      ...prevState,
-                      displayName: event.target.value,
-                    }));
-                  }}
-                  required
-                ></input>
-              </div>
-
-              <label style={{}}> {t("phonenumber")}</label>
-              <div>
-                <input
-                  style={{
-                    borderRadius: " 0.25rem",
-                    border: "1px solid black",
-                    padding: "0.25rem 0.5rem",
-                    width: 275,
-                  }}
-                  type="text"
-                  value={tempuser.phonenumber}
-                  onChange={(event) => {
-                    setTempUser((prevState) => ({
-                      ...prevState,
-                      phonenumber: event.target.value,
-                    }));
-                  }}
-                  required
-                ></input>
-              </div>
-
-              <label>{t("birthday")}</label>
-              <div
-                style={{
-                  borderRadius: " 0.25rem",
-                  border: "1px solid black",
-                  padding: "0.25rem 0.5rem",
-                  width: 275,
-                }}
-              >
-                <Input
-                  placeholder="Select Date and Time"
-                  size="md"
-                  type="datetime-local"
-                  value={tempuser.dob}
-                  onChange={(event) => {
-                    setTempUser((prevState) => ({
-                      ...prevState,
-                      dob: event.target.value,
-                    }));
-                  }}
-                />
-              </div>
-
-              <label> {t("gender")}</label>
-
-              <div
-                style={{
-                  borderRadius: " 0.25rem",
-                  border: "1px solid black",
-                  padding: "0.25rem 0.5rem",
-                  width: 275,
-                }}
-              >
-                <Select
-                  placeholder="Choose"
-                  value={tempuser.gender}
-                  onChange={(event) => {
-                    const gender: Gender = event.target.value as any;
-                    setTempUser((prevState) => ({
-                      ...prevState,
-                      gender,
-                    }));
-                  }}
+              <Stack>
+                <Text variant={isMobile ? "h4_mobile" : "h4"}>
+                  {t("changePass")}
+                </Text>
+                <Card>
+                  <InputGroup size="md">
+                    <Input
+                      pr="4.5rem"
+                      type={show ? "text" : "password"}
+                      placeholder={t("oldPass")}
+                    />
+                    <InputRightElement width="4.5rem">
+                      <Button h="1.75rem" size="sm" onClick={handleClick}>
+                        {show ? "Hide" : "Show"}
+                      </Button>
+                    </InputRightElement>
+                  </InputGroup>
+                  <InputGroup size="md">
+                    <Input
+                      pr="4.5rem"
+                      type={show ? "text" : "password"}
+                      placeholder={t("newPass")}
+                    />
+                    <InputRightElement width="4.5rem">
+                      <Button h="1.75rem" size="sm" onClick={handleClick}>
+                        {show ? "Hide" : "Show"}
+                      </Button>
+                    </InputRightElement>
+                  </InputGroup>
+                </Card>
+                <Button
+                  display="flex"
+                  alignItems="center"
+                  justifyContent="center"
+                  colorScheme="yellow"
+                  width="100px"
                 >
-                  <option value={Gender.male}>Male</option>
-                  <option value={Gender.female}>Female</option>
-                  <option value={Gender.other}>Other</option>
-                </Select>
-              </div>
-
-              <label style={{}}> {t("address")}</label>
-              <div>
-                <input
-                  style={{
-                    borderRadius: " 0.25rem",
-                    border: "1px solid black",
-                    padding: "0.25rem 0.5rem",
-                    width: 275,
-                  }}
-                  type="text"
-                  value={tempuser.address}
-                  onChange={(event) => {
-                    setTempUser((prevState) => ({
-                      ...prevState,
-                      address: event.target.value,
-                    }));
-                  }}
-                  required
-                ></input>
-              </div>
-              <Button
-                style={{
-                  marginTop: "2rem",
-                  borderRadius: " 0.25rem",
-                  fontWeight: "300",
-                  transition: " all .3s ease-in-out",
-                  cursor: "pointer",
-                  border: "none",
-                  textTransform: "uppercase",
-                  width: 275,
-                  background: "#3399FF",
-                  color: "white",
-                }}
-                type="submit"
-                isLoading={isLoading}
-              >
-                {t("update")}
+                  {t("update")}
+                </Button>
+              </Stack>
+            </Stack>
+            <Stack gap="1rem" marginTop="6rem">
+              <Button colorScheme="yellow" width="100px" onClick={onOpen}>
+                {t("edit")}
               </Button>
-            </form>
-          </div>
-        </div>
-      </div>
+              <Modal
+                size={isMobile ? "md" : "5xl"}
+                isOpen={isOpen}
+                onClose={onClose}
+              >
+                <ModalOverlay />
+                <ModalContent>
+                  <Text textAlign="center" marginTop="2rem" variant="h7">
+                    {t("profile")}
+                  </Text>
+                  <ModalCloseButton />
+                  <ModalBody>
+                    <form onSubmit={submitForm}>
+                      <Text variant={isMobile ? "h4_mobile" : "h4"}>
+                        {t("username")}
+                      </Text>
+                      <div>
+                        <input
+                          style={{
+                            borderRadius: " 0.25rem",
+                            border: "1px solid black",
+                            padding: "0.25rem 0.5rem",
+                            width: isMobile ? 250 : 600,
+                          }}
+                          type="text"
+                          value={tempuser.username}
+                          onChange={(event) => {
+                            setTempUser((prevState) => ({
+                              ...prevState,
+                              username: event.target.value,
+                            }));
+                          }}
+                          required
+                        ></input>
+                      </div>
+
+                      <Text variant={isMobile ? "h4_mobile" : "h4"}>
+                        {t("displayname")}
+                      </Text>
+                      <div>
+                        <input
+                          style={{
+                            borderRadius: " 0.25rem",
+                            border: "1px solid black",
+                            padding: "0.25rem 0.5rem",
+                            width: isMobile ? 250 : 600,
+                          }}
+                          type="text"
+                          value={tempuser.displayName}
+                          onChange={(event) => {
+                            setTempUser((prevState) => ({
+                              ...prevState,
+                              displayName: event.target.value,
+                            }));
+                          }}
+                          required
+                        ></input>
+                      </div>
+
+                      <Text variant={isMobile ? "h4_mobile" : "h4"}>
+                        {t("phonenumber")}
+                      </Text>
+                      <div>
+                        <input
+                          style={{
+                            borderRadius: " 0.25rem",
+                            border: "1px solid black",
+                            padding: "0.25rem 0.5rem",
+                            width: isMobile ? 250 : 600,
+                          }}
+                          type="text"
+                          value={tempuser.phonenumber}
+                          onChange={(event) => {
+                            setTempUser((prevState) => ({
+                              ...prevState,
+                              phonenumber: event.target.value,
+                            }));
+                          }}
+                          required
+                        ></input>
+                      </div>
+
+                      <Text variant={isMobile ? "h4_mobile" : "h4"}>
+                        {" "}
+                        {t("birthday")}
+                      </Text>
+                      <div
+                        style={{
+                          borderRadius: " 0.25rem",
+                          border: "1px solid black",
+                          padding: "0.25rem 0.5rem",
+                          width: isMobile ? 250 : 600,
+                        }}
+                      >
+                        <Input
+                          placeholder="Select Date and Time"
+                          size="md"
+                          type="datetime-local"
+                          value={tempuser.dob}
+                          onChange={(event) => {
+                            setTempUser((prevState) => ({
+                              ...prevState,
+                              dob: event.target.value,
+                            }));
+                          }}
+                        />
+                      </div>
+
+                      <Text variant={isMobile ? "h4_mobile" : "h4"}>
+                        {" "}
+                        {t("gender")}
+                      </Text>
+
+                      <div
+                        style={{
+                          borderRadius: " 0.25rem",
+                          border: "1px solid black",
+                          padding: "0.25rem 0.5rem",
+                          width: isMobile ? 250 : 600,
+                        }}
+                      >
+                        <Select
+                          placeholder="Choose"
+                          value={tempuser.gender}
+                          onChange={(event) => {
+                            const gender: Gender = event.target.value as any;
+                            setTempUser((prevState) => ({
+                              ...prevState,
+                              gender,
+                            }));
+                          }}
+                        >
+                          <option value={Gender.male}>Male</option>
+                          <option value={Gender.female}>Female</option>
+                          <option value={Gender.other}>Other</option>
+                        </Select>
+                      </div>
+
+                      <Text variant={isMobile ? "h4_mobile" : "h4"}>
+                        {t("address")}
+                      </Text>
+                      <div>
+                        <input
+                          style={{
+                            borderRadius: " 0.25rem",
+                            border: "1px solid black",
+                            padding: "0.25rem 0.5rem",
+                            width: isMobile ? 250 : 600,
+                          }}
+                          type="text"
+                          value={tempuser.address}
+                          onChange={(event) => {
+                            setTempUser((prevState) => ({
+                              ...prevState,
+                              address: event.target.value,
+                            }));
+                          }}
+                          required
+                        ></input>
+                      </div>
+
+                      <ModalFooter>
+                        <Button
+                          width="100px"
+                          colorScheme="blue"
+                          mr={3}
+                          onClick={onClose}
+                        >
+                          <Text color="white !important" variant="h7">
+                            {t("close")}
+                          </Text>
+                        </Button>
+                        <Button
+                          width="100px"
+                          type="submit"
+                          isLoading={isLoading}
+                          variant="ghost"
+                        >
+                          <Text variant="h7">{t("update")}</Text>
+                        </Button>
+                      </ModalFooter>
+                    </form>
+                  </ModalBody>
+                </ModalContent>
+              </Modal>
+              <Flex gap="2rem" direction={isMobile ? "column" : "row"}>
+                <Card
+                  width="210px"
+                  display="flex"
+                  flexDirection="row"
+                  alignItems="center"
+                  gap="1rem"
+                >
+                  <EmailIcon />
+                  <Text variant={isMobile ? "h4_mobile" : "h4"}>email</Text>
+                </Card>
+                <Card
+                  width="210px"
+                  display="flex"
+                  flexDirection="row"
+                  alignItems="center"
+                  gap="1rem"
+                >
+                  <PersonOutlineIcon />
+                  <Text variant={isMobile ? "h4_mobile" : "h4"}>
+                    {tempuser.username}
+                  </Text>
+                </Card>
+              </Flex>
+              <Flex gap="2rem" direction={isMobile ? "column" : "row"}>
+                <Card
+                  width="210px"
+                  display="flex"
+                  flexDirection="row"
+                  alignItems="center"
+                  gap="1rem"
+                >
+                  <LocalPhoneIcon />
+                  <Text variant={isMobile ? "h4_mobile" : "h4"}>
+                    {tempuser.phonenumber}
+                  </Text>
+                </Card>
+                <Card
+                  width="210px"
+                  display="flex"
+                  flexDirection="row"
+                  alignItems="center"
+                  gap="1rem"
+                >
+                  <BadgeIcon />
+                  <Text variant={isMobile ? "h4_mobile" : "h4"}>
+                    {tempuser.displayName}
+                  </Text>
+                </Card>
+              </Flex>
+              <Flex gap="2rem" direction={isMobile ? "column" : "row"}>
+                <Card
+                  width="210px"
+                  display="flex"
+                  flexDirection="row"
+                  alignItems="center"
+                  gap="1rem"
+                >
+                  <TransgenderIcon />
+                  <Text variant={isMobile ? "h4_mobile" : "h4"}>
+                    {tempuser.gender}
+                  </Text>
+                </Card>
+                <Card
+                  width="210px"
+                  display="flex"
+                  flexDirection="row"
+                  alignItems="center"
+                  gap="1rem"
+                >
+                  <CakeIcon />
+                  <Text variant={isMobile ? "h4_mobile" : "h4"}>
+                    31/01/2001
+                  </Text>
+                </Card>
+              </Flex>
+              <Card
+                width={isMobile ? "210px" : "440px"}
+                display="flex"
+                flexDirection="row"
+                alignItems="center"
+                gap="1rem"
+              >
+                <HomeIcon />
+                <Text variant={isMobile ? "h4_mobile" : "h4"}>
+                  {tempuser.address}
+                </Text>
+              </Card>
+            </Stack>
+          </Flex>
+        </Card>
+      </Container>
     </Flex>
   );
 }
 
-export default Signup;
+export default Profile;

@@ -336,7 +336,7 @@ const Content1 = ({
             borderRadius="12px"
             paddingX="10px"
             height={isMobile ? "260px" : "330px"}
-            width={isMobile ? "300px" : "852px"}
+            width={isMobile ? "350px" : "852px"}
           >
             <Text variant={isMobile ? "h5_mobile" : "h5"} data-aos="fade-up">
               {t("superhero")}
@@ -433,7 +433,7 @@ const Content1 = ({
                 direction="row"
                 display="flex"
                 alignItems="center"
-                gap={isMobile ? "2rem" : "11rem"}
+                gap={isMobile ? "9rem" : "11rem"}
               >
                 <Stack>
                   <Text variant="h7">{t("top_new_products")}</Text>
@@ -444,6 +444,7 @@ const Content1 = ({
                     src="/images/logo.png"
                     width="50px"
                     height="50px"
+                    alt=""
                   />
                 </Stack>
               </Stack>
@@ -493,7 +494,7 @@ const Content1 = ({
                 direction="row"
                 display="flex"
                 alignItems="center"
-                gap={isMobile ? "2rem" : isMobileOrTablet ? "2rem" : "11rem"}
+                gap={isMobile ? "9rem" : isMobileOrTablet ? "2rem" : "11rem"}
               >
                 <Stack>
                   <Text variant="h7">{t("top_sale_products")}</Text>
@@ -504,6 +505,7 @@ const Content1 = ({
                     src="/images/logo.png"
                     width="50px"
                     height="50px"
+                    alt=""
                   />
                 </Stack>
               </Stack>
@@ -553,7 +555,7 @@ const Content1 = ({
                 direction="row"
                 display="flex"
                 alignItems="center"
-                gap={isMobile ? "2rem" : isMobileOrTablet ? "2rem" : "8rem"}
+                gap={isMobile ? "6rem" : isMobileOrTablet ? "2rem" : "8rem"}
               >
                 <Stack>
                   <Text variant="h7">{t("top_pre_order_products")}</Text>
@@ -564,6 +566,7 @@ const Content1 = ({
                     src="/images/logo.png"
                     width="50px"
                     height="50px"
+                    alt=""
                   />
                 </Stack>
               </Stack>
@@ -623,7 +626,7 @@ const Content1 = ({
                 direction="row"
                 display="flex"
                 alignItems="center"
-                gap={isMobile ? "2rem" : isMobileOrTablet ? "2rem" : "13rem"}
+                gap={isMobile ? "10rem" : isMobileOrTablet ? "2rem" : "13rem"}
               >
                 <Stack>
                   <Text variant="h7">{t("action_figure")}</Text>
@@ -634,6 +637,7 @@ const Content1 = ({
                     src="/images/logo.png"
                     width="50px"
                     height="50px"
+                    alt=""
                   />
                 </Stack>
               </Stack>
@@ -683,7 +687,7 @@ const Content1 = ({
                 direction="row"
                 display="flex"
                 alignItems="center"
-                gap={isMobile ? "2rem" : isMobileOrTablet ? "2rem" : "17rem"}
+                gap={isMobile ? "15rem" : isMobileOrTablet ? "2rem" : "17rem"}
               >
                 <Stack>
                   <Text variant="h7">{t("statue")}</Text>
@@ -694,6 +698,7 @@ const Content1 = ({
                     src="/images/logo.png"
                     width="50px"
                     height="50px"
+                    alt=""
                   />
                 </Stack>
               </Stack>
@@ -735,7 +740,7 @@ const Content1 = ({
             borderRadius="12px"
             paddingX="10px"
             height={isMobile ? "250px" : "330px"}
-            width={isMobile ? "300px" : "852px"}
+            width={isMobile ? "350px" : "852px"}
           >
             <Text variant={isMobile ? "h5_mobile" : "h5"} data-aos="fade-up">
               Robots &amp; Anime
@@ -832,11 +837,9 @@ const Content1 = ({
             borderRadius="12px"
             paddingX="10px"
             height={isMobile ? "230px" : "330px"}
-            width={isMobile ? "300px" : "710px"}
+            width={isMobile ? "350px" : "710px"}
           >
-            <Text variant={isMobile ? "h5_mobile" : "h5"} data-aos="fade-up">
-              {t("athlete")}
-            </Text>
+            <Text variant={isMobile ? "h5_mobile" : "h5"}>{t("athlete")}</Text>
             <Text data-aos="fade-up" variant={isMobile ? "h6_mobile" : "h6"}>
               WWE &amp; UFC
             </Text>

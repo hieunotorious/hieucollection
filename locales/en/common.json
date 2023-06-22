@@ -122,5 +122,10 @@
   "We serve the best products": "We serve the best products",
   "Customer Satisfaction": "Customer Satisfaction",
   "Top quality products": "Top quality products",
-  "Quality service": "Quality service"
+  "Quality service": "Quality service",
+  "edit": "Edit",
+  "changePass": "Change Password",
+  "oldPass": "Old Password",
+  "newPass": "New Password",
+  "close": "Close"
 }

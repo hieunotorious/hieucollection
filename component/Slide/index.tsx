@@ -1,103 +1,82 @@
-// Import types for React and Next.js
-import type { FC } from "react";
-import type { NextPage } from "next";
-import Image from "next/image";
+import "swiper/css";
 
-// Import Stack component from MUI
-import { Stack } from "@mui/material";
-
-// Import Swiper components and types
+import { Flex, FlexProps, Text } from "@chakra-ui/react";
+import React from "react";
+import { Autoplay } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, Navigation, Pagination, EffectCoverflow } from "swiper";
+import { v4 as uuidv4 } from "uuid";
 
-// Import images from assets folder
-import nhatho from "../../public/images/hieu1.jpeg";
-import tcv from "../../public/images/hieu2.jpg";
+import CategoryCard from "app/component/CategoryCard";
+import { useResponsive } from "app/hooks/useResponsive";
+import Container from "../Container";
 
-import { StaticImageData } from "next/image";
+type Props = {} & FlexProps;
 
-// Import custom hook for breakpoints
-
-// Define an interface for the data array
-interface DataItem {
-  img: StaticImageData;
+export type CategoryType = {
+  id: string;
   title: string;
-}
+  img: string;
+  href?: string;
+};
 
-// Define the data array as a constant
-const data: DataItem[] = [
-  {
-    img: nhatho,
-    title: "nhatho",
-  },
-  {
-    img: tcv,
-    title: "tcv",
-  },
+const categories: CategoryType[] = [
+  { id: uuidv4(), title: "Goku", img: "/images/shfgoku.jpeg" },
+  { id: uuidv4(), title: "Spiderman", img: "/images/spidermanhasbro.webp" },
+  { id: uuidv4(), title: "Luffy", img: "/images/luffy.jpeg" },
+  { id: uuidv4(), title: "Vegeta", img: "/images/vegeta.jpeg" },
+  { id: uuidv4(), title: "Ghost Rider", img: "/images/ghostrider.webp" },
+  { id: uuidv4(), title: "Zorro", img: "/images/zorro.jpeg" },
+  { id: uuidv4(), title: "Gohan", img: "/images/goahn.jpeg" },
+  { id: uuidv4(), title: "Sanji", img: "/images/sanji.jpeg" },
+  { id: uuidv4(), title: "IronMan", img: "/images/ironman.webp" },
 ];
 
-// Define a functional component for the slide
-const Slide: FC<DataItem> = (props) => {
+const Section2 = ({ ...props }: Props) => {
+  const { isMobile, isMobileOrTablet } = useResponsive();
   return (
-    <Image
-      style={{
-        width: "100%",
-        height: "100%",
-        objectFit: "contain",
-      }}
-      src={props.img}
-      alt={props.title}
-    />
-  );
-};
-
-// Define a functional component for the slide container
-const Slide1: NextPage = () => {
-  // Use the custom hook to get the breakpoints
-
-  // Define the swiper options as a constant
-
-  return (
-    <Stack direction="row" width="100%" paddingX="0.5rem">
-      <Swiper
-        style={{ width: "100%", height: "800px" }}
-        spaceBetween={30}
-        effect={"coverflow"}
-        pagination={{
-          clickable: true,
-        }}
-        coverflowEffect={{
-          rotate: 50,
-          stretch: 0,
-          depth: 100,
-          modifier: 1,
-          slideShadows: true,
-        }}
-        slidesPerView="auto"
-        autoplay={{
-          delay: 2000,
-          disableOnInteraction: false,
-        }}
-        loop
-        navigation
-        modules={[EffectCoverflow, Navigation, Pagination, Autoplay]}
-        className="mySwiper"
+    <Container>
+      <Flex
+        mt={isMobileOrTablet ? "110px" : "10px"}
+        direction="column"
+        textAlign={isMobileOrTablet ? "center" : "left"}
+        alignItems={isMobileOrTablet ? "center" : "flex-start"}
+        {...props}
       >
-        {data.map((item) => (
-          <SwiperSlide
-            style={{
-              width: "120px",
-              marginTop: "3rem",
-              // transform: `translateY(${index % 2 === 0 ? 50 : 0}px)`,
-            }}
-            key={item.title}
-          >
-            <Slide img={item.img} title={item.title} />
-          </SwiperSlide>
-        ))}
-      </Swiper>
-    </Stack>
+        <Text variant={isMobile ? "h5_mobile" : "h5"}>Categories</Text>
+        <Text
+          maxW="370px"
+          mt="1rem"
+          fontSize="md"
+          fontWeight="medium"
+          color="#5B5F62"
+        >
+          Here are lots of interesting destinations to visit, but don’t be
+          confused—they’re already grouped by category.
+        </Text>
+
+        <Swiper
+          style={{ width: isMobile ? "400px" : "1850px", marginTop: "40px" }}
+          slidesPerView="auto"
+          spaceBetween={30}
+          autoplay={{
+            delay: 3000,
+            disableOnInteraction: false,
+          }}
+          modules={[Autoplay]}
+          loop
+          centeredSlides
+          grabCursor
+          className="mySwiper"
+        >
+          {categories.map((item) => (
+            <SwiperSlide style={{ width: 170 }} key={item.id}>
+              <CategoryCard title={item.title} img={item.img} id={item.id} />
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      </Flex>
+    </Container>
   );
 };
 
-export default Slide1;
+export default Section2;

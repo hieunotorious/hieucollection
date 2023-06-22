@@ -9,16 +9,11 @@ import Container from "app/component/Container";
 import { getProduct } from "app/services/ProductService";
 import { InferGetStaticPropsType } from "next";
 import { AuthContext } from "app/context/authContext";
-import Banners from "app/component/Banners";
 import ProductItem from "app/component/ProductItem";
-import NewProduct from "app/component/NewProduct";
-import DragonballProduct from "app/component/DragonballProduct";
-import PreProduct from "app/component/PreProduct";
-import SpidermanProduct from "app/component/SpidermanProduct";
-import TransformerProduct from "app/component/TransformerProduct";
-import SaleProduct from "app/component/SaleProduct";
 import Title from "app/component/Title";
 import Content1 from "app/component/Content/Content1";
+import Content2 from "app/component/Content/Content2";
+import Slide from "app/component/Slide";
 
 export const getStaticProps = async () => {
   const product = await getProduct();
@@ -41,6 +36,8 @@ const Home = ({ product }: InferGetStaticPropsType<typeof getStaticProps>) => {
       <Section />
       <Title />
       <Content1 product={product} />
+
+      <Slide />
     </Container>
   );
 };

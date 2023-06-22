@@ -24,7 +24,7 @@ function Footer() {
             router.pathname === "/product" ||
             router.pathname === "/admin" ||
             router.pathname === "/checkout" ||
-            router.pathname === "/profile" ||
+            // router.pathname === "/profile" ||
             router.pathname === "/about"
               ? "none"
               : "flex",

@@ -116,7 +116,7 @@ function Nav() {
                 <Flex
                   justifyContent="space-between"
                   alignItems="center"
-                  gap="28rem"
+                  gap="33rem"
                 >
                   <Menu>
                     <MenuButton
@@ -208,7 +208,17 @@ function Nav() {
                     height="200px"
                   />
                   {user ? (
-                    <Flex gap="30rem">
+                    <Flex gap="15rem">
+                      <Link href="/">
+                        <Text
+                          variant="h4"
+                          color={
+                            router.pathname === "/" ? "#FFD600" : "#41332C"
+                          }
+                        >
+                          {t("home")}
+                        </Text>
+                      </Link>
                       <Link href="/product">
                         <Text
                           variant="h4"
