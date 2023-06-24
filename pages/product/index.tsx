@@ -1,71 +1,60 @@
-import { AllType, BrandType, CategoryType } from "app/api/auth/models/product";
 import { css } from "@emotion/react";
+import { AllType, BrandType, CategoryType } from "app/api/auth/models/product";
 
 import ProductItem from "app/component/ProductItem";
-import { useState } from "react";
 import { useResponsive } from "app/hooks/useResponsive";
+import { useState } from "react";
 
-import useTranslation from "next-translate/useTranslation";
-import { getProduct } from "app/services/ProductService";
-import { InferGetStaticPropsType } from "next";
 import {
   Button,
   Flex,
   Popover,
-  PopoverTrigger,
-  PopoverContent,
   PopoverArrow,
-  PopoverCloseButton,
   PopoverBody,
-  Grid,
+  PopoverCloseButton,
+  PopoverContent,
   PopoverHeader,
+  PopoverTrigger,
 } from "@chakra-ui/react";
 import Breadcrumb from "app/component/Breadcrumb";
-export const getStaticProps = async () => {
-  const product = await getProduct();
-  return {
-    props: {
-      product,
-    },
-  };
-};
+import useProducts from "app/hooks/useProducts";
+import useTranslation from "next-translate/useTranslation";
 
-const Product = ({
-  product,
-}: InferGetStaticPropsType<typeof getStaticProps>) => {
-  const [products, setProduct] = useState(product);
+const Product = () => {
+  const { isLoading, products } = useProducts();
+  const [currentProduct, setCurrentProduct] = useState(products);
   const { isMobile, isMobileOrTablet } = useResponsive();
   const { t } = useTranslation();
   const filterName = (name: string) => {
     if (!!name.trim()) {
-      const filterProducts = product.filter((item, index) => {
+      const filterProducts = currentProduct?.filter((item, index) => {
         return item.name.toUpperCase().indexOf(name.toUpperCase()) > -1;
       });
 
-      setProduct(filterProducts);
+      setCurrentProduct(filterProducts);
     } else {
-      setProduct(product);
+      setCurrentProduct(currentProduct);
     }
   };
 
   const filterAll = (all: AllType) => {
-    const filterProducts = product.filter((item, index) => {
+    const filterProducts = currentProduct?.filter((item, index) => {
       return item.all === all;
     });
-    setProduct(filterProducts);
+    setCurrentProduct(filterProducts);
   };
 
   const filterBrand = (brand: BrandType) => {
-    const filterProducts = product.filter((item, index) => {
+    const filterProducts = currentProduct?.filter((item, index) => {
       return item.brand === brand;
     });
-    setProduct(filterProducts);
+    setCurrentProduct(filterProducts);
   };
   const filterCategory = (category: CategoryType) => {
-    const filterProducts = product.filter((item, index) => {
+    const filterProducts = currentProduct?.filter((item, index) => {
       return item.category === category;
     });
-    setProduct(filterProducts);
+    setCurrentProduct(filterProducts);
   };
 
   return (
@@ -126,7 +115,7 @@ const Product = ({
                           fontWeight: 900,
                           textAlign: "center",
                         }}
-                        onClick={() => setProduct(product)}
+                        onClick={() => setCurrentProduct(currentProduct)}
                       >
                         {t("all")}
                       </div>
@@ -173,7 +162,7 @@ const Product = ({
                           fontWeight: 900,
                           textAlign: "center",
                         }}
-                        onClick={() => setProduct(product)}
+                        onClick={() => setCurrentProduct(currentProduct)}
                       >
                         {t("all")}
                       </div>
@@ -245,7 +234,7 @@ const Product = ({
                           fontWeight: 900,
                           textAlign: "center",
                         }}
-                        onClick={() => setProduct(product)}
+                        onClick={() => setCurrentProduct(currentProduct)}
                       >
                         {t("all")}
                       </div>
@@ -312,7 +301,7 @@ const Product = ({
 
             <div
               style={{ cursor: "pointer", fontWeight: 900 }}
-              onClick={() => setProduct(product)}
+              onClick={() => setCurrentProduct(currentProduct)}
             >
               {t("all")}
             </div>
@@ -382,7 +371,7 @@ const Product = ({
             cursor: "pointer",
           }}
         >
-          {products.map((item: any, index: number) => {
+          {currentProduct?.map((item: any, index: number) => {
             return <ProductItem product={item} key={item.id} />;
           })}
         </div>

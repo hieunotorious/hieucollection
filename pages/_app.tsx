@@ -5,14 +5,24 @@ import { ChakraProvider, Flex } from "@chakra-ui/react";
 import { AuthProvider } from "../context/authContext";
 import Footer from "../component/Footer";
 import { useRouter } from "next/router";
-import { useMemo } from "react";
+import { ReactElement, ReactNode, useMemo } from "react";
 import AdminSide from "app/component/AdminSide";
 import AdminNav from "app/component/AdminNav";
 import Head from "next/head";
 import theme from "app/theme";
+import { NextPage } from "next";
 
-function App({ Component, pageProps }: AppProps) {
+export type NextApplicationPage<P = {}> = NextPage<P> & {
+  getLayout?: (page: ReactElement) => ReactNode;
+};
+
+interface MyAppProps extends AppProps {
+  Component: NextApplicationPage;
+}
+
+function App({ Component, pageProps }: MyAppProps) {
   const router = useRouter();
+  const getLayout = Component.getLayout ?? ((page) => page);
   const isAdminPage = useMemo(
     () => router.pathname.includes("/admin"),
     [router]
@@ -30,7 +40,7 @@ function App({ Component, pageProps }: AppProps) {
 
           <Flex w="full" h="full">
             {isAdminPage && <AdminSide />}
-            <Component {...pageProps} />
+            {getLayout(<Component {...pageProps} />)}
           </Flex>
 
           <Footer />

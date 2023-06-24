@@ -4,7 +4,6 @@ import StarIcon from "@mui/icons-material/Star";
 import { useResponsive } from "app/hooks/useResponsive";
 import { useRouter } from "next/router";
 import { ProductType } from "app/api/auth/models/product";
-import { css } from "@emotion/react";
 import { AuthContext } from "../../../context/authContext";
 import Link from "next/link";
 import FacebookIcon from "@mui/icons-material/Facebook";
