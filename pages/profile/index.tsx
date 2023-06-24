@@ -104,10 +104,13 @@ function Profile() {
             direction={isMobile ? "column" : "row"}
             marginTop="2rem"
             alignItems="center"
-            justifyContent="center"
-            gap={isMobile ? "none" : "10rem"}
+            justifyContent="space-between"
+            paddingX="3rem"
           >
-            <Stack gap={isMobile ? "none" : "1rem"}>
+            <Stack
+              gap={isMobile ? "none" : "1rem"}
+              marginRight={isMobile ? "4.8rem" : "none"}
+            >
               <Text variant={isMobile ? "h6_mobile" : "h6"}>
                 {t("profile")}
               </Text>
@@ -154,13 +157,13 @@ function Profile() {
                   colorScheme="yellow"
                   width="100px"
                 >
-                  {t("update")}
+                  <Text color="white">{t("update")}</Text>
                 </Button>
               </Stack>
             </Stack>
-            <Stack gap="1rem" marginTop="6rem">
+            <Stack gap="1rem" marginTop={isMobile ? "2rem" : "6rem"}>
               <Button colorScheme="yellow" width="100px" onClick={onOpen}>
-                {t("edit")}
+                <Text color="white">{t("edit")}</Text>
               </Button>
               <Modal
                 size={isMobile ? "md" : "5xl"}

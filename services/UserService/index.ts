@@ -31,6 +31,7 @@ export const signup = async (
   return res.data || undefined;
 };
 export const logout = async () => {
+  if (typeof window === "undefined") return;
   const res = await axiosClient.post(`/user/logout`, {
     refreshToken: localStorage.getItem("refresh_token"),
   });

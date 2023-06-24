@@ -128,7 +128,7 @@ const Content1 = ({
         marginTop="5rem"
       >
         <Box
-          data-aos="zoom-in-up"
+          data-aos="flip-right"
           sx={{
             display: "flex",
             flexDirection: "column",
@@ -152,7 +152,7 @@ const Content1 = ({
         </Box>
 
         <Box
-          data-aos="zoom-in-up"
+          data-aos="flip-left"
           sx={{
             display: "flex",
             flexDirection: "column",
@@ -177,7 +177,7 @@ const Content1 = ({
         </Box>
 
         <Box
-          data-aos="zoom-in-up"
+          data-aos="flip-right"
           sx={{
             display: "flex",
             flexDirection: "column",
@@ -209,7 +209,7 @@ const Content1 = ({
         marginTop="5rem"
       >
         <Box
-          data-aos="zoom-in-up"
+          data-aos="flip-left"
           sx={{
             display: "flex",
             flexDirection: "column",
@@ -233,7 +233,7 @@ const Content1 = ({
         </Box>
 
         <Box
-          data-aos="zoom-in-up"
+          data-aos="flip-right"
           sx={{
             display: "flex",
             flexDirection: "column",
@@ -253,7 +253,7 @@ const Content1 = ({
         </Box>
 
         <Box
-          data-aos="zoom-in-up"
+          data-aos="flip-left"
           sx={{
             display: "flex",
             flexDirection: "column",
@@ -403,7 +403,9 @@ const Content1 = ({
       </Flex>
 
       <Stack marginTop="7rem" justifyContent="center" alignItems="center">
-        <Text variant={isMobile ? "h5_mobile" : "h5"}>{t("product")}</Text>
+        <Text variant={isMobile ? "h5_mobile" : "h5"} textTransform="uppercase">
+          {t("product")}
+        </Text>
         <Flex
           gap="3rem"
           data-aos="zoom-in"
@@ -596,7 +598,9 @@ const Content1 = ({
       </Stack>
 
       <Stack marginTop="7rem" justifyContent="center" alignItems="center">
-        <Text variant={isMobile ? "h5_mobile" : "h5"}>{t("category")}</Text>
+        <Text variant={isMobile ? "h5_mobile" : "h5"} textTransform="uppercase">
+          {t("category")}
+        </Text>
         <Flex
           gap="3rem"
           data-aos="zoom-in"
@@ -839,13 +843,13 @@ const Content1 = ({
             height={isMobile ? "230px" : "330px"}
             width={isMobile ? "350px" : "710px"}
           >
-            <Text variant={isMobile ? "h5_mobile" : "h5"}>{t("athlete")}</Text>
+            <Text data-aos="fade-up" variant={isMobile ? "h5_mobile" : "h5"}>
+              {t("athlete")}
+            </Text>
             <Text data-aos="fade-up" variant={isMobile ? "h6_mobile" : "h6"}>
               WWE &amp; UFC
             </Text>
-            <Text data-aos="fade-up" variant={isMobile ? "h4_mobile" : "h4"}>
-              {t("text6")}
-            </Text>
+            <Text variant={isMobile ? "h4_mobile" : "h4"}>{t("text6")}</Text>
           </Stack>
           <Link href="/product">
             <Button

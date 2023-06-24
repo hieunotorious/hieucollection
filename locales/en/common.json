@@ -9,6 +9,7 @@
   "product": "Products",
   "contact": "Contact",
   "shop_now": "Shop now",
+  "characters": "characters",
   "top_new_products": "Top New Products",
   "profile": "Profile",
   "logout": "Logout",
@@ -27,7 +28,7 @@
   "thank_you_for_shopping_with_us_your_order_is_on_the_way": "Thank you for shopping with us your order is on the way.",
   "contact_us": "Contact us",
   "have_a_wonderful_day!": "Have a wonderful day!",
-  "copyright_2022_all_right_reserved_designed_and_developed_by_Ma_Ngoc_Hieu": " Copyright 2022. All Right Reserved. Designed and Developed by Ma Ngoc Hieu",
+  "copyright_all_right_reserved_designed_and_developed_by_Ma_Ngoc_Hieu": " Copyright. All Right Reserved. Designed and Developed by Ma Ngoc Hieu",
   "new_arrival": "NEW ARRIVAL",
   "sale_product": "SALE PRODUCT",
   "pre_order": "PRE-ORDER",
@@ -127,5 +128,10 @@
   "changePass": "Change Password",
   "oldPass": "Old Password",
   "newPass": "New Password",
-  "close": "Close"
+  "close": "Close",
+  "username_placeholder": "Enter your username",
+  "password_placeholder": "Enter your password",
+  "google": "Sign in with Google",
+  "facebook": "Sign in with Facebook",
+  "text10": "Here are lots of interesting characters to visit, but don’t be confused—they’re already grouped by category."
 }

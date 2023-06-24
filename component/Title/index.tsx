@@ -6,6 +6,7 @@ import { useResponsive } from "app/hooks/useResponsive";
 import { Flex, Stack, Text } from "@chakra-ui/react";
 import { useRef } from "react";
 import useOnScreen from "app/hooks/useOnScreen";
+import Swiper from "app/component/Swiper";
 
 function Title() {
   const ref = useRef(null);
@@ -26,7 +27,11 @@ function Title() {
         <Text variant={isMobile ? "h4_mobile" : "h4"}>
           {t("action_figures_statue_collectibles_and_more!")}
         </Text>
-        <Flex display={isMobile ? "none" : isMobileOrTablet ? "none" : "flex"}>
+        <Swiper />
+        <Flex
+          display={isMobile ? "none" : isMobileOrTablet ? "flex" : "flex"}
+          marginLeft="10rem"
+        >
           <Flex
             marginTop="60px"
             height="600px"

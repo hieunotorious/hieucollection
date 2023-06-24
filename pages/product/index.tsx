@@ -34,7 +34,7 @@ const Product = ({
   product,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
   const [products, setProduct] = useState(product);
-  const { isMobile } = useResponsive();
+  const { isMobile, isMobileOrTablet } = useResponsive();
   const { t } = useTranslation();
   const filterName = (name: string) => {
     if (!!name.trim()) {
@@ -377,7 +377,7 @@ const Product = ({
             justifyContent: isMobile ? "center" : "space-between",
             width: "100%",
             margin: "auto",
-            flexWrap: "wrap",
+            flexWrap: isMobile ? "wrap" : "wrap",
             marginTop: 8,
             cursor: "pointer",
           }}

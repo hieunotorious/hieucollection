@@ -19,19 +19,17 @@ import { setTokens } from "app/utils/token";
 import { useResponsive } from "app/hooks/useResponsive";
 import Breadcrumb from "app/component/Breadcrumb";
 import { isAxiosError } from "axios";
-import { Form, Formik } from "formik";
+import { Formik, Form } from "formik";
 import * as Yup from "yup";
+import Image from "next/image";
+
 function Login() {
-  const [user, setUser] = useState<LoginType>({
-    username: "",
-    password: "",
-  });
   const SigninSchema = Yup.object().shape({
-    email: Yup.string()
-      .matches(
-        /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
-        "Định dạng email không đúng"
-      )
+    username: Yup.string()
+      // .matches(
+      //   /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
+      //   "Định dạng email không đúng"
+      // )
       .required("Bạn cần nhập thông tin vào"),
     password: Yup.string().required("Bạn cần nhập thông tin vào"),
   });
@@ -40,13 +38,11 @@ function Login() {
   const { t } = useTranslation();
   const { setUser: setGlobalUser } = useContext(AuthContext);
   const toast = useToast();
-  const [isLoading, setIsLoading] = useState(false);
 
-  const submitForm = async (event: any) => {
-    setIsLoading(true);
-    event.preventDefault();
+  const submitForm = async (values: { username: string; password: string }) => {
+    // handle form submission here
     try {
-      const res = await login(user.username, user.password);
+      const res = await login(values.username, values.password);
       if (res) {
         const { accessToken, refreshToken, expiredDate } = res;
         setTokens(accessToken, expiredDate, refreshToken);
@@ -74,7 +70,7 @@ function Login() {
         });
       }
     }
-    setIsLoading(false);
+
     // const dataIndex = data.findIndex(
     //   (item, index) => item.username === user.username
     // );
@@ -93,7 +89,7 @@ function Login() {
   const handleClick = () => setShow(!show);
   const { isMobile } = useResponsive();
   return (
-    <Flex direction="column" w="full">
+    <Flex direction="column" w="full" mt="3rem">
       <Breadcrumb
         links={[
           { title: t("home"), href: "/" },
@@ -101,10 +97,10 @@ function Login() {
         ]}
         current={t("login")}
       />
+
       <div
         style={{
-          margin: "0 auto",
-          minHeight: isMobile ? 610 : 795,
+          minHeight: isMobile ? 510 : 495,
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
@@ -112,220 +108,263 @@ function Login() {
           background: "white",
         }}
       >
-        <div>
-          <div
-            style={{
-              padding: "1.25rem",
-              borderRadius: "0.5rem",
-              border: " 1px solid black",
-              display: "grid",
-              gap: "1rem",
-              marginTop: " 4rem",
-              width: "300px",
-              background: "white",
-            }}
+        <div
+          style={{
+            marginTop: "2rem",
+            padding: "1.25rem",
+            border: isMobile ? "none" : "1px solid #FFD600",
+            display: "grid",
+            gap: "1rem",
+            width: isMobile ? "350px" : "576px",
+            backgroundColor: "#FFFFFF",
+            height: isMobile ? "520px" : "600px",
+            transform: isMobile ? "none" : "skew(-10deg)",
+          }}
+        >
+          <Formik
+            initialValues={{ username: "", password: "" }}
+            validationSchema={SigninSchema}
+            onSubmit={submitForm}
           >
-            <h1 style={{ textAlign: "center" }}>{t("login")}</h1>
-            <label style={{}}>{t("username")}</label>
-            <form onSubmit={submitForm}>
-              <div>
-                <input
-                  style={{
-                    borderRadius: " 0.25rem",
-                    border: "1px solid black",
-                    padding: "0.25rem 0.5rem",
-                    width: 275,
-                  }}
-                  type="text"
-                  onChange={(event) => {
-                    setUser((prevState) => ({
-                      ...prevState,
-                      username: event.target.value,
-                    }));
-                  }}
-                  required
-                ></input>
-              </div>
-              <label>{t("password")}</label>
-              <div>
-                <InputGroup size="md">
-                  <Input
+            {({ isSubmitting, values, handleChange }) => (
+              <Form>
+                <Stack>
+                  <Text
+                    variant={isMobile ? "h5_mobile" : "h5"}
+                    style={{ textAlign: "center" }}
+                  >
+                    {t("login")}
+                  </Text>
+                  <div
                     style={{
-                      padding: "0.25rem 0.5rem",
-                      borderRadius: "0.25rem",
-                      border: "1px solid black",
-                      width: 275,
-                      height: 30,
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
                     }}
-                    type={show ? "text" : "password"}
-                    onChange={(event) => {
-                      setUser((prevState) => ({
-                        ...prevState,
-                        password: event.target.value,
-                      }));
-                    }}
-                    required
-                  />
-                  <InputRightElement width="5.5rem">
-                    <Button h="1.75rem" size="sm" onClick={handleClick}>
-                      {show ? "Hide" : "Show"}
-                    </Button>
-                  </InputRightElement>
-                </InputGroup>
-              </div>
+                  >
+                    <Stack gap="1rem">
+                      <Text variant={isMobile ? "h4_mobile" : "h4"}>
+                        {t("username")}
+                        <span style={{ color: "red" }}>*</span>
+                      </Text>
+                      <Input
+                        style={{
+                          border: "1px solid #FFECAA",
+                          width: isMobile ? 320 : 480,
+                          height: 48,
+                          transform: "skew(-10deg)",
+                          fontFamily: "Balsamiq Sans, sans-serif",
 
-              <div
-                style={{
-                  fontSize: "1rem",
-                  letterSpacing: "normal",
-                  color: "var(--text)",
-                  textDecoration: "underline",
-                }}
-              >
-                {t("forgot_password?")}
-              </div>
-              <Button
-                style={{
-                  borderRadius: " 0.25rem",
-                  fontWeight: "300",
-                  cursor: "pointer",
-                  border: "none",
-                  textTransform: "uppercase",
-                  width: 275,
-                  background: "#3399FF",
-                  color: "white",
-                }}
-                type="submit"
-                isLoading={isLoading}
-              >
-                {t("login")}
-              </Button>
-            </form>
-          </div>
-          <div
-            style={{
-              marginTop: " 1rem",
-              display: "flex",
-              alignItems: " center",
-              borderRadius: "0.5rem",
-              border: "1px solid black",
-              padding: " 1.25rem",
-              background: "white",
-              marginBottom: "4rem",
-              justifyContent: "center",
-            }}
-          >
-            <div
-              style={{
-                marginLeft: isMobile ? "none" : "1rem",
-              }}
-            >
+                          fontSize: "15px",
+                        }}
+                        focusBorderColor="#FFD600"
+                        autoComplete="off"
+                        value={values.username}
+                        onChange={handleChange("username")}
+                        type="text"
+                        name="username"
+                        margin="2rem"
+                        placeholder={t("username_placeholder")}
+                        required
+                      />
+
+                      <Text variant={isMobile ? "h4_mobile" : "h4"}>
+                        {t("password")}
+                        <span style={{ color: "red" }}>*</span>
+                      </Text>
+                      <InputGroup>
+                        <Input
+                          style={{
+                            border: "1px solid #FFECAA",
+                            width: isMobile ? 320 : 480,
+
+                            height: 48,
+                            fontSize: "15px",
+                            fontFamily: "Balsamiq Sans, sans-serif",
+                            transform: "skew(-10deg)",
+                          }}
+                          focusBorderColor="#FFD600"
+                          autoComplete="off"
+                          type={show ? "text" : "password"}
+                          name="password"
+                          value={values.password}
+                          placeholder={t("password_placeholder")}
+                          onChange={handleChange("password")}
+                          required
+                        />
+                        <InputRightElement width="5.5rem" height="5rem">
+                          <Button
+                            h="3rem"
+                            size="sm"
+                            transform="skew(-10deg)"
+                            onClick={handleClick}
+                          >
+                            {show ? "hide" : "Show"}
+                          </Button>
+                        </InputRightElement>
+                      </InputGroup>
+                      <Text
+                        variant="h7"
+                        style={{
+                          display: "flex",
+                          justifyContent: "flex-end",
+                          fontSize: "1rem",
+                          letterSpacing: "normal",
+                          color: "#1964FF",
+                          textDecoration: "underline",
+                        }}
+                      >
+                        {t("forgot_password?")}
+                      </Text>
+                      <Button
+                        sx={{
+                          "&:hover": {
+                            background:
+                              "linear-gradient(90deg, #FFD600 0%, #FFFFFF 100%)",
+                          },
+                          fontWeight: "300",
+                          cursor: "pointer",
+                          textTransform: "uppercase",
+                          width: isMobile ? 320 : 480,
+
+                          height: 20,
+                          transform: "skew(-10deg)",
+                          border: "1px solid #FFD600",
+                          background: isMobile
+                            ? "linear-gradient(90deg, #FFD600 0%, #FFFFFF 100%)"
+                            : "#FFECAA",
+                        }}
+                        variant="ghost"
+                        type="submit"
+                        isLoading={isSubmitting}
+                      >
+                        <Text variant={isMobile ? "h4_mobile" : "h4"}>
+                          {t("login")}
+                        </Text>
+                      </Button>
+                      <Flex
+                        alignItems="center"
+                        justifyContent="center"
+                        gap="10px"
+                      >
+                        <Flex
+                          backgroundColor="black"
+                          width="50px"
+                          height="1px"
+                        />
+                        <Text variant="h7" fontSize="15px ! important">
+                          {t("or")}
+                        </Text>
+                        <Flex
+                          backgroundColor="black"
+                          width="50px"
+                          height="1px"
+                        />
+                      </Flex>
+                      <Stack gap="10px">
+                        <Button
+                          sx={{
+                            "&:hover": {
+                              background:
+                                "linear-gradient(90deg, #FFD600 0%, #FFFFFF 100%)",
+                            },
+                            cursor: "pointer",
+                            width: isMobile ? 320 : 480,
+
+                            height: 20,
+                            transform: "skew(-10deg)",
+                            border: "1px solid #FFD600",
+                            background: "white",
+                          }}
+                          variant="ghost"
+                          type="submit"
+                        >
+                          <Flex
+                            alignItems="center"
+                            justifyContent="center"
+                            gap="10px"
+                          >
+                            <Text variant={isMobile ? "h4_mobile" : "h4"}>
+                              {t("google")}
+                            </Text>
+                            <Image
+                              src="/images/logoGG.png"
+                              alt=""
+                              width="25px"
+                              height="25px"
+                            />
+                          </Flex>
+                        </Button>
+                        <Button
+                          sx={{
+                            "&:hover": {
+                              background:
+                                "linear-gradient(90deg, #FFD600 0%, #FFFFFF 100%)",
+                            },
+                            cursor: "pointer",
+                            width: isMobile ? 320 : 480,
+
+                            height: 20,
+                            transform: "skew(-10deg)",
+                            border: "1px solid #FFD600",
+                            background: "white",
+                          }}
+                          variant="ghost"
+                          type="submit"
+                        >
+                          <Flex
+                            alignItems="center"
+                            justifyContent="center"
+                            gap="10px"
+                          >
+                            <Text variant={isMobile ? "h4_mobile" : "h4"}>
+                              {t("facebook")}
+                            </Text>
+                            <Image
+                              src="/images/logoFB.png"
+                              alt=""
+                              width="30px"
+                              height="30px"
+                            />
+                          </Flex>
+                        </Button>
+                      </Stack>
+                    </Stack>
+                  </div>
+                </Stack>
+              </Form>
+            )}
+          </Formik>
+        </div>
+        <div
+          style={{
+            marginRight: isMobile ? "1rem" : "12rem",
+            marginTop: isMobile ? "1px" : "2rem",
+            padding: "1.25rem",
+            border: isMobile ? "none" : " 1px solid #FFD600",
+            display: "grid",
+            gap: "1rem",
+            width: isMobile ? "350px" : "576px",
+            backgroundColor: "#FFFFFF",
+            height: isMobile ? "10px" : "50px",
+            transform: "skew(-10deg)",
+          }}
+        >
+          <Flex alignItems="center" justifyContent="center" gap="5px">
+            <Text variant={isMobile ? "h4_mobile" : "h4"}>
               {t("not_a_member")}
-              <a
-                style={{ color: "blue", textDecoration: "underline" }}
-                href="signup"
+            </Text>
+            <a href="signup">
+              <Text
+                variant={isMobile ? "h4_mobile" : "h4"}
+                color="#1964FF !important"
               >
                 {t("signup")}
-              </a>
-            </div>
-          </div>
+              </Text>
+            </a>
+          </Flex>
         </div>
       </div>
-      {/* <Formik
-        onSubmit={(e) => submitForm(e)}
-        initialValues={{
-          username: "",
-          password: "",
-        }}
-        validationSchema={SigninSchema}
-      >
-        {({ handleSubmit, handleChange, values, errors, touched }) => (
-          <Form onSubmit={handleSubmit}>
-            <Box width="100%">
-              <Text>{t("username")}</Text>
-              <Input
-                autoComplete="off"
-                placeholder="Nhập email của bạn"
-                value={values.username}
-                sx={{
-                  borderRadius: "6px",
-                  border: "1px solid #FFD600",
-                  width: "100%",
-                  height: "35px",
-                  padding: "0 5px",
-                }}
-                type="text"
-                onChange={handleChange("username")}
-                required
-              />
-              {errors.username && touched.username && (
-                <Text color="error" fontSize="10px">
-                  {errors.username}
-                </Text>
-              )}
-            </Box>
-            <InputGroup width="100%" mt="10px">
-              <Input
-                autoComplete="off"
-                placeholder="Mật khẩu"
-                value={values.password}
-                sx={{
-                  borderRadius: "6px",
-                  border: "1px solid #FFD600",
-                  width: "100%",
-                  height: "35px",
-                  padding: "0 5px",
-                }}
-                type={show ? "text" : "password"}
-                onChange={handleChange("password")}
-                required
-              />
-              <InputRightElement width="5.5rem">
-                <Button h="1.75rem" size="sm" onClick={handleClick}>
-                  {show ? "Hide" : "Show"}
-                </Button>
-              </InputRightElement>
-              {errors.password && touched.password && (
-                <Text color="error" fontSize="10px">
-                  {errors.password}
-                </Text>
-              )}
-            </InputGroup>
-
-            <Text
-              justifyContent="flex-end"
-              display="flex"
-              color="#E28A00"
-              fontSize="10px"
-              mt="10px"
-              style={{ textDecoration: "underline", cursor: "pointer" }}
-            >
-              Quên mật khẩu
-            </Text>
-
-            <Box justifyContent="center" display="flex">
-              <Button
-                variant="contained"
-                sx={{
-                  background:
-                    "linear-gradient(90deg, #FF9900 0%, #FFD600 100%)",
-                  color: "#ffffff",
-                  width: "120px",
-                  display: "flex",
-                  alignItems: "center",
-                  marginTop: "10px",
-                  textTransform: "none",
-                }}
-                type="submit"
-                fontSize="13px"
-                isLoading={isLoading}
-              >
-                Đăng nhập
-              </Button>
-            </Box>
-          </Form>
-        )}
-      </Formik> */}
     </Flex>
   );
 }

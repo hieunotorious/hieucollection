@@ -1,5 +1,5 @@
 import "swiper/css";
-import useTranslation from "next-translate/useTranslation";
+
 import { Flex, FlexProps, Text } from "@chakra-ui/react";
 import { Autoplay } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -21,48 +21,34 @@ export type CategoryType = {
 };
 
 const categories: CategoryType[] = [
-  { id: uuidv4(), title: "Goku", img: "/images/shfgoku.jpeg" },
-  { id: uuidv4(), title: "Spiderman", img: "/images/spidermanhasbro.webp" },
-  { id: uuidv4(), title: "Luffy", img: "/images/luffy.jpeg" },
-  { id: uuidv4(), title: "Vegeta", img: "/images/vegeta.jpeg" },
-  { id: uuidv4(), title: "Ghost Rider", img: "/images/ghostrider.webp" },
-  { id: uuidv4(), title: "Zorro", img: "/images/zorro.jpeg" },
-  { id: uuidv4(), title: "Gohan", img: "/images/goahn.jpeg" },
-  { id: uuidv4(), title: "Sanji", img: "/images/sanji.jpeg" },
-  { id: uuidv4(), title: "IronMan", img: "/images/ironman.webp" },
+  { id: uuidv4(), title: "", img: "/images/batman.jpeg" },
+  { id: uuidv4(), title: "", img: "/images/spiderman.jpeg" },
+  { id: uuidv4(), title: "", img: "/images/goku.jpeg" },
+  { id: uuidv4(), title: "", img: "/images/transformer.jpeg" },
 ];
 
-const Section2 = ({ ...props }: Props) => {
+const Section = ({ ...props }: Props) => {
   const { isMobile, isMobileOrTablet } = useResponsive();
-  const { t } = useTranslation();
-
   React.useEffect(() => {
     Aos.init({ duration: 1000 });
   }, []);
   return (
     <Container>
       <Flex
-        mt={isMobileOrTablet ? "110px" : "10px"}
+        display={isMobileOrTablet ? "flex" : "none"}
         direction="column"
         textAlign={isMobileOrTablet ? "center" : "left"}
         alignItems={isMobileOrTablet ? "center" : "flex-start"}
         {...props}
       >
-        <Text
-          variant={isMobile ? "h5_mobile" : "h5"}
-          textTransform="uppercase"
-          marginTop="3rem"
-        >
-          {t("characters")}
-        </Text>
-        <Text maxW="600px" mt="1rem" variant={isMobile ? "h4_mobile" : "h4"}>
-          {t("text10")}
-        </Text>
-
         <Swiper
-          style={{ width: isMobile ? "400px" : "1850px", marginTop: "40px" }}
+          style={{
+            width: "400px",
+            height: "300px",
+            marginTop: "40px",
+          }}
           slidesPerView="auto"
-          spaceBetween={30}
+          spaceBetween={80}
           autoplay={{
             delay: 3000,
             disableOnInteraction: false,
@@ -73,8 +59,14 @@ const Section2 = ({ ...props }: Props) => {
           grabCursor
           className="mySwiper"
         >
-          {categories.map((item) => (
-            <SwiperSlide style={{ width: 170 }} key={item.id}>
+          {categories.map((item, index) => (
+            <SwiperSlide
+              style={{
+                width: 170,
+                transform: `translateY(${index % 2 === 0 ? 50 : 0}px)`,
+              }}
+              key={item.id}
+            >
               <CategoryCard title={item.title} img={item.img} id={item.id} />
             </SwiperSlide>
           ))}
@@ -84,4 +76,4 @@ const Section2 = ({ ...props }: Props) => {
   );
 };
 
-export default Section2;
+export default Section;

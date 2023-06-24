@@ -221,7 +221,7 @@ function Footer() {
             }}
           >
             {t(
-              "copyright_2022_all_right_reserved_designed_and_developed_by_Ma_Ngoc_Hieu"
+              "copyright_all_right_reserved_designed_and_developed_by_Ma_Ngoc_Hieu"
             )}
           </Text>
         </Flex>

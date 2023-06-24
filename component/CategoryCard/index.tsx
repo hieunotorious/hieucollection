@@ -1,13 +1,15 @@
 import { Button, Flex, FlexProps, Image, Text } from "@chakra-ui/react";
 import { css } from "@emotion/react";
 import React from "react";
-
+import { useResponsive } from "app/hooks/useResponsive";
 import { CategoryType } from "app/component/Slide";
 import Container from "../Container";
 
 type CategoryCardType = {} & CategoryType & FlexProps;
 
 const CategoryCard = ({ img, title, href, ...props }: CategoryCardType) => {
+  const { isMobile, isMobileOrTablet } = useResponsive();
+
   return (
     <Container>
       <Flex direction="column" alignItems="center" {...props}>
@@ -26,7 +28,7 @@ const CategoryCard = ({ img, title, href, ...props }: CategoryCardType) => {
             src={img}
             fit="contain"
             alt={title}
-            style={{ borderRadius: "10px", gap: "1rem" }}
+            style={{ borderRadius: "10px" }}
           />
           <Button
             variant="unstyled"
@@ -41,12 +43,17 @@ const CategoryCard = ({ img, title, href, ...props }: CategoryCardType) => {
             justifyContent="center"
             alignItems="center"
           >
-            <Text fontSize="1.25rem" fontWeight="semibold" color="white">
+            <Text
+              fontSize="1.25rem"
+              fontWeight="semibold"
+              color="white !important"
+              variant={isMobile ? "h4_mobile" : "h4"}
+            >
               Visite
             </Text>
           </Button>
         </Flex>
-        <Text mt="1rem" fontSize="26px" fontWeight="semibold">
+        <Text mt="1rem" variant={isMobile ? "h4_mobile" : "h4"}>
           {title}
         </Text>
       </Flex>

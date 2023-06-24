@@ -1,40 +1,69 @@
-import React, { useContext, useState } from "react";
-import { SignupType } from "../../api/auth/models/user";
-import { AuthContext } from "app/context/authContext";
-import { useRouter } from "next/router";
-import useTranslation from "next-translate/useTranslation";
 import {
+  Button,
+  Flex,
   Input,
   InputGroup,
   InputRightElement,
-  Button,
+  Stack,
+  Text,
   useToast,
-  Flex,
 } from "@chakra-ui/react";
-import { setTokens } from "app/utils/token";
-import { getUser, signup } from "app/services/UserService";
-import { useResponsive } from "app/hooks/useResponsive";
 import Breadcrumb from "app/component/Breadcrumb";
+import { AuthContext } from "app/context/authContext";
+import { useResponsive } from "app/hooks/useResponsive";
+import { getUser, signup } from "app/services/UserService";
+import { setTokens } from "app/utils/token";
+import useTranslation from "next-translate/useTranslation";
+import { useRouter } from "next/router";
+import React, { useContext } from "react";
+import { SignupType } from "../../api/auth/models/user";
+
+// Import Formik components and hooks
+import { ErrorMessage, Form, Formik } from "formik";
+
+// Import Yup for validation
+import * as Yup from "yup";
+
 function Signup() {
   const [show1, setShow1] = React.useState(false);
   const [show2, setShow2] = React.useState(false);
 
   const { t } = useTranslation();
-  const [user, setUser] = useState<SignupType>({
+  const router = useRouter();
+  const toast = useToast();
+  const { setUser: setGlobalUser } = useContext(AuthContext);
+  const { isMobile } = useResponsive();
+
+  // Define the initial values for the form fields
+  const initialValues: SignupType = {
     username: "",
     password: "",
     dob: "",
     email: "",
     confirm: "",
+  };
+
+  // Define the validation schema for the form fields
+  const validationSchema = Yup.object({
+    username: Yup.string()
+      .required(t("username_required"))
+      .min(3, t("username_min_length")),
+    email: Yup.string().required(t("email_required")).email(t("email_invalid")),
+    password: Yup.string()
+      .required(t("password_required"))
+      .min(8, t("password_min_length")),
+    confirm: Yup.string()
+      .required(t("confirm_password_required"))
+      .oneOf([Yup.ref("password"), null], t("confirm_password_match")),
   });
-  const router = useRouter();
-  const [isLoading, setIsLoading] = useState(false);
-  const toast = useToast();
-  const { setUser: setGlobalUser } = useContext(AuthContext);
-  const submitForm = async (event: any) => {
-    setIsLoading(true);
-    event.preventDefault();
-    const res = await signup(user.username, user.password, user.email);
+
+  const onSubmit = async (values: SignupType) => {
+    const res = await signup(
+      values.username,
+      values.password,
+      values.confirm
+      // values.email
+    );
     if (res) {
       const { accessToken, refreshToken, expiredDate } = res;
       setTokens(accessToken, expiredDate, refreshToken);
@@ -51,10 +80,8 @@ function Signup() {
         await router.push("/");
       }
     }
-    setIsLoading(false);
   };
   const handleClick1 = () => setShow1(!show1);
-  const { isMobile } = useResponsive();
   const handleClick2 = () => setShow2(!show2);
 
   return (
@@ -80,168 +107,182 @@ function Signup() {
         <div>
           <div
             style={{
+              marginTop: "2rem",
               padding: "1.25rem",
-              borderRadius: "0.5rem",
-              border: " 1px solid black",
+              border: isMobile ? "none" : "1px solid #FFD600",
               display: "grid",
               gap: "1rem",
-              marginTop: " 4rem",
-              width: "300px",
-              background: "white",
+              width: isMobile ? "350px" : "576px",
+              backgroundColor: "#FFFFFF",
+              height: isMobile ? "520px" : "700px",
+              transform: isMobile ? "none" : "skew(-10deg)",
             }}
           >
-            <h1 style={{ textAlign: "center" }}>{t("signup")}</h1>
-            <label style={{}}>{t("username")}</label>
-            <form onSubmit={submitForm}>
-              <div>
-                <input
-                  style={{
-                    borderRadius: " 0.25rem",
-                    border: "1px solid black",
-                    padding: "0.25rem 0.5rem",
-                    width: 275,
-                  }}
-                  type="text"
-                  onChange={(event) => {
-                    setUser((prevState) => ({
-                      ...prevState,
-                      username: event.target.value,
-                    }));
-                  }}
-                  required
-                ></input>
-              </div>
+            <Formik
+              initialValues={initialValues}
+              validationSchema={validationSchema}
+              onSubmit={onSubmit}
+            >
+              {({ isSubmitting, values, handleChange }) => (
+                <Form>
+                  <Stack>
+                    <Text
+                      variant={isMobile ? "h5_mobile" : "h5"}
+                      style={{ textAlign: "center" }}
+                    >
+                      {t("signup")}
+                    </Text>
+                    <div
+                      style={{
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                      }}
+                    >
+                      <Stack gap="1rem">
+                        <Text variant={isMobile ? "h4_mobile" : "h4"}>
+                          {t("username")}
+                        </Text>
+                        <Input
+                          style={{
+                            width: isMobile ? 320 : 480,
+                            height: 48,
+                            transform: "skew(-10deg)",
+                            fontFamily: "Balsamiq Sans, sans-serif",
+                            fontSize: "15px",
+                          }}
+                          focusBorderColor="#FFD600"
+                          autoComplete="off"
+                          value={values.username}
+                          onChange={handleChange("username")}
+                          type="text"
+                          name="username"
+                          margin="2rem"
+                          placeholder={t("username_placeholder")}
+                        />
+                        <ErrorMessage name="username" />
+                        <Text variant={isMobile ? "h4_mobile" : "h4"}>
+                          Email
+                        </Text>
+                        <Input
+                          style={{
+                            width: isMobile ? 320 : 480,
+                            height: 48,
+                            transform: "skew(-10deg)",
+                            fontFamily: "Balsamiq Sans, sans-serif",
+                            fontSize: "15px",
+                          }}
+                          focusBorderColor="#FFD600"
+                          autoComplete="off"
+                          value={values.email}
+                          onChange={handleChange("email")}
+                          type="text"
+                          name="email"
+                          margin="2rem"
+                          placeholder={t("email_placeholder")}
+                        />
+                        <ErrorMessage name="email" />
+                        <Text variant={isMobile ? "h4_mobile" : "h4"}>
+                          {t("password")}
+                          <span style={{ color: "red" }}>*</span>
+                        </Text>
+                        <InputGroup>
+                          <Input
+                            style={{
+                              border: "1px solid #FFECAA",
+                              width: isMobile ? 320 : 480,
 
-              <label style={{}}>Email</label>
-              <div>
-                <input
-                  style={{
-                    borderRadius: " 0.25rem",
-                    border: "1px solid black",
-                    padding: "0.25rem 0.5rem",
-                    width: 275,
-                  }}
-                  type="text"
-                  onChange={(event) => {
-                    setUser((prevState) => ({
-                      ...prevState,
-                      email: event.target.value,
-                    }));
-                  }}
-                  required
-                ></input>
-              </div>
+                              height: 48,
+                              fontSize: "15px",
+                              fontFamily: "Balsamiq Sans, sans-serif",
+                              transform: "skew(-10deg)",
+                            }}
+                            focusBorderColor="#FFD600"
+                            autoComplete="off"
+                            type={show1 ? "text" : "password"}
+                            name="password"
+                            value={values.password}
+                            placeholder={t("password_placeholder")}
+                            onChange={handleChange("password")}
+                            required
+                          />
+                          <InputRightElement width="5.5rem" height="5rem">
+                            <Button
+                              h="3rem"
+                              size="sm"
+                              transform="skew(-10deg)"
+                              onClick={handleClick1}
+                            >
+                              {show1 ? "hide" : "Show"}
+                            </Button>
+                          </InputRightElement>
+                        </InputGroup>
+                        <Text variant={isMobile ? "h4_mobile" : "h4"}>
+                          {t("confirm_password")}
+                          <span style={{ color: "red" }}>*</span>
+                        </Text>
+                        <InputGroup>
+                          <Input
+                            style={{
+                              border: "1px solid #FFECAA",
+                              width: isMobile ? 320 : 480,
 
-              <label>{t("Password")}</label>
-              <div>
-                <InputGroup size="md">
-                  <Input
-                    style={{
-                      padding: "0.25rem 0.5rem",
-                      borderRadius: "0.25rem",
-                      border: "1px solid black",
-                      width: 275,
-                      height: 30,
-                    }}
-                    type={show1 ? "text" : "password"}
-                    onChange={(event) => {
-                      setUser((prevState) => ({
-                        ...prevState,
-                        password: event.target.value,
-                      }));
-                    }}
-                    required
-                  />
-                  <InputRightElement width="5.5rem">
-                    <Button h="1.75rem" size="sm" onClick={handleClick1}>
-                      {show1 ? "Hide" : "Show"}
-                    </Button>
-                  </InputRightElement>
-                </InputGroup>
-              </div>
+                              height: 48,
+                              fontSize: "15px",
+                              fontFamily: "Balsamiq Sans, sans-serif",
+                              transform: "skew(-10deg)",
+                            }}
+                            focusBorderColor="#FFD600"
+                            autoComplete="off"
+                            type={show2 ? "text" : "password"}
+                            name="confirm"
+                            value={values.confirm}
+                            placeholder={t("confirm_placeholder")}
+                            onChange={handleChange("confirm")}
+                            required
+                          />
+                          <InputRightElement width="5.5rem" height="5rem">
+                            <Button
+                              h="3rem"
+                              size="sm"
+                              transform="skew(-10deg)"
+                              onClick={handleClick2}
+                            >
+                              {show2 ? "hide" : "Show"}
+                            </Button>
+                          </InputRightElement>
+                        </InputGroup>
+                        <Button
+                          sx={{
+                            "&:hover": {
+                              background:
+                                "linear-gradient(90deg, #FFD600 0%, #FFFFFF 100%)",
+                            },
+                            cursor: "pointer",
+                            textTransform: "uppercase",
+                            width: isMobile ? 320 : 480,
 
-              <label>{t("confirm_password")}</label>
-              <div>
-                <InputGroup size="md">
-                  <Input
-                    style={{
-                      padding: "0.25rem 0.5rem",
-                      borderRadius: "0.25rem",
-                      border: "1px solid black",
-                      width: 275,
-                      height: 30,
-                    }}
-                    type={show2 ? "text" : "password"}
-                    onChange={(event) => {
-                      setUser((prevState) => ({
-                        ...prevState,
-                        confirm: event.target.value,
-                      }));
-                    }}
-                    required
-                  />
-                  <InputRightElement width="5.5rem">
-                    <Button h="1.75rem" size="sm" onClick={handleClick2}>
-                      {show2 ? "Hide" : "Show"}
-                    </Button>
-                  </InputRightElement>
-                </InputGroup>
-              </div>
-
-              <div
-                style={{
-                  fontSize: "1rem",
-                  letterSpacing: "normal",
-                  color: "var(--text)",
-                }}
-              >
-                {t(
-                  "by_clicking_reate_account_i_agree_that_i_have_read_and_accepted_the_and"
-                )}
-                <a style={{ color: "blue" }}>{t("terms_of_use")}</a> and
-                <a style={{ color: "blue", padding: 2 }}>
-                  {t("privacy_policy")}
-                </a>
-              </div>
-              <Button
-                style={{
-                  borderRadius: " 0.25rem",
-                  fontWeight: "300",
-                  cursor: "pointer",
-                  border: "none",
-                  textTransform: "uppercase",
-                  width: 275,
-                  background: "#3399FF",
-                  color: "white",
-                }}
-                type="submit"
-                isLoading={isLoading}
-              >
-                {t("signup")}
-              </Button>
-            </form>
-          </div>
-          <div
-            style={{
-              marginTop: " 1rem",
-              display: "flex",
-              alignItems: " center",
-              borderRadius: "0.5rem",
-              border: "1px solid black",
-              padding: " 1.25rem",
-              background: "white",
-              marginBottom: "4rem",
-            }}
-          >
-            <div>
-              {t("already_have_an_account?")}
-              <a
-                style={{ color: "blue", textDecoration: "underline" }}
-                href="signin"
-              >
-                {t("login")}
-              </a>
-            </div>
+                            height: 20,
+                            transform: "skew(-10deg)",
+                            border: "1px solid #FFD600",
+                            background: isMobile
+                              ? "linear-gradient(90deg, #FFD600 0%, #FFFFFF 100%)"
+                              : "#FFECAA",
+                          }}
+                          variant="ghost"
+                          type="submit"
+                          isLoading={isSubmitting}
+                        >
+                          <Text variant={isMobile ? "h4_mobile" : "h4"}>
+                            {t("signup")}
+                          </Text>
+                        </Button>
+                      </Stack>
+                    </div>
+                  </Stack>
+                </Form>
+              )}
+            </Formik>
           </div>
         </div>
       </div>

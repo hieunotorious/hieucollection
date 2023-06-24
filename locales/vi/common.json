@@ -8,6 +8,11 @@
   "about": "Về chúng tôi",
   "product": "Sản Phẩm",
   "contact": "Liên hệ",
+  "characters": "Nhân vật",
+  "username_placeholder": "Nhập tên đăng nhập của bạn",
+  "password_placeholder": "Nhập mật khẩu của bạn",
+  "google": "Đăng nhập bằng Google",
+  "facebook": "Đăng nhập bằng Facebook",
   "shop_now": "Mua ngay",
   "top_new_products": "Sản phẩm mới",
   "profile": "Thông tin cá nhân",
@@ -27,7 +32,7 @@
   "contact_us": "Liên lạc với chúng tôi.",
   "have_a_wonderful_day!": "Chúc một ngày tốt lành!",
   "store_at": "Cửa hàng ở",
-  "copyright_2022_all_right_reserved_designed_and_developed_by_Ma_Ngoc_Hieu": "Bản quyền 2022. All Right Reserved. Thiết kế và Phát triển bởi Mã Ngọc Hiếu",
+  "copyright_all_right_reserved_designed_and_developed_by_Ma_Ngoc_Hieu": "Bản quyền. All Right Reserved. Thiết kế và Phát triển bởi Mã Ngọc Hiếu",
   "new_arrival": "Sản phẩm mới về",
   "sale_product": "Sản phẩm giảm giá",
   "pre_order": "Sản phẩm đặt trước",
@@ -126,5 +131,6 @@
   "changePass": "Đổi mật khẩu",
   "oldPass": "Mật khẩu cũ",
   "newPass": "Mật khẩu mới",
-  "close": "Đóng"
+  "close": "Đóng",
+  "text10": "Dưới đây là rất nhiều nhân vật thú vị để ghé thăm, nhưng đừng nhầm lẫn—chúng đã được nhóm theo danh mục."
 }

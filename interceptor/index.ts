@@ -15,6 +15,7 @@ const axiosClient = axios.create({
 axiosClient.interceptors.request.use(
   async (config) => {
     try {
+      if (typeof window === "undefined") return config;
       const accessToken = await localStorage.getItem("access_token");
       const expiredDate = await localStorage.getItem("expired");
 
@@ -51,6 +52,7 @@ axiosClient.interceptors.response.use(
   },
   async (err) => {
     try {
+      if (typeof window === "undefined") return Promise.reject(err);
       const refreshToken = await localStorage.getItem("refresh_token");
       if (!refreshToken) {
         return Promise.reject(err);
