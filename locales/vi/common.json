@@ -132,5 +132,7 @@
   "oldPass": "Mật khẩu cũ",
   "newPass": "Mật khẩu mới",
   "close": "Đóng",
-  "text10": "Dưới đây là rất nhiều nhân vật thú vị để ghé thăm, nhưng đừng nhầm lẫn—chúng đã được nhóm theo danh mục."
+  "text10": "Dưới đây là rất nhiều nhân vật thú vị để ghé thăm, nhưng đừng nhầm lẫn—chúng đã được nhóm theo danh mục.",
+  "email_placeholder": "Nhập email của bạn",
+  "confirm_placeholder": "Xác nhận mật khẩu của bạn"
 }

@@ -12,7 +12,7 @@ function Contact() {
   const { t } = useTranslation();
 
   return (
-    <Flex direction="column" w="full">
+    <Flex direction="column" w="full" mt="5rem">
       <Breadcrumb
         marginTop="3rem"
         links={[

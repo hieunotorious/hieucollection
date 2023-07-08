@@ -50,3 +50,19 @@ export enum Role {
   user = "USER",
   admin = "ADMIN",
 }
+
+export enum SocialProvider {
+  facebook = "FACEBOOK",
+  google = "GOOGLE",
+  github = "GITHUB",
+  default = "DEFAULT",
+}
+
+export type SocialPayload = {
+  email: string | null;
+  username: string | null;
+  socialProvider: SocialProvider;
+  displayName: string | null;
+  phoneNumber: string | null;
+  uid: string;
+};

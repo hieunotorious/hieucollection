@@ -10,7 +10,8 @@ import Swiper from "app/component/Swiper";
 
 function Title() {
   const ref = useRef(null);
-  const { isMobile, isMobileOrTablet } = useResponsive();
+  const { isMobile, isMobileOrTablet, isTabletOrLaptop, isBigScreen } =
+    useResponsive();
   const router = useRouter();
   const { t } = useTranslation();
 
@@ -29,8 +30,16 @@ function Title() {
         </Text>
         <Swiper />
         <Flex
-          display={isMobile ? "none" : isMobileOrTablet ? "flex" : "flex"}
-          marginLeft="10rem"
+          display={
+            isMobile
+              ? "none"
+              : isMobileOrTablet
+              ? "none"
+              : isTabletOrLaptop
+              ? "none"
+              : "flex"
+          }
+          marginX="15rem"
         >
           <Flex
             marginTop="60px"
@@ -39,7 +48,7 @@ function Title() {
             sx={{ overflow: "hidden" }}
           >
             <Stack
-              width="340px"
+              width={isBigScreen ? "320px" : "340px"}
               sx={{
                 transform: `translateY(${isVisible ? 150 : 600}px)`,
                 opacity: isVisible ? 1 : 0,
@@ -65,7 +74,7 @@ function Title() {
               </Stack>
             </Stack>
             <Stack
-              width="340px"
+              width={isBigScreen ? "320px" : "340px"}
               sx={{
                 transform: `translateY(${isVisible ? 10 : 600}px)`,
                 opacity: isVisible ? 1 : 0,
@@ -91,7 +100,7 @@ function Title() {
               </Stack>
             </Stack>
             <Stack
-              width="340px"
+              width={isBigScreen ? "320px" : "340px"}
               sx={{
                 transform: `translateY(${isVisible ? 150 : 600}px)`,
                 opacity: isVisible ? 1 : 0,
@@ -117,7 +126,7 @@ function Title() {
               </Stack>
             </Stack>
             <Stack
-              width="340px"
+              width={isBigScreen ? "320px" : "340px"}
               sx={{
                 transform: `translateY(${isVisible ? 10 : 600}px)`,
                 opacity: isVisible ? 1 : 0,

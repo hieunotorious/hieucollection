@@ -28,14 +28,14 @@ const categories: CategoryType[] = [
 ];
 
 const Section = ({ ...props }: Props) => {
-  const { isMobile, isMobileOrTablet } = useResponsive();
+  const { isSmallDevice, isTabletOrLaptop, isMobileOrTablet } = useResponsive();
   React.useEffect(() => {
     Aos.init({ duration: 1000 });
   }, []);
   return (
     <Container>
       <Flex
-        display={isMobileOrTablet ? "flex" : "none"}
+        display={isMobileOrTablet ? "flex" : isTabletOrLaptop ? "flex" : "none"}
         direction="column"
         textAlign={isMobileOrTablet ? "center" : "left"}
         alignItems={isMobileOrTablet ? "center" : "flex-start"}
@@ -43,7 +43,8 @@ const Section = ({ ...props }: Props) => {
       >
         <Swiper
           style={{
-            width: "400px",
+            width: isSmallDevice ? "400px" : "930px",
+
             height: "300px",
             marginTop: "40px",
           }}

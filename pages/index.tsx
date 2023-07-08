@@ -10,7 +10,6 @@ const Home = () => {
 
   return (
     <Container direction="column">
-      <Section />
       <Title />
       {!isLoading && products && <Content1 product={products} />}
 

@@ -10,7 +10,7 @@ import { useResponsive } from "app/hooks/useResponsive";
 import { Flex, Text, Tooltip } from "@chakra-ui/react";
 import Link from "next/link";
 function Footer() {
-  const { isMobile } = useResponsive();
+  const { isMobile, isMobileOrTablet } = useResponsive();
   const router = useRouter();
   const { t } = useTranslation();
   return (
@@ -31,14 +31,17 @@ function Footer() {
         }}
       >
         <Flex
-          display={isMobile ? "column" : "grid"}
-          gridTemplateColumns="1fr 1fr 1fr 1fr"
-          textAlign="left"
-          mb="6rem"
-          gap="20rem"
+          display={isMobile ? "column" : isMobileOrTablet ? "grid" : "grid"}
+          gridTemplateColumns={isMobileOrTablet ? "1fr 1fr" : "1fr 1fr 1fr 1fr"}
+          mb="3rem"
+          justifyContent="space-between"
+          width="full"
+          gap="2rem"
         >
           <Flex
-            textAlign={isMobile ? "center" : "left"}
+            textAlign={
+              isMobile ? "center" : isMobileOrTablet ? "left" : "center"
+            }
             direction="column"
             h={isMobile ? "200px" : "full"}
             w="full"
@@ -49,7 +52,7 @@ function Footer() {
             </Text>
             <Text
               mt="1rem"
-              textAlign={isMobile ? "center" : "left"}
+              textAlign="center"
               whiteSpace={isMobile ? "break-spaces" : "nowrap"}
               variant="h1"
             >
@@ -62,7 +65,9 @@ function Footer() {
               cursor="pointer"
               gap="1rem"
               textAlign="center"
-              justifyContent={isMobile ? "center" : "none"}
+              justifyContent={
+                isMobile ? "center" : isMobileOrTablet ? "left" : "center"
+              }
             >
               <Link href="https://www.facebook.com/profile.php?id=100004517205574">
                 <Tooltip label="NgocHieu" placement="top">
@@ -127,14 +132,16 @@ function Footer() {
             h={isMobile ? "150px" : "full"}
             w="full"
             lineHeight="1.5"
-            alignItems="center"
+            alignItems={
+              isMobile ? "center" : isMobileOrTablet ? "left" : "center"
+            }
           >
             <Text
               variant="h5"
               fontWeight="700"
               fontSize="2.1rem"
               whiteSpace="nowrap"
-              textAlign={isMobile ? "center" : "left"}
+              // textAlign={isMobile ? "center" : "left"}
             >
               {t("store_at")}
             </Text>
@@ -148,7 +155,6 @@ function Footer() {
           <Flex
             direction="column"
             h={isMobile ? "110px" : "full"}
-            w="full"
             lineHeight="1.5"
             alignItems="center"
           >
@@ -202,13 +208,16 @@ function Footer() {
           background: "black",
           padding: "2rem 0",
           minHeight: "6.7rem",
-          marginTop: isMobile ? "none" : "2rem",
+          justifyContent: "center",
+
+          // marginTop: isMobile ? "none" : "2rem",
         }}
       >
         <Flex
           style={{
-            marginLeft: isMobile ? "none" : "300px",
+            // marginLeft: isMobile ? "none" : "300px",
             flexDirection: isMobile ? "column" : "row",
+            alignItems: "center",
           }}
         >
           <Text
@@ -216,7 +225,6 @@ function Footer() {
               color: "white",
               fontSize: "1.5rem",
               opacity: 1,
-              marginLeft: isMobile ? "none" : "300px",
               textAlign: "center",
             }}
           >

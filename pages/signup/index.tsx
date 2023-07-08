@@ -17,6 +17,7 @@ import useTranslation from "next-translate/useTranslation";
 import { useRouter } from "next/router";
 import React, { useContext } from "react";
 import { SignupType } from "../../api/auth/models/user";
+import { css } from "@emotion/react";
 
 // Import Formik components and hooks
 import { ErrorMessage, Form, Formik } from "formik";
@@ -106,6 +107,13 @@ function Signup() {
       >
         <div>
           <div
+            css={css`
+              &:focus-within {
+                -webkit-box-shadow: var(--box-shadow);
+                box-shadow: 0 4px 20px #ffd600;
+                transition-duration: 200 ease-linear;
+              }
+            `}
             style={{
               marginTop: "2rem",
               padding: "1.25rem",
@@ -114,7 +122,7 @@ function Signup() {
               gap: "1rem",
               width: isMobile ? "350px" : "576px",
               backgroundColor: "#FFFFFF",
-              height: isMobile ? "520px" : "700px",
+              height: isMobile ? "520px" : "630px",
               transform: isMobile ? "none" : "skew(-10deg)",
             }}
           >
@@ -142,6 +150,7 @@ function Signup() {
                       <Stack gap="1rem">
                         <Text variant={isMobile ? "h4_mobile" : "h4"}>
                           {t("username")}
+                          <span style={{ color: "red" }}>*</span>
                         </Text>
                         <Input
                           style={{
@@ -163,6 +172,7 @@ function Signup() {
                         <ErrorMessage name="username" />
                         <Text variant={isMobile ? "h4_mobile" : "h4"}>
                           Email
+                          <span style={{ color: "red" }}>*</span>
                         </Text>
                         <Input
                           style={{
@@ -284,6 +294,41 @@ function Signup() {
               )}
             </Formik>
           </div>
+        </div>
+        <div
+          css={css`
+            &:focus-within {
+              -webkit-box-shadow: var(--box-shadow);
+              box-shadow: 0 4px 20px #ffd600;
+              transition-duration: 200 ease-linear;
+            }
+          `}
+          style={{
+            marginRight: isMobile ? "1rem" : "12rem",
+            marginTop: isMobile ? "10px" : "2rem",
+            padding: "1.25rem",
+            border: isMobile ? "none" : " 1px solid #FFD600",
+            display: "grid",
+            gap: "1rem",
+            width: isMobile ? "350px" : "576px",
+            backgroundColor: "#FFFFFF",
+            height: isMobile ? "50px" : "50px",
+            transform: "skew(-10deg)",
+          }}
+        >
+          <Flex alignItems="center" justifyContent="center" gap="5px">
+            <Text variant={isMobile ? "h4_mobile" : "h4"}>
+              {t("already_have_an_account?")}
+            </Text>
+            <a href="signin">
+              <Text
+                variant={isMobile ? "h4_mobile" : "h4"}
+                color="#1964FF !important"
+              >
+                {t("login")}
+              </Text>
+            </a>
+          </Flex>
         </div>
       </div>
     </Flex>

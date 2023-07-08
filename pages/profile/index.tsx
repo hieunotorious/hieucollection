@@ -169,6 +169,7 @@ function Profile() {
                 size={isMobile ? "md" : "5xl"}
                 isOpen={isOpen}
                 onClose={onClose}
+                isCentered
               >
                 <ModalOverlay />
                 <ModalContent>

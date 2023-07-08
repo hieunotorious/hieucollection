@@ -23,12 +23,12 @@ export const useResponsive = () => {
     lg: false,
     base: true,
   });
-  const isBigscreen = useBreakpointValue({
+  const isBigScreen = useBreakpointValue({
     "2xl": false,
     base: true,
   });
   return {
-    isBigscreen,
+    isBigScreen,
     isDesktop,
     isMobile,
     isMobileOrTablet,
