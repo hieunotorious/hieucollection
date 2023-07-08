@@ -33,7 +33,13 @@ const categories: CategoryType[] = [
 ];
 
 const Section2 = ({ ...props }: Props) => {
-  const { isMobile, isMobileOrTablet } = useResponsive();
+  const {
+    isSmallDevice,
+    isMobile,
+    isMobileOrTablet,
+    isTabletOrLaptop,
+    isBigScreen,
+  } = useResponsive();
   const { t } = useTranslation();
 
   React.useEffect(() => {
@@ -42,10 +48,11 @@ const Section2 = ({ ...props }: Props) => {
   return (
     <Container>
       <Flex
-        mt={isMobileOrTablet ? "110px" : "10px"}
+        mt={isMobileOrTablet ? "50px" : "10px"}
         direction="column"
-        textAlign={isMobileOrTablet ? "center" : "left"}
-        alignItems={isMobileOrTablet ? "center" : "flex-start"}
+        textAlign="center"
+        alignItems="center"
+        w="full"
         {...props}
       >
         <Text
@@ -60,7 +67,20 @@ const Section2 = ({ ...props }: Props) => {
         </Text>
 
         <Swiper
-          style={{ width: isMobile ? "400px" : "1850px", marginTop: "40px" }}
+          style={{
+            width: isSmallDevice
+              ? "300px"
+              : isMobile
+              ? "350px"
+              : isMobileOrTablet
+              ? "700px"
+              : isTabletOrLaptop
+              ? "900px"
+              : isBigScreen
+              ? "1300px"
+              : "1415px",
+            marginTop: "40px",
+          }}
           slidesPerView="auto"
           spaceBetween={30}
           autoplay={{

@@ -13,7 +13,7 @@
   "top_new_products": "Top New Products",
   "profile": "Profile",
   "logout": "Logout",
-  "login": "Login",
+  "login": "Sign in",
   "shf_figures": "SHF Figures",
   "mcfarlane_figures": "Mcfarlane Figures",
   "hasbro": "Hasbro Figures",
@@ -133,5 +133,7 @@
   "password_placeholder": "Enter your password",
   "google": "Sign in with Google",
   "facebook": "Sign in with Facebook",
-  "text10": "Here are lots of interesting characters to visit, but don’t be confused—they’re already grouped by category."
+  "text10": "Here are lots of interesting characters to visit, but don’t be confused—they’re already grouped by category.",
+  "email_placeholder": "Enter your email",
+  "confirm_placeholder": "Confirm your password"
 }

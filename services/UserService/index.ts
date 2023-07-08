@@ -1,4 +1,4 @@
-import { UpdateUser } from "app/api/auth/models/user";
+import { SocialPayload, UpdateUser } from "app/api/auth/models/user";
 import axiosClient from "app/interceptor";
 import axios from "axios";
 
@@ -12,18 +12,24 @@ export const getUser = async () => {
 };
 
 export const login = async (username: string, password: string) => {
-  const res = await axiosClient.post(`/user/login`, {
+  const res = await axiosClient.post(`/auth/login`, {
     username,
     password,
   });
   return res.data || undefined;
 };
+
+export const socialLogin = async (id_token: string) => {
+  const res = await axiosClient.post(`/auth/social_login`, { id_token });
+  return res.data || undefined;
+};
+
 export const signup = async (
   username: string,
   password: string,
   email: string
 ) => {
-  const res = await axiosClient.post(`/user/signup`, {
+  const res = await axiosClient.post(`/auth/signup`, {
     username,
     password,
     email,
@@ -32,7 +38,7 @@ export const signup = async (
 };
 export const logout = async () => {
   if (typeof window === "undefined") return;
-  const res = await axiosClient.post(`/user/logout`, {
+  const res = await axiosClient.post(`/auth/logout`, {
     refreshToken: localStorage.getItem("refresh_token"),
   });
   return res.data;

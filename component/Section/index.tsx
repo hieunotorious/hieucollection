@@ -18,15 +18,11 @@ const Section = (props: Props) => {
   const { t } = useTranslation();
   const { isMobile, isTabletOrLaptop, isDesktop } = useResponsive();
   return (
-    <Flex
-      id="section1"
-      display={isMobile ? "none" : "none"}
-      direction={isMobile ? "column" : "row"}
-    >
+    <Flex id="section1" direction={isMobile ? "column" : "row"}>
       <Swiper
         style={{ width: "100%", height: isMobile ? "200px" : "800px" }}
         spaceBetween={30}
-        effect={"coverflow"}
+        effect="coverflow"
         pagination={{
           clickable: true,
         }}

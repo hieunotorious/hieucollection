@@ -1,7 +1,11 @@
 import { AuthContext } from "app/context/authContext";
 import { useRouter } from "next/router";
 import React, { useContext, useState } from "react";
-import { LoginType } from "../../api/auth/models/user";
+import {
+  LoginType,
+  SocialPayload,
+  SocialProvider,
+} from "../../api/auth/models/user";
 import useTranslation from "next-translate/useTranslation";
 import {
   Input,
@@ -14,7 +18,7 @@ import {
   Stack,
   Box,
 } from "@chakra-ui/react";
-import { getUser, login } from "app/services/UserService";
+import { getUser, login, socialLogin } from "app/services/UserService";
 import { setTokens } from "app/utils/token";
 import { useResponsive } from "app/hooks/useResponsive";
 import Breadcrumb from "app/component/Breadcrumb";
@@ -22,6 +26,8 @@ import { isAxiosError } from "axios";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import Image from "next/image";
+import { css } from "@emotion/react";
+import { signInWithFacebook, signInWithGoogle } from "app/utils/firebase";
 
 function Login() {
   const SigninSchema = Yup.object().shape({
@@ -87,9 +93,53 @@ function Login() {
     // }
   };
   const handleClick = () => setShow(!show);
-  const { isMobile } = useResponsive();
+  const { isMobile, isMobileOrTablet } = useResponsive();
+
+  const handleLoginWithGoogle = async () => {
+    try {
+      const data = await signInWithGoogle();
+      const id_token = await data.user.getIdToken();
+      const res = await socialLogin(id_token);
+      if (res) {
+        const { accessToken, refreshToken, expiredDate } = res;
+        setTokens(accessToken, expiredDate, refreshToken);
+        const loginUser = await getUser();
+        if (loginUser) {
+          toast({
+            title: t("login_successful"),
+            status: "success",
+            position: "top-right",
+            duration: 3000,
+            isClosable: true,
+          });
+          setGlobalUser(loginUser);
+          await router.push("/");
+        }
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const handleLoginWithFacebook = async () => {
+    // try {
+    //   const res = await signInWithFacebook();
+    //   const payload: SocialPayload = {
+    //     email: res.user.email,
+    //     displayName: res.user.displayName,
+    //     socialProvider: SocialProvider.facebook,
+    //     phoneNumber: res.user.phoneNumber,
+    //     uid: res.user.uid,
+    //     username: res.user.displayName,
+    //   };
+    //   await socialLogin(payload);
+    // } catch (err) {
+    //   console.log(err);
+    // }
+  };
+
   return (
-    <Flex direction="column" w="full" mt="3rem">
+    <Flex direction="column" w="full" mt="5rem">
       <Breadcrumb
         links={[
           { title: t("home"), href: "/" },
@@ -100,7 +150,7 @@ function Login() {
 
       <div
         style={{
-          minHeight: isMobile ? 510 : 495,
+          minHeight: isMobile ? 650 : 200,
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
@@ -109,6 +159,13 @@ function Login() {
         }}
       >
         <div
+          css={css`
+            &:focus-within {
+              -webkit-box-shadow: var(--box-shadow);
+              box-shadow: 0 4px 20px #ffd600;
+              transition-duration: 200 ease-linear;
+            }
+          `}
           style={{
             marginTop: "2rem",
             padding: "1.25rem",
@@ -276,6 +333,7 @@ function Login() {
                             border: "1px solid #FFD600",
                             background: "white",
                           }}
+                          onClick={handleLoginWithGoogle}
                           variant="ghost"
                           type="submit"
                         >
@@ -309,6 +367,7 @@ function Login() {
                             border: "1px solid #FFD600",
                             background: "white",
                           }}
+                          onClick={handleLoginWithFacebook}
                           variant="ghost"
                           type="submit"
                         >
@@ -337,16 +396,23 @@ function Login() {
           </Formik>
         </div>
         <div
+          css={css`
+            &:focus-within {
+              -webkit-box-shadow: var(--box-shadow);
+              box-shadow: 0 4px 20px #ffd600;
+              transition-duration: 200 ease-linear;
+            }
+          `}
           style={{
             marginRight: isMobile ? "1rem" : "12rem",
-            marginTop: isMobile ? "1px" : "2rem",
+            marginTop: isMobile ? "10px" : "2rem",
             padding: "1.25rem",
             border: isMobile ? "none" : " 1px solid #FFD600",
             display: "grid",
             gap: "1rem",
             width: isMobile ? "350px" : "576px",
             backgroundColor: "#FFFFFF",
-            height: isMobile ? "10px" : "50px",
+            height: isMobile ? "50px" : "50px",
             transform: "skew(-10deg)",
           }}
         >

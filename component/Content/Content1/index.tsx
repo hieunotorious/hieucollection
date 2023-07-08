@@ -69,7 +69,7 @@ const Content1 = ({
   };
   const { t } = useTranslation();
   const { setUser } = useContext(AuthContext);
-  const { isMobile, isMobileOrTablet, isTabletOrLaptop, isDesktop } =
+  const { isMobile, isMobileOrTablet, isTabletOrLaptop, isBigScreen } =
     useResponsive();
 
   const router = useRouter();
@@ -82,7 +82,17 @@ const Content1 = ({
       <Stack
         alignItems="left"
         justifyContent="center"
-        width={isMobile ? "300px" : "1400px"}
+        width={
+          isMobile
+            ? "300px"
+            : isMobileOrTablet
+            ? "710px"
+            : isTabletOrLaptop
+            ? "920px"
+            : isBigScreen
+            ? "1300px"
+            : "1400px"
+        }
       >
         <Text variant={isMobile ? "h5_mobile" : "h5"} data-aos="fade-up">
           {t("about")}
@@ -121,10 +131,10 @@ const Content1 = ({
         </Flex>
       </Stack>
       <Stack
-        direction={isMobile ? "column" : "row"}
+        direction={isMobile ? "column" : isMobileOrTablet ? "column" : "row"}
         justifyContent="center"
         alignItems="center"
-        gap={isTabletOrLaptop ? "1rem" : "10rem"}
+        gap={isMobileOrTablet ? "1rem" : isTabletOrLaptop ? "1rem" : "10rem"}
         marginTop="5rem"
       >
         <Box
@@ -202,7 +212,7 @@ const Content1 = ({
         </Box>
       </Stack>
       <Stack
-        direction={isMobile ? "column" : "row"}
+        direction={isMobile ? "column" : isMobileOrTablet ? "column" : "row"}
         justifyContent="center"
         alignItems="center"
         gap={isTabletOrLaptop ? "1rem" : "10rem"}
@@ -291,40 +301,57 @@ const Content1 = ({
         }}
       >
         <Tooltip label="hieumn2001@gmail.com" placement="top">
-          <Link href="mailto:hieumn2001@gmail.com">
-            <Image
-              src="/images/EmailMes.png"
-              width="30px"
-              height="30px"
-              alt=""
-            />
-          </Link>
+          <Stack>
+            <Link href="mailto:hieumn2001@gmail.com">
+              <Image
+                src="/images/EmailMes.png"
+                width="30px"
+                height="30px"
+                alt=""
+              />
+            </Link>
+          </Stack>
         </Tooltip>
 
         <Tooltip label="0912590467" placement="top">
           <Stack>
-            <a href="tel:0912590467">
+            <Link href="tel:0912590467">
               <Image
                 src="/images/phoneMes.png"
                 alt=""
                 width="30px"
                 height="30px"
               />
-            </a>
+            </Link>
           </Stack>
         </Tooltip>
         <Tooltip
           label="102 Nguyễn Trãi, Thành Công, Thành phố Buôn Ma Thuột, Đắk Lắk"
           placement="top"
         >
-          <Link href="https://www.google.com/maps/place/102+Nguy%E1%BB%85n+Tr%C3%A3i,+Th%C3%A0nh+C%C3%B4ng,+Th%C3%A0nh+ph%E1%BB%91+Bu%C3%B4n+Ma+Thu%E1%BB%99t,+%C4%90%E1%BA%AFk+L%E1%BA%AFk,+Vi%E1%BB%87t+Nam/@12.6865306,108.0361911,17z/data=!3m1!4b1!4m6!3m5!1s0x31721d7a35d6ff99:0x9eae08b73bf3f4df!8m2!3d12.6865306!4d108.038766!16s%2Fg%2F11fsjhqr51?hl=vi-VN&entry=ttu">
-            <Image src="/images/frame.png" width="30px" height="30px" alt="" />
-          </Link>
+          <Stack>
+            <Link href="https://www.google.com/maps/place/102+Nguy%E1%BB%85n+Tr%C3%A3i,+Th%C3%A0nh+C%C3%B4ng,+Th%C3%A0nh+ph%E1%BB%91+Bu%C3%B4n+Ma+Thu%E1%BB%99t,+%C4%90%E1%BA%AFk+L%E1%BA%AFk,+Vi%E1%BB%87t+Nam/@12.6865306,108.0361911,17z/data=!3m1!4b1!4m6!3m5!1s0x31721d7a35d6ff99:0x9eae08b73bf3f4df!8m2!3d12.6865306!4d108.038766!16s%2Fg%2F11fsjhqr51?hl=vi-VN&entry=ttu">
+              <Image
+                src="/images/frame.png"
+                width="30px"
+                height="30px"
+                alt=""
+              />
+            </Link>
+          </Stack>
         </Tooltip>
       </Stack>
 
       <Flex
-        direction={isMobile ? "column" : "row"}
+        direction={
+          isMobile
+            ? "column"
+            : isMobileOrTablet
+            ? "column"
+            : isTabletOrLaptop
+            ? "column"
+            : "row"
+        }
         justifyContent="center"
         alignItems="center"
         marginTop="5rem"
@@ -335,8 +362,24 @@ const Content1 = ({
             background="#FCF9EF"
             borderRadius="12px"
             paddingX="10px"
-            height={isMobile ? "260px" : "330px"}
-            width={isMobile ? "350px" : "852px"}
+            height={
+              isMobile
+                ? "260px"
+                : isTabletOrLaptop
+                ? "320px"
+                : isBigScreen
+                ? "280px"
+                : "330px"
+            }
+            width={
+              isMobile
+                ? "350px"
+                : isMobileOrTablet
+                ? "670px"
+                : isBigScreen
+                ? "900px"
+                : "852px"
+            }
           >
             <Text variant={isMobile ? "h5_mobile" : "h5"} data-aos="fade-up">
               {t("superhero")}
@@ -366,7 +409,7 @@ const Content1 = ({
             </Button>
           </Link>
         </Stack>
-        <Flex gap="2rem" data-aos="flip-up">
+        <Flex gap="2rem" data-aos="flip-up" mb="auto">
           <Stack
             sx={{
               transition: `all 300ms ease-in-out`,
@@ -407,39 +450,38 @@ const Content1 = ({
           {t("product")}
         </Text>
         <Flex
-          gap="3rem"
+          gap={isTabletOrLaptop ? "1rem" : "3rem"}
           data-aos="zoom-in"
-          direction={isMobile ? "column" : "row"}
+          direction={isMobile ? "column" : isMobileOrTablet ? "column" : "row"}
         >
           <Card
             style={{
               marginTop: "1rem",
               cursor: "pointer",
-              width: isMobile ? "300px" : "335px",
+              width: "300px",
               height: "105px",
               display: "flex",
               alignItems: "center",
               flexDirection: "column",
             }}
           >
-            <Stack direction="row" gap={isMobile ? "1rem" : "1rem"}>
-              <Stack
-                border="5px"
-                borderRadius="5px"
-                background="linear-gradient(180deg, #49A3F1 0%, #1A73E8 100%)"
-                width="6px"
-                height="50px"
-              />
+            <Stack direction="row" justifyContent="space-between" w="90%">
+              <Flex alignItems="center" gap="10px">
+                <Stack
+                  border="5px"
+                  borderRadius="5px"
+                  background="linear-gradient(180deg, #49A3F1 0%, #1A73E8 100%)"
+                  width="6px"
+                  height="50px"
+                />
+                <Text variant="h7">{t("top_new_products")}</Text>
+              </Flex>
               <Stack
                 justifyContent="space-between"
                 direction="row"
                 display="flex"
                 alignItems="center"
-                gap={isMobile ? "9rem" : "11rem"}
               >
-                <Stack>
-                  <Text variant="h7">{t("top_new_products")}</Text>
-                </Stack>
                 <Stack>
                   <Image
                     style={{ borderRadius: "10px" }}
@@ -456,7 +498,7 @@ const Content1 = ({
               background="linear-gradient(90deg, #49A3F1 0%, #1A73E8 100%)"
               borderRadius="6px"
               height="30px"
-              width={isMobile ? "280px" : isMobileOrTablet ? "280px" : "300px"}
+              width="90%"
               justifyContent="center"
               mt="1rem"
               alignItems="center"
@@ -476,31 +518,30 @@ const Content1 = ({
             style={{
               marginTop: "1rem",
               cursor: "pointer",
-              width: isMobile ? "300px" : isMobileOrTablet ? "300px" : "335px",
+              width: "300px",
               height: "105px",
               display: "flex",
               alignItems: "center",
               flexDirection: "column",
             }}
           >
-            <Stack direction="row" gap={isMobile ? "1rem" : "1rem"}>
-              <Stack
-                border="5px"
-                borderRadius="5px"
-                width="6px"
-                height="50px"
-                background="linear-gradient(180deg, #66BB6A 0%, #43A047 100%)"
-              />
+            <Stack direction="row" justifyContent="space-between" w="90%">
+              <Flex alignItems="center" gap="10px">
+                <Stack
+                  border="5px"
+                  borderRadius="5px"
+                  width="6px"
+                  height="50px"
+                  background="linear-gradient(180deg, #66BB6A 0%, #43A047 100%)"
+                />
+                <Text variant="h7">{t("top_sale_products")}</Text>
+              </Flex>
               <Stack
                 justifyContent="space-between"
                 direction="row"
                 display="flex"
                 alignItems="center"
-                gap={isMobile ? "9rem" : isMobileOrTablet ? "2rem" : "11rem"}
               >
-                <Stack>
-                  <Text variant="h7">{t("top_sale_products")}</Text>
-                </Stack>
                 <Stack>
                   <Image
                     style={{ borderRadius: "10px" }}
@@ -517,7 +558,7 @@ const Content1 = ({
               background="linear-gradient(90deg, #66BB6A 0%, #43A047 100%)"
               borderRadius="6px"
               height="30px"
-              width={isMobile ? "280px" : isMobileOrTablet ? "280px" : "300px"}
+              width="90%"
               justifyContent="center"
               mt="1rem"
               alignItems="center"
@@ -537,31 +578,30 @@ const Content1 = ({
             style={{
               marginTop: "1rem",
               cursor: "pointer",
-              width: isMobile ? "300px" : isMobileOrTablet ? "300px" : "335px",
+              width: "300px",
               height: "105px",
               display: "flex",
               alignItems: "center",
               flexDirection: "column",
             }}
           >
-            <Stack direction="row" gap={isMobile ? "1rem" : "1rem"}>
-              <Stack
-                border="5px"
-                borderRadius="5px"
-                background=" linear-gradient(180deg, #FF9452 0%, #FF6538 100%)"
-                width="6px"
-                height="50px"
-              />
+            <Stack direction="row" justifyContent="space-between" w="90%">
+              <Flex alignItems="center" gap="10px">
+                <Stack
+                  border="5px"
+                  borderRadius="5px"
+                  background=" linear-gradient(180deg, #FF9452 0%, #FF6538 100%)"
+                  width="6px"
+                  height="50px"
+                />
+                <Text variant="h7">{t("top_pre_order_products")}</Text>
+              </Flex>
               <Stack
                 justifyContent="space-between"
                 direction="row"
                 display="flex"
                 alignItems="center"
-                gap={isMobile ? "6rem" : isMobileOrTablet ? "2rem" : "8rem"}
               >
-                <Stack>
-                  <Text variant="h7">{t("top_pre_order_products")}</Text>
-                </Stack>
                 <Stack>
                   <Image
                     style={{ borderRadius: "10px" }}
@@ -578,7 +618,7 @@ const Content1 = ({
               background=" linear-gradient(90deg, #FF9452 0%, #FF6538 100%)"
               borderRadius="6px"
               height="30px"
-              width={isMobile ? "280px" : isMobileOrTablet ? "280px" : "300px"}
+              width="90%"
               justifyContent="center"
               mt="1rem"
               alignItems="center"
@@ -610,31 +650,31 @@ const Content1 = ({
             style={{
               marginTop: "1rem",
               cursor: "pointer",
-              width: isMobile ? "300px" : "335px",
+              width: "300px",
               height: "105px",
               display: "flex",
               alignItems: "center",
               flexDirection: "column",
             }}
           >
-            <Stack direction="row" gap={isMobile ? "1rem" : "1rem"}>
-              <Stack
-                border="5px"
-                borderRadius="5px"
-                background=" linear-gradient(180deg, #FF3294 0%, #FF1D6F 100%)"
-                width="6px"
-                height="50px"
-              />
+            <Stack direction="row" justifyContent="space-between" w="90%">
+              <Flex alignItems="center" gap="10px">
+                <Stack
+                  border="5px"
+                  borderRadius="5px"
+                  background=" linear-gradient(180deg, #FF3294 0%, #FF1D6F 100%)"
+                  width="6px"
+                  height="50px"
+                />
+                <Text variant="h7">{t("action_figure")}</Text>
+              </Flex>
+
               <Stack
                 justifyContent="space-between"
                 direction="row"
                 display="flex"
                 alignItems="center"
-                gap={isMobile ? "10rem" : isMobileOrTablet ? "2rem" : "13rem"}
               >
-                <Stack>
-                  <Text variant="h7">{t("action_figure")}</Text>
-                </Stack>
                 <Stack>
                   <Image
                     style={{ borderRadius: "10px" }}
@@ -651,7 +691,7 @@ const Content1 = ({
               background=" linear-gradient(90deg, #FF3294 0%, #FF1D6F 100%)"
               borderRadius="6px"
               height="30px"
-              width={isMobile ? "280px" : isMobileOrTablet ? "280px" : "300px"}
+              width="90%"
               justifyContent="center"
               mt="1rem"
               alignItems="center"
@@ -671,21 +711,31 @@ const Content1 = ({
             style={{
               marginTop: "1rem",
               cursor: "pointer",
-              width: isMobile ? "300px" : isMobileOrTablet ? "300px" : "335px",
+              width: "300px",
               height: "105px",
               display: "flex",
               alignItems: "center",
               flexDirection: "column",
             }}
           >
-            <Stack direction="row" gap={isMobile ? "1rem" : "1rem"}>
-              <Stack
-                border="5px"
-                borderRadius="5px"
-                width="6px"
-                height="50px"
-                background=" linear-gradient(90deg, #FFE248 0%, #FFB11B 100%)"
-              />
+            <Stack
+              direction="row"
+              justifyContent="space-between"
+              w="90%"
+              alignItems="center"
+            >
+              <Flex alignItems="center" gap="10px">
+                <Stack
+                  border="5px"
+                  borderRadius="5px"
+                  width="6px"
+                  height="50px"
+                  background=" linear-gradient(90deg, #FFE248 0%, #FFB11B 100%)"
+                />
+                <Text textAlign="center" variant="h7">
+                  {t("statue")}
+                </Text>
+              </Flex>
               <Stack
                 justifyContent="space-between"
                 direction="row"
@@ -693,9 +743,6 @@ const Content1 = ({
                 alignItems="center"
                 gap={isMobile ? "15rem" : isMobileOrTablet ? "2rem" : "17rem"}
               >
-                <Stack>
-                  <Text variant="h7">{t("statue")}</Text>
-                </Stack>
                 <Stack>
                   <Image
                     style={{ borderRadius: "10px" }}
@@ -712,7 +759,7 @@ const Content1 = ({
               background=" linear-gradient(180deg, #FFE248 0%, #FFB11B 100%)"
               borderRadius="6px"
               height="30px"
-              width={isMobile ? "280px" : isMobileOrTablet ? "280px" : "300px"}
+              width="90%"
               justifyContent="center"
               mt="1rem"
               alignItems="center"
@@ -736,15 +783,31 @@ const Content1 = ({
         alignItems="center"
         marginTop="5rem"
         gap="2rem"
-        direction={isMobile ? "column" : "row"}
+        direction={
+          isMobile
+            ? "column"
+            : isMobileOrTablet
+            ? "column"
+            : isTabletOrLaptop
+            ? "column"
+            : "row"
+        }
       >
         <Stack>
           <Stack
             background="#FCF9EF"
             borderRadius="12px"
             paddingX="10px"
-            height={isMobile ? "250px" : "330px"}
-            width={isMobile ? "350px" : "852px"}
+            height={
+              isMobile
+                ? "250px"
+                : isTabletOrLaptop
+                ? "300px"
+                : isBigScreen
+                ? "270px"
+                : "330px"
+            }
+            width={isMobile ? "350px" : isMobileOrTablet ? "710px" : "852px"}
           >
             <Text variant={isMobile ? "h5_mobile" : "h5"} data-aos="fade-up">
               Robots &amp; Anime
@@ -811,7 +874,15 @@ const Content1 = ({
       </Flex>
 
       <Flex
-        direction={isMobile ? "column" : "row"}
+        direction={
+          isMobile
+            ? "column"
+            : isMobileOrTablet
+            ? "column"
+            : isTabletOrLaptop
+            ? "column"
+            : "row"
+        }
         justifyContent="center"
         alignItems="center"
         marginTop="5rem"
@@ -840,7 +911,7 @@ const Content1 = ({
             background="#FCF9EF"
             borderRadius="12px"
             paddingX="10px"
-            height={isMobile ? "230px" : "330px"}
+            height={isMobile ? "230px" : isBigScreen ? "290px" : "330px"}
             width={isMobile ? "350px" : "710px"}
           >
             <Text data-aos="fade-up" variant={isMobile ? "h5_mobile" : "h5"}>

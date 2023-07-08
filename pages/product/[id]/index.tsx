@@ -22,6 +22,7 @@ import {
   Button,
   Stack,
   Flex,
+  Tooltip,
 } from "@chakra-ui/react";
 import { getProductId } from "app/services/ProductService";
 import { addToCart } from "app/services/CartService";
@@ -67,7 +68,7 @@ function ProductId() {
           w="full"
           direction="column"
           title={product?.name || "Product"}
-          marginTop="3rem"
+          marginTop="5rem"
         >
           <Breadcrumb
             links={[
@@ -76,7 +77,60 @@ function ProductId() {
               { title: product?.name || "", href: "/" },
             ]}
             current={product?.name || ""}
-          />{" "}
+          />
+          <Stack
+            sx={{
+              border: "1px solid #EAA234",
+              borderRadius: "50px",
+              position: "fixed",
+              right: isMobile ? "5px" : "10px",
+              top: "30%",
+              zIndex: "99",
+              padding: isMobile ? "10px 5px" : "40px 15px",
+              gap: "20px",
+            }}
+          >
+            <Tooltip label="hieumn2001@gmail.com" placement="top">
+              <Stack>
+                <Link href="mailto:hieumn2001@gmail.com">
+                  <Image
+                    src="/images/EmailMes.png"
+                    width="30px"
+                    height="30px"
+                    alt=""
+                  />
+                </Link>
+              </Stack>
+            </Tooltip>
+
+            <Tooltip label="0912590467" placement="top">
+              <Stack>
+                <Link href="tel:0912590467">
+                  <Image
+                    src="/images/phoneMes.png"
+                    alt=""
+                    width="30px"
+                    height="30px"
+                  />
+                </Link>
+              </Stack>
+            </Tooltip>
+            <Tooltip
+              label="102 Nguyễn Trãi, Thành Công, Thành phố Buôn Ma Thuột, Đắk Lắk"
+              placement="top"
+            >
+              <Stack>
+                <Link href="https://www.google.com/maps/place/102+Nguy%E1%BB%85n+Tr%C3%A3i,+Th%C3%A0nh+C%C3%B4ng,+Th%C3%A0nh+ph%E1%BB%91+Bu%C3%B4n+Ma+Thu%E1%BB%99t,+%C4%90%E1%BA%AFk+L%E1%BA%AFk,+Vi%E1%BB%87t+Nam/@12.6865306,108.0361911,17z/data=!3m1!4b1!4m6!3m5!1s0x31721d7a35d6ff99:0x9eae08b73bf3f4df!8m2!3d12.6865306!4d108.038766!16s%2Fg%2F11fsjhqr51?hl=vi-VN&entry=ttu">
+                  <Image
+                    src="/images/frame.png"
+                    width="30px"
+                    height="30px"
+                    alt=""
+                  />
+                </Link>
+              </Stack>
+            </Tooltip>
+          </Stack>
           <div
             key={product._id}
             style={{

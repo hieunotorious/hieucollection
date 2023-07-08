@@ -1,19 +1,18 @@
 import Link from "next/link";
 import setLanguage from "next-translate/setLanguage";
 import useTranslation from "next-translate/useTranslation";
-import { useState, useContext } from "react";
 import LanguageIcon from "@mui/icons-material/Language";
 import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import ShoppingCartCheckoutIcon from "@mui/icons-material/ShoppingCartCheckout";
 import { AuthContext } from "../../context/authContext";
 import MenuIcon from "@mui/icons-material/Menu";
 import { logout } from "app/services/UserService";
+import React, { useContext, useState, useRef } from "react";
 import {
   Button,
   Flex,
   Menu,
   MenuButton,
-  MenuItem,
   MenuList,
   Popover,
   PopoverContent,
@@ -53,13 +52,22 @@ function Nav() {
   return (
     <Flex direction="column" h="12rem" background="b5def2">
       <Container
-        display={isMobile ? "flex" : "none"}
+        display={
+          isMobile
+            ? "flex"
+            : isMobileOrTablet
+            ? "flex"
+            : isTabletOrLaptop
+            ? "flex"
+            : "none"
+        }
         h="48px"
         justifyContent="space-between"
         alignItems="center"
         background="b5def2"
+        mt={isMobile ? "0" : "1rem"}
       >
-        <Flex w="full" h="3rem" background="b5def2">
+        <Flex w="full" h="2rem" background="b5def2">
           <Text variant="h4_mobile">{t("welcome_to_our_online_store!")}</Text>
         </Flex>
         <Flex>
@@ -71,7 +79,7 @@ function Nav() {
               <Button
                 display="flex"
                 w="30px"
-                h="30px"
+                h={isMobile ? "30px" : "1px"}
                 variant="unstyled"
                 minWidth={0}
                 p="4px"
@@ -99,9 +107,13 @@ function Nav() {
       </Container>
       <Flex
         w="full"
-        h="60px"
+        h={isMobile ? "60px" : "90px"}
         background={
           isMobile
+            ? "linear-gradient(180deg, #FFD600 0%, #FFFFFF 100%)"
+            : isMobileOrTablet
+            ? "linear-gradient(180deg, #FFD600 0%, #FFFFFF 100%)"
+            : isTabletOrLaptop
             ? "linear-gradient(180deg, #FFD600 0%, #FFFFFF 100%)"
             : "#FFFFFF"
         }
@@ -116,11 +128,11 @@ function Nav() {
             }}
           >
             <Flex w="full">
-              {isMobile ? (
+              {isMobileOrTablet || isTabletOrLaptop ? (
                 <Flex
                   justifyContent="space-between"
                   alignItems="center"
-                  gap="33rem"
+                  w="full"
                 >
                   <Menu>
                     <MenuButton
@@ -204,7 +216,8 @@ function Nav() {
                   <Flex
                     justifyContent="space-between"
                     alignItems="center"
-                    gap={isMobileOrTablet ? "15rem" : "25rem"}
+                    // gap={isMobileOrTablet ? "15rem" : "25rem"}
+                    width="full"
                   >
                     <Image
                       src="/images/logo.jpg"
@@ -518,18 +531,18 @@ function Nav() {
                                   <Text variant="h1">{t("login")}</Text>
                                 </Button>
                               </Link>
-                              <Button
-                                h="44px"
-                                border="1px solid #FFD600"
-                                background="linear-gradient(to right, #FFD600 0%, #FFFFFF 100%)"
-                                transform="skew(-10deg)"
-                                variant="unstyled"
-                                paddingX="1rem !important"
-                              >
-                                <Text variant="h1">
-                                  {t("sign_up_newletter")}
-                                </Text>
-                              </Button>
+                              <Link href="/signup">
+                                <Button
+                                  w="101px"
+                                  h="44px"
+                                  transform="skew(-10deg)"
+                                  border="1px solid #FFD600"
+                                  background="linear-gradient(to right, #FFD600 0%, #FFFFFF 100%)"
+                                  variant="unstyled"
+                                >
+                                  <Text variant="h1">{t("signup")}</Text>
+                                </Button>
+                              </Link>
                             </Flex>
                           )}
                           <Flex>
@@ -543,6 +556,7 @@ function Nav() {
                                   variant="unstyled"
                                   minWidth={0}
                                   p="4px"
+                                  h="50px"
                                   onClick={() => setIsOpenLanguage(true)}
                                 >
                                   <LanguageIcon
@@ -550,7 +564,7 @@ function Nav() {
                                   />
                                 </Button>
                               </PopoverTrigger>
-                              <PopoverContent w="120px">
+                              <PopoverContent w="120px" h="80px" p="1rem">
                                 <Button
                                   variant="unstyled"
                                   onClick={() => handleChangeLanguage("en")}

@@ -35,7 +35,7 @@ function App({ Component, pageProps }: MyAppProps) {
           <title>HieuCollection</title>
           <link rel="icon" href="/gorilla.svg" />
         </Head>
-        <Flex direction="column" w="full" h="full">
+        <Flex direction="column" w="full" h="full" overflow="hidden">
           {!isAdminPage ? <Navbar /> : <AdminNav />}
 
           <Flex w="full" h="full">
