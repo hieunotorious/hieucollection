@@ -150,7 +150,7 @@ const Content1 = ({
         >
           <Stack alignItems="center">
             <Image
-              src="/images/shflogo.png"
+              src="/images/shflogo.webp"
               width="130px"
               height="50px"
               alt=""
@@ -231,7 +231,7 @@ const Content1 = ({
         >
           <Stack alignItems="center">
             <Image
-              src="/images/medicomtoylogo.png"
+              src="/images/medicomtoylogo.webp"
               width="80px"
               height="50px"
               alt=""
@@ -332,7 +332,7 @@ const Content1 = ({
           <Stack>
             <Link href="https://www.google.com/maps/place/102+Nguy%E1%BB%85n+Tr%C3%A3i,+Th%C3%A0nh+C%C3%B4ng,+Th%C3%A0nh+ph%E1%BB%91+Bu%C3%B4n+Ma+Thu%E1%BB%99t,+%C4%90%E1%BA%AFk+L%E1%BA%AFk,+Vi%E1%BB%87t+Nam/@12.6865306,108.0361911,17z/data=!3m1!4b1!4m6!3m5!1s0x31721d7a35d6ff99:0x9eae08b73bf3f4df!8m2!3d12.6865306!4d108.038766!16s%2Fg%2F11fsjhqr51?hl=vi-VN&entry=ttu">
               <Image
-                src="/images/frame.png"
+                src="/images/Frame.png"
                 width="30px"
                 height="30px"
                 alt=""
@@ -485,7 +485,7 @@ const Content1 = ({
                 <Stack>
                   <Image
                     style={{ borderRadius: "10px" }}
-                    src="/images/logo.png"
+                    src="/images/logo.jpg"
                     width="50px"
                     height="50px"
                     alt=""

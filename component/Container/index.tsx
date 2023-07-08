@@ -2,9 +2,9 @@ import { Flex, FlexProps } from "@chakra-ui/react";
 import { useResponsive } from "app/hooks/useResponsive";
 
 const Container = ({ children, ...props }: FlexProps) => {
-  const { isBigscreen } = useResponsive();
+  const { isBigScreen } = useResponsive();
   return (
-    <Flex w={!isBigscreen ? "95vw" : "90vw"} m={"0 auto"} {...props}>
+    <Flex w={!isBigScreen ? "95vw" : "90vw"} m={"0 auto"} {...props}>
       {children}
     </Flex>
   );
