@@ -10,6 +10,7 @@ import { Button, Flex, Text } from "@chakra-ui/react";
 import { round } from "lodash";
 import { useResponsive } from "app/hooks/useResponsive";
 import Link from "next/link";
+import APP_ROUTES from "app/constant/app_routes";
 
 function Checkout() {
   const { isMobile } = useResponsive();
@@ -196,7 +197,7 @@ function Checkout() {
             >
               {t("need_login")}
             </Text>
-            <Link href="/signin">
+            <Link href={APP_ROUTES.SIGNIN}>
               <Text
                 fontSize="15px"
                 color="#3399FF"

@@ -9,6 +9,8 @@ import Container from "../Container";
 import { useResponsive } from "app/hooks/useResponsive";
 import { Flex, Text, Tooltip } from "@chakra-ui/react";
 import Link from "next/link";
+import APP_ROUTES from "app/constant/app_routes";
+import COLOR from "app/constant/color";
 function Footer() {
   const { isMobile, isMobileOrTablet } = useResponsive();
   const router = useRouter();
@@ -18,14 +20,14 @@ function Footer() {
       <Container
         style={{
           display:
-            router.pathname === "/cart" ||
-            router.pathname === "/signin" ||
-            router.pathname === "/signup" ||
-            router.pathname === "/product" ||
+            router.pathname === APP_ROUTES.CART ||
+            router.pathname === APP_ROUTES.SIGNIN ||
+            router.pathname === APP_ROUTES.SIGNUP ||
+            router.pathname === APP_ROUTES.PRODUCT.INDEX ||
             router.pathname === "/admin" ||
             router.pathname === "/checkout" ||
             // router.pathname === "/profile" ||
-            router.pathname === "/about"
+            router.pathname === APP_ROUTES.ABOUT
               ? "none"
               : "flex",
         }}
@@ -72,28 +74,32 @@ function Footer() {
               <Link href="https://www.facebook.com/profile.php?id=100004517205574">
                 <Tooltip label="NgocHieu" placement="top">
                   <FacebookIcon
-                    style={{ width: "23px", height: "23px", fill: "3B5998" }}
+                    style={{ width: "23px", height: "23px", fill: COLOR.fb }}
                   />
                 </Tooltip>
               </Link>
               <Link href="https://www.instagram.com/hieucollection___/">
                 <Tooltip label="hieucollection" placement="top">
                   <InstagramIcon
-                    style={{ width: "23px", height: "23px", fill: "#BC2A8D" }}
+                    style={{ width: "23px", height: "23px", fill: COLOR.ins }}
                   />
                 </Tooltip>
               </Link>
               <Link href="https://github.com/hieunotorious">
                 <Tooltip label="hieunotorious" placement="top">
                   <GitHubIcon
-                    style={{ width: "23px", height: "23px", fill: "#000000" }}
+                    style={{ width: "23px", height: "23px", fill: COLOR.black }}
                   />
                 </Tooltip>
               </Link>
               <Link href="https://www.linkedin.com/in/hi%E1%BA%BFu-ng%E1%BB%8Dc-90b51924a/">
                 <Tooltip label="HieuNgoc" placement="top">
                   <LinkedInIcon
-                    style={{ width: "23px", height: "23px", fill: "#0077B5" }}
+                    style={{
+                      width: "23px",
+                      height: "23px",
+                      fill: COLOR.LinkedIn,
+                    }}
                   />
                 </Tooltip>
               </Link>

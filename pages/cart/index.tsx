@@ -17,6 +17,7 @@ import {
 } from "app/services/CartService";
 import { useResponsive } from "app/hooks/useResponsive";
 import Breadcrumb from "app/component/Breadcrumb";
+import APP_ROUTES from "app/constant/app_routes";
 function Cart() {
   const { t } = useTranslation();
   const { user, setUser } = useContext(AuthContext);
@@ -211,8 +212,8 @@ function Cart() {
     <Flex direction="column" w="full">
       <Breadcrumb
         links={[
-          { title: t("home"), href: "/" },
-          { title: t("cart"), href: "/cart" },
+          { title: t("home"), href: APP_ROUTES.HOME },
+          { title: t("cart"), href: APP_ROUTES.CART },
         ]}
         current={t("cart")}
       />{" "}
@@ -280,7 +281,7 @@ function Cart() {
                     width: 40,
                   }}
                 >
-                  <Link style={{}} href="/product">
+                  <Link href={APP_ROUTES.PRODUCT.INDEX}>
                     <button>
                       <ArrowBackIcon
                         style={{
@@ -408,7 +409,7 @@ function Cart() {
                   {t("empty")}
                 </Text>
               </Flex>
-              <Link href="/product">
+              <Link href={APP_ROUTES.PRODUCT.INDEX}>
                 <Button
                   cursor="pointer"
                   mt="1rem"
@@ -432,7 +433,7 @@ function Cart() {
               >
                 {t("need_login")}
               </Text>
-              <Link href="/signin">
+              <Link href={APP_ROUTES.SIGNIN}>
                 <Text
                   fontSize="15px"
                   color="#3399FF"

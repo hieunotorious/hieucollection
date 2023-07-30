@@ -12,8 +12,6 @@ const Home = () => {
     <Container direction="column">
       <Title />
       {!isLoading && products && <Content1 product={products} />}
-
-      <Slide />
     </Container>
   );
 };

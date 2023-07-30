@@ -18,7 +18,7 @@ import {
   Stack,
   Box,
 } from "@chakra-ui/react";
-import { getUser, login, socialLogin } from "app/services/UserService";
+import { getUser } from "app/services/UserService";
 import { setTokens } from "app/utils/token";
 import { useResponsive } from "app/hooks/useResponsive";
 import Breadcrumb from "app/component/Breadcrumb";
@@ -28,6 +28,8 @@ import * as Yup from "yup";
 import Image from "next/image";
 import { css } from "@emotion/react";
 import { signInWithFacebook, signInWithGoogle } from "app/utils/firebase";
+import APP_ROUTES from "app/constant/app_routes";
+import { login, socialLogin } from "app/services/AuthService";
 
 function Login() {
   const SigninSchema = Yup.object().shape({
@@ -62,7 +64,7 @@ function Login() {
             isClosable: true,
           });
           setGlobalUser(loginUser);
-          await router.push("/");
+          await router.push(APP_ROUTES.HOME);
         }
       }
     } catch (err) {
@@ -113,7 +115,7 @@ function Login() {
             isClosable: true,
           });
           setGlobalUser(loginUser);
-          await router.push("/");
+          await router.push(APP_ROUTES.HOME);
         }
       }
     } catch (err) {
@@ -142,8 +144,8 @@ function Login() {
     <Flex direction="column" w="full" mt="5rem">
       <Breadcrumb
         links={[
-          { title: t("home"), href: "/" },
-          { title: t("login"), href: "/signin" },
+          { title: t("home"), href: APP_ROUTES.HOME },
+          { title: t("login"), href: APP_ROUTES.SIGNIN },
         ]}
         current={t("login")}
       />

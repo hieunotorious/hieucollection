@@ -11,6 +11,7 @@ import AdminNav from "app/component/AdminNav";
 import Head from "next/head";
 import theme from "app/theme";
 import { NextPage } from "next";
+import { useResponsive } from "app/hooks/useResponsive";
 
 export type NextApplicationPage<P = {}> = NextPage<P> & {
   getLayout?: (page: ReactElement) => ReactNode;
@@ -33,9 +34,9 @@ function App({ Component, pageProps }: MyAppProps) {
       <AuthProvider>
         <Head>
           <title>HieuCollection</title>
-          <link rel="icon" href="/gorilla.svg" />
+          <link rel="icon" href="/hieucollectionLogo.png" />
         </Head>
-        <Flex direction="column" w="full" h="full" overflow="hidden">
+        <Flex direction="column" w="full" h="full" position="relative">
           {!isAdminPage ? <Navbar /> : <AdminNav />}
 
           <Flex w="full" h="full">

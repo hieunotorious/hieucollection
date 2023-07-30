@@ -1,34 +1,36 @@
-import Link from "next/link";
-import setLanguage from "next-translate/setLanguage";
-import useTranslation from "next-translate/useTranslation";
-import LanguageIcon from "@mui/icons-material/Language";
-import AccountBoxIcon from "@mui/icons-material/AccountBox";
-import ShoppingCartCheckoutIcon from "@mui/icons-material/ShoppingCartCheckout";
-import { AuthContext } from "../../context/authContext";
-import MenuIcon from "@mui/icons-material/Menu";
-import { logout } from "app/services/UserService";
-import React, { useContext, useState, useRef } from "react";
 import {
   Button,
+  Divider,
   Flex,
+  IconButton,
   Menu,
   MenuButton,
+  MenuDivider,
+  MenuGroup,
   MenuList,
   Popover,
   PopoverContent,
   PopoverTrigger,
-  Text,
-  IconButton,
   Stack,
-  MenuGroup,
-  MenuDivider,
-  Divider,
+  Text,
 } from "@chakra-ui/react";
+import AccountBoxIcon from "@mui/icons-material/AccountBox";
+import LanguageIcon from "@mui/icons-material/Language";
+import MenuIcon from "@mui/icons-material/Menu";
+import ShoppingCartCheckoutIcon from "@mui/icons-material/ShoppingCartCheckout";
 import { Role } from "app/api/auth/models/user";
-import Container from "../Container";
+import APP_ROUTES from "app/constant/app_routes";
+import COLOR from "app/constant/color";
 import { useResponsive } from "app/hooks/useResponsive";
-import { useRouter } from "next/router";
+import { logout } from "app/services/AuthService";
+import setLanguage from "next-translate/setLanguage";
+import useTranslation from "next-translate/useTranslation";
 import Image from "next/image";
+import Link from "next/link";
+import { useRouter } from "next/router";
+import { useContext, useState } from "react";
+import { AuthContext } from "../../context/authContext";
+import Container from "../Container";
 function Nav() {
   const router = useRouter();
   const { isMobile, isMobileOrTablet, isTabletOrLaptop, isDesktop } =
@@ -50,7 +52,15 @@ function Nav() {
   };
 
   return (
-    <Flex direction="column" h="12rem" background="b5def2">
+    <Flex
+      direction="column"
+      h="12rem"
+      position="sticky"
+      top="0"
+      zIndex={99}
+      paddingTop={isMobile ? "0" : "3rem"}
+      bg={COLOR.white}
+    >
       <Container
         display={
           isMobile
@@ -85,7 +95,7 @@ function Nav() {
                 p="4px"
                 onClick={() => setIsOpenLanguage(true)}
               >
-                <LanguageIcon style={{ color: "black" }} />
+                <LanguageIcon style={{ color: COLOR.black }} />
               </Button>
             </PopoverTrigger>
             <PopoverContent w="120px">
@@ -107,18 +117,17 @@ function Nav() {
       </Container>
       <Flex
         w="full"
-        h={isMobile ? "60px" : "90px"}
+        h={isMobile ? "60px" : "50px"}
         background={
           isMobile
-            ? "linear-gradient(180deg, #FFD600 0%, #FFFFFF 100%)"
+            ? `linear-gradient(180deg, ${COLOR.primary} 0%, ${COLOR.white} 100%)`
             : isMobileOrTablet
-            ? "linear-gradient(180deg, #FFD600 0%, #FFFFFF 100%)"
+            ? `linear-gradient(180deg, ${COLOR.primary} 0%, ${COLOR.white} 100%)`
             : isTabletOrLaptop
-            ? "linear-gradient(180deg, #FFD600 0%, #FFFFFF 100%)"
+            ? `linear-gradient(180deg, ${COLOR.primary} 0%, ${COLOR.white} 100%)`
             : "#FFFFFF"
         }
         alignItems="center"
-        mt={isMobile ? "0" : "3rem"}
       >
         <Container>
           <Flex
@@ -142,17 +151,17 @@ function Nav() {
                       icon={<MenuIcon />}
                     />
                     <MenuList>
-                      <Link href="/">
+                      <Link href={APP_ROUTES.HOME}>
                         <Text paddingX="1rem" variant="h4_mobile">
                           {t("home")}
                         </Text>
                       </Link>
-                      <Link href="/about">
+                      <Link href={APP_ROUTES.ABOUT}>
                         <Text paddingX="1rem" variant="h4_mobile">
                           {t("about")}
                         </Text>
                       </Link>
-                      <Link href="/product">
+                      <Link href={APP_ROUTES.PRODUCT.INDEX}>
                         <Text paddingX="1rem" variant="h4_mobile">
                           {t("product")}
                         </Text>
@@ -177,21 +186,20 @@ function Nav() {
                             </Link>
                           )}
 
-                          <Link href="/profile">
+                          <Link href={APP_ROUTES.PROFILE}>
                             <Text paddingX="1rem" variant="h4_mobile">
-                              {" "}
                               {t("profile")}
                             </Text>
                           </Link>
 
-                          <Link href="/cart">
+                          <Link href={APP_ROUTES.CART}>
                             <Text paddingX="1rem" variant="h4_mobile">
                               <ShoppingCartCheckoutIcon
-                                style={{ color: "black" }}
+                                style={{ color: COLOR.black }}
                               />
                             </Text>
                           </Link>
-                          <Link href="/">
+                          <Link href={APP_ROUTES.HOME}>
                             <Text
                               onClick={() => handleLogout()}
                               variant="h4_mobile"
@@ -202,7 +210,7 @@ function Nav() {
                           </Link>
                         </>
                       ) : (
-                        <Link href="/signin">
+                        <Link href={APP_ROUTES.SIGNIN}>
                           <Text paddingX="1rem" variant="h4_mobile">
                             {t("login")}
                           </Text>
@@ -220,42 +228,44 @@ function Nav() {
                     width="full"
                   >
                     <Image
-                      src="/images/logo.jpg"
+                      src="/images/logo.png"
                       alt=""
-                      width="200px"
-                      height="200px"
+                      width="150px"
+                      height="150px"
                     />
                     {user ? (
                       <Flex gap="15rem">
-                        <Link href="/">
+                        <Link href={APP_ROUTES.HOME}>
                           <Text
                             variant="h4"
                             color={
-                              router.pathname === "/" ? "#FFD600" : "#41332C"
+                              router.pathname === APP_ROUTES.HOME
+                                ? COLOR.primary
+                                : COLOR.secondary
                             }
                           >
                             {t("home")}
                           </Text>
                         </Link>
-                        <Link href="/product">
+                        <Link href={APP_ROUTES.PRODUCT.INDEX}>
                           <Text
                             variant="h4"
                             color={
-                              router.pathname === "/product"
-                                ? "#FFD600"
-                                : "#41332C"
+                              router.pathname === APP_ROUTES.PRODUCT.INDEX
+                                ? COLOR.primary
+                                : COLOR.secondary
                             }
                           >
                             {t("product")}
                           </Text>
                         </Link>
-                        <Link href="/contact">
+                        <Link href={APP_ROUTES.CONTACT}>
                           <Text
                             variant="h4"
                             color={
-                              router.pathname === "/contact"
-                                ? "#FFD600"
-                                : "#41332C"
+                              router.pathname === APP_ROUTES.CONTACT
+                                ? COLOR.primary
+                                : COLOR.secondary
                             }
                           >
                             {t("contact")}
@@ -266,8 +276,8 @@ function Nav() {
                             variant="h4"
                             color={
                               router.pathname === "/hieucollection"
-                                ? "#FFD600"
-                                : "#41332C"
+                                ? COLOR.primary
+                                : COLOR.secondary
                             }
                           >
                             Hieucollection
@@ -276,49 +286,51 @@ function Nav() {
                       </Flex>
                     ) : (
                       <Flex gap={isMobileOrTablet ? "5rem" : "3rem"}>
-                        <Link href="/">
+                        <Link href={APP_ROUTES.HOME}>
                           <Text
                             variant="h4"
                             color={
-                              router.pathname === "/" ? "#FFD600" : "#41332C"
+                              router.pathname === APP_ROUTES.HOME
+                                ? COLOR.primary
+                                : COLOR.secondary
                             }
                           >
                             {t("home")}
                           </Text>
                         </Link>
 
-                        <Link href="/about">
+                        <Link href={APP_ROUTES.ABOUT}>
                           <Text
                             variant="h4"
                             color={
-                              router.pathname === "/about"
-                                ? "#FFD600"
-                                : "#41332C"
+                              router.pathname === APP_ROUTES.ABOUT
+                                ? COLOR.primary
+                                : COLOR.secondary
                             }
                           >
                             {t("about")}
                           </Text>
                         </Link>
 
-                        <Link href="/product">
+                        <Link href={APP_ROUTES.PRODUCT.INDEX}>
                           <Text
                             variant="h4"
                             color={
-                              router.pathname === "/product"
-                                ? "#FFD600"
-                                : "#41332C"
+                              router.pathname === APP_ROUTES.PRODUCT.INDEX
+                                ? COLOR.primary
+                                : COLOR.secondary
                             }
                           >
                             {t("product")}
                           </Text>
                         </Link>
-                        <Link href="/contact">
+                        <Link href={APP_ROUTES.CONTACT}>
                           <Text
                             variant="h4"
                             color={
-                              router.pathname === "/contact"
-                                ? "#FFD600"
-                                : "#41332C"
+                              router.pathname === APP_ROUTES.CONTACT
+                                ? COLOR.primary
+                                : COLOR.secondary
                             }
                           >
                             {t("contact")}
@@ -329,8 +341,8 @@ function Nav() {
                             variant="h4"
                             color={
                               router.pathname === "/hieucollection"
-                                ? "#FFD600"
-                                : "#41332C"
+                                ? COLOR.primary
+                                : COLOR.secondary
                             }
                           >
                             Hieucollection
@@ -363,21 +375,20 @@ function Nav() {
                                     </Link>
                                   )}
 
-                                  <Link href="/profile">
+                                  <Link href={APP_ROUTES.PROFILE}>
                                     <Button variant="unstyled">
-                                      {" "}
                                       {t("profile")}
                                     </Button>
                                   </Link>
 
-                                  <Link href="/cart">
+                                  <Link href={APP_ROUTES.CART}>
                                     <Button variant="unstyled">
                                       <ShoppingCartCheckoutIcon
-                                        style={{ color: "black" }}
+                                        style={{ color: COLOR.black }}
                                       />
                                     </Button>
                                   </Link>
-                                  <Link href="/">
+                                  <Link href={APP_ROUTES.HOME}>
                                     <Button
                                       onClick={() => handleLogout()}
                                       variant="unstyled"
@@ -387,9 +398,8 @@ function Nav() {
                                   </Link>
                                 </>
                               ) : (
-                                <Link href="/signin">
+                                <Link href={APP_ROUTES.SIGNIN}>
                                   <Button variant="unstyled">
-                                    {" "}
                                     {t("login")}
                                   </Button>
                                 </Link>
@@ -411,8 +421,8 @@ function Nav() {
                                 <MenuButton
                                   as={Button}
                                   h="44px"
-                                  border="1px solid #FFD600"
-                                  background="linear-gradient(to right, #FFD600 0%, #FFFFFF 100%)"
+                                  border={`1px solid ${COLOR.primary}`}
+                                  background={`linear-gradient(to right, ${COLOR.primary} 0%, ${COLOR.white} 100%)`}
                                   transform="skew(-10deg)"
                                   variant="unstyled"
                                   paddingX="1rem !important"
@@ -421,7 +431,7 @@ function Nav() {
                                 </MenuButton>
                                 <MenuList>
                                   <MenuGroup
-                                    color="#FF9A00"
+                                    color={COLOR.fifth}
                                     fontSize="13px"
                                     title={t("info")}
                                   >
@@ -433,37 +443,38 @@ function Nav() {
                                           style={{
                                             color:
                                               router.pathname === "/admin"
-                                                ? "#FFD600"
-                                                : "#41332C",
+                                                ? COLOR.primary
+                                                : COLOR.secondary,
                                           }}
                                         >
                                           {t("Admin")}
                                         </Text>
                                       </Link>
                                     )}
-                                    <Link href="/profile">
+                                    <Link href={APP_ROUTES.PROFILE}>
                                       <Text
                                         variant="h1"
                                         paddingX="1rem"
                                         style={{
                                           color:
-                                            router.pathname === "/profile"
-                                              ? "#FFD600"
-                                              : "#41332C",
+                                            router.pathname ===
+                                            APP_ROUTES.PROFILE
+                                              ? COLOR.primary
+                                              : COLOR.secondary,
                                         }}
                                       >
                                         {t("profile")}
                                       </Text>
                                     </Link>
-                                    <Link href="/cart">
+                                    <Link href={APP_ROUTES.CART}>
                                       <Text
                                         variant="h1"
                                         paddingX="1rem"
                                         style={{
                                           color:
-                                            router.pathname === "/cart"
-                                              ? "#FFD600"
-                                              : "#41332C",
+                                            router.pathname === APP_ROUTES.CART
+                                              ? COLOR.primary
+                                              : COLOR.secondary,
                                         }}
                                       >
                                         {t("cart")}
@@ -472,7 +483,7 @@ function Nav() {
                                   </MenuGroup>
                                   <MenuDivider />
                                   <MenuGroup
-                                    color="#FF9A00"
+                                    color={COLOR.fifth}
                                     fontSize="13px"
                                     title={t("help")}
                                   >
@@ -483,21 +494,21 @@ function Nav() {
                                         style={{
                                           color:
                                             router.pathname === "/Faq"
-                                              ? "#FFD600"
-                                              : "#41332C",
+                                              ? COLOR.primary
+                                              : COLOR.secondary,
                                         }}
                                       >
                                         {t("FAQ")}
                                       </Text>
                                     </Link>
-                                    <Link href="/contact">
+                                    <Link href={APP_ROUTES.CONTACT}>
                                       <Text
                                         variant="h1"
                                         paddingX="1rem"
                                         color={
-                                          router.pathname === "/contact"
-                                            ? "#FFD600"
-                                            : "#41332C"
+                                          router.pathname === APP_ROUTES.CONTACT
+                                            ? COLOR.primary
+                                            : COLOR.secondary
                                         }
                                       >
                                         {t("contact")}
@@ -505,7 +516,7 @@ function Nav() {
                                     </Link>
                                   </MenuGroup>
                                   <MenuDivider />
-                                  <Link href="/">
+                                  <Link href={APP_ROUTES.HOME}>
                                     <Text
                                       onClick={() => handleLogout()}
                                       variant="h1"
@@ -519,25 +530,25 @@ function Nav() {
                             </>
                           ) : (
                             <Flex gap="2rem" alignItems="center">
-                              <Link href="/signin">
+                              <Link href={APP_ROUTES.SIGNIN}>
                                 <Button
                                   w="101px"
                                   h="44px"
                                   transform="skew(-10deg)"
-                                  border="1px solid #FFD600"
-                                  background="linear-gradient(to right, #FFD600 0%, #FFFFFF 100%)"
+                                  border={`1px solid ${COLOR.primary}`}
+                                  background={`"linear-gradient(to right, ${COLOR.primary} 0%, ${COLOR.white} 100%)`}
                                   variant="unstyled"
                                 >
                                   <Text variant="h1">{t("login")}</Text>
                                 </Button>
                               </Link>
-                              <Link href="/signup">
+                              <Link href={APP_ROUTES.SIGNUP}>
                                 <Button
                                   w="101px"
                                   h="44px"
                                   transform="skew(-10deg)"
-                                  border="1px solid #FFD600"
-                                  background="linear-gradient(to right, #FFD600 0%, #FFFFFF 100%)"
+                                  border={`1px solid ${COLOR.primary}`}
+                                  background={`"linear-gradient(to right, ${COLOR.primary} 0%, ${COLOR.white} 100%)`}
                                   variant="unstyled"
                                 >
                                   <Text variant="h1">{t("signup")}</Text>
@@ -560,7 +571,10 @@ function Nav() {
                                   onClick={() => setIsOpenLanguage(true)}
                                 >
                                   <LanguageIcon
-                                    style={{ color: "black", fontSize: "30px" }}
+                                    style={{
+                                      color: COLOR.black,
+                                      fontSize: "30px",
+                                    }}
                                   />
                                 </Button>
                               </PopoverTrigger>

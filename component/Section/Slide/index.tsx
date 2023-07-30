@@ -3,6 +3,7 @@ import Link from "next/link";
 import useTranslation from "next-translate/useTranslation";
 import { Button, Flex, FlexProps, Text } from "@chakra-ui/react";
 import { useResponsive } from "app/hooks/useResponsive";
+import APP_ROUTES from "app/constant/app_routes";
 
 type SlideType = {
   title: string;
@@ -32,7 +33,7 @@ const Slide = ({ title, description, banner, ...props }: SlideType) => {
         </Text>
         <Flex mt={isMobile ? "1px" : "16px"}>
           <Button variant="solid" colorScheme="blue" size="lg">
-            <Link href="/product">
+            <Link href={APP_ROUTES.PRODUCT.INDEX}>
               <Text>{t("shop_now")}</Text>
             </Link>
           </Button>

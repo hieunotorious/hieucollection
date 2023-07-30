@@ -76,7 +76,7 @@
   "users": "Users",
   "delivery": "Delivery",
   "stats": "Stats",
-  "service": "Service",
+  "service": "Our Service",
   "client_comment": "Client Comment",
   "notifications": "notifications",
   "useful": "Useful",
@@ -135,5 +135,6 @@
   "facebook": "Sign in with Facebook",
   "text10": "Here are lots of interesting characters to visit, but don’t be confused—they’re already grouped by category.",
   "email_placeholder": "Enter your email",
-  "confirm_placeholder": "Confirm your password"
+  "confirm_placeholder": "Confirm your password",
+  "what_provide": "What we provide"
 }

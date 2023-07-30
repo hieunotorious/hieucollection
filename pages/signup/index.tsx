@@ -11,7 +11,7 @@ import {
 import Breadcrumb from "app/component/Breadcrumb";
 import { AuthContext } from "app/context/authContext";
 import { useResponsive } from "app/hooks/useResponsive";
-import { getUser, signup } from "app/services/UserService";
+import { getUser } from "app/services/UserService";
 import { setTokens } from "app/utils/token";
 import useTranslation from "next-translate/useTranslation";
 import { useRouter } from "next/router";
@@ -24,6 +24,8 @@ import { ErrorMessage, Form, Formik } from "formik";
 
 // Import Yup for validation
 import * as Yup from "yup";
+import APP_ROUTES from "app/constant/app_routes";
+import { signup } from "app/services/AuthService";
 
 function Signup() {
   const [show1, setShow1] = React.useState(false);
@@ -78,7 +80,7 @@ function Signup() {
           isClosable: true,
         });
         setGlobalUser(loginUser);
-        await router.push("/");
+        await router.push(APP_ROUTES.HOME);
       }
     }
   };
@@ -89,8 +91,8 @@ function Signup() {
     <Flex direction="column" w="full">
       <Breadcrumb
         links={[
-          { title: t("home"), href: "/" },
-          { title: t("signup"), href: "/signup" },
+          { title: t("home"), href: APP_ROUTES.HOME },
+          { title: t("signup"), href: APP_ROUTES.SIGNUP },
         ]}
         current={t("signup")}
       />{" "}

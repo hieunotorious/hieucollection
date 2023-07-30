@@ -11,6 +11,10 @@ import Breadcrumb from "app/component/Breadcrumb";
 import { useRef } from "react";
 import useOnScreen from "app/hooks/useOnScreen";
 import Link from "next/link";
+import APP_ROUTES from "app/constant/app_routes";
+import Info from "app/component/Info";
+import COLOR from "app/constant/color";
+import ProgressBar from "app/component/ProgressBar";
 type Props = {} & FlexProps;
 
 const About = ({ ...props }: Props) => {
@@ -28,8 +32,8 @@ const About = ({ ...props }: Props) => {
     <Flex direction="column" w="full" marginTop="5rem">
       <Breadcrumb
         links={[
-          { title: t("home"), href: "/" },
-          { title: t("about"), href: "/about" },
+          { title: t("home"), href: APP_ROUTES.HOME },
+          { title: t("about"), href: APP_ROUTES.ABOUT },
         ]}
         current={t("about")}
       />
@@ -125,59 +129,7 @@ const About = ({ ...props }: Props) => {
               </Flex>
             </Stack>
 
-            <Stack
-              sx={{
-                border: "1px solid #EAA234",
-                borderRadius: "50px",
-                position: "fixed",
-                right: isMobile ? "5px" : "10px",
-                top: "30%",
-                zIndex: "99",
-                padding: isMobile ? "10px 5px" : "40px 15px",
-                gap: "20px",
-              }}
-            >
-              <Tooltip label="hieumn2001@gmail.com" placement="top">
-                <Stack>
-                  <Link href="mailto:hieumn2001@gmail.com">
-                    <Image
-                      src="/images/EmailMes.png"
-                      width="30px"
-                      height="30px"
-                      alt=""
-                    />
-                  </Link>
-                </Stack>
-              </Tooltip>
-
-              <Tooltip label="0912590467" placement="top">
-                <Stack>
-                  <a href="tel:0912590467">
-                    <Image
-                      src="/images/phoneMes.png"
-                      alt=""
-                      width="30px"
-                      height="30px"
-                    />
-                  </a>
-                </Stack>
-              </Tooltip>
-              <Tooltip
-                label="102 Nguyễn Trãi, Thành Công, Thành phố Buôn Ma Thuột, Đắk Lắk"
-                placement="top"
-              >
-                <Stack>
-                  <Link href="https://www.google.com/maps/place/102+Nguy%E1%BB%85n+Tr%C3%A3i,+Th%C3%A0nh+C%C3%B4ng,+Th%C3%A0nh+ph%E1%BB%91+Bu%C3%B4n+Ma+Thu%E1%BB%99t,+%C4%90%E1%BA%AFk+L%E1%BA%AFk,+Vi%E1%BB%87t+Nam/@12.6865306,108.0361911,17z/data=!3m1!4b1!4m6!3m5!1s0x31721d7a35d6ff99:0x9eae08b73bf3f4df!8m2!3d12.6865306!4d108.038766!16s%2Fg%2F11fsjhqr51?hl=vi-VN&entry=ttu">
-                    <Image
-                      src="/images/frame.png"
-                      width="30px"
-                      height="30px"
-                      alt=""
-                    />
-                  </Link>
-                </Stack>
-              </Tooltip>
-            </Stack>
+            <Info />
 
             <Flex
               position="relative"
@@ -229,145 +181,21 @@ const About = ({ ...props }: Props) => {
                         borderRadius: "1rem",
                       }}
                     >
-                      <Stack>
-                        <Stack direction="row">
-                          <Text
-                            variant={isMobile ? "h4_mobile" : "h4"}
-                            zIndex="1"
-                          >
-                            {t("Customer Satisfaction")}
-                          </Text>
-                        </Stack>
-                        <Stack
-                          sx={{
-                            position: "relative",
-                            background: "#FDE0A1",
-                            borderRadius: "8px",
-                          }}
-                          height="12px"
-                        >
-                          <Text
-                            variant={isMobile ? "h4_mobile" : "h4"}
-                            style={{
-                              color: "#41332C",
-                              fontWeight: 400,
-                              fontFamily: "Balsamiq Sans",
-                              marginRight: "10rem",
-                              position: "absolute",
-                              transition: "all 3000ms ease-in-out",
-                              top: -30,
-                              left: isVisible ? "87%" : 0,
-                            }}
-                          >
-                            87%
-                          </Text>
-                          <Stack
-                            sx={{
-                              width: isVisible ? "87%" : 0,
-                              height: "100%",
-                              background: "#EAA234",
-                              borderRadius: "8px",
-                              transition: "all 3000ms ease-in-out",
-                            }}
-                          />
-                        </Stack>
-                      </Stack>
-                      <Stack>
-                        <Stack direction="row">
-                          <Text
-                            variant={isMobile ? "h4_mobile" : "h4"}
-                            style={{
-                              color: "#41332C",
-                              fontWeight: 700,
-                              fontFamily: "Balsamiq Sans",
-                            }}
-                            zIndex="1"
-                          >
-                            {t("Top quality products")}
-                          </Text>
-                        </Stack>
-                        <Stack
-                          sx={{
-                            position: "relative",
-                            background: "#FDE0A1",
-                            borderRadius: "8px",
-                          }}
-                          height="12px"
-                        >
-                          <Text
-                            variant={isMobile ? "h4_mobile" : "h4"}
-                            style={{
-                              color: "#41332C",
-                              fontWeight: 400,
-                              fontFamily: "Balsamiq Sans",
-                              marginRight: "10rem",
-                              position: "absolute",
-                              transition: "all 3000ms ease-in-out",
-                              top: -30,
-                              left: isVisible ? "93%" : 0,
-                            }}
-                          >
-                            93%
-                          </Text>
-                          <Stack
-                            sx={{
-                              width: isVisible ? "93%" : 0,
-                              height: "100%",
-                              background: "#EAA234",
-                              borderRadius: "8px",
-                              transition: "all 3000ms ease-in-out",
-                            }}
-                          />
-                        </Stack>
-                      </Stack>
-                      <Stack>
-                        <Stack direction="row" justifyContent="space-between">
-                          <Text
-                            variant={isMobile ? "h4_mobile" : "h4"}
-                            style={{
-                              color: "#41332C",
-                              fontWeight: 700,
-                              fontFamily: "Balsamiq Sans",
-                            }}
-                            zIndex="1"
-                          >
-                            {t("Quality service")}
-                          </Text>
-                        </Stack>
-                        <Stack
-                          sx={{
-                            position: "relative",
-                            background: "#FDE0A1",
-                            borderRadius: "8px",
-                          }}
-                          height="12px"
-                        >
-                          <Text
-                            variant={isMobile ? "h4_mobile" : "h4"}
-                            style={{
-                              color: "#41332C",
-                              fontWeight: 400,
-                              fontFamily: "Balsamiq Sans",
-                              marginRight: "10rem",
-                              position: "absolute",
-                              transition: "all 3000ms ease-in-out",
-                              top: -30,
-                              left: isVisible ? "83%" : 0,
-                            }}
-                          >
-                            83%
-                          </Text>
-                          <Stack
-                            sx={{
-                              width: isVisible ? "83%" : 0,
-                              height: "100%",
-                              background: "#EAA234",
-                              borderRadius: "8px",
-                              transition: "all 3000ms ease-in-out",
-                            }}
-                          />
-                        </Stack>
-                      </Stack>
+                      <ProgressBar
+                        title={t("Customer Satisfaction")}
+                        progress={87}
+                        isVisible={isVisible}
+                      />
+                      <ProgressBar
+                        title={t("Top quality products")}
+                        progress={93}
+                        isVisible={isVisible}
+                      />
+                      <ProgressBar
+                        title={t("Quality service")}
+                        progress={83}
+                        isVisible={isVisible}
+                      />
                     </Stack>
                   </Stack>
                 </Flex>
@@ -386,8 +214,8 @@ const About = ({ ...props }: Props) => {
                       flexDirection: "column",
                       padding: "15px 25px",
                       borderRadius: "12px",
-                      backgroundColor: "#FFFFFF",
-                      boxShadow: "0px 2px 4px #F6921E",
+                      backgroundColor: COLOR.white,
+                      boxShadow: `0px 2px 4px ${COLOR.sixth}`,
                     }}
                   >
                     <Stack alignItems="center">
@@ -410,8 +238,8 @@ const About = ({ ...props }: Props) => {
                       flexDirection: "column",
                       padding: "15px 25px",
                       borderRadius: "12px",
-                      backgroundColor: "#FFFFFF",
-                      boxShadow: "0px 2px 4px #F6921E",
+                      backgroundColor: COLOR.white,
+                      boxShadow: `0px 2px 4px ${COLOR.sixth}`,
                     }}
                   >
                     <Stack alignItems="center">
@@ -435,8 +263,8 @@ const About = ({ ...props }: Props) => {
                       flexDirection: "column",
                       padding: "15px 25px",
                       borderRadius: "12px",
-                      backgroundColor: "#FFFFFF",
-                      boxShadow: "0px 2px 4px #F6921E",
+                      backgroundColor: COLOR.white,
+                      boxShadow: `0px 2px 4px ${COLOR.sixth}`,
                     }}
                   >
                     <Stack alignItems="center">
@@ -468,8 +296,8 @@ const About = ({ ...props }: Props) => {
                       flexDirection: "column",
                       padding: "15px 25px",
                       borderRadius: "12px",
-                      backgroundColor: "#FFFFFF",
-                      boxShadow: "0px 2px 4px #F6921E",
+                      backgroundColor: COLOR.white,
+                      boxShadow: `0px 2px 4px ${COLOR.sixth}`,
                     }}
                   >
                     <Stack alignItems="center">
@@ -492,8 +320,8 @@ const About = ({ ...props }: Props) => {
                       flexDirection: "column",
                       padding: "15px 25px",
                       borderRadius: "12px",
-                      backgroundColor: "#FFFFFF",
-                      boxShadow: "0px 2px 4px #F6921E",
+                      backgroundColor: COLOR.white,
+                      boxShadow: `0px 2px 4px ${COLOR.sixth}`,
                     }}
                   >
                     <Stack alignItems="center">
@@ -517,8 +345,8 @@ const About = ({ ...props }: Props) => {
                       flexDirection: "column",
                       padding: "15px 25px",
                       borderRadius: "12px",
-                      backgroundColor: "#FFFFFF",
-                      boxShadow: "0px 2px 4px #F6921E",
+                      backgroundColor: COLOR.white,
+                      boxShadow: `0px 2px 4px ${COLOR.sixth}`,
                     }}
                   >
                     <Stack alignItems="center">

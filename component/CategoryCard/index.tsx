@@ -20,13 +20,13 @@ const CategoryCard = ({ img, title, href, ...props }: CategoryCardType) => {
             }
           `}
           position="relative"
-          w="full"
+          w="230px"
           h="230px"
           borderRadius="full"
         >
           <Image
             src={img}
-            fit="contain"
+            fit="cover"
             alt={title}
             style={{ borderRadius: "10px" }}
           />

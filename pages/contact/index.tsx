@@ -6,6 +6,8 @@ import Breadcrumb from "app/component/Breadcrumb";
 import { Box, Flex, Stack, Text, Tooltip } from "@chakra-ui/react";
 import Link from "next/link";
 import Image from "next/image";
+import APP_ROUTES from "app/constant/app_routes";
+import Info from "app/component/Info";
 
 function Contact() {
   const { isMobile } = useResponsive();
@@ -16,11 +18,12 @@ function Contact() {
       <Breadcrumb
         marginTop="3rem"
         links={[
-          { title: t("home"), href: "/" },
-          { title: t("contact"), href: "/contact" },
+          { title: t("home"), href: APP_ROUTES.HOME },
+          { title: t("contact"), href: APP_ROUTES.CONTACT },
         ]}
         current={t("login")}
       />
+      <Info />
       <Stack alignItems="center">
         <Text variant="h5">{t("contact")}</Text>
         <Text variant="h4">{t("text7")}</Text>

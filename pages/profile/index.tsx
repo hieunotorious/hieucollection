@@ -38,6 +38,7 @@ import TransgenderIcon from "@mui/icons-material/Transgender";
 import CakeIcon from "@mui/icons-material/Cake";
 import EmailIcon from "@mui/icons-material/Email";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
+import APP_ROUTES from "app/constant/app_routes";
 
 function Profile() {
   const { t } = useTranslation();
@@ -89,8 +90,8 @@ function Profile() {
     <Flex direction="column" w="full" marginTop={isMobile ? "2rem" : "5rem"}>
       <Breadcrumb
         links={[
-          { title: t("home"), href: "/" },
-          { title: t("profile"), href: "/profile" },
+          { title: t("home"), href: APP_ROUTES.HOME },
+          { title: t("profile"), href: APP_ROUTES.PROFILE },
         ]}
         current={t("profile")}
       />

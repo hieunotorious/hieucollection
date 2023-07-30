@@ -78,7 +78,7 @@
   "users": "Người dùng",
   "delivery": "Vận chuyển",
   "stats": "Thống kê",
-  "service": "Phục vụ",
+  "service": " Dịch vụ của chúng tôi",
   "client_comment": "Phản hồi",
   "notifications": "Thông báo",
   "useful": "Tiện ích",
@@ -134,5 +134,6 @@
   "close": "Đóng",
   "text10": "Dưới đây là rất nhiều nhân vật thú vị để ghé thăm, nhưng đừng nhầm lẫn—chúng đã được nhóm theo danh mục.",
   "email_placeholder": "Nhập email của bạn",
-  "confirm_placeholder": "Xác nhận mật khẩu của bạn"
+  "confirm_placeholder": "Xác nhận mật khẩu của bạn",
+  "what_provide": "Những gì chúng tôi cung cấp"
 }

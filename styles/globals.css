@@ -154,4 +154,11 @@ h4 {
   line-height: 1.2;
 }
 
-/* navbar */
+@keyframes spinAround {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

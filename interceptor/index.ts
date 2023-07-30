@@ -1,12 +1,13 @@
 import { setTokens } from "./../utils/token";
 import axios from "axios";
 import moment from "moment";
+import API_ROUTES from "app/constant/api_routes";
+import APP_ROUTES from "app/constant/app_routes";
 
 const axiosClient = axios.create({
   baseURL: process.env.NEXT_PUBLIC_HOST,
   timeout: 10000,
   headers: {
-    "Accept-Encoding": "gzip,deflate,compress,",
     "Content-Type": "application/json",
   },
 });
@@ -58,13 +59,13 @@ axiosClient.interceptors.response.use(
         return Promise.reject(err);
       }
       const originalConfig = err.config;
-      if (originalConfig.url !== "/login" && err.response) {
+      if (originalConfig.url !== APP_ROUTES.SIGNIN && err.response) {
         // Access Token was expired
         if (err.response.status === 401 && !originalConfig._retry) {
           originalConfig._retry = true;
           try {
             const { data } = await axios.post(
-              "/auth/refreshToken",
+              API_ROUTES.AUTH.REFRESH_TOKEN,
               {
                 refreshToken,
               },

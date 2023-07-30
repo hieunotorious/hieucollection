@@ -27,6 +27,7 @@ import {
 import { getProductId } from "app/services/ProductService";
 import { addToCart } from "app/services/CartService";
 import Breadcrumb from "app/component/Breadcrumb";
+import APP_ROUTES from "app/constant/app_routes";
 function ProductId() {
   const router = useRouter();
   const { isMobile } = useResponsive();
@@ -57,7 +58,7 @@ function ProductId() {
         if (prevState) return { ...prevState, cart: data };
         return undefined;
       });
-      router.push("/cart");
+      router.push(APP_ROUTES.CART);
     }
   };
 
@@ -72,9 +73,9 @@ function ProductId() {
         >
           <Breadcrumb
             links={[
-              { title: t("home"), href: "/" },
-              { title: t("product"), href: "/products" },
-              { title: product?.name || "", href: "/" },
+              { title: t("home"), href: APP_ROUTES.HOME },
+              { title: t("product"), href: APP_ROUTES.PRODUCT.INDEX },
+              { title: product?.name || "", href: APP_ROUTES.HOME },
             ]}
             current={product?.name || ""}
           />
@@ -144,7 +145,7 @@ function ProductId() {
             }}
           >
             <div>
-              <Link style={{}} href="/product">
+              <Link href={APP_ROUTES.PRODUCT.INDEX}>
                 <button>
                   <ArrowBackIcon
                     style={{
@@ -306,7 +307,7 @@ function ProductId() {
                       <Button
                         style={{ width: "15rem", height: "3rem" }}
                         onClick={() => {
-                          router.push("/cart");
+                          router.push(APP_ROUTES.CART);
                           handleAddCart(product._id);
                         }}
                         colorScheme="blue"
@@ -322,12 +323,12 @@ function ProductId() {
                       alignItems: "center",
                     }}
                   >
-                    <Link style={{ color: "black" }} href="/cart">
+                    <Link style={{ color: "black" }} href={APP_ROUTES.CART}>
                       <Stack spacing={4} direction="row" align="center">
                         <Button
                           style={{ width: "15rem", height: "3rem" }}
                           onClick={() => {
-                            router.push("/cart");
+                            router.push(APP_ROUTES.CART);
                             handleAddCart(product._id);
                           }}
                           variant="ghost"
